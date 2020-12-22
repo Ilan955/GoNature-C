@@ -3,6 +3,7 @@ import java.io.IOException;
 
 import Client.ClientUI;
 import Entities.Person;
+import Entities.departmentEmployee;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -33,11 +34,8 @@ public class WelcomeAndLoginController {
 
 	    @FXML
 	    private Button TravellerLoginBtn;
-	    @FXML 
-	    
-	    private Person p;
-	    private String First,Last,Email,ID;
-	 
+	   
+	    	 
 	    @FXML
 	    void WhenPressTravellerLoginBtn(ActionEvent event) throws Exception {
 	    	String id = IdLBL.getText();
@@ -46,9 +44,6 @@ public class WelcomeAndLoginController {
 	    		 Alert a = new Alert(AlertType.NONE,"You must enter a valid id!\nId must consist the following:\nA. 9 digits\nB. numbers only"); 
 				 a.setAlertType(AlertType.ERROR);
 				 a.show();
-				//Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
-		    	//stage.hide();
-	    	//	this.start(stage);
 	    		return;
 	    	}
 	    	// need to check if id consists chars or its length is less or greater than 9
@@ -72,6 +67,13 @@ public class WelcomeAndLoginController {
 	    {
 	    	String userName = UserNameLBL.getText();
 	    	String password = PasswordLBL.getText();
+	    	if (password.isEmpty())
+	    	{
+				Alert a = new Alert(AlertType.NONE,"Password field must not be empty!!"); 
+				a.setAlertType(AlertType.ERROR);
+				a.show();
+				return;
+	    	}
 			StringBuffer str = new StringBuffer();
 			str.append("getEmployeeDetails");
 			str.append(" ");
@@ -97,7 +99,9 @@ public class WelcomeAndLoginController {
 				a.show();
 				return;
 			}
-			switch (ClientUI.employeeController.employee.getType()) {
+		//	departmentEmployee t_emp = (departmentEmployee)ClientUI.employeeController.getEmployee();
+			String whichScreen = ClientUI.employeeController.getType();
+			switch (whichScreen) {
 			case "DepartmentEmployee":
 				changeScreen(event,"welcomeEmployee.fxml");
 				break;
@@ -111,6 +115,7 @@ public class WelcomeAndLoginController {
 				System.out.print("Don't know what to do (2)");
 			}
 	    }
+	    /*
 		public void start(Stage primaryStage) throws Exception {
 			
 			Parent root = FXMLLoader.load(getClass().getResource("WelcomeAndLoginScreen.fxml"));
@@ -121,6 +126,7 @@ public class WelcomeAndLoginController {
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		}
+		*/
 		public boolean checkID(String id)
 		{
 			if (id.length() != 9)
@@ -140,7 +146,7 @@ public class WelcomeAndLoginController {
 			FXMLLoader loader = new FXMLLoader();
 			Pane root = loader.load(getClass().getResource(screen).openStream());
 			Scene scene = new Scene(root);
-			stage.setTitle("Welcome Employee!");
+			stage.setTitle("Welcome" + " " + ClientUI.employeeController.getType() + "!");
 			stage.setScene(scene);
 			stage.show();
 		}
