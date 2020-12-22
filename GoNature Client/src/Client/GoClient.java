@@ -113,6 +113,15 @@ public class GoClient extends AbstractClient {
 		}
 			break;
 			
+	case "SignUpController":
+		try {
+			ClientUI.signUpController.gotMessage(res);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+			break;
+			
 		
 		case "Done":
 		
