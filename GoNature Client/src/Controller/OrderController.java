@@ -113,6 +113,27 @@ public void canMakeOrder(LocalTime time, LocalDate dateOfVisit, String wantedPar
 	sb.append(dateOfVisit.toString());
 	ClientUI.chat.accept(sb.toString());
 }
+/*
+ * check if the phone and numbers are valid
+ * will check if the phone containing 10 digits.
+ * will check if all the string of the phone is not a char but a number
+ * if will find a char there will enter to the cache.
+ */
+public boolean checkValidValues(String phone,String email)
+{
+	if(phone.length()==10) {
+		String[] tmp = email.split("@");
+	try {
+		int areDigits = Integer.parseInt(phone);
+	}catch(Exception e) {
+		return false;
+	}
+		
+		if(tmp.length==2)
+			return true;
+	}
+	return false;
+}
 
 public boolean getValid() {
 	return valid;
@@ -259,6 +280,8 @@ public void confirmOrder() {
 	sb.append("F");
 	sb.append(" ");
 	sb.append(Integer.toString(order.getNumberOfVisitors()));
+	sb.append(" ");
+	sb.append("Confirmed");
 	order=null;
 	ClientUI.chat.accept(sb.toString());
 	

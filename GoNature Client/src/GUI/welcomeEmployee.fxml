@@ -19,7 +19,7 @@
             <Font name="Corbel" size="39.0" />
          </font>
       </Label>
-      <Button layoutX="14.0" layoutY="356.0" mnemonicParsing="false" onAction="#WhenClickLogOutBtn" text="Log-Out" textFill="#e11212">
+      <Button fx:id="logOutButton" layoutX="14.0" layoutY="356.0" mnemonicParsing="false" onAction="#WhenClickLogOutBtn" text="Log-Out" textFill="#e11212">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>

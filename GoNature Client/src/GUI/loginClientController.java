@@ -33,13 +33,9 @@ public class loginClientController {
 			Scene scene = new Scene(root);
 			primaryStage.setTitle("Prototype");
 			primaryStage.setScene(scene);
-			
-			
-			primaryStage.show();
-			
-			
+					
+			primaryStage.show();		
 		}
-	    
 	    
 	    /*
 	     * !!!!!!!! If you want to check your screen !!!!!!!!
@@ -53,7 +49,9 @@ public class loginClientController {
 	    		int port= Integer.parseInt(portLbl.getText());
 	    		ClientUI.set(s, port);
 	    		Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
-	    		Parent root = FXMLLoader.load(getClass().getResource("WelcomeTraveller.fxml"));
+
+	    		Parent root = FXMLLoader.load(getClass().getResource("MonthlyReport.fxml"));
+
 	    		Scene scene = new Scene(root);
 	    		stage.setTitle("Prototype");
 	    		stage.setScene(scene);

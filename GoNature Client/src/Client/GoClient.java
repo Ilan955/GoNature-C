@@ -64,6 +64,8 @@ public class GoClient extends AbstractClient {
 		int len = res.length;
 		len-=2;
 		String[] toSend = new String[len];
+		for (int i=0;i<len;i++)
+			toSend[i] = res[i+1];
 		/*
 		 * in place 0 of res will be the name of the method need to deal with
 		 * in place greater then 0 will be all the data for this method
@@ -80,11 +82,10 @@ public class GoClient extends AbstractClient {
 			}
 				break;
         case "EmployeeController":
-        	ClientUI.employeeController.gotMessage(res[1],toSend);
+        	ClientUI.employeeController.gotMessage(res[0],toSend);
 		  		break;
         case "UserController":
-				System.out.println("Got here b");
-				ClientUI.userController.gotMessage(res[1],toSend);
+        	ClientUI.userController.gotMessage(res[0],toSend);
 		  		break;
         case "ParkController":
 			ClientUI.parkController.gotMessage(res);
@@ -103,6 +104,15 @@ public class GoClient extends AbstractClient {
 	case "WaitingListController":
 		try {
 			ClientUI.waitingListController.gotMessage(res);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+			break;
+			
+	case "SignUpController":
+		try {
+			ClientUI.signUpController.gotMessage(res);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
