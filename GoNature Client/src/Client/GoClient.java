@@ -6,7 +6,6 @@ package Client;
 
 
 import Client.*;
-import Entities.Traveller;
 import Entities.departmentEmployee;
 import common.*;
 import src.ocsf.client.AbstractClient;
@@ -90,9 +89,6 @@ public class GoClient extends AbstractClient {
         case "ParkController":
 			ClientUI.parkController.gotMessage(res);
 			// TODO Auto-generated catch block
-		break;
-	case "EntranceParkController":
-		ClientUI.entranceParkController.gotMesage(res);
 		break;
 		
 	case "DiscountController": 
