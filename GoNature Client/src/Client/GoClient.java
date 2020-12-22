@@ -6,7 +6,6 @@ package Client;
 
 
 import Client.*;
-import Entities.Traveller;
 import Entities.departmentEmployee;
 import common.*;
 import src.ocsf.client.AbstractClient;

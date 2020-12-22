@@ -29,6 +29,7 @@ public class SureCancellScreen implements Initializable {
 	    //if the traveler don't want to cancel the order, he will return to the previous page (the UnapprovedOrder sceen)
 	    @FXML
 	    void WhenClickDontWantToCancelBtn(ActionEvent event) throws IOException {
+	    	
 	    	 Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
 	    	 FXMLLoader loader = new FXMLLoader();
 	    		Pane root = loader.load(getClass().getResource("/GUI/WelcomeTraveller.fxml").openStream());

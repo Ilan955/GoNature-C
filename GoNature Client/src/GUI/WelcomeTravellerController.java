@@ -87,7 +87,7 @@ public class WelcomeTravellerController implements Initializable {
 
     @FXML
     void WhenPressLogOutBtn(ActionEvent event) {
-
+  
     }
 
     @FXML

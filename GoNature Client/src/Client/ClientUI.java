@@ -51,6 +51,7 @@ public class ClientUI extends Application {
 		cp = new loginClientController();
 		discountController=new DiscountController();
 		waitingListController = new WaitingListController();
+		employeeController = new EmployeeController();
 		parkController=new ParkController();
 		entranceParkController=new EntranceParkController();
 		LoginClientController= new loginClientController();

@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import Client.ClientUI;
 import Entities.Person;
-import Entities.Traveller;
 import Entities.departmentEmployee;
 
 

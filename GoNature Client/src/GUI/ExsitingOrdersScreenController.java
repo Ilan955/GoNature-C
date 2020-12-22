@@ -172,8 +172,9 @@ public class ExsitingOrdersScreenController  implements Initializable{
 	                            int timeH =timeNow.getHour();
 	                            int timeM=timeNow.getMinute();
 	                            int timelH=lt.getHour();
+	                            int limitTime=timelH+4;
 	                            int timelM=lt.getMinute();
-	                            if (ld.compareTo(dateNow)==0&&timeH==timelH&&timelM==timeM)
+	                            if (ld.compareTo(dateNow)==0&&timeH<limitTime&&timelM==timeM)
 	                            	System.out.println("GOOD");
 	                            else {
 	                            	Alert a = new Alert(AlertType.NONE,"Now it's not the time for your order!"); 
