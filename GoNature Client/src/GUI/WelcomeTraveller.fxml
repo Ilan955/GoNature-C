@@ -12,13 +12,13 @@
             <Font name="Corbel" size="39.0" />
          </font>
       </Label>
-      <Label layoutX="25.0" layoutY="75.0" prefHeight="21.0" prefWidth="112.0" text="Signed in as a:" />
-      <Label fx:id="userNameLbl" layoutX="181.0" layoutY="20.0" prefHeight="55.0" prefWidth="364.0" text="&quot;userName&quot;">
+      <Label fx:id="beforeTypeLBL" layoutX="25.0" layoutY="75.0" prefHeight="21.0" prefWidth="112.0" text="Signed in as a:" />
+      <Label fx:id="userNamelb" layoutX="181.0" layoutY="20.0" prefHeight="55.0" prefWidth="364.0" text="&quot;userName&quot;">
          <font>
             <Font name="Corbel" size="39.0" />
          </font>
       </Label>
-      <Label fx:id="TypeLBL" layoutX="135.0" layoutY="75.0" prefHeight="21.0" prefWidth="92.0" text="&quot;TYPE&quot;" />
+      <Label fx:id="TypeLBL" layoutX="135.0" layoutY="75.0" prefHeight="21.0" prefWidth="148.0" text="&quot;TYPE&quot;" />
       <Button fx:id="btnExistingorders" layoutX="397.0" layoutY="218.0" mnemonicParsing="false" onAction="#WhenPressEsitingOrdersBtn" prefHeight="31.0" prefWidth="189.0" text="Show Existing orders" />
       <Button fx:id="btnNewOrder" layoutX="397.0" layoutY="272.0" mnemonicParsing="false" onAction="#WhenPressMakeNewOrderBtn" prefHeight="31.0" prefWidth="189.0" text="Make New Order" />
       <Button fx:id="btnWithoutOrder" layoutX="395.0" layoutY="325.0" mnemonicParsing="false" onAction="#WhenPressEnterWithoutOrderBtn" prefHeight="31.0" prefWidth="189.0" text="Enter Without Order" />

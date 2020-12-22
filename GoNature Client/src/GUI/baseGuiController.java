@@ -73,7 +73,6 @@ public boolean waitresponse = false;
 		scene.getStylesheets().add(getClass().getResource("baseGui.css").toExternalForm());
 		primaryStage.setTitle("Prototyeeee");
 		primaryStage.setScene(scene);
-		
 		primaryStage.show();
 		
 		

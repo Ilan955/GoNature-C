@@ -18,6 +18,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 
@@ -86,7 +87,7 @@ import javafx.event.ActionEvent;
 	    	Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			Parent root = null;
 			try {
-				root = FXMLLoader.load(getClass().getResource("ParkManager.fxml"));
+				root = FXMLLoader.load(getClass().getResource("WelcomeParkManager.fxml"));
 				Scene scene = new Scene(root);
 				stage.setTitle("Park Manger Menu");
 				stage.setScene(scene);

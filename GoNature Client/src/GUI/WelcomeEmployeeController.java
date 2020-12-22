@@ -45,8 +45,12 @@ public class WelcomeEmployeeController implements Initializable {
 	    	EmployeeNameLbl.setText(tName);
 	    	String park = ClientUI.employeeController.getParkName();
 	    	ParkNameLbl.setText(park);
-	  //  	int current = ParkController.getCurrentVisitors(park) + ParkController.getCurrentUnexpectedVisitors(park);
-	    //	CurrentPeopleLbl.setText("" + current);
+
+	    	int current = ParkController.getCurrentVisitors(park) + ParkController.getCurrentUnexpectedVisitors(park);
+	     //	CurrentPeopleLbl.setText("" + current);
+	     //	current-=ClientUI.parkController.getMaxVisitors(park);
+	     //	HowManyEnterLbl.setText(""+current);
+
 		}
 	    @FXML
 	    void WhenClickLogOutBtn(ActionEvent event) throws IOException {
@@ -64,13 +68,19 @@ public class WelcomeEmployeeController implements Initializable {
 	    }
 
 	    @FXML
-	    void WhenClickParkCapacityBtn(ActionEvent event) {
-
+	    void WhenClickParkCapacityBtn(ActionEvent event) { //don't know if its even needed
+	    	
 	    }
 
 	    @FXML
-	    void WhenClickSignUpNewMemberBtn(ActionEvent event) {
-
+	    void WhenClickSignUpNewMemberBtn(ActionEvent event) throws IOException {
+	       	Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+			FXMLLoader loader = new FXMLLoader();
+			Pane root = loader.load(getClass().getResource("SignUpNewMember.fxml").openStream());
+			Scene scene = new Scene(root);
+			stage.setTitle("Signup new member");
+			stage.setScene(scene);
+			stage.show();
 	    }
 
 	}
