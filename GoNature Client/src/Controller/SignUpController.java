@@ -1,5 +1,7 @@
 package Controller;
 
+import java.io.IOException;
+
 import Client.ClientUI;
 
 public class SignUpController {
@@ -7,14 +9,13 @@ public class SignUpController {
 	int numOfVisitors;
 	public Boolean checker;
 
-	public Boolean checkExist(String id) {
+	public void checkExist(String id) {
 		StringBuffer sb = new StringBuffer();
-		sb.append("exists");
+		sb.append("isMemberExists");
 		sb.append(" ");
 		sb.append(id);
 		String res = sb.toString();
 		ClientUI.chat.accept(res);
-		return !checker;
 	}
 
 	public void init(String id, String firstName, String lastName, String phoneNum, String email, String paymentMethod,
@@ -39,6 +40,24 @@ public class SignUpController {
 		sb.append(numOfVisitors);
 		String res = sb.toString();
 		ClientUI.chat.accept(res);
+	}
+
+	public void gotMessage(String[] msg) throws IOException {
+		String cases = msg[0];
+		switch (cases) {
+		case "isMemberExists":
+			if (msg[1] == "false") {
+				checker = false;
+			} else
+				checker = true;
+			;
+			break;
+		case "addMember":
+			break;
+		default:
+			break;
+
+		}
 
 	}
 }

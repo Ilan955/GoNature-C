@@ -79,15 +79,14 @@ public class SignUpScreenController implements Initializable{
 		setTypeMemberCB();
 	}
 
-	public void start(Stage primaryStage) throws Exception {
-		Parent root = FXMLLoader.load(getClass().getResource("/GUI/SignUpNewMember.fxml"));
-		
-		Scene scene = new Scene(root);
-		primaryStage.setTitle("Register New Member");
-		primaryStage.setScene(scene);
-		primaryStage.show();
-
-	}
+//	public void start(Stage primaryStage) throws Exception {
+//		Parent root = FXMLLoader.load(getClass().getResource("/GUI/SignUpNewMember.fxml"));
+//		Scene scene = new Scene(root);
+//		primaryStage.setTitle("Register New Member");
+//		primaryStage.setScene(scene);
+//		primaryStage.show();
+//
+//	}
 
 	@FXML
 	void WhenClickBackBtn(ActionEvent event) {
@@ -122,7 +121,8 @@ public class SignUpScreenController implements Initializable{
 			System.out.println("Member type incompatible");
 		}
 		// here we will send the data we got from the page
-		if (!ClientUI.signUpController.checkExist(id)) {
+		ClientUI.signUpController.checkExist(id);
+		if (ClientUI.signUpController.checker) {
 			ClientUI.signUpController.init(id, firstName, lastName, phoneNum, email, paymentMethod, memberType,
 					numOfVisitors);
 			System.out.println("New member added: "+id);

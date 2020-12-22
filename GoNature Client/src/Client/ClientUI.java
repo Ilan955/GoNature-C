@@ -36,6 +36,7 @@ public class ClientUI extends Application {
 
 	// public static UserController userController;
 	public static SignUpController signUpController;
+	public static SignUpScreenController signUpScreenController;
 
 
 	public static void main(String args[]) throws Exception {
@@ -56,6 +57,7 @@ public class ClientUI extends Application {
 		LoginClientController= new loginClientController();
 		orderScreenController = new OrderScreenController();
 		orderController=new OrderController();
+		signUpScreenController=new SignUpScreenController();
 		signUpController = new SignUpController();
 		cp.start(primaryStage);
 		
