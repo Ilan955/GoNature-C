@@ -55,8 +55,12 @@ public class ClientUI extends Application {
 		entranceParkController=new EntranceParkController();
 		LoginClientController= new loginClientController();
 		orderScreenController = new OrderScreenController();
+		wt = new WelcomeTravellerController();
 		orderController=new OrderController();
 		signUpController = new SignUpController();
+		welcomeController = new WelcomeAndLoginController();
+		employeeController = new EmployeeController();
+		userController = new UserController();
 		cp.start(primaryStage);
 		
 

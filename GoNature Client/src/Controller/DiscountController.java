@@ -51,7 +51,7 @@ public class DiscountController {
 	//!!!!does not include regular discount!!!!!!
 	public float calculateFinalPrice(Order order) {
 		//check for valid parkManager discount/
-		ValidDiscount(order.getDateOfVisit(),order.getWantedPark());
+		//ValidDiscount(order.getDateOfVisit(),order.getWantedPark());
 		if(checkDiscount_flag) // there is a valid discount for this park and timeOfVisit
 		{
 			return order.getTotalPrice() * discountPrecentage; // full price after parkManager discount
