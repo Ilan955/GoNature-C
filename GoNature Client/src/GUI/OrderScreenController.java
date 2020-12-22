@@ -18,10 +18,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -116,41 +118,49 @@ public class OrderScreenController implements Initializable{
 
 	    @FXML
 	    void WhenClickNextBtn(ActionEvent event) throws IOException {
-	    	String temp=(String)TimeOfVisitCB.getValue();
-	    	String[] res=temp.split(":");
-	    	LocalDate date=DateLbl.getValue();
-	    	String wanted= (String)WantedParkCB.getValue();
-	    	int numOfVisitors= Integer.parseInt(NumOfVisotrsLbl.getText());
-	    	Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
-	    	LocalDate d = DateLbl.getValue(); 	
-	    	LocalTime time= LocalTime.of(Integer.parseInt(res[0]), Integer.parseInt(res[1]));
-	    	
-	    	//here we will send the data we got from the page, we need to use "the type"
-	    	//!!!!!!! TYPE NEED TO BE CHANGED !!!!!!!!
-	    	ClientUI.orderController.setEmailAndPhone(EmailLbl.getText(), PhoneNumberLbl.getText());
-	    	ClientUI.orderController.n_order=true;
-	    	ClientUI.orderController.canMakeOrder(time, date, wanted, "Member", numOfVisitors);
-	    	
-	    	/*
-	    	 * after knowing if the order is possible or not, showing the right screen/
-	    	 */
-	    	if(ClientUI.orderController.valid)
-	    	{
-	    		FXMLLoader loader = new FXMLLoader();
-	    		Pane root = loader.load(getClass().getResource("/GUI/Confirmation.fxml").openStream());
-	    		Scene scene = new Scene(root);
-	    		stage.setTitle("Confirm Order");
-	    		stage.setScene(scene);
-	    		stage.show();
+	    	if(ClientUI.orderController.checkValidValues(PhoneNumberLbl.getText(), EmailLbl.getText())) {
+	    		String temp=(String)TimeOfVisitCB.getValue();
+		    	String[] res=temp.split(":");
+		    	LocalDate date=DateLbl.getValue();
+		    	String wanted= (String)WantedParkCB.getValue();
+		    	int numOfVisitors= Integer.parseInt(NumOfVisotrsLbl.getText());
+		    	Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+		    	LocalDate d = DateLbl.getValue(); 	
+		    	LocalTime time= LocalTime.of(Integer.parseInt(res[0]), Integer.parseInt(res[1]));
+		    	
+		    	//here we will send the data we got from the page, we need to use "the type"
+		    	//!!!!!!! TYPE NEED TO BE CHANGED !!!!!!!!
+		    	ClientUI.orderController.setEmailAndPhone(EmailLbl.getText(), PhoneNumberLbl.getText());
+		    	ClientUI.orderController.n_order=true;
+		    	ClientUI.orderController.canMakeOrder(time, date, wanted, "Member", numOfVisitors);
+		    	
+		    	/*
+		    	 * after knowing if the order is possible or not, showing the right screen/
+		    	 */
+		    	if(ClientUI.orderController.valid)
+		    	{
+		    		FXMLLoader loader = new FXMLLoader();
+		    		Pane root = loader.load(getClass().getResource("/GUI/Confirmation.fxml").openStream());
+		    		Scene scene = new Scene(root);
+		    		stage.setTitle("Confirm Order");
+		    		stage.setScene(scene);
+		    		stage.show();
+		    	}
+		    	else {
+		    		FXMLLoader loader = new FXMLLoader();
+		    		Pane root = loader.load(getClass().getResource("/GUI/CancellOrder.fxml").openStream());
+		    		Scene scene = new Scene(root);
+		    		stage.setTitle("Unapproved Order");
+		    		stage.setScene(scene);
+		    		stage.show();
+		    	}
 	    	}
 	    	else {
-	    		FXMLLoader loader = new FXMLLoader();
-	    		Pane root = loader.load(getClass().getResource("/GUI/CancellOrder.fxml").openStream());
-	    		Scene scene = new Scene(root);
-	    		stage.setTitle("Unapproved Order");
-	    		stage.setScene(scene);
-	    		stage.show();
+	    		Alert a = new Alert(AlertType.NONE,"Email or phone is incorrect!"); 
+  				 a.setAlertType(AlertType.ERROR);
+  				 a.show();
 	    	}
+	    	
 	    	//System.out.println("Time: "+timeofVisit+" date: "+date+" wantedPark: "+wanted+" number of visit: "+numOfVisitors);
 	    }
 

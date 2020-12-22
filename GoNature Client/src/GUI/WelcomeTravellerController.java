@@ -100,6 +100,7 @@ public class WelcomeTravellerController implements Initializable {
     }
 
     @FXML
+
     void WhenPressLogOutBtn(ActionEvent event) throws IOException {
     	ClientUI.userController.traveller = null;
     	Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
@@ -109,6 +110,7 @@ public class WelcomeTravellerController implements Initializable {
 		stage.setTitle("Welcome to GoNature!");
 		stage.setScene(scene);
 		stage.show();
+
     }
 
     @FXML

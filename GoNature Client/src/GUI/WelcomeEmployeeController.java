@@ -1,4 +1,3 @@
-
 package GUI;
 
 import java.io.IOException;
@@ -46,10 +45,12 @@ public class WelcomeEmployeeController implements Initializable {
 	    	EmployeeNameLbl.setText(tName);
 	    	String park = ClientUI.employeeController.getParkName();
 	    	ParkNameLbl.setText(park);
+
 	    	int current = ParkController.getCurrentVisitors(park) + ParkController.getCurrentUnexpectedVisitors(park);
 	     //	CurrentPeopleLbl.setText("" + current);
 	     //	current-=ClientUI.parkController.getMaxVisitors(park);
 	     //	HowManyEnterLbl.setText(""+current);
+
 		}
 	    @FXML
 	    void WhenClickLogOutBtn(ActionEvent event) throws IOException {
@@ -83,4 +84,3 @@ public class WelcomeEmployeeController implements Initializable {
 	    }
 
 	}
-
