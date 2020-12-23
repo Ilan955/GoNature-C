@@ -23,7 +23,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-public class SignUpScreenController implements Initializable{
+public class SignUpScreenController implements Initializable {
 
 	@FXML
 	private TextField IdLbl;
@@ -51,6 +51,8 @@ public class SignUpScreenController implements Initializable{
 
 	ObservableList<String> listForTypes;
 	ObservableList<String> listForPaymont;
+	public String id, firstName, lastName, phoneNum, email, paymentMethod, memberType;
+	int numOfVisitors;
 
 	// Set the Type member ComboBox
 	private void setTypeMemberCB() {
@@ -73,20 +75,22 @@ public class SignUpScreenController implements Initializable{
 	}
 
 	// initialize Combo Boxes
-	 @Override
+	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		setPaymentCB();
 		setTypeMemberCB();
+
 	}
 
-//	public void start(Stage primaryStage) throws Exception {
-//		Parent root = FXMLLoader.load(getClass().getResource("/GUI/SignUpNewMember.fxml"));
-//		Scene scene = new Scene(root);
-//		primaryStage.setTitle("Register New Member");
-//		primaryStage.setScene(scene);
-//		primaryStage.show();
-//
-//	}
+	// public void start(Stage primaryStage) throws Exception {
+	// Parent root =
+	// FXMLLoader.load(getClass().getResource("/GUI/SignUpNewMember.fxml"));
+	// Scene scene = new Scene(root);
+	// primaryStage.setTitle("Register New Member");
+	// primaryStage.setScene(scene);
+	// primaryStage.show();
+	//
+	// }
 
 	@FXML
 	void WhenClickBackBtn(ActionEvent event) {
@@ -107,14 +111,14 @@ public class SignUpScreenController implements Initializable{
 
 	@FXML
 	void WhenClickSubmitBtn(ActionEvent event) {
-		String id = IdLbl.getText().toString();
-		String firstName = FirstNameLbl.getText().toString();
-		String lastName = LastNameLbl.getText().toString();
-		String phoneNum = PhoneNumberLbl.getText().toString();
-		String email = EmailLbl.getText().toString();
-		int numOfVisitors = Integer.valueOf(NumberMembersLbl.getText().toString());
-		String paymentMethod = (String) PaymentCB.getValue();
-		String memberType = (String) TypeMemberCB.getValue();
+		id = IdLbl.getText().toString();
+		firstName = FirstNameLbl.getText().toString();
+		lastName = LastNameLbl.getText().toString();
+		phoneNum = PhoneNumberLbl.getText().toString();
+		email = EmailLbl.getText().toString();
+		numOfVisitors = Integer.valueOf(NumberMembersLbl.getText().toString());
+		paymentMethod = (String) PaymentCB.getValue();
+		memberType = (String) TypeMemberCB.getValue();
 		if (numOfVisitors > 1 && numOfVisitors < 15 && memberType == "Traveller") {
 			memberType = "Family Member";
 		} else {
@@ -125,10 +129,31 @@ public class SignUpScreenController implements Initializable{
 		if (ClientUI.signUpController.checker) {
 			ClientUI.signUpController.init(id, firstName, lastName, phoneNum, email, paymentMethod, memberType,
 					numOfVisitors);
-			System.out.println("New member added: "+id);
+			System.out.println("New member added: " + id);
+			GoToSuccess(event);
+		} else {
+			System.out.println("Member already exists!");
 		}
 
-		
+	}
+
+	void GoToSuccess(ActionEvent event) {
+		System.out.println("Enter SucceSS");
+		ClientUI.signUpController.id = this.id;
+		ClientUI.signUpController.memberType = this.memberType;
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		Parent root = null;
+		try {
+			root = FXMLLoader.load(getClass().getResource("SuccessfulySignUp.fxml"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Scene scene = new Scene(root);
+		stage.setTitle("Success Sign Up");
+		stage.setScene(scene);
+
+		stage.show();
 	}
 
 }

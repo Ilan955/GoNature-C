@@ -4,7 +4,6 @@
 
 package Client;
 
-
 import Client.*;
 import Entities.departmentEmployee;
 import common.*;
@@ -55,81 +54,85 @@ public class GoClient extends AbstractClient {
 	 * @param msg The message from the server.
 	 */
 	public void handleMessageFromServer(Object msg) {
-		//System.out.println("--> handleMessageFromServer");
+		// System.out.println("--> handleMessageFromServer");
 		awaitResponse = false;
 		String st;
 		st = msg.toString();
 		String whatController = getAction(st);
-		String[] res= DecrypteMassege(st);
+		String[] res = DecrypteMassege(st);
 		int len = res.length;
-		len-=2;
+		len -= 2;
 		String[] toSend = new String[len];
-		for (int i=0;i<len;i++)
-			toSend[i] = res[i+1];
+		for (int i = 0; i < len; i++)
+			toSend[i] = res[i + 1];
 		/*
-		 * in place 0 of res will be the name of the method need to deal with
-		 * in place greater then 0 will be all the data for this method
-		 * in every controller will be a method that will comunicate with the GoClient and transfer the data to her methods.
+		 * in place 0 of res will be the name of the method need to deal with in place
+		 * greater then 0 will be all the data for this method in every controller will
+		 * be a method that will comunicate with the GoClient and transfer the data to
+		 * her methods.
 		 */
-		switch(whatController) {
-		
+		switch (whatController) {
+
 			case "OrderController":
-			try {
-				ClientUI.orderController.gotMessage(res);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+				try {
+					ClientUI.orderController.gotMessage(res);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				break;
-        case "EmployeeController":
-        	ClientUI.employeeController.gotMessage(res[0],toSend);
-		  		break;
-        case "UserController":
-        	ClientUI.userController.gotMessage(res[0],toSend);
-		  		break;
-        case "ParkController":
-			ClientUI.parkController.gotMessage(res);
-			// TODO Auto-generated catch block
-		break;
-		
-	case "DiscountController": 
-		try {
-			ClientUI.discountController.gotMessage(res);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-			break;
-			
-	case "WaitingListController":
-		try {
-			ClientUI.waitingListController.gotMessage(res);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-			break;
-			
-	case "SignUpController":
-		try {
-			ClientUI.signUpController.gotMessage(res);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-			break;
-			
-		
-		case "Done":
-		
-			break;			
-		}
-						
-  }
+			case "EmployeeController":
+				ClientUI.employeeController.gotMessage(res[0], toSend);
+				break;
+			case "UserController":
+				ClientUI.userController.gotMessage(res[0], toSend);
+				break;
+			case "ParkController":
+				ClientUI.parkController.gotMessage(res);
+				// TODO Auto-generated catch block
+				break;
 
+			case "DiscountController":
+				try {
+					ClientUI.discountController.gotMessage(res);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				break;
 
-	
+			case "WaitingListController":
+				try {
+					ClientUI.waitingListController.gotMessage(res);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				break;
 
+			case "SignUpController":
+				try {
+					ClientUI.signUpController.gotMessage(res);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				break;
+			case "ReportsController":
+				try {
+					ClientUI.reportsController.gotMessage(res);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				break;
+
+			case "Done":
+
+				break;
+		}
+
+	}
 
 	/**
 	 * This method handles all data coming from the UI
@@ -142,51 +145,51 @@ public class GoClient extends AbstractClient {
 			openConnection();// in order to send more than one message
 			awaitResponse = true;
 			sendToServer(message);
-			if(message.equals("exit"))
+			if (message.equals("exit"))
 				quit();
 			// wait for response
 			else
-			while (awaitResponse) {
-				try {
-					Thread.sleep(100);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
+				while (awaitResponse) {
+					try {
+						Thread.sleep(100);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
 				}
-			}
 			/*
 			 * 
-			 * There may be an exception trhown because there is no connection to the server 
-			 * This can happen if clicking conectivity when there is no connection
-			 * This can happen when click exit whene there is no connecton to the server
-			 * This can happen when trying to submit data to the server when there is no connection to the server
+			 * There may be an exception trhown because there is no connection to the server
+			 * This can happen if clicking conectivity when there is no connection This can
+			 * happen when click exit whene there is no connecton to the server This can
+			 * happen when trying to submit data to the server when there is no connection
+			 * to the server
 			 * 
 			 * 
 			 */
 		} catch (IOException e) {
-			if(!(message.equals("exit"))) {
+			if (!(message.equals("exit"))) {
 				ClientUI.aFrame.thePortIsLBL.setText("No connection");
 				ClientUI.aFrame.thePortIsLBL.setVisible(true);
 				clientUI.display("Could not send message to server: Terminating client." + e);
-				
-			}	
-		} 
+
+			}
+		}
 	}
-	
+
 	public String[] DecrypteMassege(String msg) {
 		String[] gotFromServer = msg.split(" ");
-		String[] res= new String[gotFromServer.length-1];
-	    for(int i = 1; i <gotFromServer.length; i++) {
-	       res[i-1]=gotFromServer[i];
-	    }
-	    return res;
-	    
+		String[] res = new String[gotFromServer.length - 1];
+		for (int i = 1; i < gotFromServer.length; i++) {
+			res[i - 1] = gotFromServer[i];
+		}
+		return res;
+
 	}
-	
+
 	public String getAction(String msg) {
 		String[] result = msg.split(" ");
 		return result[0];
 	}
-	
 
 	/**
 	 * This method terminates the client.
@@ -199,4 +202,4 @@ public class GoClient extends AbstractClient {
 		System.exit(0);
 	}
 }
-//End of ChatClient class
+// End of ChatClient class

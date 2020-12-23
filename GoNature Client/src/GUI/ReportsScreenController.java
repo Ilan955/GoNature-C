@@ -79,10 +79,12 @@ public class ReportsScreenController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		setMonthCB();
+
 	}
 
 	@FXML
 	void ClickOnSendToDepartmentManager(ActionEvent event) {
+		// Send message to Park Manager with the report
 
 	}
 
@@ -109,9 +111,12 @@ public class ReportsScreenController implements Initializable {
 	void WhenClickOnGetBtn(ActionEvent event) {
 		MonthLBL.setText(WantedMonthDATE.getValue().toString());
 		YearLBL.setText(WantedYearLBL.getText().toString());
-		ParkLBL.setText(ClientUI.employeeController.employee.getParkName());
-		NameLBL.setText(ClientUI.employeeController.employee.getFirstName() + " "
-				+ ClientUI.employeeController.employee.getLastName());
+		ParkLBL.setText(ClientUI.employeeController.getParkName());
+		NameLBL.setText(ClientUI.employeeController.getFirstName() + " " + ClientUI.employeeController.getLastName());
+		ClientUI.reportsController.getData(WantedMonthDATE.getValue().toString(), WantedYearLBL.getText().toString());
+		int sumSolo = ClientUI.reportsController.getSolo();
+		int sumMembers = ClientUI.reportsController.getMembers();
+		int sumGroups = ClientUI.reportsController.getGroups();
 	}
 
 }

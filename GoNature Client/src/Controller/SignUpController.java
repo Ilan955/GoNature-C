@@ -5,7 +5,7 @@ import java.io.IOException;
 import Client.ClientUI;
 
 public class SignUpController {
-	String id, firstName, lastName, phoneNum, email, paymentMethod, memberType;
+	public String memberID, id, firstName, lastName, phoneNum, email, paymentMethod, memberType;
 	int numOfVisitors;
 	public Boolean checker;
 
@@ -45,19 +45,31 @@ public class SignUpController {
 	public void gotMessage(String[] msg) throws IOException {
 		String cases = msg[0];
 		switch (cases) {
-		case "isMemberExists":
-			if (msg[1] == "false") {
-				checker = false;
-			} else
-				checker = true;
-			;
-			break;
-		case "addMember":
-			break;
-		default:
-			break;
-
+			case "isMemberExists":
+				if (msg[1] == "false") {
+					checker = false;
+				} else
+					checker = true;
+				;
+				break;
+			case "addMember":
+				if (msg[1] == "false") {
+					System.out.println("Member was not added");
+				} else {
+					this.memberID = msg[1];
+				}
+				break;
+			default:
+				break;
 		}
 
+	}
+
+	public String getID() {
+		return this.memberID;
+	}
+
+	public String getType() {
+		return this.memberType;
 	}
 }
