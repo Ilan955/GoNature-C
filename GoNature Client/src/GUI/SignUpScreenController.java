@@ -17,6 +17,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
@@ -111,6 +113,7 @@ public class SignUpScreenController implements Initializable {
 
 	@FXML
 	void WhenClickSubmitBtn(ActionEvent event) {
+		boolean regFlag = true;
 		id = IdLbl.getText().toString();
 		firstName = FirstNameLbl.getText().toString();
 		lastName = LastNameLbl.getText().toString();
@@ -122,17 +125,24 @@ public class SignUpScreenController implements Initializable {
 		if (numOfVisitors > 1 && numOfVisitors < 15 && memberType == "Traveller") {
 			memberType = "Family Member";
 		} else {
-			System.out.println("Member type incompatible");
+			if (memberType == "Traveller") {
+				Alert a = new Alert(AlertType.ERROR, "Member type incompatible");
+				a.show();
+				regFlag = false;
+			}
 		}
 		// here we will send the data we got from the page
 		ClientUI.signUpController.checkExist(id);
-		if (ClientUI.signUpController.checker) {
+		if (ClientUI.signUpController.checker && regFlag == true) {
 			ClientUI.signUpController.init(id, firstName, lastName, phoneNum, email, paymentMethod, memberType,
 					numOfVisitors);
 			System.out.println("New member added: " + id);
 			GoToSuccess(event);
 		} else {
-			System.out.println("Member already exists!");
+			if (regFlag == true) {
+				Alert b = new Alert(AlertType.WARNING, "Member with id " + id + " already exists!");
+				b.show();
+			}
 		}
 
 	}

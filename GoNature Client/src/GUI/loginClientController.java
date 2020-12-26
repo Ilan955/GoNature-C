@@ -50,7 +50,7 @@ public class loginClientController {
 	    		ClientUI.set(s, port);
 	    		Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
 
-	    		Parent root = FXMLLoader.load(getClass().getResource("MonthlyReport.fxml"));
+				Parent root = FXMLLoader.load(getClass().getResource("SignUpNewMember.fxml"));
 
 	    		Scene scene = new Scene(root);
 	    		stage.setTitle("Prototype");

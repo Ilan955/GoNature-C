@@ -1,4 +1,3 @@
-
 package GUI;
 
 import java.io.IOException;
@@ -19,8 +18,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 public class ReportsScreenController implements Initializable {
@@ -36,6 +37,17 @@ public class ReportsScreenController implements Initializable {
 
 	@FXML
 	private TableView<String> ReportTable;
+	@FXML
+	private TableColumn<String, String> IndiLbl;
+
+	@FXML
+	private TableColumn<String, String> MemberLbl;
+
+	@FXML
+	private TableColumn<String, String> GroupsLbl;
+
+	@FXML
+	private TableColumn<String, String> TotalLbl;
 
 	@FXML
 	private Button SetReportBTN;
@@ -57,21 +69,22 @@ public class ReportsScreenController implements Initializable {
 
 	// Set Month ComboBox
 	private void setMonthCB() {
-		ArrayList<String> pays = new ArrayList<String>();
-		pays.add("Jan");
-		pays.add("Fab");
-		pays.add("Mar");
-		pays.add("Apr");
-		pays.add("May");
-		pays.add("Jun");
-		pays.add("Jul");
-		pays.add("Aug");
-		pays.add("Sep");
-		pays.add("Oct");
-		pays.add("Nov");
-		pays.add("Dec");
+		ArrayList<String> months = new ArrayList<String>();
+		months.add("Jan");
+		months.add("Fab");
+		months.add("Mar");
+		months.add("Apr");
+		months.add("May");
+		months.add("Jun");
+		months.add("Jul");
+		months.add("Aug");
+		months.add("Sep");
+		months.add("Oct");
+		months.add("Nov");
+		months.add("Dec");
 
-		ObservableList<String> listForMonth = FXCollections.observableArrayList(pays);
+		ObservableList<String> listForMonth = FXCollections.observableArrayList(months);
+
 		WantedMonthDATE.setItems(listForMonth);
 	}
 
@@ -80,6 +93,10 @@ public class ReportsScreenController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		setMonthCB();
 
+		IndiLbl.setCellValueFactory(new PropertyValueFactory<>("Individuals"));
+		MemberLbl.setCellValueFactory(new PropertyValueFactory<>("Members"));
+		GroupsLbl.setCellValueFactory(new PropertyValueFactory<>("Groups"));
+		TotalLbl.setCellValueFactory(new PropertyValueFactory<>("Total"));
 	}
 
 	@FXML
@@ -102,21 +119,33 @@ public class ReportsScreenController implements Initializable {
 		Scene scene = new Scene(root);
 		stage.setTitle("Welcome Employee");
 		stage.setScene(scene);
-
 		stage.show();
 	}
 
 //Click on Get button => view data
 	@FXML
 	void WhenClickOnGetBtn(ActionEvent event) {
-		MonthLBL.setText(WantedMonthDATE.getValue().toString());
-		YearLBL.setText(WantedYearLBL.getText().toString());
-		ParkLBL.setText(ClientUI.employeeController.getParkName());
-		NameLBL.setText(ClientUI.employeeController.getFirstName() + " " + ClientUI.employeeController.getLastName());
-		ClientUI.reportsController.getData(WantedMonthDATE.getValue().toString(), WantedYearLBL.getText().toString());
+		String month = WantedMonthDATE.getValue().toString();
+		String year = WantedYearLBL.getText().toString();
+		MonthLBL.setText(month);
+		YearLBL.setText(year);
+//		ParkLBL.setText(ClientUI.employeeController.getParkName());
+//		NameLBL.setText(ClientUI.employeeController.getFirstName() + " " + ClientUI.employeeController.getLastName());
+		ClientUI.reportsController.getData(month, year);
 		int sumSolo = ClientUI.reportsController.getSolo();
 		int sumMembers = ClientUI.reportsController.getMembers();
 		int sumGroups = ClientUI.reportsController.getGroups();
+		int sumTotal = sumSolo + sumMembers + sumGroups;
+
+		ObservableList<String> counters = FXCollections.observableArrayList();
+		counters.add(String.valueOf(sumSolo));
+		counters.add(String.valueOf(sumMembers));
+		counters.add(String.valueOf(sumGroups));
+		counters.add(String.valueOf(sumTotal));
+		System.out.println(counters);
+
+		ReportTable.setItems(counters);
+
 	}
 
 }

@@ -66,6 +66,8 @@ public class ClientUI extends Application {
 		welcomeController = new WelcomeAndLoginController();
 		employeeController = new EmployeeController();
 		userController = new UserController();
+		reportsController=new ReportsController() ;
+		reportsScreenController=new ReportsScreenController() ;
 		cp.start(primaryStage);
 		
 
