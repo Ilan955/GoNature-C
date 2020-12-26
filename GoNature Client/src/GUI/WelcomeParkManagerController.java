@@ -95,8 +95,14 @@ import javafx.stage.Stage;
 	    }
 
 	    @FXML
-	    void WhenClickCreateMonthlyIncomeReportBtn(ActionEvent event) {
-
+	    void WhenClickCreateMonthlyIncomeReportBtn(ActionEvent event) throws IOException {
+	    		Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+				FXMLLoader loader = new FXMLLoader();
+				Pane root = loader.load(getClass().getResource("MonthlyReport.fxml").openStream());
+				Scene scene = new Scene(root);
+				stage.setTitle("Create monthly report");
+				stage.setScene(scene);
+				stage.show();
 	    }
 
 	    @FXML

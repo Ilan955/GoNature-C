@@ -64,7 +64,6 @@ public class ClientUI extends Application {
 		signUpScreenController=new SignUpScreenController();
 		signUpController = new SignUpController();
 		welcomeController = new WelcomeAndLoginController();
-		employeeController = new EmployeeController();
 		userController = new UserController();
 		reportsController=new ReportsController() ;
 		reportsScreenController=new ReportEntreisScreenController() ;
