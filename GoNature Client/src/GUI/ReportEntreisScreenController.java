@@ -24,7 +24,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-public class ReportsScreenController implements Initializable {
+public class ReportEntreisScreenController implements Initializable {
 
 	@FXML
 	private ComboBox<String> WantedMonthDATE;
