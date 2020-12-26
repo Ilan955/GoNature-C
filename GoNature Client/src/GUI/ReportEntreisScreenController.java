@@ -24,7 +24,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-public class ReportsScreenController implements Initializable {
+public class ReportEntreisScreenController implements Initializable {
 
 	@FXML
 	private ComboBox<String> WantedMonthDATE;
@@ -125,7 +125,6 @@ public class ReportsScreenController implements Initializable {
 //Click on Get button => view data
 	@FXML
 	void WhenClickOnGetBtn(ActionEvent event) {
-
 		String month = WantedMonthDATE.getValue().toString();
 		String year = WantedYearLBL.getText().toString();
 		MonthLBL.setText(month);
@@ -146,7 +145,6 @@ public class ReportsScreenController implements Initializable {
 		System.out.println(counters);
 
 		ReportTable.setItems(counters);
-
 
 	}
 
