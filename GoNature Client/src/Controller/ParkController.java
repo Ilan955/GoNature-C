@@ -3,7 +3,7 @@ package Controller;
 import java.io.IOException;
 
 import Client.ClientUI;
-import Entities.*;
+import Entities.Park;
 
 public class ParkController {
 	public Park park;
@@ -55,9 +55,7 @@ public class ParkController {
 		switch (cases) {
 		case "DetailsPark":
 			park=null;
-			park=new Park(parkname,Integer.parseInt(msg[1]),
-					Integer.parseInt(msg[2]),Integer.parseInt(msg[3]),
-					Integer.parseInt(msg[4]),Float.parseFloat(msg[5]));
+			park=new Park(parkname,Integer.parseInt(msg[1]),Integer.parseInt(msg[2]),Integer.parseInt(msg[3]),Integer.parseInt(msg[4]),Float.parseFloat(msg[5]));
 
 			break;
 
