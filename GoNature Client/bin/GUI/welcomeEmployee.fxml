@@ -41,9 +41,7 @@
          </font>
       </Label>
       <Line endX="599.0" layoutX="101.0" layoutY="128.0" startX="-100.0" />
-
       <Button layoutX="403.0" layoutY="263.0" mnemonicParsing="false" onAction="#WhenClickSRequestsOfCasualTravellerBtn" prefHeight="31.0" prefWidth="285.0" text="Show enter requests of casual traveller" />
       <Button layoutX="405.0" layoutY="314.0" mnemonicParsing="false" onAction="#WhenClickExitControlBtn" prefHeight="31.0" prefWidth="285.0" text="Exit control of travellers" />
-
    </children>
 </AnchorPane>

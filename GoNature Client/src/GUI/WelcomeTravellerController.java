@@ -67,7 +67,7 @@ public class WelcomeTravellerController implements Initializable {
 	public void start(Stage primaryStage) throws Exception {
 		Parent root = FXMLLoader.load(getClass().getResource("WelcomeTraveller.fxml"));
 		Scene scene = new Scene(root);
-		primaryStage.setTitle("Welcome traveller");
+		primaryStage.setTitle("Welcome traveler");
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		
