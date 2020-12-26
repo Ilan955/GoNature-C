@@ -109,9 +109,9 @@ public class ReportsScreenController implements Initializable {
 	void WhenClickOnGetBtn(ActionEvent event) {
 		MonthLBL.setText(WantedMonthDATE.getValue().toString());
 		YearLBL.setText(WantedYearLBL.getText().toString());
-		ParkLBL.setText(ClientUI.employeeController.employee.getParkName());
-		NameLBL.setText(ClientUI.employeeController.employee.getFirstName() + " "
-				+ ClientUI.employeeController.employee.getLastName());
+		ParkLBL.setText(ClientUI.employeeController.getParkName());
+		NameLBL.setText(ClientUI.employeeController.getFirstName() + " "
+				+ ClientUI.employeeController.getLastName());
 	}
 
 }

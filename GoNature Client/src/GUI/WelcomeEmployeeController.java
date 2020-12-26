@@ -45,17 +45,31 @@ public class WelcomeEmployeeController implements Initializable {
 	    	EmployeeNameLbl.setText(tName);
 	    	String park = ClientUI.employeeController.getParkName();
 	    	ParkNameLbl.setText(park);
-
-	    	int current = ParkController.getCurrentVisitors(park) + ParkController.getCurrentUnexpectedVisitors(park);
-	     //	CurrentPeopleLbl.setText("" + current);
-	     //	current-=ClientUI.parkController.getMaxVisitors(park);
-	     //	HowManyEnterLbl.setText(""+current);
+	    	int current=0;
+	     //*This section of code will initialize label of current visitors in park and display it in employee screen.
+	    // *It does not work yet because Liad is M _ _ i _ k. [If you answer correctly to what Liad is, you will get a surprise].
+	    /*
+		try {
+			current = ClientUI.parkController.getCurrentVisitors(park) + ClientUI.parkController.getCurrentUnexpectedVisitors(park);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	     	CurrentPeopleLbl.setText("" + current);
+	     	try {
+				current-=ClientUI.parkController.getMaxVisitors(park);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		*/
+	    CurrentPeopleLbl.setText(""+current);
 
 		}
 	    @FXML
 	    void WhenClickLogOutBtn(ActionEvent event) throws IOException {
 	    	ClientUI.employeeController.setFirstName(null);
-	    	ClientUI.employeeController.setLastName(null);
+	    	ClientUI.employeeController.setLastName(null);;
 	    	ClientUI.employeeController.setType(null);
 	    	ClientUI.employeeController.setParkName(null);
 	    	Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
@@ -68,7 +82,7 @@ public class WelcomeEmployeeController implements Initializable {
 	    }
 
 	    @FXML
-	    void WhenClickParkCapacityBtn(ActionEvent event) { //don't know if its even needed
+	    void WhenClickParkCapacityBtn(ActionEvent event) { //don't know if its even needed.. It could appear automatic when screen is shown.
 	    	
 	    }
 
