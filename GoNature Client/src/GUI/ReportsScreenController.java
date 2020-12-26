@@ -125,6 +125,7 @@ public class ReportsScreenController implements Initializable {
 //Click on Get button => view data
 	@FXML
 	void WhenClickOnGetBtn(ActionEvent event) {
+
 		String month = WantedMonthDATE.getValue().toString();
 		String year = WantedYearLBL.getText().toString();
 		MonthLBL.setText(month);
@@ -145,6 +146,7 @@ public class ReportsScreenController implements Initializable {
 		System.out.println(counters);
 
 		ReportTable.setItems(counters);
+
 
 	}
 

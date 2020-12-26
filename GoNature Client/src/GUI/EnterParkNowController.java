@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.ResourceBundle;
 
+import javax.jws.soap.SOAPBinding.Use;
+
 import Client.ClientUI;
 import Entities.Park;
 import Entities.TravellerInPark;
@@ -59,9 +61,14 @@ public class EnterParkNowController implements Initializable {
 	@FXML
 	private Button btnCalculatePrice;
 	ObservableList<String> listForParks;
+	public static String wantedpark;
+	public static int numOfVisitors;
+	private LocalDate myDate;
+	private LocalTime myTime;
 
 	public void setIdOfMakingOrder() {
-		IDlbl.setText("31198");
+		// IDlbl.setText(ClientUI.userController.traveller.getId());
+		IDlbl.setText("11");
 	}
 
 	private void setWantedParkCm() {
@@ -75,8 +82,8 @@ public class EnterParkNowController implements Initializable {
 	}
 
 	private void SetTimePark() {
-		LocalDate myDate = LocalDate.now();
-		LocalTime myTime = LocalTime.now();
+		myDate = LocalDate.now();
+		myTime = LocalTime.now();
 		DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("HH:mm");
 		String formattedTime = myTime.format(myFormatObj);
 		this.DateLbl.setText(myDate.toString());
@@ -98,34 +105,18 @@ public class EnterParkNowController implements Initializable {
 
 	@FXML
 	void WhenClickNextBtn(ActionEvent event) throws IOException {
-    	String wantedpark= (String)WantedParkCB.getValue();
-    	int numOfVisitors= Integer.parseInt(NumOfVisiotrstxt.getText());
-    	Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
-	
-		//ClientUI.parkController.DetailsPark(wantedpark);
-		ClientUI.parkController.getCurrentUnexpectedVisitors(wantedpark);
-		ClientUI.parkController.getCurrentVisitors(wantedpark);
-		ClientUI.parkController.getMaxAvailableVisitors(wantedpark);
-		ClientUI.parkController.getMaxVisitors(wantedpark);
-    	if(!ClientUI.parkController.parkIsFull(wantedpark, numOfVisitors))
-    	{
-        	ClientUI.entranceParkController.enterWithoutOrder(LocalTime.now(), LocalDate.now(), wantedpark, numOfVisitors,(float)50);
-    		
-    		FXMLLoader loader = new FXMLLoader();
-    		Pane root = loader.load(getClass().getResource("/GUI/ImplementaionEnterPark.fxml").openStream());
-    		Scene scene = new Scene(root);
-    		stage.setTitle("Confirm Enter park");
-    		stage.setScene(scene);
-    		stage.show();
-    	}
-    	else {
-    		FXMLLoader loader = new FXMLLoader();
-    		Pane root = loader.load(getClass().getResource("/GUI/parkIsFull.fxml").openStream());
-    		Scene scene = new Scene(root);
-    		stage.setTitle("Unapproved enter");
-    		stage.setScene(scene);
-    		stage.show();
-    	}
+		String wantedpark = (String) WantedParkCB.getValue();
+		int numOfVisitors=Integer.parseInt(NumOfVisiotrstxt.getText());
+
+		ClientUI.requestsController.insertRequestToDB("11", myDate, myTime, wantedpark,numOfVisitors, "EnterPark", -1);
+
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		FXMLLoader loader = new FXMLLoader();
+		Pane root = loader.load(getClass().getResource("waiting.fxml").openStream());
+		Scene scene = new Scene(root);
+		stage.setTitle("Waiting for enter");
+		stage.setScene(scene);
+		stage.show();
 	}
 
 	@FXML
