@@ -39,8 +39,7 @@ public class ClientUI extends Application {
 	public static SignUpScreenController signUpScreenController;
 
 	public static RequestsController requestsController;
-
-
+	public static ReportsController reportsController;
 	public static ReportEntreisScreenController reportsScreenController;
 
 
