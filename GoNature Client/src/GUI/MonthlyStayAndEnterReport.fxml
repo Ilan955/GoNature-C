@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="617.0" prefWidth="825.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.ReportEntreisScreenController">
+	<children>
+		<Label layoutX="14.0" layoutY="14.0" text="Monthly Overall visitors Stay and Entrance report">
+			<font>
+				<Font size="28.0" />
+			</font>
+		</Label>
+		<Label layoutX="27.0" layoutY="80.0" text="Wanted month" />
+		<Label layoutX="303.0" layoutY="80.0" text="Wanted year" />
+		<ComboBox fx:id="WantedMonthDATE" layoutX="109.0" layoutY="76.0" prefWidth="150.0" />
+		<TextField fx:id="WantedYearLBL" layoutX="390.0" layoutY="73.0" prefHeight="31.0" prefWidth="150.0" />
+		<Button fx:id="GetBTN" layoutX="579.0" layoutY="73.0" mnemonicParsing="false" onAction="#WhenClickOnGetBtn" prefHeight="31.0" prefWidth="62.0" text="Get" />
+		<Line endX="713.9999389648438" layoutX="111.0" layoutY="114.0" startX="-111.0" />
+		<Button fx:id="SetReportBTN" layoutX="641.0" layoutY="566.0" mnemonicParsing="false" onAction="#ClickOnSendToDepartmentManager" prefHeight="31.0" prefWidth="159.0" text="Send to D.Manager" textFill="#8abf03">
+			<font>
+				<Font name="System Bold" size="15.0" />
+			</font>
+		</Button>
+		<Button fx:id="ClickCancelBTN" layoutX="27.0" layoutY="566.0" mnemonicParsing="false" onAction="#WhenClickOnCancel" prefHeight="31.0" prefWidth="140.0" text="Cancel" textFill="#d72828">
+			<font>
+				<Font name="System Bold" size="15.0" />
+			</font>
+		</Button>
+      <BarChart fx:id="graphDisplay" layoutX="22.0" layoutY="126.0" legendSide="LEFT" prefHeight="400.0" prefWidth="781.0" titleSide="LEFT">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </BarChart>
+	</children>
+</Pane>
