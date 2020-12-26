@@ -18,6 +18,12 @@ public class Data {
 		this.numOfVisit = new SimpleStringProperty(numOfVisit);
 		this.Price = new SimpleStringProperty(price);
 	}
+	public Data(String ID, String time,
+			String numOfVisit) {
+		this.ID=new SimpleStringProperty(ID);
+		this.Time = new SimpleStringProperty(time);
+		this.numOfVisit = new SimpleStringProperty(numOfVisit);
+	}
 	
 	public void setID(String Id) {
 		this.ID=new SimpleStringProperty(Id);
