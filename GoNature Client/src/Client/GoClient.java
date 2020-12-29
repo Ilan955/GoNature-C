@@ -68,7 +68,7 @@ public class GoClient extends AbstractClient {
 		/*
 		 * in place 0 of res will be the name of the method need to deal with in place
 		 * greater then 0 will be all the data for this method in every controller will
-		 * be a method that will comunicate with the GoClient and transfer the data to
+		 * be a method that will communicate with the GoClient and transfer the data to
 		 * her methods.
 		 */
 		switch (whatController) {
@@ -104,6 +104,7 @@ public class GoClient extends AbstractClient {
 				e.printStackTrace();
 			}
 			break;
+<<<<<<< HEAD
 		case "WaitingListController":
 			try {
 				ClientUI.waitingListController.gotMessage(res);
@@ -113,6 +114,10 @@ public class GoClient extends AbstractClient {
 			}
 			break;
 
+		case "ChangeIsSababa":
+			return;
+		case "parkSettingsAreUpdated":
+			return;
 		case "SignUpController":
 			try {
 				ClientUI.signUpController.gotMessage(res);
@@ -129,11 +134,6 @@ public class GoClient extends AbstractClient {
 				e.printStackTrace();
 			}
 			break;
-
-		case "ChangeIsSababa":
-			return;
-		case "parkSettingsAreUpdated":
-			return;
 
 		case "Done":
 

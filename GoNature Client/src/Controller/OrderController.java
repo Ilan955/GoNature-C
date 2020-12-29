@@ -155,7 +155,7 @@ public void gotMessage(String[] msg) throws IOException {
 		break;	
 	case "getExsistingOrders":
 		fillExsistingOrders(msg);
-	
+		
 	
 	}
 	
