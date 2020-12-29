@@ -48,7 +48,7 @@ public class loginClientController {
 		ClientUI.set(s, port);
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-		Parent root = FXMLLoader.load(getClass().getResource("WelcomeAndLoginScreen.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("NewOrder.fxml"));
 
 		Scene scene = new Scene(root);
 		stage.setTitle("Prototype");

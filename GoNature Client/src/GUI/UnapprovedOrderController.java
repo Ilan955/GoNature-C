@@ -47,9 +47,17 @@ public class UnapprovedOrderController implements Initializable{
 	    	ClientUI.orderController.wantToCancel(stage);
 	    }
 
+	    /*
+	     * when click enter waiting list : 
+	     * 	1. need to enter the order into the Order table in the Db
+	     *  2. need to change the status of the order to waiting from confirmed
+	     *  3. need to put the waiting request into the table of the waiting list with the current timeStamp.
+	     */
 	    @FXML
 	    void WhenClickEnterWaitingListBtn(ActionEvent event) {
-
+	    	Order tmp = ClientUI.orderController.order;
+	    	ClientUI.orderController.confirmOrder();
+	    	ClientUI.orderController.ChangeToWaitOrder(tmp);
 	    }
 
 	    @FXML

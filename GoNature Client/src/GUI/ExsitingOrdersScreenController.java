@@ -125,7 +125,7 @@ public class ExsitingOrdersScreenController  implements Initializable{
 								try {
 									root = loader.load(getClass().getResource("/GUI/SureIfCancel.fxml").openStream());
 									Scene scene = new Scene(root);
-		            	    		stage.setTitle("Unapproved Order");
+		            	    		stage.setTitle("Cancel Order");
 		            	    		stage.setScene(scene);
 		            	    		stage.show();
 								} catch (IOException e) {
@@ -174,8 +174,14 @@ public class ExsitingOrdersScreenController  implements Initializable{
 	                            int timelH=lt.getHour();
 	                            int limitTime=timelH+4;
 	                            int timelM=lt.getMinute();
-	                            if (ld.compareTo(dateNow)==0&&timeH<limitTime&&timelM==timeM)
-	                            	System.out.println("GOOD");
+	                            //if the time now (or the 4 hours of the visit, the traveller need to update that he is entering the park)
+	                            // when clicking, in the db his order status will change from confirmed to entered
+	                            if (ld.compareTo(dateNow)==0&&timeH<limitTime&&timelM==timeM) {
+	                            	  Data dataToApprove = getTableView().getItems().get(getIndex());
+	                            	  ClientUI.orderController.setEnterOrder(dataToApprove.getID(),dataToApprove.getPark(),dataToApprove.getDate(),dataToApprove.getTime());
+	                            	  
+	                            }
+	                            	
 	                            else {
 	                            	Alert a = new Alert(AlertType.NONE,"Now it's not the time for your order!"); 
 	               				 a.setAlertType(AlertType.ERROR);

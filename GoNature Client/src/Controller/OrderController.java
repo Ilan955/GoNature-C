@@ -3,6 +3,8 @@ package Controller;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.Time;
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -12,7 +14,7 @@ import java.util.ArrayList;
 import Client.ClientUI;
 import Entities.Order;
 import Entities.Person;
-
+import GUI.CancelReportData;
 import GUI.Data;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -35,9 +37,13 @@ private String currentPhone;
 public boolean n_order=false;
 public float currentPrice;
 public boolean isInDb=false;
+private String ReportMonth;
+private String ReportYear;
 private ArrayList<String> alternativeDates =new ArrayList<String>();
 public ObservableList<Data> ob = FXCollections.observableArrayList();
 public ObservableList<Data> aD =FXCollections.observableArrayList();
+public ArrayList<CancelReportData> oR =new ArrayList<CancelReportData>();
+public boolean isConfirm =true;
 /*
  * This method will check with the db if there is a place in the park for this time and date got
  * if so, will create new order, and save it later in the DB.
@@ -155,12 +161,35 @@ public void gotMessage(String[] msg) throws IOException {
 		break;	
 	case "getExsistingOrders":
 		fillExsistingOrders(msg);
+		break;
+	case "getDataForReport":
+		fillReportTableData(msg);
+		break;
 	
 	
 	}
 	
 }
+//This method will create a table row for the report.
+private void fillReportTableData(String[] msg) {
+	System.out.println(msg[1]+"This is the cancel Amount");
+	
+	System.out.println(msg[2]+"this is confirmed");
+	Number numOfCancel;
+	Number numOfConfirm;
+	CancelReportData crd=null;
+	try {
+		numOfCancel = NumberFormat.getInstance().parse(msg[1]);
+		numOfConfirm = NumberFormat.getInstance().parse(msg[2]);
+		crd = new CancelReportData(ReportYear,ReportMonth,numOfCancel,numOfConfirm);
+	} catch (ParseException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
 
+	oR.add(crd);
+	
+}
 // array[0]=methodName, array[1]=data
 private void fillExsistingOrders(String[] ordersArray) {
 	int counter=1;
@@ -175,10 +204,7 @@ private void fillExsistingOrders(String[] ordersArray) {
 			
 		}
 		System.out.println(check);
-		
-		
-		
-		
+
 	}
 	
 }
@@ -240,7 +266,6 @@ public void getAlternativeDates(LocalTime timeForVisit) throws IOException {
 			this.canMakeOrder(time, toDate, park, "f", numOfVisit);
 			if(valid)
 				alternativeDates.add(toDate.toString());
-		}
 		
 	for (String var:alternativeDates) {
 		d=new Data("4",var,order.getWantedPark(),time.toString(),Integer.toString(order.getNumberOfVisitors()),Float.toString(order.getTotalPrice()));
@@ -250,7 +275,7 @@ public void getAlternativeDates(LocalTime timeForVisit) throws IOException {
 		
 	}
 	
-	
+		}
 	
 }
 
@@ -323,6 +348,54 @@ public void getExsistingOrders() {
 	sb.append("4");
 	ClientUI.chat.accept(sb.toString());
 	
+}
+/*
+ * Method that will change the status of the order of the traveller from confirmed to entered
+ */
+public void setEnterOrder(String Id,String wantedPark,String dateOfVisit, String TimeInPark) {
+	
+	StringBuffer sb=  new StringBuffer();
+	sb.append("setEnterOrder");
+	sb.append(" ");
+	sb.append(TimeInPark);
+	sb.append(" ");
+	sb.append(dateOfVisit);
+	sb.append(" ");
+	sb.append(wantedPark);
+	sb.append(" ");
+	sb.append(Id);
+	sb.append(" ");
+	
+	ClientUI.chat.accept(sb.toString());
+
+}
+public void ChangeToWaitOrder(Order getOr) {
+	StringBuffer sb=  new StringBuffer();
+	sb.append("ChangeToWaitOrder");
+	sb.append(" ");
+	sb.append(getOr.getTimeInPark().toString());
+	sb.append(" ");
+	sb.append(getOr.getDateOfVisit().toString());
+	sb.append(" ");
+	sb.append(getOr.getWantedPark());
+	sb.append(" ");
+	sb.append(t.getType());
+	sb.append(" ");
+	ClientUI.chat.accept(sb.toString());
+	
+}
+//private String ReportMonth;
+//private String ReportYear;
+public void getDataForReport(LocalDate fromDate,LocalDate toDate ) {
+	ReportMonth = Integer.toString(fromDate.getMonthValue());
+	ReportYear = Integer.toString(fromDate.getYear());
+	StringBuffer sb = new StringBuffer();
+	sb.append("getDataForReport");
+	sb.append(" ");
+	sb.append(fromDate.toString());
+	sb.append(" ");
+	sb.append(toDate.toString());
+	ClientUI.chat.accept(sb.toString());
 }
 
 

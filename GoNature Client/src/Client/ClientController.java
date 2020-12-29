@@ -4,7 +4,8 @@
 package Client;
 import java.io.*;
 import Client.*;
-import common.*;
+import common.goIF;
+
 
 
 /**
