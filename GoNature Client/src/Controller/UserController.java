@@ -37,6 +37,7 @@ public class UserController {
 			 break;
 		case "IdentifyNotExistingTraveller": //Traveller does not exist on our DB, making a default one
 			ClientUI.userController.traveller = new Person("Traveller","",null,"",null);
+			ClientUI.userController.traveller.setId(info[3]);
 			break;
 		default:
 			System.out.print("Don't know what to do");

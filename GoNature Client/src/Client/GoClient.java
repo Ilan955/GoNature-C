@@ -61,7 +61,7 @@ public class GoClient extends AbstractClient {
 		String whatController = getAction(st);
 		String[] res = DecrypteMassege(st);
 		int len = res.length;
-		len -= 2;
+		len -= 1;
 		String[] toSend = new String[len];
 		for (int i = 0; i < len; i++)
 			toSend[i] = res[i + 1];
@@ -73,78 +73,66 @@ public class GoClient extends AbstractClient {
 		 */
 		switch (whatController) {
 
-			case "OrderController":
-				try {
-					ClientUI.orderController.gotMessage(res);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				break;
-			case "EmployeeController":
-				ClientUI.employeeController.gotMessage(res[0], toSend);
-				break;
-			case "UserController":
-				ClientUI.userController.gotMessage(res[0], toSend);
-				break;
-			case "ParkController":
-				ClientUI.parkController.gotMessage(res);
+		case "OrderController":
+			try {
+				ClientUI.orderController.gotMessage(res);
+			} catch (IOException e) {
 				// TODO Auto-generated catch block
-				break;
-
-        case "EmployeeController":
-        	ClientUI.employeeController.gotMessage(res[0],toSend);
-		  		break;
-        case "UserController":
-        	ClientUI.userController.gotMessage(res[0],toSend);
-		  		break;
-        case "ParkController":
+				e.printStackTrace();
+			}
+			break;
+		case "EmployeeController":
+			ClientUI.employeeController.gotMessage(res[0], toSend);
+			break;
+		case "UserController":
+			ClientUI.userController.gotMessage(res[0], toSend);
+			break;
+		case "ParkController":
 			ClientUI.parkController.gotMessage(res);
-		break;
-        case "RequestsController":
+			// TODO Auto-generated catch block
+			break;
+		case "RequestsController":
 			ClientUI.requestsController.gotMessage(res);
-		break;
+			break;
 
+		case "DiscountController":
+			try {
+				ClientUI.discountController.gotMessage(res);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
 
+		case "WaitingListController":
+			try {
+				ClientUI.waitingListController.gotMessage(res);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
 
-			case "DiscountController":
-				try {
-					ClientUI.discountController.gotMessage(res);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				break;
+		case "SignUpController":
+			try {
+				ClientUI.signUpController.gotMessage(res);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
+		case "ReportsController":
+			try {
+				ClientUI.reportsController.gotMessage(res);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
 
-			case "WaitingListController":
-				try {
-					ClientUI.waitingListController.gotMessage(res);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				break;
+		case "Done":
 
-			case "SignUpController":
-				try {
-					ClientUI.signUpController.gotMessage(res);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				break;
-			case "ReportsController":
-				try {
-					ClientUI.reportsController.gotMessage(res);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				break;
-
-			case "Done":
-
-				break;
+			break;
 		}
 
 	}

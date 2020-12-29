@@ -112,12 +112,4 @@ public class WelcomeEmployeeController implements Initializable {
 		stage.show();
 	}
 
-	@FXML
-	void WhenClickExitControlBtn(ActionEvent event) {
-
-	}
-
-    
-
-
 }

@@ -49,6 +49,44 @@ public class EntranceParkController {
 		System.out.println(res);
 		ClientUI.chat.accept(res);
 	}
+	
+	public void setCurrentVisitros(String wantedpark, int numOfVisitors) throws IOException {
+		int currentVisitorsToUpdate = ClientUI.parkController.getCurrentVisitors(wantedpark) + numOfVisitors;
+		StringBuffer sb = new StringBuffer();
+		sb.append("setCurrentVisitros");
+		sb.append(" ");
+		sb.append(wantedpark);
+		sb.append(" ");
+		sb.append(currentVisitorsToUpdate);
+		String res = sb.toString();
+		System.out.println(res);
+		ClientUI.chat.accept(res);
+	}
+	
+	public void updateExitTimeForTravellerWithOrder(String wantedpark, String id) throws IOException {
+		StringBuffer sb = new StringBuffer();
+		sb.append("updateExitTimeForTravellerWithOrder");
+		sb.append(" ");
+		sb.append(wantedpark);
+		sb.append(" ");
+		sb.append(id);
+		String res = sb.toString();
+		System.out.println(res);
+		ClientUI.chat.accept(res);
+	}
+	
+	public void updateExitTimeForcasualTraveller(String wantedpark, String id) throws IOException {
+		StringBuffer sb = new StringBuffer();
+		sb.append("updateExitTimeForcasualTraveller");
+		sb.append(" ");
+		sb.append(wantedpark);
+		sb.append(" ");
+		sb.append(id);
+		String res = sb.toString();
+		System.out.println(res);
+		ClientUI.chat.accept(res);
+	}
+	
 
 	/*
 	 * this method handle the GoClient data

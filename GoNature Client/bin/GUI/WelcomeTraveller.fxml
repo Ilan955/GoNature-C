@@ -19,13 +19,14 @@
          </font>
       </Label>
       <Label fx:id="TypeLBL" layoutX="135.0" layoutY="75.0" prefHeight="21.0" prefWidth="148.0" text="&quot;TYPE&quot;" />
-      <Button fx:id="btnExistingorders" layoutX="397.0" layoutY="218.0" mnemonicParsing="false" onAction="#WhenPressEsitingOrdersBtn" prefHeight="31.0" prefWidth="189.0" text="Show Existing orders" />
-      <Button fx:id="btnNewOrder" layoutX="397.0" layoutY="272.0" mnemonicParsing="false" onAction="#WhenPressMakeNewOrderBtn" prefHeight="31.0" prefWidth="189.0" text="Make New Order" />
-      <Button fx:id="btnWithoutOrder" layoutX="395.0" layoutY="325.0" mnemonicParsing="false" onAction="#WhenPressEnterWithoutOrderBtn" prefHeight="31.0" prefWidth="189.0" text="Enter Without Order" />
+      <Button fx:id="btnExistingorders" layoutX="397.0" layoutY="204.0" mnemonicParsing="false" onAction="#WhenPressEsitingOrdersBtn" prefHeight="31.0" prefWidth="189.0" text="Show Existing orders" />
+      <Button fx:id="btnNewOrder" layoutX="397.0" layoutY="252.0" mnemonicParsing="false" onAction="#WhenPressMakeNewOrderBtn" prefHeight="31.0" prefWidth="189.0" text="Make New Order" />
+      <Button fx:id="btnWithoutOrder" layoutX="397.0" layoutY="298.0" mnemonicParsing="false" onAction="#WhenPressEnterWithoutOrderBtn" prefHeight="31.0" prefWidth="189.0" text="Enter Without Order" />
       <Button fx:id="LogOutBtn" layoutX="14.0" layoutY="356.0" mnemonicParsing="false" onAction="#WhenPressLogOutBtn" text="Log-Out" textFill="#e11212">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Button>
+      <Button fx:id="exitParkBtn" layoutX="398.0" layoutY="343.0" mnemonicParsing="false" onAction="#WhenPressExitParkBtn" prefHeight="31.0" prefWidth="189.0" text="Exit the park" />
    </children>
 </AnchorPane>

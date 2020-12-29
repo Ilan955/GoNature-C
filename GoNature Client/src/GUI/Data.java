@@ -9,57 +9,72 @@ public class Data {
 	private SimpleStringProperty numOfVisit;
 	private SimpleStringProperty Price;
 	private SimpleStringProperty ID;
-	public Data(String ID,String date, String park, String time,
-			String numOfVisit, String price) {
-		this.ID=new SimpleStringProperty(ID);
+
+	public Data(String ID, String date, String park, String time, String numOfVisit, String price) {
+		this.ID = new SimpleStringProperty(ID);
 		this.Date = new SimpleStringProperty(date);
 		this.Park = new SimpleStringProperty(park);
 		this.Time = new SimpleStringProperty(time);
 		this.numOfVisit = new SimpleStringProperty(numOfVisit);
 		this.Price = new SimpleStringProperty(price);
 	}
-	public Data(String ID, String time,
-			String numOfVisit) {
-		this.ID=new SimpleStringProperty(ID);
+
+	public Data(String ID, String time, String numOfVisit) {
+		this.ID = new SimpleStringProperty(ID);
 		this.Time = new SimpleStringProperty(time);
 		this.numOfVisit = new SimpleStringProperty(numOfVisit);
 	}
-	
-	public void setID(String Id) {
-		this.ID=new SimpleStringProperty(Id);
+
+	public Data(String date) {
+		this.Date = new SimpleStringProperty(date);
 	}
+
+	public void setID(String Id) {
+		this.ID = new SimpleStringProperty(Id);
+	}
+
 	public String getID() {
 		return ID.get();
 	}
+
 	public void setDate(String date) {
 		Date = new SimpleStringProperty(date);
 	}
+
 	public void setPark(String park) {
 		Park = new SimpleStringProperty(park);
 	}
+
 	public void setTime(String time) {
 		Time = new SimpleStringProperty(time);
 	}
+
 	public void setNumOfVisit(String numOfVisit) {
 		this.numOfVisit = new SimpleStringProperty(numOfVisit);
 	}
+
 	public void setPrice(String price) {
 		new SimpleStringProperty(price);
 	}
+
 	public String getDate() {
 		return Date.get();
 	}
+
 	public String getPark() {
 		return Park.get();
 	}
+
 	public String getTime() {
 		return Time.get();
 	}
+
 	public String getNumOfVisit() {
 		return numOfVisit.get();
 	}
+
 	public String getPrice() {
 		return Price.get();
 	}
-	
+
 }

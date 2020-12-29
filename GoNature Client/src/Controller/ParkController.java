@@ -1,6 +1,7 @@
 package Controller;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 import Client.ClientUI;
 import Entities.Park;
@@ -8,9 +9,10 @@ import Entities.Park;
 public class ParkController {
 	public Park park;
 	private String parkname;
-	
+	private boolean dateExistInDB = false;
+
 	public void DetailsPark(String parkName) throws IOException {
-		this.parkname=parkName;
+		this.parkname = parkName;
 		StringBuffer sb = new StringBuffer();
 		sb.append("DetailsPark");
 		sb.append(" ");
@@ -18,45 +20,79 @@ public class ParkController {
 		String res = sb.toString();
 		ClientUI.chat.accept(res);
 	}
-	
+
 	public int getCurrentVisitors(String parkName) throws IOException {
 		ClientUI.parkController.DetailsPark(parkName);
 		return park.getCurrentVisitors();
 	}
-	
+
 	public int getCurrentUnexpectedVisitors(String parkName) throws IOException {
 		ClientUI.parkController.DetailsPark(parkName);
 		return park.getAmountOfUnExpectedTravellers();
 	}
-	
+
 	public int getMaxAvailableVisitors(String parkName) throws IOException {
 		ClientUI.parkController.DetailsPark(parkName);
 		return park.getMaxAvailableVisitors();
 	}
-	
+
 	public int getMaxVisitors(String parkName) throws IOException {
 		ClientUI.parkController.DetailsPark(parkName);
 		return park.getMaxVisitors();
 	}
+
 	public float getMaxDuration(String parkName) throws IOException {
 		ClientUI.parkController.DetailsPark(parkName);
 		return park.getMaxDurationVisit();
 	}
-	
-	public boolean parkIsFull(String parkName,int numOfVisitors) throws IOException {
-		int unExpectedVisitors=getMaxVisitors(parkName)-getMaxAvailableVisitors(parkName);
-		if(numOfVisitors+getCurrentUnexpectedVisitors(parkName)>=unExpectedVisitors)
+
+	public boolean parkIsFull(String parkName, int numOfVisitors) throws IOException {
+		int unExpectedVisitors = getMaxVisitors(parkName) - getMaxAvailableVisitors(parkName);
+		if (numOfVisitors + getCurrentUnexpectedVisitors(parkName) >= unExpectedVisitors)
 			return true;
 		return false;
 	}
 
-	public void gotMessage(String[] msg)  {
+	public void enterDateofFullCapcityPark(String park, LocalDate date, int full) {
+		StringBuffer sb = new StringBuffer();
+		sb.append("enterDateofFullCapcityPark");
+		sb.append(" ");
+		sb.append(park);
+		sb.append(" ");
+		sb.append(date.toString());
+		sb.append(" ");
+		sb.append(full);
+		String res = sb.toString();
+		ClientUI.chat.accept(res);
+
+	}
+
+	public boolean IfgetDateExistInDB() {
+		return dateExistInDB;
+	}
+	
+	public void updateStatusForCapacityParkToFull(String park) {
+		StringBuffer sb = new StringBuffer();
+		sb.append("updateStatusForCapacityParkToFull");
+		sb.append(" ");
+		sb.append(park);
+		String res = sb.toString();
+		ClientUI.chat.accept(res);
+	}
+
+	public void gotMessage(String[] msg) {
 		String cases = msg[0];
 		switch (cases) {
 		case "DetailsPark":
-			park=null;
-			park=new Park(parkname,Integer.parseInt(msg[1]),Integer.parseInt(msg[2]),Integer.parseInt(msg[3]),Integer.parseInt(msg[4]),Float.parseFloat(msg[5]));
+			park = null;
+			park = new Park(parkname, Integer.parseInt(msg[1]), Integer.parseInt(msg[2]), Integer.parseInt(msg[3]),
+					Integer.parseInt(msg[4]), Float.parseFloat(msg[5]));
 
+		case "checkIfThisDateInFullCapacityTable":
+			if (msg[1] == "true")
+				dateExistInDB = true;
+			else
+				dateExistInDB = false;
 			break;
 
 		}

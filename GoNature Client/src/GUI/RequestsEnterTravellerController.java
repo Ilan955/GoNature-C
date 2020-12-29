@@ -41,7 +41,8 @@ public class RequestsEnterTravellerController implements Initializable {
 
 	@FXML
 	private Label DateLbl;
-	
+
+	private boolean isFull = false;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -60,7 +61,7 @@ public class RequestsEnterTravellerController implements Initializable {
 
 	private void addButtonToTable() {
 		TableColumn<Data, Void> colBtn = new TableColumn("Action");
-
+		LocalDate myDate = LocalDate.now();
 		Callback<TableColumn<Data, Void>, TableCell<Data, Void>> cellFactory = new Callback<TableColumn<Data, Void>, TableCell<Data, Void>>() {
 			@Override
 			public TableCell<Data, Void> call(final TableColumn<Data, Void> param) {
@@ -69,7 +70,7 @@ public class RequestsEnterTravellerController implements Initializable {
 					private final Button btn = new Button("Check availability");
 
 					{
-					
+
 						btn.setOnAction((ActionEvent event) -> {
 							Data data = getTableView().getItems().get(getIndex());
 							try {
@@ -77,24 +78,33 @@ public class RequestsEnterTravellerController implements Initializable {
 								String park = data.getPark();
 								int numOfvisit = Integer.parseInt(data.getNumOfVisit());
 								if (!ClientUI.parkController.parkIsFull(park, numOfvisit)) {
-									 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-									 FXMLLoader loader = new FXMLLoader();
-									 Pane root;
-									 root = loader.load(getClass().getResource("ApprovingRequestTraveller.fxml").openStream());
-									 Scene scene = new Scene(root);
-									 stage.setTitle("Approve request");
-									 stage.setScene(scene);
-									 stage.show();
+									if (!ClientUI.parkController.IfgetDateExistInDB())
+										ClientUI.parkController.enterDateofFullCapcityPark(park, myDate, 0);
+									Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+									FXMLLoader loader = new FXMLLoader();
+									Pane root;
+									root = loader.load(
+									getClass().getResource("ApprovingRequestTraveller.fxml").openStream());
+									Scene scene = new Scene(root);
+									stage.setTitle("Approve request");
+									stage.setScene(scene);
+									stage.show();
 								} else {
 									ClientUI.requestsController.changeStatusForCasualTraveller(0, ID, park);
-									 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-									 FXMLLoader loader = new FXMLLoader();
-									 Pane root;
-									 root = loader.load(getClass().getResource("parkIsFullEmployee.fxml").openStream());
-									 Scene scene = new Scene(root);
-									 stage.setTitle("park is full");
-									 stage.setScene(scene);
-									 stage.show();
+
+									if (ClientUI.parkController.getCurrentVisitors(park)
+											+ ClientUI.parkController.getCurrentUnexpectedVisitors(
+													park) == ClientUI.parkController.getMaxVisitors(park)) {
+										ClientUI.parkController.updateStatusForCapacityParkToFull(park);
+									}
+									Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+									FXMLLoader loader = new FXMLLoader();
+									Pane root;
+									root = loader.load(getClass().getResource("parkIsFullEmployee.fxml").openStream());
+									Scene scene = new Scene(root);
+									stage.setTitle("park is full");
+									stage.setScene(scene);
+									stage.show();
 								}
 
 							} catch (IOException e) {
