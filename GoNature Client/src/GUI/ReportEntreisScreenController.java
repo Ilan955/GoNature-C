@@ -36,18 +36,18 @@ public class ReportEntreisScreenController implements Initializable {
 	private Button GetBTN;
 
 	@FXML
-	private TableView<String> ReportTable;
+	private TableView<ReportData> ReportTable;
 	@FXML
-	private TableColumn<String, String> IndiLbl;
+	private TableColumn<ReportData, String> IndiLbl;
 
 	@FXML
-	private TableColumn<String, String> MemberLbl;
+	private TableColumn<ReportData, String> MemberLbl;
 
 	@FXML
-	private TableColumn<String, String> GroupsLbl;
+	private TableColumn<ReportData, String> GroupsLbl;
 
 	@FXML
-	private TableColumn<String, String> TotalLbl;
+	private TableColumn<ReportData, String> TotalLbl;
 
 	@FXML
 	private Button SetReportBTN;
@@ -125,25 +125,24 @@ public class ReportEntreisScreenController implements Initializable {
 //Click on Get button => view data
 	@FXML
 	void WhenClickOnGetBtn(ActionEvent event) {
+
 		String month = WantedMonthDATE.getValue().toString();
 		String year = WantedYearLBL.getText().toString();
 		MonthLBL.setText(month);
 		YearLBL.setText(year);
-//		ParkLBL.setText(ClientUI.employeeController.getParkName());
-//		NameLBL.setText(ClientUI.employeeController.getFirstName() + " " + ClientUI.employeeController.getLastName());
+		ParkLBL.setText(ClientUI.employeeController.getParkName());
+		NameLBL.setText(ClientUI.employeeController.getFirstName() + " " + ClientUI.employeeController.getLastName());
 		ClientUI.reportsController.getData(month, year);
 		int sumSolo = ClientUI.reportsController.getSolo();
 		int sumMembers = ClientUI.reportsController.getMembers();
 		int sumGroups = ClientUI.reportsController.getGroups();
 		int sumTotal = sumSolo + sumMembers + sumGroups;
+		System.out.println("After click get: " + sumSolo + " " + sumMembers + " " + sumGroups + " " + sumTotal);
 
-		ObservableList<String> counters = FXCollections.observableArrayList();
-		counters.add(String.valueOf(sumSolo));
-		counters.add(String.valueOf(sumMembers));
-		counters.add(String.valueOf(sumGroups));
-		counters.add(String.valueOf(sumTotal));
-		System.out.println(counters);
-
+		ObservableList<ReportData> counters = FXCollections.observableArrayList();
+		ReportData rd = new ReportData(String.valueOf(sumSolo), String.valueOf(sumMembers), String.valueOf(sumGroups),
+				String.valueOf(sumTotal));
+		counters.add(rd);
 		ReportTable.setItems(counters);
 
 	}
