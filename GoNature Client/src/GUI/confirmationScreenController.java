@@ -84,10 +84,26 @@ public class confirmationScreenController implements Initializable{
     		Scene scene = new Scene(root);
     		stage.setTitle("Prototyp");
     		stage.setScene(scene);
-			
     		stage.show();
 			
 	    }
+		/*
+		 * if the user click back, he will need to fill the form again
+		 * with the ditails from here
+		 */
+		@FXML
+	    void whenClickBackBtn(ActionEvent event) throws IOException {
+			Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+			Parent root = FXMLLoader.load(getClass().getResource("NewOrder.fxml"));
+    		Scene scene = new Scene(root);
+    		stage.setTitle("Prototyp");
+    		stage.setScene(scene);
+			
+    		stage.show();
+	    }
+		
+		
+		
 
 	
 

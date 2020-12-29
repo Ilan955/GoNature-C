@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import Client.ClientUI;
+import Entities.Order;
 import Entities.Person;
 import javafx.fxml.Initializable;
 import javafx.collections.FXCollections;
@@ -100,12 +101,24 @@ public class OrderScreenController implements Initializable{
 	    public void setIdOfMakingOrder() {
 	    	IdOfViditorLbl.setText("31198");
 	    }
-	    //initialize the parks and the times, and the id of the user who is making the order
+	    /*
+	     * initialize park times and dates, if the user came back from the confirmation page, it will show on the screen all of his ditails that he already filled
+	     */
 	    @Override
 		public void initialize(URL arg0, ResourceBundle arg1) {	
 			setWantedParkCm();
 			SetTimeParkCm();
 			setIdOfMakingOrder();
+			if(!(ClientUI.orderController.isConfirm)) {
+				Order o = ClientUI.orderController.order;
+				EmailLbl.setText(ClientUI.orderController.getEmail());
+				PhoneNumberLbl.setText(ClientUI.orderController.getPhone());
+				DateLbl.setValue(o.getDateOfVisit());
+				NumOfVisotrsLbl.setText(Integer.toString(o.getNumberOfVisitors()));
+				ClientUI.orderController.isConfirm= true;
+				
+			
+			}
 		}
 	    
 	    
@@ -138,7 +151,8 @@ public class OrderScreenController implements Initializable{
 		    	 * after knowing if the order is possible or not, showing the right screen/
 		    	 */
 		    	if(ClientUI.orderController.valid)
-		    	{
+		    	{	
+		    		ClientUI.orderController.isConfirm=false;
 		    		FXMLLoader loader = new FXMLLoader();
 		    		Pane root = loader.load(getClass().getResource("/GUI/Confirmation.fxml").openStream());
 		    		Scene scene = new Scene(root);

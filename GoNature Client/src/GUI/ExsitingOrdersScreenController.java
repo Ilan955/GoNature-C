@@ -203,10 +203,5 @@ public class ExsitingOrdersScreenController implements Initializable {
 			}
 		};
 
-		colBtn.setCellFactory(cellFactory);
-		colBtnEnter.setCellFactory(cellFactory1);
-		ExistingOrderTable.getColumns().add(colBtn);
-		ExistingOrderTable.getColumns().add(colBtnEnter);
-
 	}
 }

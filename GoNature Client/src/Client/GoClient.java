@@ -104,7 +104,6 @@ public class GoClient extends AbstractClient {
 				e.printStackTrace();
 			}
 			break;
-<<<<<<< HEAD
 		case "WaitingListController":
 			try {
 				ClientUI.waitingListController.gotMessage(res);
