@@ -22,98 +22,80 @@ import javafx.scene.control.Label;
 
 public class WelcomeTravellerController implements Initializable {
 
-    @FXML
-    private Label userNamelb;
+	@FXML
+	private Label userNamelb;
 
-    @FXML
-    private Label TypeLBL;
-    
-    @FXML
-    private Button btnExistingorders;
+	@FXML
+	private Label TypeLBL;
 
-    @FXML
-    private Button btnNewOrder;
+	@FXML
+	private Button btnExistingorders;
 
-    @FXML
-    private Button btnWithoutOrder;
+	@FXML
+	private Button btnNewOrder;
 
-    @FXML
-    private Button LogOutBtn;
-    @FXML
-    private Label beforeTypeLBL;
-    
-    @Override
-	public void initialize(URL arg0, ResourceBundle arg1) {	
-    	String typ = ClientUI.userController.traveller.getType();
-    	if (typ.equals("") || typ.equals("preOrderTraveller") || typ.equals("Traveller"))
-    		btnExistingorders.setVisible(false);
-    	String first = ClientUI.userController.traveller.getFirstName();
-    	String last = ClientUI.userController.traveller.getLastName();
-    	StringBuffer name = new StringBuffer();
-    	name.append(first);
-    	name.append(" ");
-    	name.append(last);
-    	String tName = name.toString();
-//    	System.out.println("\n" + tName);
-    	if (first.equals("Traveller")) {
-    		userNamelb.setText("Traveller");
-    		if (typ.equals("")) {
-    		beforeTypeLBL.setText("");
-    		TypeLBL.setText("");}
-    		else {
-    			userNamelb.setText(tName);
-    	    	TypeLBL.setText(ClientUI.userController.traveller.getType());
-    		}
-    	}
-    	else {
-    	userNamelb.setText(tName);
-    	TypeLBL.setText(ClientUI.userController.traveller.getType());}
+	@FXML
+	private Button LogOutBtn;
+	@FXML
+	private Label beforeTypeLBL;
+	@FXML
+	private Button btnWithoutOrder;
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		String typ = ClientUI.userController.traveller.getType();
+		if (typ.equals("") || typ.equals("preOrderTraveller") || typ.equals("Traveller"))
+			btnExistingorders.setVisible(false);
+		String first = ClientUI.userController.traveller.getFirstName();
+		String last = ClientUI.userController.traveller.getLastName();
+		StringBuffer name = new StringBuffer();
+		name.append(first);
+		name.append(" ");
+		name.append(last);
+		String tName = name.toString();
+
+		if (first.equals("Traveller")) {
+			userNamelb.setText("Traveller");
+			if (typ.equals("")) {
+				beforeTypeLBL.setText("");
+				TypeLBL.setText("");
+			} else {
+				userNamelb.setText(tName);
+				TypeLBL.setText(ClientUI.userController.traveller.getType());
+			}
+		} else {
+			userNamelb.setText(tName);
+			TypeLBL.setText(ClientUI.userController.traveller.getType());
+		}
 	}
-    
 
- /*
-	public void start(Stage primaryStage) throws Exception {
-		Parent root = FXMLLoader.load(getClass().getResource("WelcomeTraveller.fxml"));
-		Scene scene = new Scene(root);
-		primaryStage.setTitle("Welcome traveler");
-		primaryStage.setScene(scene);
-		primaryStage.show();
-		
-	}
-*/
-    
-    
-    @FXML
-    void WhenPressEnterWithoutOrderBtn(ActionEvent event) throws IOException {
-    	if (ClientUI.userController.traveller.getType().equals(""))
-    		ClientUI.userController.traveller.setType("Traveller");
-    	Stage stage = (Stage) btnWithoutOrder.getScene().getWindow();
-		stage.close();
+	@FXML
+	void WhenPressEnterWithoutOrderBtn(ActionEvent event) throws IOException {
+		Stage stage = (Stage) btnWithoutOrder.getScene().getWindow();
 		FXMLLoader loader = new FXMLLoader();
-		Stage primaryStage = new Stage();
 		Pane root = loader.load(getClass().getResource("/GUI/EnterParkNow.fxml").openStream());
 		Scene scene = new Scene(root);
-		primaryStage.setTitle("Enter Park Now");
-		primaryStage.setScene(scene);
-		primaryStage.show();
-    }
+		stage.setTitle("Enter Park Now");
+		stage.setScene(scene);
+		stage.show();
+	}
 
-    @FXML
-    void WhenPressEsitingOrdersBtn(ActionEvent event) throws IOException {
-    	Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+	@FXML
+	void WhenPressEsitingOrdersBtn(ActionEvent event) throws IOException {
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		FXMLLoader loader = new FXMLLoader();
 		Pane root = loader.load(getClass().getResource("ExistingOrders.fxml").openStream());
 		Scene scene = new Scene(root);
 		stage.setTitle("Existing orders");
 		stage.setScene(scene);
 		stage.show();
-    }
+	}
 
-    @FXML
+	@FXML
 
-    void WhenPressLogOutBtn(ActionEvent event) throws IOException {
-    	ClientUI.userController.traveller = null;
-    	Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+	void WhenPressLogOutBtn(ActionEvent event) throws IOException {
+		ClientUI.userController.traveller = null;
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		FXMLLoader loader = new FXMLLoader();
 		Parent root = loader.load(getClass().getResource("WelcomeAndLoginScreen.fxml").openStream());
 		Scene scene = new Scene(root);
@@ -121,22 +103,43 @@ public class WelcomeTravellerController implements Initializable {
 		stage.setScene(scene);
 		stage.show();
 
-    }
+	}
 
-    @FXML
-    void WhenPressMakeNewOrderBtn(ActionEvent event) throws IOException {
-    	if (ClientUI.userController.traveller.getType().equals(""))
-    		ClientUI.userController.traveller.setType("preOrderTraveller");
-    	Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+	@FXML
+	void WhenPressMakeNewOrderBtn(ActionEvent event) throws IOException {
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		FXMLLoader loader = new FXMLLoader();
 		Pane root = loader.load(getClass().getResource("NewOrder.fxml").openStream());
 		Scene scene = new Scene(root);
 		stage.setTitle("New order");
 		stage.setScene(scene);
 		stage.show();
-    }
+	}
 
+	@FXML
+	void WhenPressExitParkBtn(ActionEvent event) throws IOException {
+		String typeOfVisitor = ClientUI.userController.traveller.getType();
+		int numofvisitors = 3;
+		ClientUI.entranceParkController.travellerinpark.getnumOfVisitors(); // check
+		String park = EnterParkNowController.wantedpark;
+		String id = ClientUI.userController.traveller.getId();
+		numofvisitors = numofvisitors * (-1);
+		if (typeOfVisitor == "Traveller") {
+			ClientUI.entranceParkController.setNumOfVisitorEntringPark(park, numofvisitors);
+			ClientUI.entranceParkController.updateExitTimeForcasualTraveller(park, id);
+		} else {
+			ClientUI.entranceParkController.setCurrentVisitros(park, numofvisitors);
+			ClientUI.entranceParkController.updateExitTimeForTravellerWithOrder(park, id);
+		}
+
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		FXMLLoader loader = new FXMLLoader();
+		Pane root = loader.load(getClass().getResource("ByeBye.fxml").openStream());
+		Scene scene = new Scene(root);
+		stage.setTitle("Exit");
+		stage.setScene(scene);
+		stage.show();
+
+	}
 
 }
-
-

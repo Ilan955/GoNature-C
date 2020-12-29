@@ -67,8 +67,7 @@ public class EnterParkNowController implements Initializable {
 	private LocalTime myTime;
 
 	public void setIdOfMakingOrder() {
-		// IDlbl.setText(ClientUI.userController.traveller.getId());
-		IDlbl.setText("11");
+		IDlbl.setText(ClientUI.userController.traveller.getId());
 	}
 
 	private void setWantedParkCm() {
@@ -100,7 +99,6 @@ public class EnterParkNowController implements Initializable {
 
 	@FXML
 	void WhenClickCalculatePriceBtn(ActionEvent event) throws IOException {
-
 	}
 
 	@FXML
@@ -108,7 +106,8 @@ public class EnterParkNowController implements Initializable {
 		String wantedpark = (String) WantedParkCB.getValue();
 		int numOfVisitors=Integer.parseInt(NumOfVisiotrstxt.getText());
 
-		ClientUI.requestsController.insertRequestToDB("11", myDate, myTime, wantedpark,numOfVisitors, "EnterPark", -1);
+		ClientUI.requestsController.insertRequestToDB(ClientUI.userController.traveller.getId()
+				, myDate, myTime, wantedpark,numOfVisitors, "EnterPark", -1);
 
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		FXMLLoader loader = new FXMLLoader();
