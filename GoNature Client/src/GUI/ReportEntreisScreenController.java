@@ -111,13 +111,13 @@ public class ReportEntreisScreenController implements Initializable {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		Parent root = null;
 		try {
-			root = FXMLLoader.load(getClass().getResource("welcomeEmployee.fxml"));
+			root = FXMLLoader.load(getClass().getResource("WelcomeParkManager.fxml"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		Scene scene = new Scene(root);
-		stage.setTitle("Welcome Employee");
+		stage.setTitle("Welcome " + ClientUI.employeeController.getFirstName());
 		stage.setScene(scene);
 		stage.show();
 	}

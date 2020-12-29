@@ -100,6 +100,7 @@ public class WelcomeAndLoginController {
 				return;
 			}
 		//	departmentEmployee t_emp = (departmentEmployee)ClientUI.employeeController.getEmployee();
+			ClientUI.parkController.DetailsPark(ClientUI.employeeController.getParkName());
 			String whichScreen = ClientUI.employeeController.getType();
 			switch (whichScreen) {
 			case "DepartmentEmployee":
@@ -109,7 +110,7 @@ public class WelcomeAndLoginController {
 				changeScreen(event,"WelcomeParkManager.fxml");
 				break;
 			case "DepartmentManager":
-				changeScreen(event,"welcomeDepartmentManager.fxml");
+				changeScreen(event,"WelcomeDepartmentEmployee.fxml");
 				break;
 			default:
 				System.out.print("Don't know what to do (2)");

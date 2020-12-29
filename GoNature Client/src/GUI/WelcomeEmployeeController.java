@@ -44,28 +44,23 @@ public class WelcomeEmployeeController implements Initializable {
     	EmployeeNameLbl.setText(tName);
     	String park = ClientUI.employeeController.getParkName();
     	ParkNameLbl.setText(park);
-    	int current=0;
-     //*This section of code will initialize label of current visitors in park and display it in employee screen.
-    // *It does not work yet because Liad is M _ _ i _ k. [If you answer correctly to what Liad is, you will get a surprise].
-    /*
-	try {
-		current = ClientUI.parkController.getCurrentVisitors(park) + ClientUI.parkController.getCurrentUnexpectedVisitors(park);
-	} catch (IOException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
+    	int current=0,currentVisitors=0,unExpected=0;
+    	try {
+    	currentVisitors = ClientUI.parkController.getCurrentVisitors(park);
+    	unExpected = ClientUI.parkController.getCurrentUnexpectedVisitors(park);
+    	} catch (IOException e) {e.printStackTrace();}
+    	current = currentVisitors + unExpected;
      	CurrentPeopleLbl.setText("" + current);
-     	try {
-			current-=ClientUI.parkController.getMaxVisitors(park);
-
+     	int howMany = 0;
+		try {
+			howMany = ClientUI.parkController.getMaxVisitors(park) - current;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	*/
-    CurrentPeopleLbl.setText(""+current);
-
+     	HowManyEnterLbl.setText("" + howMany);
 	}
+	
     @FXML
     void WhenClickLogOutBtn(ActionEvent event) throws IOException {
     	ClientUI.employeeController.setFirstName(null);

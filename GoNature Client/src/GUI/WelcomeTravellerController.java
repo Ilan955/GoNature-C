@@ -44,6 +44,9 @@ public class WelcomeTravellerController implements Initializable {
     
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {	
+    	String typ = ClientUI.userController.traveller.getType();
+    	if (typ.equals("") || typ.equals("preOrderTraveller") || typ.equals("Traveller"))
+    		btnExistingorders.setVisible(false);
     	String first = ClientUI.userController.traveller.getFirstName();
     	String last = ClientUI.userController.traveller.getLastName();
     	StringBuffer name = new StringBuffer();
@@ -54,8 +57,13 @@ public class WelcomeTravellerController implements Initializable {
 //    	System.out.println("\n" + tName);
     	if (first.equals("Traveller")) {
     		userNamelb.setText("Traveller");
+    		if (typ.equals("")) {
     		beforeTypeLBL.setText("");
-    		TypeLBL.setText("");
+    		TypeLBL.setText("");}
+    		else {
+    			userNamelb.setText(tName);
+    	    	TypeLBL.setText(ClientUI.userController.traveller.getType());
+    		}
     	}
     	else {
     	userNamelb.setText(tName);
@@ -77,6 +85,8 @@ public class WelcomeTravellerController implements Initializable {
     
     @FXML
     void WhenPressEnterWithoutOrderBtn(ActionEvent event) throws IOException {
+    	if (ClientUI.userController.traveller.getType().equals(""))
+    		ClientUI.userController.traveller.setType("Traveller");
     	Stage stage = (Stage) btnWithoutOrder.getScene().getWindow();
 		stage.close();
 		FXMLLoader loader = new FXMLLoader();
@@ -115,6 +125,8 @@ public class WelcomeTravellerController implements Initializable {
 
     @FXML
     void WhenPressMakeNewOrderBtn(ActionEvent event) throws IOException {
+    	if (ClientUI.userController.traveller.getType().equals(""))
+    		ClientUI.userController.traveller.setType("preOrderTraveller");
     	Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
 		FXMLLoader loader = new FXMLLoader();
 		Pane root = loader.load(getClass().getResource("NewOrder.fxml").openStream());

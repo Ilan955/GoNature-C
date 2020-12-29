@@ -56,15 +56,15 @@ public class GoClient extends AbstractClient {
 	public void handleMessageFromServer(Object msg) {
 		// System.out.println("--> handleMessageFromServer");
 		awaitResponse = false;
-		String st;
-		st = msg.toString();
+		String st = msg.toString();
 		String whatController = getAction(st);
 		String[] res = DecrypteMassege(st);
 		int len = res.length;
-		len -= 2;
+		len -= 1;
 		String[] toSend = new String[len];
-		for (int i = 0; i < len; i++)
+		for (int i = 0; i < len; i++) {
 			toSend[i] = res[i + 1];
+		}
 		/*
 		 * in place 0 of res will be the name of the method need to deal with in place
 		 * greater then 0 will be all the data for this method in every controller will
@@ -91,23 +91,14 @@ public class GoClient extends AbstractClient {
 				ClientUI.parkController.gotMessage(res);
 				// TODO Auto-generated catch block
 				break;
-
-        case "EmployeeController":
-        	ClientUI.employeeController.gotMessage(res[0],toSend);
-		  		break;
-        case "UserController":
-        	ClientUI.userController.gotMessage(res[0],toSend);
-		  		break;
-        case "ParkController":
-			ClientUI.parkController.gotMessage(res);
-		break;
         case "RequestsController":
 			ClientUI.requestsController.gotMessage(res);
 		break;
-
-
-
-			case "DiscountController":
+        case "ChangeIsSababa":
+        	return;
+        case "parkSettingsAreUpdated":
+        	return;
+		case "DiscountController":
 				try {
 					ClientUI.discountController.gotMessage(res);
 				} catch (IOException e) {
