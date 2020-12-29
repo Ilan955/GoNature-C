@@ -56,15 +56,15 @@ public class GoClient extends AbstractClient {
 	public void handleMessageFromServer(Object msg) {
 		// System.out.println("--> handleMessageFromServer");
 		awaitResponse = false;
-		String st;
-		st = msg.toString();
+		String st = msg.toString();
 		String whatController = getAction(st);
 		String[] res = DecrypteMassege(st);
 		int len = res.length;
-		len -= 2;
+		len -= 1;
 		String[] toSend = new String[len];
-		for (int i = 0; i < len; i++)
+		for (int i = 0; i < len; i++) {
 			toSend[i] = res[i + 1];
+		}
 		/*
 		 * in place 0 of res will be the name of the method need to deal with in place
 		 * greater then 0 will be all the data for this method in every controller will
@@ -104,7 +104,6 @@ public class GoClient extends AbstractClient {
 				e.printStackTrace();
 			}
 			break;
-
 		case "WaitingListController":
 			try {
 				ClientUI.waitingListController.gotMessage(res);
@@ -130,6 +129,11 @@ public class GoClient extends AbstractClient {
 				e.printStackTrace();
 			}
 			break;
+
+		case "ChangeIsSababa":
+			return;
+		case "parkSettingsAreUpdated":
+			return;
 
 		case "Done":
 

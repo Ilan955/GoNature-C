@@ -2,6 +2,8 @@ package GUI;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ResourceBundle;
 
 import Client.ClientUI;
@@ -12,9 +14,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseDragEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -56,6 +60,7 @@ import javafx.stage.Stage;
 
 	    @FXML
 	    private Button SpecialDiscountBTN111;
+	    
 	    @Override
 		public void initialize(URL arg0, ResourceBundle arg1) {	
 	    	String first = ClientUI.employeeController.getFirstName();
@@ -68,6 +73,22 @@ import javafx.stage.Stage;
 	    	ParkMAnagerName.setText(tName);
 	    	String park = ClientUI.employeeController.getParkName();
 	    	ParkName.setText(park);
+	    	int current=0,currentVisitors=0,unExpected=0;
+	    	try {
+	    	currentVisitors = ClientUI.parkController.getCurrentVisitors(park);
+	    	unExpected = ClientUI.parkController.getCurrentUnexpectedVisitors(park);
+	    	} catch (IOException e) {e.printStackTrace();}
+	    	current = currentVisitors + unExpected;
+	    	numberOFVisitorsLabel.setText("" + current);
+	    	try {
+				MaxVisitorsField.setText("" + ClientUI.parkController.getMaxVisitors(park));
+				GapField.setText("" + (ClientUI.parkController.getMaxVisitors(park) - ClientUI.parkController.getMaxAvailableVisitors(park))); //--> need to know what the gap is 
+				durationField.setText("" + ClientUI.parkController.getMaxDuration(park));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	    	
 	    //	int current = ParkController.getCurrentVisitors(park) + ParkController.getCurrentUnexpectedVisitors(park);
 	    //	CurrentPeopleLbl.setText("" + current);
 	    	// 64-65 rows are after DB check with parkController. (I didn't use park DB yet)
@@ -75,7 +96,7 @@ import javafx.stage.Stage;
 
 	    @FXML
 	    void ClickCreateOverallVisitorsReport(ActionEvent event) {
-
+	    	
 	    }
 
 	    @FXML
@@ -107,7 +128,7 @@ import javafx.stage.Stage;
 
 	    @FXML
 	    void WhenClickCreateUsageReportBtn(ActionEvent event) {
-
+	    	
 	    }
 
 	    @FXML
@@ -127,13 +148,70 @@ import javafx.stage.Stage;
 
 	    @FXML
 	    void WhenClickSendChangesBtn(ActionEvent event) {
-
+	    	if (MaxVisitorsField.getText().isEmpty() || GapField.getText().isEmpty() || durationField.getText().isEmpty()) {
+	    		 Alert a = new Alert(AlertType.NONE,"All fields are required!\nPlease fill every field correctly"); 
+				 a.setAlertType(AlertType.ERROR);
+				 a.show();
+		    	return;
+	    	}
+	    	int gap = Integer.parseInt(GapField.getText());
+	    	int maxVisit = Integer.parseInt(MaxVisitorsField.getText());
+	    	float duration = Float.parseFloat(durationField.getText());
+	    	if (gap >= maxVisit)
+	    	{
+	   		 Alert a = new Alert(AlertType.NONE,"Gap can not be greater then maximum visitors amount!\nPlease fill fields correctly"); 
+			 a.setAlertType(AlertType.ERROR);
+			 a.show();
+	    	return;
+	    	}
+	    	if (duration <= 0 || gap <= 0 || maxVisit <= 0)
+	    	{
+	   		 Alert a = new Alert(AlertType.NONE,"Field can not be negative!"); 
+			 a.setAlertType(AlertType.ERROR);
+			 a.show();
+	    	return;
+	    	}
+	    	if (duration >= 8) {
+	    		 Alert a = new Alert(AlertType.NONE,"Duration must be less or equal to 8.00(H)"); 
+				 a.setAlertType(AlertType.ERROR);
+				 a.show();
+		    	return;
+	    	}
+            LocalTime timeNow = LocalTime.now();
+            LocalDate dateNow = LocalDate.now();
+           StringBuffer s = new StringBuffer();
+           s.append("SendParkChangesToDepartmentManager ");
+           s.append("x ");
+           s.append(dateNow);
+           s.append(" ");
+           s.append(timeNow);
+           s.append(" ");
+           s.append(ClientUI.employeeController.getParkName());
+           s.append(" ");// untill now --> s = [SendParkChanges..,date,time,parkName]
+           s.append(MaxVisitorsField.getText() + " " + GapField.getText() + " " + durationField.getText() + " " + "0");
+           ClientUI.employeeController.sendChangesToDepartmentManager(s.toString());
+           if (ClientUI.requestsController.isCanSendParkSettingsChangesToDm()) {
+        		 Alert a = new Alert(AlertType.INFORMATION,"Changes sent to D.manager approval!"); 
+				 a.setAlertType(AlertType.INFORMATION);
+				 a.setHeaderText("Sent to D.manager");
+				 a.setTitle("Sent to D.manager");
+				 a.show();
+				 ClientUI.requestsController.setCanSendParkSettingsChangesToDm(false);
+				 return;
+           }
+           else {
+        		 Alert a = new Alert(AlertType.NONE,"An error has occured\nCould not send to D.manager"); 
+				 a.setAlertType(AlertType.ERROR);
+				 a.show();
+           }
+           return;
 	    }
 
 	    @FXML
 	    void WhenOverGapInPArkForHelp(MouseDragEvent event) {
 
 	    }
+
 
 	}
 

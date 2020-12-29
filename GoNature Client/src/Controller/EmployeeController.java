@@ -3,6 +3,10 @@ package Controller;
 import Client.ClientUI;
 //import Entities.departmentEmployee;
 import Entities.*;
+import GUI.Data;
+import GUI.parkPendingRData;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class EmployeeController {
 	//!!!! WHAT NEED TO BE !!!!
@@ -10,6 +14,7 @@ public class EmployeeController {
 	String firstName,lastName,type,parkName;
 	private boolean isValidUserName;
 	private boolean isPasswordsMatch;
+	public ObservableList<parkPendingRData> parkSettingChangeRequests = FXCollections.observableArrayList();
 	//private departmentEmployee employee;
 	
 
@@ -22,6 +27,9 @@ public class EmployeeController {
 	public void identify(String s) {
 		ClientUI.chat.accept(s);
 	}
+	public void sendChangesToDepartmentManager(String s) {
+		ClientUI.chat.accept(s);
+	}
 	public void gotMessage(String action, String[] info)
 	{
 		switch (action) {
@@ -32,11 +40,6 @@ public class EmployeeController {
 				lastName=info[1];
 				type=info[3];
 				parkName=info[7];
-				//departmentEmployee t_emp = new departmentEmployee (info[0],info[1],info[2],info[3],info[4],info[5],info[6],info[7],info[8],info[9]);
-				//System.out.println("Dep" + t_emp.getFirstName() + " " + t_emp.getLastName());
-				//ClientUI.employeeController.employee = t_emp;
-			 	// ClientUI.employeeController.setEmployee(new departmentEmployee (info[0],info[1],info[2],info[3],info[4],info[5],info[6],info[7],info[8],info[9]));
-			 	//System.out.print("Hello from Employee: " + getEmployee().getUserName() + " " + getEmployee().getPassword());
 			 	break;
 		case "IdentifyNotExistingEmployee": //UserName does not exist on our DB
 			isValidUserName = false;
@@ -44,6 +47,9 @@ public class EmployeeController {
 		case "IdentifyPasswordDoesNotMatch": //Means that passwords do not match
 			isPasswordsMatch = false;
 			isValidUserName=true;
+			break;
+		case "displayParkSettingsRequestsToDepartmentManager":
+			fillParkSettingRequests(info);
 			break;
 		default:
 			System.out.print("Don't know what to do");
@@ -73,5 +79,23 @@ public class EmployeeController {
 		public void setParkName (String parkName) {
 			this.parkName=parkName;
 		}
-
+		private void fillParkSettingRequests(String[] ordersArray) {
+			int counter=0;
+			parkSettingChangeRequests.removeAll(parkSettingChangeRequests);
+			parkPendingRData pprd;
+			if(!(ordersArray[1].equals("Done"))) {
+				while(!(ordersArray[counter].equals("Done"))) {
+					 pprd= new parkPendingRData(ordersArray[counter],ordersArray[counter+1],ordersArray[counter+2],ordersArray[counter+3],ordersArray[counter+4],ordersArray[counter+5],ordersArray[counter+6]);
+					 parkSettingChangeRequests.add(pprd);
+					counter+=7;	
+				}
+			}
+			
+		}
+		public void goAndUpdateRequestStatusInDB(String s) {
+			ClientUI.chat.accept(s);
+		}
+		public void goAndChangeParkSettingsInDB(String s) {
+			ClientUI.chat.accept(s);
+		}
 }

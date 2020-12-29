@@ -7,11 +7,14 @@ import Client.ClientUI;
 import GUI.Data;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 public class RequestsController {
 	private int statusOfRequest = -1;
 	public ObservableList<Data> ob = FXCollections.observableArrayList();
 	public Data d;
+	private boolean canSendParkSettingsChangesToDm;
 	private String park;
 	public void insertRequestToDB(String id, LocalDate date, LocalTime time, String park, int numOfVisitors,
 			String type, int status) {
@@ -78,9 +81,16 @@ public class RequestsController {
 			break;
 		case "getRequestsTravellerOfEnterPark":
 			fillRequestsTraveller(msg);	
-
-		}
+			break;
+		case "parkSettingsChangesSent":
+			if (msg[1].equals("true")) {
+				ClientUI.requestsController.setCanSendParkSettingsChangesToDm(true);}
+			else if (msg[1].equals("false"))
+				ClientUI.requestsController.setCanSendParkSettingsChangesToDm(false);
+		default:
+			System.out.print("Nothing to do");
 	}
+}
 
 	private void fillRequestsTraveller(String[] msg) {
 		int cnt = 1;
@@ -92,5 +102,13 @@ public class RequestsController {
 				cnt += 3;
 			}
 		}
+	}
+
+	public boolean isCanSendParkSettingsChangesToDm() {
+		return canSendParkSettingsChangesToDm;
+	}
+
+	public void setCanSendParkSettingsChangesToDm(boolean canSendParkSettingsChangesToDm) {
+		this.canSendParkSettingsChangesToDm = canSendParkSettingsChangesToDm;
 	}
 }
