@@ -1,21 +1,23 @@
 package Controller;
 
-import java.io.IOException;
-import java.time.LocalTime;
-import java.util.ArrayList;
-
 import Client.ClientUI;
 import GUI.Data;
-import Logic.clientLogic.*;
-import clientLogic.Reports;
+import clientLogic.*;
+import java.io.IOException;
+import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class ReportsController {
+
 	public Data d;
 	public ObservableList<Data> ob = FXCollections.observableArrayList();
-
+	public ArrayList<Reports> visitors;
+	public ArrayList<Reports> members;
+	public ArrayList<Reports> groups;
+	public String month, park, year;
 	public int sumSolo = 0, sumMembers = 0, sumGroups = 0;
+
 	// sumSolo=individuals that entered the park
 	// sumMembers=members and family members that entered the park
 	// sumGroups=groups that entered to the park
@@ -35,7 +37,6 @@ public class ReportsController {
 		default:
 			break;
 		}
-
 	}
 
 	private String getMonth(String month) {
@@ -88,12 +89,10 @@ public class ReportsController {
 
 	public int getMembers() {
 		return this.sumMembers;
-
 	}
 
 	public int getGroups() {
 		return this.sumGroups;
-
 	}
 
 	public void getTableOfUnFullCapacityInDates(String month, String year, String wantedpark) {
@@ -106,7 +105,6 @@ public class ReportsController {
 		sb.append(" ");
 		sb.append(wantedpark);
 		ClientUI.chat.accept(sb.toString());
-
 	}
 
 	private void filldateofNotfullCapacityTable(String[] msg) {
@@ -122,6 +120,9 @@ public class ReportsController {
 
 	public void getDataEntranceTimesAndStay(String month, String year, String wantedpark) {
 		StringBuffer sb = new StringBuffer();
+		this.month = month;
+		this.year = year;
+		this.park = wantedpark;
 		sb.append("getDataEntranceTimesAndStay");
 		sb.append(" ");
 		sb.append(getMonth(month));
@@ -130,7 +131,6 @@ public class ReportsController {
 		sb.append(" ");
 		sb.append(wantedpark);
 		ClientUI.chat.accept(sb.toString());
-
 	}
 
 	private void dealWithgetDataEntranceTimesAndStay(String[] msg) {
@@ -142,6 +142,7 @@ public class ReportsController {
 		ArrayList<Reports> visitors = new ArrayList<Reports>();
 		ArrayList<Reports> members = new ArrayList<Reports>();
 		ArrayList<Reports> groups = new ArrayList<Reports>();
+
 		while (!(msg[i].equals("Done"))) {
 			String type = msg[i + 1];
 			switch (type) {
@@ -160,6 +161,6 @@ public class ReportsController {
 			}
 			i += 4;
 		}
-	}
 
+	}
 }
