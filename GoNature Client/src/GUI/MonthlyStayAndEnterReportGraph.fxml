@@ -9,7 +9,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="683.0" prefWidth="929.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.cancelGraphScreen">
    <children>
-      <BarChart fx:id="chartBarEntrance" layoutY="104.0" prefHeight="246.0" prefWidth="929.0" title="Stay and Entrance">
+      <BarChart fx:id="chartBarEntrance" layoutX="7.0" layoutY="22.0" prefHeight="246.0" prefWidth="929.0" title="Stay and Entrance">
          <xAxis>
             <CategoryAxis fx:id="DateX" label="Date" side="BOTTOM" />
          </xAxis>
