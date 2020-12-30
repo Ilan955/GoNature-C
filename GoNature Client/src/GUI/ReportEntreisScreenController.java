@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import Client.ClientUI;
+import clientLogic.inits;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -67,31 +68,10 @@ public class ReportEntreisScreenController implements Initializable {
 	@FXML
 	private Label NameLBL;
 
-	// Set Month ComboBox
-	private void setMonthCB() {
-		ArrayList<String> months = new ArrayList<String>();
-		months.add("Jan");
-		months.add("Fab");
-		months.add("Mar");
-		months.add("Apr");
-		months.add("May");
-		months.add("Jun");
-		months.add("Jul");
-		months.add("Aug");
-		months.add("Sep");
-		months.add("Oct");
-		months.add("Nov");
-		months.add("Dec");
-
-		ObservableList<String> listForMonth = FXCollections.observableArrayList(months);
-
-		WantedMonthDATE.setItems(listForMonth);
-	}
-
 	// initialize Combo Boxes
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		setMonthCB();
+		WantedMonthDATE.setItems(inits.setMonthCB());
 
 		IndiLbl.setCellValueFactory(new PropertyValueFactory<>("Individuals"));
 		MemberLbl.setCellValueFactory(new PropertyValueFactory<>("Members"));
@@ -128,11 +108,12 @@ public class ReportEntreisScreenController implements Initializable {
 
 		String month = WantedMonthDATE.getValue().toString();
 		String year = WantedYearLBL.getText().toString();
+		String park = ClientUI.employeeController.getParkName();
 		MonthLBL.setText(month);
 		YearLBL.setText(year);
 		ParkLBL.setText(ClientUI.employeeController.getParkName());
 		NameLBL.setText(ClientUI.employeeController.getFirstName() + " " + ClientUI.employeeController.getLastName());
-		ClientUI.reportsController.getData(month, year);
+		ClientUI.reportsController.getData(month, year, park);
 		int sumSolo = ClientUI.reportsController.getSolo();
 		int sumMembers = ClientUI.reportsController.getMembers();
 		int sumGroups = ClientUI.reportsController.getGroups();
