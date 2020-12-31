@@ -12,9 +12,9 @@ public class ReportsController {
 
 	public Data d;
 	public ObservableList<Data> ob = FXCollections.observableArrayList();
-	public ArrayList<Reports> visitors;
-	public ArrayList<Reports> members;
-	public ArrayList<Reports> groups;
+	public ArrayList<Reports> visitors = new ArrayList<Reports>();
+	public ArrayList<Reports> members = new ArrayList<Reports>();
+	public ArrayList<Reports> groups = new ArrayList<Reports>();
 	public String month, park, year;
 	public int sumSolo = 0, sumMembers = 0, sumGroups = 0;
 
@@ -32,8 +32,10 @@ public class ReportsController {
 			break;
 		case "getTableOfUnFullCapacityInDates":
 			filldateofNotfullCapacityTable(msg);
+			break;
 		case "getDataEntranceTimesAndStay":
 			dealWithgetDataEntranceTimesAndStay(msg);
+			break;
 		default:
 			break;
 		}
@@ -138,29 +140,27 @@ public class ReportsController {
 		 * msg[0] is numOfVisitors, msg[1] is type, msg[2] is entrance time, msg[3] is
 		 * exit time.
 		 */
-		int i = 0;
-		ArrayList<Reports> visitors = new ArrayList<Reports>();
-		ArrayList<Reports> members = new ArrayList<Reports>();
-		ArrayList<Reports> groups = new ArrayList<Reports>();
-
+		int i = 1;
 		while (!(msg[i].equals("Done"))) {
+
 			String type = msg[i + 1];
 			switch (type) {
 			case "traveller":
-				visitors.add(new Reports(msg[i], msg[i + 1], msg[i + 2], msg[i + 3]));
+				visitors.add(new Reports(msg[i], msg[i + 1], msg[i + 2], msg[i + 3], msg[i + 4]));
 				break;
-			case "member":
+			case "Member":
 			case "familyMember":
-				members.add(new Reports(msg[i], msg[i + 1], msg[i + 2], msg[i + 3]));
+				members.add(new Reports(msg[i], msg[i + 1], msg[i + 2], msg[i + 3], msg[i + 4]));
 				break;
 			case "groupGuide":
-				groups.add(new Reports(msg[i], msg[i + 1], msg[i + 2], msg[i + 3]));
+				groups.add(new Reports(msg[i], msg[i + 1], msg[i + 2], msg[i + 3], msg[i + 4]));
 				break;
 			default:
 				System.out.println("Somthing is wrong with type");
+				System.out.println("I: " + i + " msg[1]: " + msg[i] + "  msg[2]: " + msg[i + 1] + "  msg[3]: "
+						+ msg[i + 2] + "  msg[4]: " + msg[i + 3] + " msg[5]: " + msg[i + 4]);
 			}
-			i += 4;
+			i += 5;
 		}
-
 	}
 }

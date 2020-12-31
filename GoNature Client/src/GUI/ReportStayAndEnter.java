@@ -1,14 +1,10 @@
 package GUI;
 
+import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
-import Logic.clientLogic.*;
 import clientLogic.inits;
 import Client.ClientUI;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,7 +16,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 public class ReportStayAndEnter implements Initializable {
@@ -68,17 +63,21 @@ public class ReportStayAndEnter implements Initializable {
 				"Please enter the wanted Park Month and Year to make the report.\nYou can't choose month that is not yet been.");
 		a.setTitle("Stay and Entrance reports");
 		a.setHeaderText("Information about Stay and Entrance report");
-
 		a.show();
 	}
 
 	@FXML
-	void whenClickCalculateBtn(ActionEvent event) {
+	void whenClickCalculateBtn(ActionEvent event) throws IOException {
 		String monthOfReport = (String) MonthCB.getValue();
 		String yearOfReport = (String) YearCB.getValue();
-		String parkOfreport =(String) parkCB.getValue();
+		String parkOfreport = (String) parkCB.getValue();
 		ClientUI.reportsController.getDataEntranceTimesAndStay(monthOfReport, yearOfReport, parkOfreport);
-
+		Stage stage = new Stage();
+		Parent root = FXMLLoader.load(getClass().getResource("MonthlyStayAndEnterReportGraph.fxml"));
+		Scene scene = new Scene(root);
+		stage.setTitle("View Graph");
+		stage.setScene(scene);
+		stage.show();
 
 	}
 
