@@ -1,7 +1,5 @@
 package GUI;
 
-import javafx.beans.property.SimpleStringProperty;
-
 public class CancelReportData {
 	public String getYear() {
 		return Year;

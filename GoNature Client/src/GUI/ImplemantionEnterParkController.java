@@ -3,12 +3,9 @@ package GUI;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ResourceBundle;
 
 import Client.ClientUI;
-import Entities.Order;
 import Entities.TravellerInPark;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

@@ -6,7 +6,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 import Client.ClientUI;
-import Entities.*;
+import Entities.Order;
+import Entities.TravellerInPark;
 
 public class EntranceParkController {
 	public TravellerInPark travellerinpark;

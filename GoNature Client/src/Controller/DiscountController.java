@@ -3,10 +3,8 @@ package Controller;
 import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
-import java.util.Arrays;
 
 import Client.ClientUI;
-
 import Entities.Order;
 
 public class DiscountController {

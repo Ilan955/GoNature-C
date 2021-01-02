@@ -4,12 +4,10 @@
 
 package Client;
 
-import Client.*;
-import Entities.departmentEmployee;
-import common.*;
-import src.ocsf.client.AbstractClient;
+import java.io.IOException;
 
-import java.io.*;
+import common.goIF;
+import src.ocsf.client.AbstractClient;
 
 /**
  * This class overrides some of the methods defined in the abstract superclass

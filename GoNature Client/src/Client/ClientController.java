@@ -3,8 +3,8 @@
 // license found at www.lloseng.com 
 package Client;
 
-import java.io.*;
-import Client.*;
+import java.io.IOException;
+
 import common.goIF;
 
 /**

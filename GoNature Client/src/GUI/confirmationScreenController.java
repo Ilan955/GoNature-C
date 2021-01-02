@@ -2,11 +2,12 @@ package GUI;
 
 
 
-import Client.ClientUI;
-import Entities.Order;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import Client.ClientUI;
+import Entities.Order;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

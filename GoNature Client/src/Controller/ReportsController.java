@@ -2,11 +2,11 @@ package Controller;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.util.ArrayList;
 
 import Client.ClientUI;
 import GUI.Data;
-import clientLogic.*;
-import java.util.ArrayList;
+import clientLogic.Reports;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 

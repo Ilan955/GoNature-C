@@ -2,11 +2,11 @@ package GUI;
 
 import java.io.IOException;
 import java.sql.Date;
-import java.time.Duration;
 import java.time.LocalDate;
 import java.util.concurrent.TimeUnit;
 
 import Client.ClientUI;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -18,9 +18,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import javafx.event.ActionEvent;
 
 public class setDiscountScreenController {
 	long diff_days;

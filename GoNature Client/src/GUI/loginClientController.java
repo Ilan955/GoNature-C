@@ -1,6 +1,5 @@
 package GUI;
 
-import GUI.*;
 import Client.ClientUI;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

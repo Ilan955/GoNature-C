@@ -6,8 +6,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
-import javax.imageio.event.IIOReadWarningListener;
-
 import Client.ClientUI;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

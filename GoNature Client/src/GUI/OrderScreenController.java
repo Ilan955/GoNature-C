@@ -1,16 +1,16 @@
 package GUI;
 
-import Client.ClientUI;
-import Entities.Order;
-import Entities.Person;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Date;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+import Client.ClientUI;
+import Entities.Order;
+import Entities.Person;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -26,7 +26,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 

@@ -5,8 +5,6 @@ import java.io.IOException;
 import Client.ClientUI;
 import Entities.Person;
 
-import Entities.departmentEmployee;
-
 public class UserController {
 	public Person traveller = null;
 	private boolean changeScreen = false;
