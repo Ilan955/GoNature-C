@@ -1,21 +1,23 @@
 package Controller;
 
-import java.io.IOException;
-import java.time.LocalTime;
-import java.util.ArrayList;
-
 import Client.ClientUI;
 import GUI.Data;
-import Logic.clientLogic.*;
-import clientLogic.Reports;
+import clientLogic.*;
+import java.io.IOException;
+import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class ReportsController {
+
 	public Data d;
 	public ObservableList<Data> ob = FXCollections.observableArrayList();
-
+	public ArrayList<Reports> visitors = new ArrayList<Reports>();
+	public ArrayList<Reports> members = new ArrayList<Reports>();
+	public ArrayList<Reports> groups = new ArrayList<Reports>();
+	public String month, park, year;
 	public int sumSolo = 0, sumMembers = 0, sumGroups = 0;
+
 	// sumSolo=individuals that entered the park
 	// sumMembers=members and family members that entered the park
 	// sumGroups=groups that entered to the park
@@ -30,12 +32,13 @@ public class ReportsController {
 			break;
 		case "getTableOfUnFullCapacityInDates":
 			filldateofNotfullCapacityTable(msg);
+			break;
 		case "getDataEntranceTimesAndStay":
 			dealWithgetDataEntranceTimesAndStay(msg);
+			break;
 		default:
 			break;
 		}
-
 	}
 
 	private String getMonth(String month) {
@@ -88,12 +91,10 @@ public class ReportsController {
 
 	public int getMembers() {
 		return this.sumMembers;
-
 	}
 
 	public int getGroups() {
 		return this.sumGroups;
-
 	}
 
 	public void getTableOfUnFullCapacityInDates(String month, String year, String wantedpark) {
@@ -106,7 +107,6 @@ public class ReportsController {
 		sb.append(" ");
 		sb.append(wantedpark);
 		ClientUI.chat.accept(sb.toString());
-
 	}
 
 	private void filldateofNotfullCapacityTable(String[] msg) {
@@ -122,6 +122,9 @@ public class ReportsController {
 
 	public void getDataEntranceTimesAndStay(String month, String year, String wantedpark) {
 		StringBuffer sb = new StringBuffer();
+		this.month = month;
+		this.year = year;
+		this.park = wantedpark;
 		sb.append("getDataEntranceTimesAndStay");
 		sb.append(" ");
 		sb.append(getMonth(month));
@@ -130,7 +133,6 @@ public class ReportsController {
 		sb.append(" ");
 		sb.append(wantedpark);
 		ClientUI.chat.accept(sb.toString());
-
 	}
 
 	private void dealWithgetDataEntranceTimesAndStay(String[] msg) {
@@ -138,28 +140,27 @@ public class ReportsController {
 		 * msg[0] is numOfVisitors, msg[1] is type, msg[2] is entrance time, msg[3] is
 		 * exit time.
 		 */
-		int i = 0;
-		ArrayList<Reports> visitors = new ArrayList<Reports>();
-		ArrayList<Reports> members = new ArrayList<Reports>();
-		ArrayList<Reports> groups = new ArrayList<Reports>();
+		int i = 1;
 		while (!(msg[i].equals("Done"))) {
+
 			String type = msg[i + 1];
 			switch (type) {
 			case "traveller":
-				visitors.add(new Reports(msg[i], msg[i + 1], msg[i + 2], msg[i + 3]));
+				visitors.add(new Reports(msg[i], msg[i + 1], msg[i + 2], msg[i + 3], msg[i + 4]));
 				break;
-			case "member":
+			case "Member":
 			case "familyMember":
-				members.add(new Reports(msg[i], msg[i + 1], msg[i + 2], msg[i + 3]));
+				members.add(new Reports(msg[i], msg[i + 1], msg[i + 2], msg[i + 3], msg[i + 4]));
 				break;
 			case "groupGuide":
-				groups.add(new Reports(msg[i], msg[i + 1], msg[i + 2], msg[i + 3]));
+				groups.add(new Reports(msg[i], msg[i + 1], msg[i + 2], msg[i + 3], msg[i + 4]));
 				break;
 			default:
 				System.out.println("Somthing is wrong with type");
+				System.out.println("I: " + i + " msg[1]: " + msg[i] + "  msg[2]: " + msg[i + 1] + "  msg[3]: "
+						+ msg[i + 2] + "  msg[4]: " + msg[i + 3] + " msg[5]: " + msg[i + 4]);
 			}
-			i += 4;
+			i += 5;
 		}
 	}
-
 }

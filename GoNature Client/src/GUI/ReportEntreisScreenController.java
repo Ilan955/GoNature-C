@@ -16,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -31,7 +32,7 @@ public class ReportEntreisScreenController implements Initializable {
 	private ComboBox<String> WantedMonthDATE;
 
 	@FXML
-	private TextField WantedYearLBL;
+	private ComboBox<String> YearCB;
 
 	@FXML
 	private Button GetBTN;
@@ -68,11 +69,14 @@ public class ReportEntreisScreenController implements Initializable {
 	@FXML
 	private Label NameLBL;
 
+	@FXML
+	private PieChart visitorsPie;
+
 	// initialize Combo Boxes
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		WantedMonthDATE.setItems(inits.setMonthCB());
-
+		YearCB.setItems(inits.setYearCB());
 		IndiLbl.setCellValueFactory(new PropertyValueFactory<>("Individuals"));
 		MemberLbl.setCellValueFactory(new PropertyValueFactory<>("Members"));
 		GroupsLbl.setCellValueFactory(new PropertyValueFactory<>("Groups"));
@@ -105,9 +109,8 @@ public class ReportEntreisScreenController implements Initializable {
 //Click on Get button => view data
 	@FXML
 	void WhenClickOnGetBtn(ActionEvent event) {
-
 		String month = WantedMonthDATE.getValue().toString();
-		String year = WantedYearLBL.getText().toString();
+		String year = YearCB.getValue().toString();
 		String park = ClientUI.employeeController.getParkName();
 		MonthLBL.setText(month);
 		YearLBL.setText(year);
@@ -121,9 +124,13 @@ public class ReportEntreisScreenController implements Initializable {
 		System.out.println("After click get: " + sumSolo + " " + sumMembers + " " + sumGroups + " " + sumTotal);
 
 		ObservableList<ReportData> counters = FXCollections.observableArrayList();
+		ObservableList<PieChart.Data> pieChart = FXCollections.observableArrayList(
+				new PieChart.Data("Travellers", sumSolo), new PieChart.Data("Members", sumMembers),
+				new PieChart.Data("Groups", sumGroups));
 		ReportData rd = new ReportData(String.valueOf(sumSolo), String.valueOf(sumMembers), String.valueOf(sumGroups),
 				String.valueOf(sumTotal));
 		counters.add(rd);
+		visitorsPie.setData(pieChart);
 		ReportTable.setItems(counters);
 
 	}

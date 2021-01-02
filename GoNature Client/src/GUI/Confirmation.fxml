@@ -7,44 +7,65 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="416.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.confirmationScreenController">
-   <children>
-      <Label layoutX="14.0" layoutY="14.0" prefHeight="46.0" prefWidth="218.0" text="Confirmation">
-         <font>
-            <Font name="Corbel" size="39.0" />
-         </font>
-      </Label>
-      <Label layoutX="14.0" layoutY="60.0" text="ID: " />
-      <Label fx:id="IdOvTravelerLb" layoutX="56.0" layoutY="60.0" prefHeight="21.0" prefWidth="144.0" text="&quot;ID OF TRAVELOR&quot;" />
-      <Label layoutX="17.0" layoutY="94.0" text="Wanted park" />
-      <Label layoutX="17.0" layoutY="134.0" text="Date of visit" />
-      <Label layoutX="17.0" layoutY="179.0" text="Time for the visit" />
-      <Label layoutX="17.0" layoutY="222.0" text="Email:" />
-      <Label layoutX="17.0" layoutY="269.0" text="PhoneNumber:" />
-      <Label layoutX="17.0" layoutY="314.0" prefHeight="21.0" prefWidth="144.0" text="NumberOfVisitors" />
-      <Label fx:id="WantedParkLbl" layoutX="158.0" layoutY="94.0" text="&quot;WantedPark&quot;" />
-      <Label fx:id="DateLbl" layoutX="158.0" layoutY="134.0" text="&quot;Date&quot;" />
-      <Label fx:id="TimeLbl" layoutX="158.0" layoutY="179.0" text="&quot;Time&quot;" />
-      <Label fx:id="EmailLbl" layoutX="158.0" layoutY="222.0" text="&quot;Email of the orderer&quot;" />
-      <Label fx:id="PhoneLbl" layoutX="158.0" layoutY="269.0" prefHeight="21.0" prefWidth="118.0" text="&quot;Phone&quot;" />
-      <Label fx:id="NumVisitLlbl" layoutX="158.0" layoutY="314.0" prefHeight="21.0" prefWidth="118.0" text="&quot;NOFVISIT&quot;" />
-      <Button layoutX="476.0" layoutY="363.0" mnemonicParsing="false" onAction="#WhenClickDoneBtn" prefHeight="31.0" prefWidth="111.0" text="Done" textFill="#026502">
-         <font>
-            <Font name="Calibri Bold Italic" size="17.0" />
-         </font>
-      </Button>
-      <Label layoutX="409.0" layoutY="314.0" prefHeight="21.0" prefWidth="100.0" text="Total-Price">
-         <font>
-            <Font name="System Bold" size="15.0" />
-         </font>
-      </Label>
-      <Label fx:id="PriceLbl" layoutX="506.0" layoutY="314.0" text="&quot;PRICE&quot;" />
-      <TextArea layoutX="309.0" layoutY="15.0" prefHeight="201.0" prefWidth="283.0" text="Thank you for making order.&#10;*IMPORTENT:&#10; One day before the visit &#10;a confirmation massege will be send&#10;to you, make sure to confirm it within&#10;2 hourse!&#10;Otherwise your order will be cancelled&#10;&#10;" />
-      <Button layoutX="17.0" layoutY="364.0" mnemonicParsing="false" onAction="#whenClickBackBtn" text="Back" textFill="#f50505">
-         <font>
-            <Font name="System Bold" size="17.0" />
-         </font>
-      </Button>
-      <Line endX="498.0" layoutX="101.0" layoutY="353.0" startX="-100.0" />
-   </children>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity"
+	minHeight="-Infinity" minWidth="-Infinity" prefHeight="416.0"
+	prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="GUI.confirmationScreenController">
+	<children>
+		<Label layoutX="14.0" layoutY="14.0" prefHeight="46.0"
+			prefWidth="218.0" text="Confirmation">
+			<font>
+				<Font name="Corbel" size="39.0" />
+			</font>
+		</Label>
+		<Label layoutX="14.0" layoutY="60.0" text="ID: " />
+		<Label fx:id="IdOvTravelerLb" layoutX="56.0" layoutY="60.0"
+			prefHeight="21.0" prefWidth="144.0" text="&quot;ID OF TRAVELOR&quot;" />
+		<Label layoutX="17.0" layoutY="94.0" text="Wanted park" />
+		<Label layoutX="17.0" layoutY="134.0" text="Date of visit" />
+		<Label layoutX="17.0" layoutY="179.0" text="Time for the visit" />
+		<Label layoutX="17.0" layoutY="222.0" text="Email:" />
+		<Label layoutX="17.0" layoutY="269.0" text="PhoneNumber:" />
+		<Label layoutX="17.0" layoutY="314.0" prefHeight="21.0"
+			prefWidth="144.0" text="NumberOfVisitors" />
+		<Label fx:id="WantedParkLbl" layoutX="158.0" layoutY="94.0"
+			text="&quot;WantedPark&quot;" />
+		<Label fx:id="DateLbl" layoutX="158.0" layoutY="134.0"
+			text="&quot;Date&quot;" />
+		<Label fx:id="TimeLbl" layoutX="158.0" layoutY="179.0"
+			text="&quot;Time&quot;" />
+		<Label fx:id="EmailLbl" layoutX="158.0" layoutY="222.0"
+			text="&quot;Email of the orderer&quot;" />
+		<Label fx:id="PhoneLbl" layoutX="158.0" layoutY="269.0"
+			prefHeight="21.0" prefWidth="118.0" text="&quot;Phone&quot;" />
+		<Label fx:id="NumVisitLlbl" layoutX="158.0" layoutY="314.0"
+			prefHeight="21.0" prefWidth="118.0" text="&quot;NOFVISIT&quot;" />
+		<Button layoutX="476.0" layoutY="363.0" mnemonicParsing="false"
+			onAction="#WhenClickDoneBtn" prefHeight="31.0" prefWidth="111.0"
+			text="Done" textFill="#026502">
+			<font>
+				<Font name="Calibri Bold Italic" size="17.0" />
+			</font>
+		</Button>
+		<Label layoutX="409.0" layoutY="314.0" prefHeight="21.0"
+			prefWidth="100.0" text="Total-Price">
+			<font>
+				<Font name="System Bold" size="15.0" />
+			</font>
+		</Label>
+		<Label fx:id="PriceLbl" layoutX="506.0" layoutY="314.0"
+			text="&quot;PRICE&quot;" />
+		<TextArea layoutX="309.0" layoutY="15.0" prefHeight="201.0"
+			prefWidth="283.0"
+			text="Thank you for making order.&#10;*IMPORTENT:&#10; One day before the visit &#10;a confirmation massege will be send&#10;to you, make sure to confirm it within&#10;2 hourse!&#10;Otherwise your order will be cancelled&#10;&#10;" />
+		<Button layoutX="17.0" layoutY="364.0" mnemonicParsing="false"
+			onAction="#whenClickBackBtn" text="Back" textFill="#f50505">
+			<font>
+				<Font name="System Bold" size="17.0" />
+			</font>
+		</Button>
+		<Line endX="498.0" layoutX="101.0" layoutY="353.0"
+			startX="-100.0" />
+	</children>
 </Pane>
