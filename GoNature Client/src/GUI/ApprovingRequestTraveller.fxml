@@ -6,22 +6,31 @@
 <?import javafx.scene.text.Font?>
 
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="262.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.ApproveEmployeeForEnterTraveller">
-   <children>
-      <Label layoutX="42.0" layoutY="58.0" text="You can enter the park this traveller!" textFill="#002203">
-         <font>
-            <Font name="System Bold" size="30.0" />
-         </font>
-      </Label>
-      <Button fx:id="notApproveBtn" layoutX="338.0" layoutY="178.0" mnemonicParsing="false" onAction="#whenClickedDontApprove" text="Don't approve" textFill="#e10000">
-         <font>
-            <Font name="System Bold Italic" size="14.0" />
-         </font>
-      </Button>
-      <Button fx:id="approveBtn" layoutX="142.0" layoutY="178.0" mnemonicParsing="false" onAction="#whenClickedApproveBtn" text="Approve" textFill="#00610a">
-         <font>
-            <Font name="System Bold Italic" size="14.0" />
-         </font>
-      </Button>
-   </children>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity"
+	minHeight="-Infinity" minWidth="-Infinity" prefHeight="262.0"
+	prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="GUI.ApproveEmployeeForEnterTraveller">
+	<children>
+		<Label layoutX="42.0" layoutY="58.0"
+			text="You can enter the park this traveller!" textFill="#002203">
+			<font>
+				<Font name="System Bold" size="30.0" />
+			</font>
+		</Label>
+		<Button fx:id="notApproveBtn" layoutX="338.0" layoutY="178.0"
+			mnemonicParsing="false" onAction="#whenClickedDontApprove"
+			text="Don't approve" textFill="#e10000">
+			<font>
+				<Font name="System Bold Italic" size="14.0" />
+			</font>
+		</Button>
+		<Button fx:id="approveBtn" layoutX="142.0" layoutY="178.0"
+			mnemonicParsing="false" onAction="#whenClickedApproveBtn"
+			text="Approve" textFill="#00610a">
+			<font>
+				<Font name="System Bold Italic" size="14.0" />
+			</font>
+		</Button>
+	</children>
 </Pane>

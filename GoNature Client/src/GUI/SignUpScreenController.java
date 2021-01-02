@@ -1,6 +1,12 @@
+/** Description of SignUpScreenController 
+* @author Omri Cohen
+* @version final Jan 2, 2021.
+ */
+
 package GUI;
 
 import GUI.*;
+import clientLogic.inits;
 
 import java.io.IOException;
 import java.net.URL;
@@ -25,75 +31,67 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+/**
+ * This is a controller for sign up window
+ * 
+ * @implNote implements Initializable - initialize all predefined data
+ */
 public class SignUpScreenController implements Initializable {
 
 	@FXML
 	private TextField IdLbl;
+	/** text box for persons ID */
 
 	@FXML
 	private TextField FirstNameLbl;
+	/** text box for persons first name */
 
 	@FXML
 	private TextField LastNameLbl;
+	/** text box for persons last name */
 
 	@FXML
 	private TextField PhoneNumberLbl;
+	/** text box for persons phone number */
 
 	@FXML
 	private TextField EmailLbl;
+	/** text box for persons email address */
 
 	@FXML
 	private TextField NumberMembersLbl;
+	/** text box for number of visitors on the membership */
 
 	@FXML
-	private ComboBox PaymentCB;
+	private ComboBox<String> PaymentCB;
+	/** PaymentCB Combo box for choosing payment method */
 
 	@FXML
-	private ComboBox TypeMemberCB;
+	private ComboBox<String> TypeMemberCB;
+	/** TypeMemberCB Combo box for choosing membership type */
 
-	ObservableList<String> listForTypes;
-	ObservableList<String> listForPaymont;
 	public String id, firstName, lastName, phoneNum, email, paymentMethod, memberType;
 	int numOfVisitors;
 
-	// Set the Type member ComboBox
-	private void setTypeMemberCB() {
-		ArrayList<String> types = new ArrayList<String>();
-		types.add("Traveller");
-		types.add("Group Guide");
-
-		listForTypes = FXCollections.observableArrayList(types);
-		TypeMemberCB.setItems(listForTypes);
-	}
-
-	// Set payment ComboBox
-	private void setPaymentCB() {
-		ArrayList<String> pays = new ArrayList<String>();
-		pays.add("Cash");
-		pays.add("Credit Card");
-
-		listForPaymont = FXCollections.observableArrayList(pays);
-		PaymentCB.setItems(listForPaymont);
-	}
-
-	// initialize Combo Boxes
+	/**
+	 * Description of initialize When this window is opened, this is the first
+	 * function to be activated. initializing all the data needed for this window.
+	 * Payment combo box and Membership types combo box
+	 * 
+	 * @return void - no returns.
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		setPaymentCB();
-		setTypeMemberCB();
-
+		PaymentCB.setItems(inits.setTypeMemberCB());
+		TypeMemberCB.setItems(inits.setPaymentCB());
 	}
 
-	// public void start(Stage primaryStage) throws Exception {
-	// Parent root =
-	// FXMLLoader.load(getClass().getResource("/GUI/SignUpNewMember.fxml"));
-	// Scene scene = new Scene(root);
-	// primaryStage.setTitle("Register New Member");
-	// primaryStage.setScene(scene);
-	// primaryStage.show();
-	//
-	// }
-
+	/**
+	 * Description of WhenClickBackBtn Upon clicking back the employee shall be sent
+	 * back to employees main screen
+	 * 
+	 * @return void - no returns.
+	 */
 	@FXML
 	void WhenClickBackBtn(ActionEvent event) {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -111,6 +109,15 @@ public class SignUpScreenController implements Initializable {
 		stage.show();
 	}
 
+	/**
+	 * Description of WhenClickSubmitBtn Upon clicking Submit the id shall be
+	 * checked to see if already exists in DB. if yes - return error if not - a new
+	 * member shall be created with all the information provided from the form. upon
+	 * success a new window shall pop up with confirmation message including new
+	 * member ID and his membership type.
+	 * 
+	 * @return void - no returns.
+	 */
 	@FXML
 	void WhenClickSubmitBtn(ActionEvent event) {
 		boolean regFlag = true;
@@ -122,16 +129,16 @@ public class SignUpScreenController implements Initializable {
 		numOfVisitors = Integer.valueOf(NumberMembersLbl.getText().toString());
 		paymentMethod = (String) PaymentCB.getValue();
 		memberType = (String) TypeMemberCB.getValue();
-		if (numOfVisitors > 1 && numOfVisitors < 15 && memberType == "Traveller") {
+		if (numOfVisitors > 1 && numOfVisitors <= 15 && memberType == "Traveller") {
 			memberType = "Family Member";
 		} else {
-			if (memberType == "Traveller") {
+			if (memberType == "Traveller" && numOfVisitors > 15) {
 				Alert a = new Alert(AlertType.ERROR, "Member type incompatible");
 				a.show();
 				regFlag = false;
 			}
 		}
-		// here we will send the data we got from the page
+		// here we will send the data we got from the form
 		ClientUI.signUpController.checkExist(id);
 		if (ClientUI.signUpController.checker && regFlag == true) {
 			ClientUI.signUpController.init(id, firstName, lastName, phoneNum, email, paymentMethod, memberType,
@@ -147,6 +154,12 @@ public class SignUpScreenController implements Initializable {
 
 	}
 
+	/**
+	 * Description of GoToSuccess After successful registration, this function shall
+	 * open confirmation window with the new member ID and his membership type.
+	 * 
+	 * @return void - no returns.
+	 */
 	void GoToSuccess(ActionEvent event) {
 		System.out.println("Enter SucceSS");
 		ClientUI.signUpController.id = this.id;
