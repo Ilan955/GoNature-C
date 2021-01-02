@@ -44,7 +44,7 @@ public class WelcomeTravellerController implements Initializable {
     
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {	
-    	String first = ClientUI.userController.traveller.getFirstName();
+    	String first = "";//ClientUI.userController.traveller.getFirstName();<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     	String last = ClientUI.userController.traveller.getLastName();
     	StringBuffer name = new StringBuffer();
     	name.append(first);

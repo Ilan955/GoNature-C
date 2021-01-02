@@ -17,7 +17,6 @@ public class DiscountController {
 
 	//use this method to create a new manager discount in DB (called by setDiscountScreenController.whenClickSubmitDiscount())/
 	public void setManagerDiscount(Date startDate, Date lastDate, float precentage, String parkName) {
-		// mDiscount = new ManagerDiscounts(startDate, lastDate, precentage, parkName);
 		/* record discount to db */
 		StringBuffer sb = new StringBuffer();
 		sb.append("setManagerDiscount");// method name
@@ -34,8 +33,8 @@ public class DiscountController {
 
 	}
 
-	public void ValidDiscount(Date dateOfVisit, String parkName) {
-		/* check in db for Discounts */
+	public void ValidDiscount(LocalDate dateOfVisit, String parkName) {
+		/* check in db for a valid Discount */
 		StringBuffer sb = new StringBuffer();
 		sb.append("ValidDiscount");// methode name
 		sb.append(" ");
@@ -50,30 +49,21 @@ public class DiscountController {
 	//use this method to calc finalPrice with managerDiscount/
 	//!!!!does not include regular discount!!!!!!
 	public float calculateFinalPrice(Order order) {
-		//check for valid parkManager discount/
-		//ValidDiscount(order.getDateOfVisit(),order.getWantedPark());
-		if(checkDiscount_flag) // there is a valid discount for this park and timeOfVisit
-		{
-			return order.getTotalPrice() * discountPrecentage; // full price after parkManager discount
-		}
-		return order.getTotalPrice();//return full price without parkManager discount
+		/*check for valid parkManager discount*/
+		ValidDiscount(order.getDateOfVisit(),order.getWantedPark());
+		if(checkDiscount_flag)//there is a valid manager discount for this order
+			return (order.getTotalPrice() * (1-discountPrecentage)); // return price after manager discount
+		else
+			return order.getTotalPrice();//return original price without manager discount
 	}
 
-	public void checkDiscount(String fromDate, String toDate, String status, String dateOfVisit, String discount) {
-		/* update checkDiscount_flag && discountPrecentage */
-		if (status.equals("T")) {
-			Date From = Date.valueOf(fromDate);
-			Date To = Date.valueOf(toDate);
-			Date Visit = Date.valueOf(dateOfVisit);
-
-			if (From.before(Visit) && To.after(Visit)) {
-				checkDiscount_flag = true;
-				discountPrecentage = Float.valueOf(discount);
-				return;
-			}
-		}
-		checkDiscount_flag = false;
-
+	/* update checkDiscount_flag && discountPrecentage */
+	public void checkDiscount(String precentage_str) {
+		discountPrecentage = Float.valueOf(precentage_str);
+		if(discountPrecentage == -1) //invalid
+			checkDiscount_flag = false;
+		else 
+			checkDiscount_flag = true;
 	}
 
 	public void set_ManagerDiscount_Flag(String str) {
@@ -91,11 +81,9 @@ public class DiscountController {
 		case "setManagerDiscount":
 			set_ManagerDiscount_Flag(msg[1]);
 			break;
+			
 		case "ValidDiscount":
-			// [methodeName[0] , parkName[1], fromDate[2] , toDate[3] , precentage[4] ,
-			// status[5] , dateOfVisit[6]]
-			// e.x [ValidDiscount, tal, 2018-12-12, 2020-01-01, 0.5, F , 2019-12-31]
-			checkDiscount(msg[2], msg[3], msg[5], msg[6] , msg[4]);
+			checkDiscount(msg[1]);
 			break;
 
 		}

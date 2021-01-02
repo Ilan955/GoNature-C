@@ -115,12 +115,18 @@ import javafx.event.ActionEvent;
 	    	}
 	    	else {
 	    	float precentage = Float.valueOf(PrecantageLBL);
-	    	String parkName = "?";//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+	    	if(precentage <= 0 || precentage >= 1) {
+	    		Alert a = new Alert(AlertType.NONE,"Discount precentage must be between 0.1 - 0.9"); 
+				 a.setAlertType(AlertType.ERROR);
+				 a.show();
+				 return;
+	    	}
+	    	String parkName = ClientUI.employeeController.getParkName();
 	    	
 	    	ClientUI.discountController.setManagerDiscount(from, to, precentage, parkName);
 	    	}
-	    	//change screen if success
 	    	
+	    	/*change screen if success*/
 	    	if(ClientUI.discountController.setManagerDiscount_flag)
 	    	{
 	    		Alert a = new Alert(AlertType.NONE,"Discount was sent to D.M"); 

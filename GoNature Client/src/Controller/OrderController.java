@@ -28,7 +28,7 @@ public Person t ;
 //!!!! WHAT NEED TO BE !!!!
 //Traveller t = ClientUI.userController.traveller
 public Order order;
-public boolean valid=false;
+public boolean valid=false;//canMakeOrder flag 
 ArrayList<String> mess= new ArrayList<String>();
 private String currentEmail;
 private String currentPhone;
@@ -102,15 +102,15 @@ public void canMakeOrder(LocalTime time, LocalDate dateOfVisit, String wantedPar
 	StringBuffer sb =new StringBuffer();
 	sb.append("canMakeOrder");
 	sb.append(" ");
-	sb.append(from.toString());
+	sb.append(from.toString()); //res[0]
 	sb.append(":00");
 	sb.append(" ");
-	sb.append(to.toString());
+	sb.append(to.toString()); //res[1]
 	sb.append(":00");
 	sb.append(" ");
-	sb.append(wantedPark);
+	sb.append(wantedPark); //res[2]
 	sb.append(" ");
-	sb.append(dateOfVisit.toString());
+	sb.append(dateOfVisit.toString());//res[3]
 	ClientUI.chat.accept(sb.toString());
 }
 /*
