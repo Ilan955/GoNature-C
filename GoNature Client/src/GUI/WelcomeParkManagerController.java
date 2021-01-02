@@ -127,8 +127,14 @@ import javafx.stage.Stage;
 	    }
 
 	    @FXML
-	    void WhenClickCreateUsageReportBtn(ActionEvent event) {
-	    	
+	    void WhenClickCreateUsageReportBtn(ActionEvent event) throws IOException {
+    		Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+			FXMLLoader loader = new FXMLLoader();
+			Pane root = loader.load(getClass().getResource("usageReport.fxml").openStream());
+			Scene scene = new Scene(root);
+			stage.setTitle("Create usage report");
+			stage.setScene(scene);
+			stage.show();
 	    }
 
 	    @FXML

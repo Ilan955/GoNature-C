@@ -89,9 +89,10 @@ public class GoClient extends AbstractClient {
 			break;
 		case "ParkController":
 			ClientUI.parkController.gotMessage(res);
-			// TODO Auto-generated catch block
 			break;
-
+		case "EntranceParkController":
+			ClientUI.entranceParkController.gotMesage(res);
+			break;
 		case "RequestsController":
 			ClientUI.requestsController.gotMessage(res);
 			break;

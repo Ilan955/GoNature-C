@@ -133,4 +133,16 @@ public class RequestsEnterTravellerController implements Initializable {
 		requestsTravellerTable.getColumns().add(colBtn);
 
 	}
+	
+
+    @FXML
+    void WhenClickedOnPreviousBtn(ActionEvent event) throws IOException {
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		FXMLLoader loader = new FXMLLoader();
+		Pane root = loader.load(getClass().getResource("WelcomeEmployee.fxml").openStream());
+		Scene scene = new Scene(root);
+		stage.setTitle("New order");
+		stage.setScene(scene);
+		stage.show();
+    }
 }

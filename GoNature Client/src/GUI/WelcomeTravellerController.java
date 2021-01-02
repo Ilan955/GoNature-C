@@ -40,9 +40,21 @@ public class WelcomeTravellerController implements Initializable {
 	private Label beforeTypeLBL;
 	@FXML
 	private Button btnWithoutOrder;
+	@FXML
+	private Button exitParkBtn;
+
+	String ID = WelcomeAndLoginController.id;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		try {
+			if (!(ClientUI.entranceParkController.IfgetTravellerInParkExistInDB(ID))
+					&& !((ClientUI.entranceParkController.IfgetOrderInParkExistInDB(ID))))
+				exitParkBtn.setVisible(false);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 		String typ = ClientUI.userController.traveller.getType();
 		if (typ.equals("") || typ.equals("preOrderTraveller") || typ.equals("Traveller"))
 			btnExistingorders.setVisible(false);
@@ -56,6 +68,7 @@ public class WelcomeTravellerController implements Initializable {
 
 		if (first.equals("Traveller")) {
 			userNamelb.setText("Traveller");
+
 			if (typ.equals("")) {
 				beforeTypeLBL.setText("");
 				TypeLBL.setText("");
@@ -67,6 +80,7 @@ public class WelcomeTravellerController implements Initializable {
 			userNamelb.setText(tName);
 			TypeLBL.setText(ClientUI.userController.traveller.getType());
 		}
+
 	}
 
 	@FXML
@@ -118,18 +132,22 @@ public class WelcomeTravellerController implements Initializable {
 
 	@FXML
 	void WhenPressExitParkBtn(ActionEvent event) throws IOException {
-		String typeOfVisitor = ClientUI.userController.traveller.getType();
-		int numofvisitors = 3;
-		ClientUI.entranceParkController.travellerinpark.getnumOfVisitors(); // check
-		String park = EnterParkNowController.wantedpark;
-		String id = ClientUI.userController.traveller.getId();
-		numofvisitors = numofvisitors * (-1);
-		if (typeOfVisitor == "Traveller") {
+		int numofvisitors;
+		String park;
+		if (ClientUI.entranceParkController.IfgetTravellerInParkExistInDB(ID)) {
+			ClientUI.entranceParkController.getTravellerInParkDetails(ID);
+			numofvisitors = ClientUI.entranceParkController.travellerinpark.getnumOfVisitors();
+			park = ClientUI.entranceParkController.travellerinpark.getwantedPark();
+			numofvisitors = numofvisitors * (-1);
 			ClientUI.entranceParkController.setNumOfVisitorEntringPark(park, numofvisitors);
-			ClientUI.entranceParkController.updateExitTimeForcasualTraveller(park, id);
-		} else {
+			ClientUI.entranceParkController.updateExitTimeForcasualTraveller(park, ID);
+		} else { //order
+			ClientUI.entranceParkController.getOrderDetailsForExitPark(ID);
+			numofvisitors = ClientUI.orderController.order.getNumberOfVisitors();
+			park = ClientUI.orderController.order.getWantedPark();
+			numofvisitors = numofvisitors * (-1);
 			ClientUI.entranceParkController.setCurrentVisitros(park, numofvisitors);
-			ClientUI.entranceParkController.updateExitTimeForTravellerWithOrder(park, id);
+			ClientUI.entranceParkController.updateExitTimeForTravellerWithOrder(park, ID);
 		}
 
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

@@ -55,12 +55,13 @@ public class EnterParkNowController implements Initializable {
 	@FXML
 	private Label TimeLbl;
 
-	@FXML
-	private TextField NumOfVisiotrstxt;
+    @FXML
+    private ComboBox NumOfVisitorsCB;
 
 	@FXML
 	private Button btnCalculatePrice;
 	ObservableList<String> listForParks;
+	ObservableList<String> listForNumOfVisitors;
 	public static String wantedpark;
 	public static int numOfVisitors;
 	private LocalDate myDate;
@@ -79,6 +80,15 @@ public class EnterParkNowController implements Initializable {
 		listForParks = FXCollections.observableArrayList(parks);
 		WantedParkCB.setItems(listForParks);
 	}
+	
+	private void setNumOfVisitorsCm() {
+		ArrayList<String> numbersOfVisitors = new ArrayList<String>();
+		for(int i=1;i<=15;i++)
+			numbersOfVisitors.add(String.valueOf(i));
+
+		listForNumOfVisitors = FXCollections.observableArrayList(numbersOfVisitors);
+		NumOfVisitorsCB.setItems(listForNumOfVisitors);
+	}
 
 	private void SetTimePark() {
 		myDate = LocalDate.now();
@@ -95,6 +105,7 @@ public class EnterParkNowController implements Initializable {
 		setWantedParkCm();
 		SetTimePark();
 		setIdOfMakingOrder();
+		setNumOfVisitorsCm();
 	}
 
 	@FXML
@@ -103,8 +114,9 @@ public class EnterParkNowController implements Initializable {
 
 	@FXML
 	void WhenClickNextBtn(ActionEvent event) throws IOException {
-		String wantedpark = (String) WantedParkCB.getValue();
-		int numOfVisitors=Integer.parseInt(NumOfVisiotrstxt.getText());
+		wantedpark = (String) WantedParkCB.getValue();
+		String numString=(String) NumOfVisitorsCB.getValue();
+		numOfVisitors=Integer.parseInt(numString);
 
 		ClientUI.requestsController.insertRequestToDB(ClientUI.userController.traveller.getId()
 				, myDate, myTime, wantedpark,numOfVisitors, "EnterPark", -1);

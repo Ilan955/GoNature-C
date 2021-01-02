@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -8,7 +9,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.RequestsEnterTravellerController">
    <children>
-      <TableView fx:id="requestsTravellerTable" layoutX="77.0" layoutY="106.0" prefHeight="249.0" prefWidth="438.0">
+      <TableView fx:id="requestsTravellerTable" layoutX="77.0" layoutY="106.0" prefHeight="216.0" prefWidth="438.0">
         <columns>
           <TableColumn fx:id="IDlbl" prefWidth="92.0" text="ID traveller" />
           <TableColumn fx:id="timeLbl" prefWidth="90.0" text="Request time" />
@@ -22,5 +23,10 @@
             <Font size="28.0" />
          </font>
       </Label>
+      <Button layoutX="38.0" layoutY="347.0" mnemonicParsing="false" onAction="#WhenClickedOnPreviousBtn" text="Previous" textFill="#b20202">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
    </children>
 </Pane>
