@@ -9,6 +9,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
+
 <Pane maxHeight="-Infinity" maxWidth="-Infinity"
 	minHeight="-Infinity" minWidth="-Infinity" prefHeight="446.0"
 	prefWidth="604.0" xmlns="http://javafx.com/javafx/8.0.171"
@@ -26,9 +27,9 @@
 			prefWidth="150.0" />
 		<ComboBox fx:id="yearCB" layoutX="86.0" layoutY="135.0"
 			prefWidth="150.0" />
-		<Button fx:id="informationBtn" layoutX="486.0" layoutY="26.0"
-			mnemonicParsing="false" onAction="#WhenClickInformationBtn"
-			text="Information" textFill="#8e00ae">
+		<Button fx:id="PreviousBtn" layoutX="12.0" layoutY="403.0"
+			mnemonicParsing="false" onAction="#WhenClickPreviousBtn"
+			text="Previous" textFill="#c30000">
 			<font>
 				<Font name="System Bold" size="13.0" />
 			</font>
@@ -38,12 +39,20 @@
 		<Button fx:id="calculateBtn" layoutX="506.0" layoutY="169.0"
 			mnemonicParsing="false" onAction="#WhenClickCralculateBtn"
 			text="Calculate" />
-		<TableView fx:id="dateofNotfullCapacityTable" layoutX="86.0"
-			layoutY="232.0" prefHeight="200.0" prefWidth="150.0">
+		<TableView fx:id="dateofNotfullCapacityTable"
+			layoutX="177.0" layoutY="223.0" prefHeight="200.0" prefWidth="150.0">
 			<columns>
 				<TableColumn fx:id="DateLbl" prefWidth="144.0"
-					text="Date of not full capacity" />
+					text="Date of unfull capacity" />
 			</columns>
 		</TableView>
+		<Button fx:id="SendToDmanagerBtn" layoutX="445.0"
+			layoutY="403.0" mnemonicParsing="false"
+			onAction="#WhenClickedOnSendToDmanagerBtn" text="send to D. manager"
+			textFill="#00571d">
+			<font>
+				<Font name="System Bold" size="13.0" />
+			</font>
+		</Button>
 	</children>
 </Pane>

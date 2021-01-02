@@ -66,8 +66,18 @@ public class ParkController {
 		ClientUI.chat.accept(res);
 
 	}
+	
+	public void checkIfThisDateInFullCapacityTable(String park) {
+		StringBuffer sb = new StringBuffer();
+		sb.append("checkIfThisDateInFullCapacityTable");
+		sb.append(" ");
+		sb.append(park);
+		String res = sb.toString();
+		ClientUI.chat.accept(res);
+	}
 
 	public boolean IfgetDateExistInDB() {
+		checkIfThisDateInFullCapacityTable(this.parkname);
 		return dateExistInDB;
 	}
 
@@ -87,9 +97,9 @@ public class ParkController {
 			park = null;
 			park = new Park(parkname, Integer.parseInt(msg[1]), Integer.parseInt(msg[2]), Integer.parseInt(msg[3]),
 					Integer.parseInt(msg[4]), Float.parseFloat(msg[5]));
-
+			break;
 		case "checkIfThisDateInFullCapacityTable":
-			if (msg[1] == "true")
+			if ((msg[1].toString()).equals("true"))
 				dateExistInDB = true;
 			else
 				dateExistInDB = false;

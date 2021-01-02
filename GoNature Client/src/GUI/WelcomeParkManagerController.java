@@ -102,11 +102,6 @@ public class WelcomeParkManagerController implements Initializable {
 	}
 
 	@FXML
-	void ClickCreateOverallVisitorsReport(ActionEvent event) {
-
-	}
-
-	@FXML
 	void ClickOnSetSpecialDiscount(ActionEvent event) throws IOException {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		FXMLLoader loader = new FXMLLoader();
@@ -134,13 +129,18 @@ public class WelcomeParkManagerController implements Initializable {
 	}
 
 	@FXML
-	void WhenClickCreateUsageReportBtn(ActionEvent event) {
-
+	void WhenClickCreateUsageReportBtn(ActionEvent event) throws IOException {
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		FXMLLoader loader = new FXMLLoader();
+		Pane root = loader.load(getClass().getResource("usageReport.fxml").openStream());
+		Scene scene = new Scene(root);
+		stage.setTitle("Create usage report");
+		stage.setScene(scene);
+		stage.show();
 	}
 
 	@FXML
 	void WhenClickLogOutBtn(ActionEvent event) throws IOException {
-		ClientUI.employeeController.logOutEmployee(ClientUI.employeeController.getUserName());
 		ClientUI.employeeController.setFirstName(null);
 		ClientUI.employeeController.setLastName(null);
 		ClientUI.employeeController.setType(null);
@@ -180,13 +180,6 @@ public class WelcomeParkManagerController implements Initializable {
 		}
 		if (duration >= 8) {
 			Alert a = new Alert(AlertType.NONE, "Duration must be less or equal to 8.00(H)");
-			a.setAlertType(AlertType.ERROR);
-			a.show();
-			return;
-		}
-		int current = Integer.parseInt(numberOFVisitorsLabel.getText());
-		if (maxVisit < current) {
-			Alert a = new Alert(AlertType.NONE, "Can not set max visitors in park less then current visitors");
 			a.setAlertType(AlertType.ERROR);
 			a.show();
 			return;

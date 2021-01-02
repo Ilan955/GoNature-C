@@ -37,9 +37,11 @@ public class WelcomeAndLoginController {
 	@FXML
 	private Button TravellerLoginBtn;
 
+	public static String id;
+
 	@FXML
 	void WhenPressTravellerLoginBtn(ActionEvent event) throws Exception {
-		String id = IdLBL.getText();
+		id = IdLBL.getText();
 		if (!(this.checkID(id))) {
 			Alert a = new Alert(AlertType.NONE,
 					"You must enter a valid id!\nId must consist the following:\nA. 9 digits\nB. numbers only");
@@ -107,6 +109,7 @@ public class WelcomeAndLoginController {
 		} else if (!(ClientUI.employeeController.isAlreadyLogged())) {
 			Alert a = new Alert(AlertType.NONE,
 					"User is already connected to GoNature system\nPlease make sure that you are logged only from 1 device");
+
 			a.setAlertType(AlertType.ERROR);
 			a.show();
 			return;

@@ -10,6 +10,8 @@ import Entities.*;
 
 public class EntranceParkController {
 	public TravellerInPark travellerinpark;
+	public boolean travellerExistsInDB = false;
+	public boolean OrderExistsInDB = false;
 
 	public void enterWithoutOrder(LocalTime timeOfVisit, LocalDate dateOfVisit, String wantedPark, int numOfVisitors,
 			float price) {
@@ -51,6 +53,15 @@ public class EntranceParkController {
 		ClientUI.chat.accept(res);
 	}
 
+	public void checkIfTravellerExistsInPark(String id) throws IOException {
+		StringBuffer sb = new StringBuffer();
+		sb.append("checkIfTravellerExistsInPark");
+		sb.append(" ");
+		sb.append(id);
+		String res = sb.toString();
+		ClientUI.chat.accept(res);
+	}
+
 	public void setCurrentVisitros(String wantedpark, int numOfVisitors) throws IOException {
 		int currentVisitorsToUpdate = ClientUI.parkController.getCurrentVisitors(wantedpark) + numOfVisitors;
 		StringBuffer sb = new StringBuffer();
@@ -88,14 +99,68 @@ public class EntranceParkController {
 		ClientUI.chat.accept(res);
 	}
 
-	/*
-	 * this method handle the GoClient data
-	 */
-	// public void gotMesage(String[] msg) {
-	// String cases = msg[0];
-	// switch (cases) {
-	// }
+	public boolean IfgetTravellerInParkExistInDB(String id) throws IOException {
+		checkIfTravellerExistsInPark(id);
+		return travellerExistsInDB;
+	}
 
-	// }
+	public void getTravellerInParkDetails(String id) {
+		StringBuffer sb = new StringBuffer();
+		sb.append("getTravellerInParkDetails");
+		sb.append(" ");
+		sb.append(id);
+		String res = sb.toString();
+		ClientUI.chat.accept(res);
+	}
+
+	public void checkIfOrderExistsInParkAndConfirmed(String id) throws IOException {
+		StringBuffer sb = new StringBuffer();
+		sb.append("checkIfOrderExistsInParkAndConfirmed");
+		sb.append(" ");
+		sb.append(id);
+		String res = sb.toString();
+		ClientUI.chat.accept(res);
+	}
+
+	public boolean IfgetOrderInParkExistInDB(String id) throws IOException {
+		checkIfOrderExistsInParkAndConfirmed(id);
+		return OrderExistsInDB;
+	}
+
+	public void getOrderDetailsForExitPark(String id) {
+		StringBuffer sb = new StringBuffer();
+		sb.append("getOrderDetailsForExitPark");
+		sb.append(" ");
+		sb.append(id);
+		String res = sb.toString();
+		ClientUI.chat.accept(res);
+	}
+
+	public void gotMesage(String[] msg) {
+		String cases = msg[0];
+		switch (cases) {
+		case "checkIfTravellerExistsInPark":
+			if ((msg[1].toString()).equals("true"))
+				travellerExistsInDB = true;
+			else
+				travellerExistsInDB = false;
+			break;
+
+		case "getTravellerInParkDetails":
+			travellerinpark = null;
+			travellerinpark = new TravellerInPark(Integer.parseInt(msg[1]), msg[2]);
+
+		case "checkIfOrderExistsInParkAndConfirmed":
+			if ((msg[1].toString()).equals("true"))
+				OrderExistsInDB = true;
+			else
+				OrderExistsInDB = false;
+			break;
+		case "getOrderDetailsForExitPark":
+			ClientUI.orderController.order = null;
+			ClientUI.orderController.order = new Order(Integer.parseInt(msg[1]), msg[2]);
+
+		}
+	}
 
 }
