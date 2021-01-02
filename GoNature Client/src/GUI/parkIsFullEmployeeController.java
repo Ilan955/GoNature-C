@@ -12,14 +12,14 @@ import javafx.stage.Stage;
 
 public class parkIsFullEmployeeController {
 
-    @FXML
-    private Button backBtn;
+	@FXML
+	private Button backBtn;
 
-    @FXML
-    private Button closeBtn;
+	@FXML
+	private Button closeBtn;
 
-    @FXML
-    void whenClickedonBackBtn(ActionEvent event) throws IOException {
+	@FXML
+	void whenClickedonBackBtn(ActionEvent event) throws IOException {
 		Stage stage = (Stage) backBtn.getScene().getWindow();
 		stage.close();
 		FXMLLoader loader = new FXMLLoader();
@@ -29,12 +29,12 @@ public class parkIsFullEmployeeController {
 		primaryStage.setTitle("Requests enter traveller");
 		primaryStage.setScene(scene);
 		primaryStage.show();
-    }
+	}
 
-    @FXML
-    void whenClickedonClosebtn(ActionEvent event) {
+	@FXML
+	void whenClickedonClosebtn(ActionEvent event) {
 		Stage stage = (Stage) closeBtn.getScene().getWindow();
 		stage.close();
-    }
+	}
 
 }

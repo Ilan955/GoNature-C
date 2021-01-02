@@ -1,7 +1,5 @@
 package GUI;
 
-
-
 import Client.*;
 import GUI.*;
 import javafx.application.Platform;
@@ -25,8 +23,8 @@ import javafx.stage.Stage;
 import java.sql.*;
 
 public class baseGuiController {
-private ClientController cl;
-public boolean waitresponse = false;
+	private ClientController cl;
+	public boolean waitresponse = false;
 	@FXML
 	private Button SubButton;
 
@@ -38,11 +36,11 @@ public boolean waitresponse = false;
 
 	@FXML
 	private Button updateVisitor;
-	
-	   @FXML
-	    private TextField findID;
-	   @FXML
-	    private Label WelcomeLBL;
+
+	@FXML
+	private TextField findID;
+	@FXML
+	private Label WelcomeLBL;
 
 	@FXML
 	private TextField firstDISP;
@@ -55,17 +53,17 @@ public boolean waitresponse = false;
 
 	@FXML
 	private TextField emailDISP;
-	
-	@FXML
-	   public Label thePortIsLBL=null;
 
-	 @FXML
-	   private Label theIPISLBL=null;
-	  @FXML
-	    private Button ExitBtn;
+	@FXML
+	public Label thePortIsLBL = null;
+
+	@FXML
+	private Label theIPISLBL = null;
+	@FXML
+	private Button ExitBtn;
 
 	public void start(Stage primaryStage) throws Exception {
-		
+
 		Parent root = FXMLLoader.load(getClass().getResource("baseGUI.fxml"));
 		Image icon = new Image(getClass().getResourceAsStream("titleIcon.png"));
 		primaryStage.getIcons().add(icon);
@@ -74,118 +72,110 @@ public boolean waitresponse = false;
 		primaryStage.setTitle("Prototyeeee");
 		primaryStage.setScene(scene);
 		primaryStage.show();
-		
-		
+
 	}
-/*
- * This method will return the host and the ip.
- * If there is no connection there will be printed a "no connection error"
- * 
- * 
- */
+
+	/*
+	 * This method will return the host and the ip. If there is no connection there
+	 * will be printed a "no connection error"
+	 * 
+	 * 
+	 */
 	@FXML
 	void connectivity(ActionEvent event) {
 		String s = "connectivity";
-		
-		ClientUI.aFrame=this;
+
+		ClientUI.aFrame = this;
 		ClientUI.chat.accept(s);
 	}
 
 	@FXML
 	void submitVisitor(ActionEvent event) {
 		StringBuffer sb = new StringBuffer();
-		/*Appending to the massege that will be send in the first line 
-		what type of action will need to commit in server
-		*/
+		/*
+		 * Appending to the massege that will be send in the first line what type of
+		 * action will need to commit in server
+		 */
 		sb.append("submitVisitor");
-		ClientUI.aFrame=this;
+		ClientUI.aFrame = this;
 		String id = findID.getText();
-		if(id.equals(""))
+		if (id.equals(""))
 			this.findID.setText("EnterID");
 		else {
 			sb.append(" ");
 			sb.append(id);
-			String res= sb.toString();
+			String res = sb.toString();
 			ClientUI.chat.accept(res);
 		}
-		
-			
+
 	}
-	
-	
-	
+
 	public void GetRepondId(String[] msg) {
-		//this methods called after getting the data back from the server.
-		if(msg==null) {
+		// this methods called after getting the data back from the server.
+		if (msg == null) {
 			this.findID.setText("InvalidID");
-			
-		}
-		else {
+
+		} else {
 			this.firstDISP.setText(msg[0]);
 			this.lastDISP.setText(msg[1]);
 			this.emailDISP.setText(msg[3]);
-			this.phoneDISP.setText(msg[4]);	
-			waitresponse =true;
+			this.phoneDISP.setText(msg[4]);
+			waitresponse = true;
 		}
-		
-		
+
 	}
 
 	@FXML
 	void updateVisitor(ActionEvent event) {
-		if(!(waitresponse))
+		if (!(waitresponse))
 			newEmail.setText("First enter id");
 		else {
 			StringBuffer sb = new StringBuffer();
-			
-			
+
 			String email = newEmail.getText();
-			String[] check= email.split("@");
-			if(check.length==1) {
-				 Alert a = new Alert(AlertType.NONE,"You must enter valid email"); 
-				 a.setAlertType(AlertType.ERROR);
-				 a.show();
-			}
-			else {
+			String[] check = email.split("@");
+			if (check.length == 1) {
+				Alert a = new Alert(AlertType.NONE, "You must enter valid email");
+				a.setAlertType(AlertType.ERROR);
+				a.show();
+			} else {
 				sb.append("updateVisitor");
 				sb.append(" ");
 				sb.append(findID.getText());
 				sb.append(" ");
 				sb.append(email);
-				String res= sb.toString();
+				String res = sb.toString();
 				ClientUI.chat.accept(res);
 			}
-			
+
 		}
 	}
 
 	public void displayConnection(String[] result) {
 		System.out.println(result[0]);
-		 String s = "The Port Is : "+result[0];
-		 System.out.println(s);
-		 Platform.runLater(new Runnable() {
-			  @Override
-			  public void run() {
-				  thePortIsLBL.setVisible(true);
-				  theIPISLBL.setVisible(true);
-				  thePortIsLBL.setText("The port is: "+result[0]); 
-				  System.out.println(result[1]);
-				  theIPISLBL.setText("The host is: "+result[1]);
-				  
-			  }
-			});
-		
-		
-	
+		String s = "The Port Is : " + result[0];
+		System.out.println(s);
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				thePortIsLBL.setVisible(true);
+				theIPISLBL.setVisible(true);
+				thePortIsLBL.setText("The port is: " + result[0]);
+				System.out.println(result[1]);
+				theIPISLBL.setText("The host is: " + result[1]);
+
+			}
+		});
+
 	}
-	  @FXML
-	    void WhenClickExitBtn(ActionEvent event) {
-		 
-		  Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
-		  stage.hide();
-		  String s= "exit";
-		  ClientUI.chat.accept(s);
-	    }
+
+	@FXML
+	void WhenClickExitBtn(ActionEvent event) {
+
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		stage.hide();
+		String s = "exit";
+		ClientUI.chat.accept(s);
+	}
 
 }
-

@@ -1,4 +1,11 @@
 package GUI;
+<<<<<<< HEAD
+=======
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+>>>>>>> branch 'Bar_Branch2_Client' of https://github.com/Ilan955/GoNature-C.git
 
 import Client.ClientUI;
 import Entities.Order;
@@ -23,6 +30,7 @@ public class confirmationScreenController implements Initializable {
   @FXML
   private Label WantedParkLbl;
 
+
   @FXML
   private Label DateLbl;
 
@@ -38,11 +46,13 @@ public class confirmationScreenController implements Initializable {
   @FXML
   private Label NumVisitLlbl;
 
-  @FXML
-  private Label PriceLbl;
+
+	@FXML
+	private Label PriceLbl;
+
 
   /*
-   * Setting the values of the confirmation based on what was set in the order and what set for the traveller who made the order
+   * Setting the values of the confirmation based on what was set in the order and what set for the traveler who made the order
    */
   public void setValues() {
     Order o = ClientUI.orderController.order;
@@ -66,8 +76,8 @@ public class confirmationScreenController implements Initializable {
   }
 
   /*
-   * when the user will click on done, the stystem will:
-   * 		will insert the order into db
+   * when the user will click on done, the system will:
+   * 		will insert the order into DB
    * 		will delete the current order from the "o" value
    */
 
@@ -86,7 +96,7 @@ public class confirmationScreenController implements Initializable {
 
   /*
    * if the user click back, he will need to fill the form again
-   * with the ditails from here
+   * with the details from here
    */
   @FXML
   void whenClickBackBtn(ActionEvent event) throws IOException {

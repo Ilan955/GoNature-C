@@ -27,7 +27,7 @@ public class EntranceParkController {
 		sb.append(travellerinpark.getdateOfVisit().toString());
 		sb.append(" ");
 		sb.append(travellerinpark.gettimeInPark().withNano(0).toString());
-		//sb.append(":00");
+		// sb.append(":00");
 		sb.append(" ");
 		sb.append(Float.toString(travellerinpark.gettotalPrice()));
 		sb.append(" ");
@@ -38,7 +38,8 @@ public class EntranceParkController {
 	}
 
 	public void setNumOfVisitorEntringPark(String wantedpark, int numOfVisitors) throws IOException {
-		int unexpectedVisitorsToUpdate = ClientUI.parkController.getCurrentUnexpectedVisitors(wantedpark) + numOfVisitors;
+		int unexpectedVisitorsToUpdate = ClientUI.parkController.getCurrentUnexpectedVisitors(wantedpark)
+				+ numOfVisitors;
 		StringBuffer sb = new StringBuffer();
 		sb.append("setNumOfVisitorEntringPark");
 		sb.append(" ");
@@ -49,7 +50,7 @@ public class EntranceParkController {
 		System.out.println(res);
 		ClientUI.chat.accept(res);
 	}
-	
+
 	public void setCurrentVisitros(String wantedpark, int numOfVisitors) throws IOException {
 		int currentVisitorsToUpdate = ClientUI.parkController.getCurrentVisitors(wantedpark) + numOfVisitors;
 		StringBuffer sb = new StringBuffer();
@@ -62,7 +63,7 @@ public class EntranceParkController {
 		System.out.println(res);
 		ClientUI.chat.accept(res);
 	}
-	
+
 	public void updateExitTimeForTravellerWithOrder(String wantedpark, String id) throws IOException {
 		StringBuffer sb = new StringBuffer();
 		sb.append("updateExitTimeForTravellerWithOrder");
@@ -74,7 +75,7 @@ public class EntranceParkController {
 		System.out.println(res);
 		ClientUI.chat.accept(res);
 	}
-	
+
 	public void updateExitTimeForcasualTraveller(String wantedpark, String id) throws IOException {
 		StringBuffer sb = new StringBuffer();
 		sb.append("updateExitTimeForcasualTraveller");
@@ -86,16 +87,15 @@ public class EntranceParkController {
 		System.out.println(res);
 		ClientUI.chat.accept(res);
 	}
-	
 
 	/*
 	 * this method handle the GoClient data
 	 */
-	//public void gotMesage(String[] msg) {
-	//	String cases = msg[0];
-	//	switch (cases) {
-	//	}
+	// public void gotMesage(String[] msg) {
+	// String cases = msg[0];
+	// switch (cases) {
+	// }
 
-	//}
+	// }
 
 }

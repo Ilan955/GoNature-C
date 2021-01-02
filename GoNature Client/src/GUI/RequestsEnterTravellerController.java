@@ -84,7 +84,7 @@ public class RequestsEnterTravellerController implements Initializable {
 									FXMLLoader loader = new FXMLLoader();
 									Pane root;
 									root = loader.load(
-									getClass().getResource("ApprovingRequestTraveller.fxml").openStream());
+											getClass().getResource("ApprovingRequestTraveller.fxml").openStream());
 									Scene scene = new Scene(root);
 									stage.setTitle("Approve request");
 									stage.setScene(scene);

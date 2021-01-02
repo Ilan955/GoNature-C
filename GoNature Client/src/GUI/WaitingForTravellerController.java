@@ -23,19 +23,20 @@ public class WaitingForTravellerController {
 	@FXML
 	void whenclickedOnCheck(ActionEvent event) throws IOException {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		statusApproval = ClientUI.requestsController.checkIfApproveRequest(ClientUI.userController.traveller.getId(), "EnterPark");
+		statusApproval = ClientUI.requestsController.checkIfApproveRequest(ClientUI.userController.traveller.getId(),
+				"EnterPark");
 		if (statusApproval == -1) {
 			Parent root = FXMLLoader.load(getClass().getResource("waiting.fxml"));
 			Scene scene = new Scene(root);
 			stage.setTitle("Waiting for enter");
 			stage.setScene(scene);
 			stage.show();
-		}
-		else if (statusApproval == 1) {
+		} else if (statusApproval == 1) {
 			ClientUI.entranceParkController.enterWithoutOrder(LocalTime.now(), LocalDate.now(),
 					EnterParkNowController.wantedpark, EnterParkNowController.numOfVisitors, (float) 50);
-			ClientUI.entranceParkController.setNumOfVisitorEntringPark(EnterParkNowController.wantedpark, EnterParkNowController.numOfVisitors);
-			
+			ClientUI.entranceParkController.setNumOfVisitorEntringPark(EnterParkNowController.wantedpark,
+					EnterParkNowController.numOfVisitors);
+
 			Parent root = FXMLLoader.load(getClass().getResource("ImplementaionEnterPark.fxml"));
 			Scene scene = new Scene(root);
 			stage.setTitle("Confirm Enter park");

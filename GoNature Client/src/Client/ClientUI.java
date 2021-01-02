@@ -1,6 +1,13 @@
 package Client;
 
+<<<<<<< HEAD
 import Controller.*;
+=======
+import javafx.application.Application;
+import javafx.stage.Stage;
+import java.util.Vector;
+
+>>>>>>> branch 'Bar_Branch2_Client' of https://github.com/Ilan955/GoNature-C.git
 import Controller.EmployeeController;
 import Controller.OrderController;
 import Controller.UserController;
@@ -10,6 +17,27 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 
 public class ClientUI extends Application {
+<<<<<<< HEAD
+=======
+	public static ClientController chat; // only one instance
+	public static baseGuiController aFrame;
+	public static EntranceParkController entranceParkController;
+	public static loginClientController cp;
+	public static OrderScreenController oc;
+	public static EnterParkNowController ep;
+	public static WelcomeTravellerController wt;
+	public static WelcomeAndLoginController welcomeController;
+	public static WelcomeTravellerController welcomeTraveller;
+	public static loginClientController LoginClientController;
+	public static OrderScreenController orderScreenController;
+	public static OrderController orderController;
+	public static ParkController parkController;
+	public static EmployeeController employeeController;
+	public static UserController userController;
+	public static DiscountController discountController;
+	public static WaitingListController waitingListController;
+	// public static UserController userController;
+>>>>>>> branch 'Bar_Branch2_Client' of https://github.com/Ilan955/GoNature-C.git
 
   public static ClientController chat; // only one instance
   public static baseGuiController aFrame;
@@ -34,6 +62,7 @@ public class ClientUI extends Application {
   public static SignUpController signUpController;
   public static SignUpScreenController signUpScreenController;
 
+<<<<<<< HEAD
   public static RequestsController requestsController;
   public static ReportsController reportsController;
   public static ReportEntreisScreenController reportsScreenController;
@@ -45,7 +74,13 @@ public class ClientUI extends Application {
   public static void set(String ip, int port) {
     chat = new ClientController(ip, port);
   }
+=======
+	public static void main(String args[]) throws Exception {
+		launch(args);
+	} // end main
+>>>>>>> branch 'Bar_Branch2_Client' of https://github.com/Ilan955/GoNature-C.git
 
+<<<<<<< HEAD
   @Override
   public void start(Stage primaryStage) throws Exception {
     cp = new loginClientController();
@@ -64,10 +99,46 @@ public class ClientUI extends Application {
     userController = new UserController();
 
     requestsController = new RequestsController();
+=======
+	public static void set(String ip, int port) {
+		chat = new ClientController(ip, port);
+	}
 
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+		cp = new loginClientController();
+		discountController = new DiscountController();
+		waitingListController = new WaitingListController();
+		employeeController = new EmployeeController();
+		parkController = new ParkController();
+		entranceParkController = new EntranceParkController();
+		LoginClientController = new loginClientController();
+		orderScreenController = new OrderScreenController();
+		wt = new WelcomeTravellerController();
+		orderController = new OrderController();
+		signUpScreenController = new SignUpScreenController();
+		signUpController = new SignUpController();
+		welcomeController = new WelcomeAndLoginController();
+		userController = new UserController();
+>>>>>>> branch 'Bar_Branch2_Client' of https://github.com/Ilan955/GoNature-C.git
+
+<<<<<<< HEAD
     reportsController = new ReportsController();
     reportsScreenController = new ReportEntreisScreenController();
+=======
+		requestsController = new RequestsController();
+>>>>>>> branch 'Bar_Branch2_Client' of https://github.com/Ilan955/GoNature-C.git
 
+<<<<<<< HEAD
     cp.start(primaryStage);
   }
+=======
+		reportsController = new ReportsController();
+		reportsScreenController = new ReportEntreisScreenController();
+
+		cp.start(primaryStage);
+
+	}
+
+>>>>>>> branch 'Bar_Branch2_Client' of https://github.com/Ilan955/GoNature-C.git
 }

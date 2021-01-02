@@ -13,17 +13,18 @@ import javafx.stage.Stage;
 
 public class ApproveEmployeeForEnterTraveller {
 
-    @FXML
-    private Button notApproveBtn;
+	@FXML
+	private Button notApproveBtn;
 
-    @FXML
-    private Button approveBtn;
-    
-    @FXML
-    void whenClickedApproveBtn(ActionEvent event) throws IOException {
+	@FXML
+	private Button approveBtn;
+
+	@FXML
+	void whenClickedApproveBtn(ActionEvent event) throws IOException {
 		Stage stage = (Stage) approveBtn.getScene().getWindow();
 		stage.close();
-		ClientUI.requestsController.changeStatusForCasualTraveller(1, ClientUI.requestsController.d.getID(), ClientUI.requestsController.d.getPark());
+		ClientUI.requestsController.changeStatusForCasualTraveller(1, ClientUI.requestsController.d.getID(),
+				ClientUI.requestsController.d.getPark());
 		FXMLLoader loader = new FXMLLoader();
 		Stage primaryStage = new Stage();
 		Pane root = loader.load(getClass().getResource("requestsEnterTraveller.fxml").openStream());
@@ -32,13 +33,14 @@ public class ApproveEmployeeForEnterTraveller {
 		primaryStage.setScene(scene);
 		primaryStage.show();
 
-    }
+	}
 
-    @FXML
-    void whenClickedDontApprove(ActionEvent event) throws IOException {
+	@FXML
+	void whenClickedDontApprove(ActionEvent event) throws IOException {
 		Stage stage = (Stage) notApproveBtn.getScene().getWindow();
 		stage.close();
-		ClientUI.requestsController.changeStatusForCasualTraveller(0, ClientUI.requestsController.d.getID(), ClientUI.requestsController.d.getPark());
+		ClientUI.requestsController.changeStatusForCasualTraveller(0, ClientUI.requestsController.d.getID(),
+				ClientUI.requestsController.d.getPark());
 		FXMLLoader loader = new FXMLLoader();
 		Stage primaryStage = new Stage();
 		Pane root = loader.load(getClass().getResource("requestsEnterTraveller.fxml").openStream());
@@ -47,6 +49,6 @@ public class ApproveEmployeeForEnterTraveller {
 		primaryStage.setScene(scene);
 		primaryStage.show();
 
-    }
+	}
 
 }

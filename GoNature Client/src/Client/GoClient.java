@@ -112,10 +112,11 @@ public class GoClient extends AbstractClient {
 				e.printStackTrace();
 			}
 			break;
-
 		case "ChangeIsSababa":
 			return;
 		case "parkSettingsAreUpdated":
+			return;
+		case "LoggedOfSuccess":
 			return;
 		case "SignUpController":
 			try {

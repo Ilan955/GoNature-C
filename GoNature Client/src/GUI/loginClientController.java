@@ -25,14 +25,12 @@ public class loginClientController {
 	private TextField portLbl;
 
 	public void start(Stage primaryStage) throws Exception {
-
 		Parent root = FXMLLoader.load(getClass().getResource("loginClient.fxml"));
 		Image icon = new Image(getClass().getResourceAsStream("titleIcon.png"));
 		primaryStage.getIcons().add(icon);
 		Scene scene = new Scene(root);
 		primaryStage.setTitle("Prototype");
 		primaryStage.setScene(scene);
-
 		primaryStage.show();
 	}
 

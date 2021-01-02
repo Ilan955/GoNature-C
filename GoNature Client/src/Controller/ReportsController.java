@@ -16,6 +16,7 @@ public class ReportsController {
 	public ArrayList<Reports> members = new ArrayList<Reports>();
 	public ArrayList<Reports> groups = new ArrayList<Reports>();
 	public String month, park, year;
+
 	public int sumSolo = 0, sumMembers = 0, sumGroups = 0;
 
 	// sumSolo=individuals that entered the park
@@ -82,6 +83,7 @@ public class ReportsController {
 		sb.append(year);
 		sb.append(" ");
 		sb.append(park);
+
 		ClientUI.chat.accept(sb.toString());
 	}
 
