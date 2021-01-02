@@ -25,14 +25,12 @@ public class loginClientController {
 	private TextField portLbl;
 
 	public void start(Stage primaryStage) throws Exception {
-
 		Parent root = FXMLLoader.load(getClass().getResource("loginClient.fxml"));
 		Image icon = new Image(getClass().getResourceAsStream("titleIcon.png"));
 		primaryStage.getIcons().add(icon);
 		Scene scene = new Scene(root);
 		primaryStage.setTitle("Prototype");
 		primaryStage.setScene(scene);
-
 		primaryStage.show();
 	}
 
@@ -47,7 +45,7 @@ public class loginClientController {
 		int port = Integer.parseInt(portLbl.getText());
 		ClientUI.set(s, port);
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		Parent root = FXMLLoader.load(getClass().getResource("MonthlyReport.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("WelcomeAndLoginScreen.fxml"));
 		Scene scene = new Scene(root);
 		stage.setTitle("Prototype");
 		stage.setScene(scene);

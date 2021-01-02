@@ -21,7 +21,7 @@
          </font>
       </Label>
       <Label layoutX="31.0" layoutY="73.0" text="Park" />
-      <Label fx:id="ParkName" layoutX="103.0" layoutY="73.0" text="&quot;Park Name&quot;" />
+      <Label fx:id="ParkName" layoutX="96.0" layoutY="73.0" text="&quot;Park Name&quot;" />
       <Label layoutX="28.0" layoutY="456.0" text="Max visiors in park" />
       <TextField fx:id="MaxVisitorsField" layoutX="177.0" layoutY="456.0" />
       <Label layoutX="25.0" layoutY="517.0" onMouseDragOver="#WhenOverGapInPArkForHelp" text="Gap visitors in park" />
@@ -29,12 +29,11 @@
       <Label layoutX="28.0" layoutY="584.0" text="Visitors duration " />
       <TextField fx:id="durationField" layoutX="177.0" layoutY="584.0" />
       <Button fx:id="duraionbtn" layoutX="406.0" layoutY="584.0" mnemonicParsing="false" onAction="#WhenClickSendChangesBtn" prefHeight="31.0" prefWidth="216.0" text="Send changes to D.Manager" />
-      <Button fx:id="duraionbtn1" layoutX="23.0" layoutY="123.0" mnemonicParsing="false" onAction="#ClickShowNumberVisitorsPark" prefHeight="31.0" prefWidth="227.0" text="Number of visitors in park" />
-      <Label layoutX="323.0" layoutY="123.0" text="Visitors in park " />
-      <Label fx:id="numberOFVisitorsLabel" layoutX="451.0" layoutY="123.0" text="&quot;Number&quot;" />
+      <Label layoutX="28.0" layoutY="123.0" text="Visitors in park " />
+      <Label fx:id="numberOFVisitorsLabel" layoutX="144.0" layoutY="124.0" text="&quot;Number&quot;" />
       <Line endX="639.0" layoutX="101.0" layoutY="370.0" startX="-100.0" />
       <TextArea layoutX="406.0" layoutY="456.0" prefHeight="96.0" prefWidth="200.0" text="You can change the values &#10;and notice them to the &#10;department manager&#10;" />
-      <Button fx:id="SpecialDiscountBTN" layoutX="23.0" layoutY="184.0" mnemonicParsing="false" onAction="#ClickOnSetSpecialDiscount" prefHeight="31.0" prefWidth="227.0" text="Set scpecial discount price" />
+      <Button fx:id="SpecialDiscountBTN" layoutX="11.0" layoutY="200.0" mnemonicParsing="false" onAction="#ClickOnSetSpecialDiscount" prefHeight="31.0" prefWidth="339.0" text="Send special discount to D.Manager approval" />
       <Button fx:id="overallVisitorsReportBTN" layoutX="14.0" layoutY="311.0" mnemonicParsing="false" onAction="#ClickCreateOverallVisitorsReport" prefHeight="31.0" prefWidth="227.0" text="Create overall visitors report" />
       <Button fx:id="CreateUsageReportBTN" layoutX="260.0" layoutY="311.0" mnemonicParsing="false" onAction="#WhenClickCreateUsageReportBtn" prefHeight="31.0" prefWidth="227.0" text="Create usage report" />
       <Button fx:id="SpecialDiscountBTN111" layoutX="504.0" layoutY="311.0" mnemonicParsing="false" onAction="#WhenClickCreateMonthlyIncomeReportBtn" prefHeight="31.0" prefWidth="227.0" text="Create monthly income report" />
@@ -54,5 +53,16 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </Button>
+      <Button fx:id="informationBtn" layoutX="581.0" layoutY="58.0" mnemonicParsing="false" onAction="#whenClickInformationBtn" prefHeight="31.0" prefWidth="112.0" text="Information" textFill="#332bcd">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Button>
+      <Line endX="639.0" layoutX="102.0" layoutY="157.0" startX="-100.0" />
+      <Label layoutX="12.0" layoutY="156.0" prefHeight="40.0" prefWidth="560.0" text="Set special discount ">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Label>
    </children>
 </Pane>

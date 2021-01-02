@@ -16,6 +16,7 @@ public class RequestsController {
 	public Data d;
 	private boolean canSendParkSettingsChangesToDm;
 	private String park;
+
 	public void insertRequestToDB(String id, LocalDate date, LocalTime time, String park, int numOfVisitors,
 			String type, int status) {
 		StringBuffer sb = new StringBuffer();
@@ -51,7 +52,7 @@ public class RequestsController {
 	}
 
 	public void getRequestsTravellerOfEnterPark(String wantedpark) {
-		this.park=wantedpark;
+		this.park = wantedpark;
 		StringBuffer sb = new StringBuffer();
 		sb.append("getRequestsTravellerOfEnterPark");
 		sb.append(" ");
@@ -59,7 +60,7 @@ public class RequestsController {
 		ClientUI.chat.accept(sb.toString());
 
 	}
-	
+
 	public void changeStatusForCasualTraveller(int status, String id, String park) {
 		StringBuffer sb = new StringBuffer();
 		sb.append("changeStatusForCasualTraveller");
@@ -80,17 +81,17 @@ public class RequestsController {
 			statusOfRequest = Integer.parseInt(msg[1]);
 			break;
 		case "getRequestsTravellerOfEnterPark":
-			fillRequestsTraveller(msg);	
+			fillRequestsTraveller(msg);
 			break;
 		case "parkSettingsChangesSent":
 			if (msg[1].equals("true")) {
-				ClientUI.requestsController.setCanSendParkSettingsChangesToDm(true);}
-			else if (msg[1].equals("false"))
+				ClientUI.requestsController.setCanSendParkSettingsChangesToDm(true);
+			} else if (msg[1].equals("false"))
 				ClientUI.requestsController.setCanSendParkSettingsChangesToDm(false);
 		default:
 			System.out.print("Nothing to do");
+		}
 	}
-}
 
 	private void fillRequestsTraveller(String[] msg) {
 		int cnt = 1;

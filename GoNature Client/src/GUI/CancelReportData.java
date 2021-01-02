@@ -23,14 +23,12 @@ public class CancelReportData {
 	private String Month;
 	private Number CancelledOrders;
 	private Number UncompleteOrders;
-	
-	public CancelReportData(String year,String Month,Number CancelledOrders ,Number UncompleteOrders) {
+
+	public CancelReportData(String year, String Month, Number CancelledOrders, Number UncompleteOrders) {
 		this.Year = year;
 		this.Month = Month;
 		this.CancelledOrders = CancelledOrders;
 		this.UncompleteOrders = UncompleteOrders;
 	}
-	
-	
-	
+
 }

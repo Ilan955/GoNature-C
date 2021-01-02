@@ -94,6 +94,9 @@ public class WelcomeTravellerController implements Initializable {
 	@FXML
 
 	void WhenPressLogOutBtn(ActionEvent event) throws IOException {
+		ClientUI.userController.setAlreadyLoggedIn(false);
+		ClientUI.userController.identify("deleteFromDbWhenlogOutTraveller " + ClientUI.userController.traveller.getId()
+				+ " " + ClientUI.userController.traveller.getMemberID());
 		ClientUI.userController.traveller = null;
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		FXMLLoader loader = new FXMLLoader();

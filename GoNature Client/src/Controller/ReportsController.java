@@ -11,7 +11,6 @@ public class ReportsController {
 	public Data d;
 	public ObservableList<Data> ob = FXCollections.observableArrayList();
 
-	
 	public int sumSolo = 0, sumMembers = 0, sumGroups = 0;
 	// sumSolo=individuals that entered the park
 	// sumMembers=members and family members that entered the park
@@ -83,7 +82,7 @@ public class ReportsController {
 
 		sb.append(" ");
 		sb.append(year);
-		
+
 		ClientUI.chat.accept(sb.toString());
 	}
 
@@ -100,8 +99,8 @@ public class ReportsController {
 		return this.sumGroups;
 
 	}
-	
-	public void getTableOfUnFullCapacityInDates(String month,String year,String wantedpark) {
+
+	public void getTableOfUnFullCapacityInDates(String month, String year, String wantedpark) {
 		StringBuffer sb = new StringBuffer();
 		sb.append("getTableOfUnFullCapacityInDates");
 		sb.append(" ");
@@ -153,13 +152,14 @@ public class ReportsController {
 		ClientUI.chat.accept(sb.toString());
 
 	}
+
 	private void filldateofNotfullCapacityTable(String[] msg) {
 		int cnt = 1;
 		if (!(msg[1].equals("Done"))) {
 			while (!(msg[cnt].equals("Done"))) {
 				d = new Data(msg[cnt]);
 				ob.add(d);
-				cnt ++;
+				cnt++;
 			}
 		}
 	}

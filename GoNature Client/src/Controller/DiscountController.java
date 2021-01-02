@@ -10,12 +10,13 @@ import Client.ClientUI;
 import Entities.Order;
 
 public class DiscountController {
-	//ManagerDiscounts mDiscount;
+	// ManagerDiscounts mDiscount;
 	public boolean setManagerDiscount_flag;
 	public boolean checkDiscount_flag;// update by ValidDiscount > gotMessage > checkDiscount
 	private float discountPrecentage;
 
-	//use this method to create a new manager discount in DB (called by setDiscountScreenController.whenClickSubmitDiscount())/
+	// use this method to create a new manager discount in DB (called by
+	// setDiscountScreenController.whenClickSubmitDiscount())/
 	public void setManagerDiscount(Date startDate, Date lastDate, float precentage, String parkName) {
 		// mDiscount = new ManagerDiscounts(startDate, lastDate, precentage, parkName);
 		/* record discount to db */
@@ -46,17 +47,17 @@ public class DiscountController {
 		ClientUI.chat.accept(sb.toString());
 
 	}
-	
-	//use this method to calc finalPrice with managerDiscount/
-	//!!!!does not include regular discount!!!!!!
+
+	// use this method to calc finalPrice with managerDiscount/
+	// !!!!does not include regular discount!!!!!!
 	public float calculateFinalPrice(Order order) {
-		//check for valid parkManager discount/
-		//ValidDiscount(order.getDateOfVisit(),order.getWantedPark());
-		if(checkDiscount_flag) // there is a valid discount for this park and timeOfVisit
+		// check for valid parkManager discount/
+		// ValidDiscount(order.getDateOfVisit(),order.getWantedPark());
+		if (checkDiscount_flag) // there is a valid discount for this park and timeOfVisit
 		{
 			return order.getTotalPrice() * discountPrecentage; // full price after parkManager discount
 		}
-		return order.getTotalPrice();//return full price without parkManager discount
+		return order.getTotalPrice();// return full price without parkManager discount
 	}
 
 	public void checkDiscount(String fromDate, String toDate, String status, String dateOfVisit, String discount) {
@@ -95,7 +96,7 @@ public class DiscountController {
 			// [methodeName[0] , parkName[1], fromDate[2] , toDate[3] , precentage[4] ,
 			// status[5] , dateOfVisit[6]]
 			// e.x [ValidDiscount, tal, 2018-12-12, 2020-01-01, 0.5, F , 2019-12-31]
-			checkDiscount(msg[2], msg[3], msg[5], msg[6] , msg[4]);
+			checkDiscount(msg[2], msg[3], msg[5], msg[6], msg[4]);
 			break;
 
 		}

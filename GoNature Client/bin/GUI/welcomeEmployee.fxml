@@ -25,7 +25,6 @@
          </font>
       </Button>
       <Button layoutX="405.0" layoutY="293.0" mnemonicParsing="false" onAction="#WhenClickSignUpNewMemberBtn" prefHeight="31.0" prefWidth="285.0" text="Sign-Up New member/Group-Guide" />
-      <Button layoutX="17.0" layoutY="154.0" mnemonicParsing="false" onAction="#WhenClickParkCapacityBtn" prefHeight="31.0" prefWidth="158.0" text="Park Capacity" />
       <Label layoutX="10.0" layoutY="216.0" prefHeight="21.0" prefWidth="167.0" text="Current people in park" />
       <Label fx:id="CurrentPeopleLbl" layoutX="181.0" layoutY="216.0" prefHeight="21.0" prefWidth="86.0" text="&quot;Number&quot;" />
       <Label layoutX="10.0" layoutY="257.0" prefHeight="21.0" prefWidth="241.0" text="How many people can enter park" />
@@ -40,7 +39,13 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <Line endX="599.0" layoutX="101.0" layoutY="128.0" startX="-100.0" />
+      <Line endX="599.0" layoutX="101.0" layoutY="141.0" startX="-100.0" />
       <Button layoutX="403.0" layoutY="343.0" mnemonicParsing="false" onAction="#WhenClickSRequestsOfCasualTravellerBtn" prefHeight="31.0" prefWidth="285.0" text="Show enter requests of casual traveller" />
+      <Button fx:id="informationBtn" layoutX="554.0" layoutY="60.0" mnemonicParsing="false" onAction="#whenClickInformationBtn" prefHeight="31.0" prefWidth="112.0" text="Information" textFill="#332bcd">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Button>
+      <Button layoutX="667.0" layoutY="-31.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="34.0" text="x" />
    </children>
 </AnchorPane>

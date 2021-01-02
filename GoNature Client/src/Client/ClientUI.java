@@ -5,7 +5,6 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import java.util.Vector;
 
-
 import Controller.EmployeeController;
 import Controller.OrderController;
 import Controller.UserController;
@@ -32,7 +31,7 @@ public class ClientUI extends Application {
 	public static UserController userController;
 	public static DiscountController discountController;
 	public static WaitingListController waitingListController;
-	//public static UserController userController;
+	// public static UserController userController;
 
 	// public static UserController userController;
 	public static SignUpController signUpController;
@@ -42,40 +41,37 @@ public class ClientUI extends Application {
 	public static ReportsController reportsController;
 	public static ReportEntreisScreenController reportsScreenController;
 
-
-
 	public static void main(String args[]) throws Exception {
 		launch(args);
 	} // end main
 
-
 	public static void set(String ip, int port) {
 		chat = new ClientController(ip, port);
 	}
-	@Override 
+
+	@Override
 	public void start(Stage primaryStage) throws Exception {
 		cp = new loginClientController();
-		discountController=new DiscountController();
+		discountController = new DiscountController();
 		waitingListController = new WaitingListController();
 		employeeController = new EmployeeController();
-		parkController=new ParkController();
-		entranceParkController=new EntranceParkController();
-		LoginClientController= new loginClientController();
+		parkController = new ParkController();
+		entranceParkController = new EntranceParkController();
+		LoginClientController = new loginClientController();
 		orderScreenController = new OrderScreenController();
 		wt = new WelcomeTravellerController();
-		orderController=new OrderController();
-		signUpScreenController=new SignUpScreenController();
+		orderController = new OrderController();
+		signUpScreenController = new SignUpScreenController();
 		signUpController = new SignUpController();
 		welcomeController = new WelcomeAndLoginController();
 		userController = new UserController();
 
-		requestsController=new RequestsController();
+		requestsController = new RequestsController();
 
-		reportsController=new ReportsController() ;
-		reportsScreenController=new ReportEntreisScreenController() ;
+		reportsController = new ReportsController();
+		reportsScreenController = new ReportEntreisScreenController();
 
 		cp.start(primaryStage);
-		
 
 	}
 

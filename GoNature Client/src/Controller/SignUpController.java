@@ -45,22 +45,22 @@ public class SignUpController {
 	public void gotMessage(String[] msg) throws IOException {
 		String cases = msg[0];
 		switch (cases) {
-			case "isMemberExists":
-				if (msg[1] == "false") {
-					checker = false;
-				} else
-					checker = true;
-				;
-				break;
-			case "addMember":
-				if (msg[1] == "false") {
-					System.out.println("Member was not added");
-				} else {
-					this.memberID = msg[1];
-				}
-				break;
-			default:
-				break;
+		case "isMemberExists":
+			if (msg[1] == "false") {
+				checker = false;
+			} else
+				checker = true;
+			;
+			break;
+		case "addMember":
+			if (msg[1] == "false") {
+				System.out.println("Member was not added");
+			} else {
+				this.memberID = msg[1];
+			}
+			break;
+		default:
+			break;
 		}
 
 	}

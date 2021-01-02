@@ -104,10 +104,10 @@ public class EnterParkNowController implements Initializable {
 	@FXML
 	void WhenClickNextBtn(ActionEvent event) throws IOException {
 		String wantedpark = (String) WantedParkCB.getValue();
-		int numOfVisitors=Integer.parseInt(NumOfVisiotrstxt.getText());
+		int numOfVisitors = Integer.parseInt(NumOfVisiotrstxt.getText());
 
-		ClientUI.requestsController.insertRequestToDB(ClientUI.userController.traveller.getId()
-				, myDate, myTime, wantedpark,numOfVisitors, "EnterPark", -1);
+		ClientUI.requestsController.insertRequestToDB(ClientUI.userController.traveller.getId(), myDate, myTime,
+				wantedpark, numOfVisitors, "EnterPark", -1);
 
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		FXMLLoader loader = new FXMLLoader();
