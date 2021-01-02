@@ -55,58 +55,37 @@
 				<Font name="System Bold" size="15.0" />
 			</font>
 		</Button>
-		<<<<<<< HEAD
-		<Label layoutX="18.0" layoutY="144.0" =======
-		
-			
-			<Label layoutX="14.0" layoutY="224.0">
-				>>>>>> branch 'new_ilan_now' of
-				https://github.com/Ilan955/GoNature-C.git
-				text="Overall visitors
+		<Label layoutX="18.0" layoutY="144.0"
+			text="Overall visitors
 				report">
-				<font>
-					<Font size="28.0" />
-				</font>
-			</Label>
-			<Button fx:id="ClickCancelBTN" layoutX="14.0" layoutY="452.0"
-				mnemonicParsing="false" onAction="#WhenClickOnCancel"
-				prefHeight="31.0" prefWidth="140.0" text="Cancel" textFill="#d72828">
-				<font>
-					<Font name="System Bold" size="15.0" />
-				</font>
-			</Button>
-			<<<<<<< HEAD
-			<Label layoutX="18.0" layoutY="195.0" text="Month:" />
-			<Label layoutX="18.0" layoutY="243.0" text="Year:" />
-			<Label layoutX="18.0" layoutY="285.0" text="Park:" />
-			<Label layoutX="17.0" layoutY="329.0" text="Produced by:" />
-			<Label fx:id="MonthLBL" layoutX="91.0" layoutY="195.0"
-				text="&quot;Month&quot;" />
-			<Label fx:id="YearLBL" layoutX="87.0" layoutY="243.0"
-				text="&quot;Year&quot;" />
-			<Label fx:id="ParkLBL" layoutX="88.0" layoutY="285.0"
-				text="&quot;ParkName" />
-			<Label fx:id="NameLBL" layoutX="131.0" layoutY="329.0"
-				text="&quot;NAME&quot;" />
-			<ComboBox fx:id="YearCB" layoutX="414.0" layoutY="75.0"
-				prefWidth="150.0" />
-			<PieChart fx:id="visitorsPie" layoutX="326.0"
-				layoutY="246.0" prefHeight="183.0" prefWidth="229.0"
-				title="Visitors" />
-			=======
-			<Label layoutX="14.0" layoutY="275.0" text="Month:" />
-			<Label layoutX="14.0" layoutY="323.0" text="Year:" />
-			<Label layoutX="14.0" layoutY="365.0" text="Park:" />
-			<Label layoutX="13.0" layoutY="409.0" text="Produced by:" />
-			<Label fx:id="MonthLBL" layoutX="87.0" layoutY="275.0"
-				text="&quot;Month&quot;" />
-			<Label fx:id="YearLBL" layoutX="83.0" layoutY="323.0"
-				text="&quot;Year&quot;" />
-			<Label fx:id="ParkLBL" layoutX="84.0" layoutY="365.0"
-				text="&quot;ParkName" />
-			<Label fx:id="NameLBL" layoutX="127.0" layoutY="409.0"
-				text="&quot;NAME&quot;" />
-			>>>>>>> branch 'new_ilan_now' of
-			https://github.com/Ilan955/GoNature-C.git
+			<font>
+				<Font size="28.0" />
+			</font>
+		</Label>
+		<Button fx:id="ClickCancelBTN" layoutX="14.0" layoutY="452.0"
+			mnemonicParsing="false" onAction="#WhenClickOnCancel"
+			prefHeight="31.0" prefWidth="140.0" text="Cancel" textFill="#d72828">
+			<font>
+				<Font name="System Bold" size="15.0" />
+			</font>
+		</Button>
+		<Label layoutX="18.0" layoutY="195.0" text="Month:" />
+		<Label layoutX="18.0" layoutY="243.0" text="Year:" />
+		<Label layoutX="18.0" layoutY="285.0" text="Park:" />
+		<Label layoutX="17.0" layoutY="329.0" text="Produced by:" />
+		<Label fx:id="MonthLBL" layoutX="91.0" layoutY="195.0"
+			text="&quot;Month&quot;" />
+		<Label fx:id="YearLBL" layoutX="87.0" layoutY="243.0"
+			text="&quot;Year&quot;" />
+		<Label fx:id="ParkLBL" layoutX="88.0" layoutY="285.0"
+			text="&quot;ParkName" />
+		<Label fx:id="NameLBL" layoutX="131.0" layoutY="329.0"
+			text="&quot;NAME&quot;" />
+		<ComboBox fx:id="YearCB" layoutX="414.0" layoutY="75.0"
+			prefWidth="150.0" />
+		<PieChart fx:id="visitorsPie" layoutX="326.0" layoutY="246.0"
+			prefHeight="183.0" prefWidth="229.0" title="Visitors" />
+
+
 	</children>
 </Pane>

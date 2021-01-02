@@ -28,7 +28,7 @@ import javafx.stage.Stage;
 public class OrderController {
 	public Person t;
 //!!!! WHAT NEED TO BE !!!!
-//Traveller t = ClientUI.userController.traveller
+//Traveler t = ClientUI.userController.traveller
 	public Order order;
 	public boolean valid = false;
 	ArrayList<String> mess = new ArrayList<String>();
@@ -44,7 +44,8 @@ public class OrderController {
 	public ObservableList<Data> aD = FXCollections.observableArrayList();
 	public ArrayList<CancelReportData> oR = new ArrayList<CancelReportData>();
 	public boolean isConfirm = true;
-	public boolean need_alert=false;
+	public boolean need_alert = false;
+
 	/*
 	 * This method will check with the db if there is a place in the park for this
 	 * time and date got if so, will create new order, and save it later in the DB.
@@ -137,6 +138,7 @@ public class OrderController {
 			if (tmp.length == 2)
 				return true;
 		}
+
 		return false;
 	}
 
@@ -162,10 +164,10 @@ public class OrderController {
 		case "getDataForReport":
 			fillReportTableData(msg);
 		case "havingAlert":
-			if(msg[1].equals(""))
+			if (msg[1].equals(""))
 				need_alert = false;
 			else
-				need_alert=true;
+				need_alert = true;
 			break;
 
 		}
@@ -201,8 +203,9 @@ public class OrderController {
 		if (!(ordersArray[1].equals("Done"))) {
 			while (!(ordersArray[counter].equals("Done"))) {
 				d = new Data(ordersArray[counter], ordersArray[counter + 1], ordersArray[counter + 2],
-						ordersArray[counter + 3], ordersArray[counter + 4], ordersArray[counter + 5],ordersArray[counter+6],ordersArray[counter+7]);
-			
+						ordersArray[counter + 3], ordersArray[counter + 4], ordersArray[counter + 5],
+						ordersArray[counter + 6], ordersArray[counter + 7]);
+
 				ob.add(d);
 				counter += 8;
 				check++;
@@ -391,7 +394,6 @@ public class OrderController {
 		ClientUI.chat.accept(sb.toString());
 
 	}
-	
 
 //private String ReportMonth;
 //private String ReportYear;
@@ -406,35 +408,36 @@ public class OrderController {
 		sb.append(toDate.toString());
 		ClientUI.chat.accept(sb.toString());
 	}
-	
+
 	/*
-	 * method that will check if tomorrow there will be any order
-	 * this is not counting how many orders, its just check if there are some
-	 * this method will be used in the welcome traveller initialize, and if it will be true, it will pop up a message
-	 * saying he need to confirm his orders that are going to be tomorrow
+	 * method that will check if tomorrow there will be any order this is not
+	 * counting how many orders, its just check if there are some this method will
+	 * be used in the welcome traveller initialize, and if it will be true, it will
+	 * pop up a message saying he need to confirm his orders that are going to be
+	 * tomorrow
 	 */
-	
-	public boolean havingAlert(LocalDate tomorrow,String ID) {
-		StringBuffer sb= new StringBuffer();
+
+	public boolean havingAlert(LocalDate tomorrow, String ID) {
+		StringBuffer sb = new StringBuffer();
 		sb.append("havingAlert");
 		sb.append(" ");
 		sb.append(tomorrow.toString());
 		sb.append(" ");
 		sb.append(ID);
 		ClientUI.chat.accept(sb.toString());
-		if(need_alert)
+		if (need_alert)
 			return true;
 		return false;
-		
+
 	}
 
 	public void confirmAlert(String id) {
-		StringBuffer sb= new StringBuffer();
+		StringBuffer sb = new StringBuffer();
 		sb.append("confirmAlert");
 		sb.append(" ");
 		sb.append(id);
 		ClientUI.chat.accept(sb.toString());
-		
+
 	}
 
 }

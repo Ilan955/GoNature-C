@@ -94,6 +94,7 @@ public class GoClient extends AbstractClient {
 			ClientUI.entranceParkController.gotMesage(res);
 			break;
 		case "RequestsController":
+
 			ClientUI.requestsController.gotMessage(res);
 			break;
 

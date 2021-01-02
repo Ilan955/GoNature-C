@@ -1,9 +1,11 @@
 package Controller;
 
+import java.io.IOException;
+import java.sql.Date;
+
 import Client.ClientUI;
 import GUI.Data;
 import clientLogic.*;
-import java.io.IOException;
 import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,6 +24,15 @@ public class ReportsController {
 	// sumSolo=individuals that entered the park
 	// sumMembers=members and family members that entered the park
 	// sumGroups=groups that entered to the park
+	Float Traveler_cnt, Traveler_income, Member_cnt, Member_income, Family_cnt, Family_income, Group_cnt, Group_income;
+
+	public void makeMonthlyIncomeReport(Date Month) {
+		StringBuffer sb = new StringBuffer();
+		sb.append("makeMonthlyIncomeReport");// method name
+		sb.append(" ");
+		sb.append(Month.toString());
+		ClientUI.chat.accept(sb.toString());
+	}
 
 	public void gotMessage(String[] msg) throws IOException {
 		String cases = msg[0];
@@ -36,6 +47,9 @@ public class ReportsController {
 			break;
 		case "getDataEntranceTimesAndStay":
 			dealWithgetDataEntranceTimesAndStay(msg);
+			break;
+		case "makeMonthlyIncomeReport":
+			createMonthlyIncomeReport(msg[1], msg[2], msg[3], msg[4], msg[5], msg[6], msg[7], msg[8]);
 			break;
 		default:
 			break;
@@ -97,6 +111,22 @@ public class ReportsController {
 
 	public int getGroups() {
 		return this.sumGroups;
+	}
+
+	private void createMonthlyIncomeReport(String Traveler_cnt, String Traveler_income, String Member_cnt,
+			String Member_income, String Family_cnt, String Family_income, String Group_cnt, String Group_income) {
+		/* set values */
+		this.Traveler_cnt = Float.valueOf(Traveler_cnt);
+		this.Traveler_income = Float.valueOf(Traveler_income);
+
+		this.Member_cnt = Float.valueOf(Member_cnt);
+		this.Member_income = Float.valueOf(Member_income);
+
+		this.Family_cnt = Float.valueOf(Family_cnt);
+		this.Family_income = Float.valueOf(Family_income);
+
+		this.Group_cnt = Float.valueOf(Group_cnt);
+		this.Group_income = Float.valueOf(Group_income);
 	}
 
 	public void getTableOfUnFullCapacityInDates(String month, String year, String wantedpark) {

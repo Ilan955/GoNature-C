@@ -73,6 +73,45 @@ public class setDiscountScreenController {
 	}
 
 	@FXML
+	void whenClickSubmitDiscount(ActionEvent event) {
+		// call WhenClickCalculate to calculate dates and daysBetween/
+		WhenClickCalculate(event);
+		String PrecantageLBL = DiscountPrecantageLBL.getText();
+
+		// check valid daysBetween && PrecantageLBL/
+		if (diff_days < 0 || PrecantageLBL.equals("")) { // show popUp message
+			Alert a = new Alert(AlertType.NONE, "All fields are required\n Or Duration time is invalid");
+			a.setAlertType(AlertType.ERROR);
+			a.show();
+			return;
+		} else {
+			float precentage = Float.valueOf(PrecantageLBL);
+			if (precentage <= 0 || precentage >= 1) {
+				Alert a = new Alert(AlertType.NONE, "Discount precentage must be between 0.1 - 0.9");
+				a.setAlertType(AlertType.ERROR);
+				a.show();
+				return;
+			}
+			String parkName = ClientUI.employeeController.getParkName();
+
+			ClientUI.discountController.setManagerDiscount(from, to, precentage, parkName);
+		}
+
+		/* change screen if success */
+		if (ClientUI.discountController.setManagerDiscount_flag) {
+			Alert a = new Alert(AlertType.NONE, "Discount was sent to D.M");
+			a.setAlertType(AlertType.CONFIRMATION);
+			a.show();
+			WhenClickCancel(event); // go back to ParkManger.fxml screen
+
+		} else {
+			Alert a = new Alert(AlertType.NONE, "Sql error!!!");
+			a.setAlertType(AlertType.ERROR);
+			a.show();
+		}
+	}
+
+	@FXML
 	void WhenClickCancel(ActionEvent event) {
 
 		// go back to manager main menu
@@ -91,36 +130,4 @@ public class setDiscountScreenController {
 
 	}
 
-	@FXML
-	void whenClickSubmitDiscount(ActionEvent event) {
-		// call WhenClickCalculate to calculate dates and daysBetween/
-		WhenClickCalculate(event);
-		String PrecantageLBL = DiscountPrecantageLBL.getText();
-
-		// check valid daysBetween && PrecantageLBL/
-		if (diff_days < 0 || PrecantageLBL.equals("")) { // show popUp message
-			Alert a = new Alert(AlertType.NONE, "All fields are required\n Or Duration time is invalid");
-			a.setAlertType(AlertType.ERROR);
-			a.show();
-			return;
-		} else {
-			float precentage = Float.valueOf(PrecantageLBL);
-			String parkName = "?";// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-
-			ClientUI.discountController.setManagerDiscount(from, to, precentage, parkName);
-		}
-		// change screen if success
-
-		if (ClientUI.discountController.setManagerDiscount_flag) {
-			Alert a = new Alert(AlertType.NONE, "Discount was sent to D.M");
-			a.setAlertType(AlertType.CONFIRMATION);
-			a.show();
-			WhenClickCancel(event); // go back to ParkManger.fxml screen
-
-		} else {
-			Alert a = new Alert(AlertType.NONE, "Sql error!!!");
-			a.setAlertType(AlertType.ERROR);
-			a.show();
-		}
-	}
 }
