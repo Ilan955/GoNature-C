@@ -42,6 +42,7 @@ public class cancelGraphScreen implements Initializable{
 		 @FXML
 		    void whenClickExit(ActionEvent event) {
 			 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			 
 			 stage.close();
 		    }
 

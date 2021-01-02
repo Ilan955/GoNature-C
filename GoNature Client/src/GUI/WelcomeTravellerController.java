@@ -2,6 +2,7 @@ package GUI;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 import Client.ClientUI;
@@ -12,9 +13,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.fxml.FXML;
@@ -43,17 +46,19 @@ public class WelcomeTravellerController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		String typ = ClientUI.userController.traveller.getType();
-		if (typ.equals("") || typ.equals("preOrderTraveller") || typ.equals("Traveller"))
-			btnExistingorders.setVisible(false);
-		String first = ClientUI.userController.traveller.getFirstName();
-		String last = ClientUI.userController.traveller.getLastName();
+		//String typ = ClientUI.userController.traveller.getType();
+		//if (typ.equals("") || typ.equals("preOrderTraveller") || typ.equals("Traveller"))
+			//btnExistingorders.setVisible(false);
+		//String first = ClientUI.userController.traveller.getFirstName();
+		//String last = ClientUI.userController.traveller.getLastName();
+		String first = "Mozes";
+		String last = "Erh";
 		StringBuffer name = new StringBuffer();
 		name.append(first);
 		name.append(" ");
 		name.append(last);
 		String tName = name.toString();
-
+		String typ="";
 		if (first.equals("Traveller")) {
 			userNamelb.setText("Traveller");
 			if (typ.equals("")) {
@@ -61,12 +66,32 @@ public class WelcomeTravellerController implements Initializable {
 				TypeLBL.setText("");
 			} else {
 				userNamelb.setText(tName);
-				TypeLBL.setText(ClientUI.userController.traveller.getType());
+				//TypeLBL.setText(ClientUI.userController.traveller.getType());
+				TypeLBL.setText("Check");
 			}
 		} else {
 			userNamelb.setText(tName);
-			TypeLBL.setText(ClientUI.userController.traveller.getType());
+			//TypeLBL.setText(ClientUI.userController.traveller.getType());
+			TypeLBL.setText("Check");
 		}
+		
+		/*
+		 * will check if the traveller have orders for tomorrow.
+		 * if he is having them, will pop up a alert message saying he need to approve the orders, in the "ExisitingOrders" section.
+		 */
+		LocalDate tomorrow = LocalDate.now();
+		tomorrow=tomorrow.plusDays(1);
+		if(ClientUI.orderController.havingAlert(tomorrow,Integer.toString(4))) {
+			ClientUI.orderController.need_alert=false;
+			Alert a = new Alert(AlertType.INFORMATION,"Good news! \nTomorrow you having a trip with us!\nplease make sure to approve your order in the 'Show exisitng orders' section!\nThank you and have fun with us!"); 
+			 a.setTitle("UpcomingVisits");
+			 a.setHeaderText("You have Upcoming visits"); 
+			 a.show();
+			 
+		}
+		
+		
+		
 	}
 
 	@FXML
