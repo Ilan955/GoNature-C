@@ -37,7 +37,6 @@ public class cancelGraphScreen implements Initializable {
 			series1.getData().add(new XYChart.Data<>(k.getMonth() + "/" + k.getYear(), k.getCancelledOrders()));
 			series2.getData().add(new XYChart.Data<>(k.getMonth() + "/" + k.getYear(), k.getUncompleteOrders()));
 		}
-		chartBar.getData().addAll(series1, series2);
 	}
 
 	@FXML

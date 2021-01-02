@@ -44,7 +44,7 @@ public class OrderController {
 	public ObservableList<Data> aD = FXCollections.observableArrayList();
 	public ArrayList<CancelReportData> oR = new ArrayList<CancelReportData>();
 	public boolean isConfirm = true;
-
+	public boolean need_alert=false;
 	/*
 	 * This method will check with the db if there is a place in the park for this
 	 * time and date got if so, will create new order, and save it later in the DB.
@@ -161,6 +161,11 @@ public class OrderController {
 			break;
 		case "getDataForReport":
 			fillReportTableData(msg);
+		case "havingAlert":
+			if(msg[1].equals(""))
+				need_alert = false;
+			else
+				need_alert=true;
 			break;
 
 		}
@@ -196,9 +201,10 @@ public class OrderController {
 		if (!(ordersArray[1].equals("Done"))) {
 			while (!(ordersArray[counter].equals("Done"))) {
 				d = new Data(ordersArray[counter], ordersArray[counter + 1], ordersArray[counter + 2],
-						ordersArray[counter + 3], ordersArray[counter + 4], ordersArray[counter + 5]);
+						ordersArray[counter + 3], ordersArray[counter + 4], ordersArray[counter + 5],ordersArray[counter+6],ordersArray[counter+7]);
+			
 				ob.add(d);
-				counter += 6;
+				counter += 8;
 				check++;
 
 			}
@@ -298,7 +304,7 @@ public class OrderController {
 		// !!!!!!! NEED TO BE !!!!!!
 		// sb.append(t.getId());
 
-		sb.append("6");
+		sb.append("4");
 		sb.append(" ");
 		// !!!!!!! NEED TO BE !!!!!!
 		// sb.append(t.getTYpe());
@@ -339,6 +345,7 @@ public class OrderController {
 	 * the current person
 	 */
 	public void getExsistingOrders() {
+		ob.clear();
 		StringBuffer sb = new StringBuffer();
 		sb.append("getExsistingOrders");
 		sb.append(" ");
@@ -398,6 +405,36 @@ public class OrderController {
 		sb.append(" ");
 		sb.append(toDate.toString());
 		ClientUI.chat.accept(sb.toString());
+	}
+	
+	/*
+	 * method that will check if tomorrow there will be any order
+	 * this is not counting how many orders, its just check if there are some
+	 * this method will be used in the welcome traveller initialize, and if it will be true, it will pop up a message
+	 * saying he need to confirm his orders that are going to be tomorrow
+	 */
+	
+	public boolean havingAlert(LocalDate tomorrow,String ID) {
+		StringBuffer sb= new StringBuffer();
+		sb.append("havingAlert");
+		sb.append(" ");
+		sb.append(tomorrow.toString());
+		sb.append(" ");
+		sb.append(ID);
+		ClientUI.chat.accept(sb.toString());
+		if(need_alert)
+			return true;
+		return false;
+		
+	}
+
+	public void confirmAlert(String id) {
+		StringBuffer sb= new StringBuffer();
+		sb.append("confirmAlert");
+		sb.append(" ");
+		sb.append(id);
+		ClientUI.chat.accept(sb.toString());
+		
 	}
 
 }

@@ -1,11 +1,6 @@
 package GUI;
-<<<<<<< HEAD
-=======
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
->>>>>>> branch 'Bar_Branch2_Client' of https://github.com/Ilan955/GoNature-C.git
+
 
 import Client.ClientUI;
 import Entities.Order;

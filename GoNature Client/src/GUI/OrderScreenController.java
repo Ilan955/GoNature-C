@@ -6,6 +6,7 @@ import Entities.Person;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -116,13 +117,15 @@ public class OrderScreenController implements Initializable {
 			DateLbl.setValue(o.getDateOfVisit());
 			NumOfVisotrsLbl.setText(Integer.toString(o.getNumberOfVisitors()));
 			ClientUI.orderController.isConfirm = true;
-
 		}
 	}
 
 	@FXML
 	void WhenClickCalculatePriceBtn(ActionEvent event) {
-
+		int numOfVisitors = Integer.parseInt(NumOfVisotrsLbl.getText());
+		ClientUI.discountController.getTotalPrice("FamilyMember", numOfVisitors, "FutreOrder", "True");
+		PriceLbl.setText(new DecimalFormat("##.##").format(ClientUI.discountController.getFinalPriceWithoutDM()));
+		ClientUI.discountController.setFinalPrice(0);
 	}
 
 	@FXML
