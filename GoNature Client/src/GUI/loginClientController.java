@@ -35,7 +35,7 @@ public class loginClientController {
 		Scene scene = new Scene(root);
 		primaryStage.sizeToScene();
 		Application.setUserAgentStylesheet(Application.STYLESHEET_MODENA);
-	    StyleManager.getInstance().addUserAgentStylesheet("GUI/css/WelcomeAll.css");
+		StyleManager.getInstance().addUserAgentStylesheet("GUI/css/WelcomeAll.css");
 		primaryStage.setTitle("Prototype");
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -53,6 +53,7 @@ public class loginClientController {
 		ClientUI.set(s, port);
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		Parent root = FXMLLoader.load(getClass().getResource("WelcomeAndLoginScreen.fxml"));
+
 		Scene scene = new Scene(root);
 		stage.getScene().getWindow().sizeToScene();
 		stage.setTitle("Welcome");
@@ -66,7 +67,5 @@ public class loginClientController {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		stage.hide();
 	}
-	
-	
 
 }

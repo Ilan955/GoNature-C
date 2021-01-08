@@ -19,7 +19,6 @@ import GUI.WelcomeAndLoginController;
 import GUI.WelcomeTravellerController;
 import GUI.baseGuiController;
 import GUI.loginClientController;
-
 import javafx.application.Application;
 import javafx.stage.Stage;
 

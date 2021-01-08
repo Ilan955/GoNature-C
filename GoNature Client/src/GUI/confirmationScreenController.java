@@ -12,8 +12,6 @@
 
 package GUI;
 
-
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
@@ -36,123 +34,123 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 public class confirmationScreenController implements Initializable {
-	/**IdOvTravelerLb - Label for IdOvTravelerLb*/
-  @FXML
-  private Label IdOvTravelerLb;
-  /**WantedParkLbl - Label for WantedParkLbl*/
-  @FXML
-  private Label WantedParkLbl;
-  /**DateLbl - Label for DateLbl*/
+	/** IdOvTravelerLb - Label for IdOvTravelerLb */
+	@FXML
+	private Label IdOvTravelerLb;
+	/** WantedParkLbl - Label for WantedParkLbl */
+	@FXML
+	private Label WantedParkLbl;
+	/** DateLbl - Label for DateLbl */
 
-  @FXML
-  private Label DateLbl;
-  /**TimeLbl - Label for TimeLbl*/
-  @FXML
-  private Label TimeLbl;
-  /**EmailLbl - Label for EmailLbl*/
-  @FXML
-  private Label EmailLbl;
-  /**PhoneLbl - Label for PhoneLbl*/
-  @FXML
-  private Label PhoneLbl;
-  /**NumVisitLlbl - Label for NumVisitLlbl*/
-  @FXML
-  private Label NumVisitLlbl;
+	@FXML
+	private Label DateLbl;
+	/** TimeLbl - Label for TimeLbl */
+	@FXML
+	private Label TimeLbl;
+	/** EmailLbl - Label for EmailLbl */
+	@FXML
+	private Label EmailLbl;
+	/** PhoneLbl - Label for PhoneLbl */
+	@FXML
+	private Label PhoneLbl;
+	/** NumVisitLlbl - Label for NumVisitLlbl */
+	@FXML
+	private Label NumVisitLlbl;
 
-  /**PriceLbl - Label for PriceLbl*/
+	/** PriceLbl - Label for PriceLbl */
 	@FXML
 	private Label PriceLbl;
 
+	/**
+	 * Description of setValues() Setting the values of the confirmation based on
+	 * what was set in the order and what set for the traveler who made the order
+	 * 
+	 * @return void
+	 */
+	public void setValues() {
+		Order o = ClientUI.orderController.order;
 
-  /** Description of setValues()
-   * Setting the values of the confirmation based on what was set in the order and what set for the traveler who made the order
-   * @return void
-   */
-  public void setValues() {
-    Order o = ClientUI.orderController.order;
+		WantedParkLbl.setText(o.getWantedPark());
+		DateLbl.setText(o.getDateOfVisit().toString());
+		TimeLbl.setText(o.getTimeInPark().toString());
+		EmailLbl.setText(ClientUI.orderController.getEmail());
+		PhoneLbl.setText(ClientUI.orderController.getPhone());
+		NumVisitLlbl.setText(Integer.toString(o.getNumberOfVisitors()));
+		PriceLbl.setText(Float.toString(o.getTotalPrice()));
+	}
 
-    WantedParkLbl.setText(o.getWantedPark());
-    DateLbl.setText(o.getDateOfVisit().toString());
-    TimeLbl.setText(o.getTimeInPark().toString());
-    EmailLbl.setText(ClientUI.orderController.getEmail());
-    PhoneLbl.setText(ClientUI.orderController.getPhone());
-    NumVisitLlbl.setText(Integer.toString(o.getNumberOfVisitors()));
-    PriceLbl.setText(Float.toString(o.getTotalPrice()));
-  }
-  
-  /**
-	 * This method responislbe of showing an alert
-	 * when want to close the application.
+	/**
+	 * This method responislbe of showing an alert when want to close the
+	 * application.
+	 * 
 	 * @param event
 	 */
-	  @FXML
-	    void WhenClickExitBtn(MouseEvent event) {
-		  Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-		  alert.setTitle("Exit");
-		  alert.setHeaderText("Are you sure you want to exit the application?");
-		  alert.setResizable(false);
-		  alert.setContentText("Select yes if you want, or not if you want to get back!");
-		  ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Yes");
-		  ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("No");
-		  Optional<ButtonType> result =  alert.showAndWait();
-		  if(!result.isPresent())
-		    alert.close();
-		  else if(result.get() == ButtonType.OK) { 
-			  ClientUI.LogOutUtility.logOutTraveller();
-			  Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-				stage.close();
-		  }   
-		  else if(result.get() == ButtonType.CANCEL)
-			  alert.close();
-	    }
-	  
-	  
+	@FXML
+	void WhenClickExitBtn(MouseEvent event) {
+		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+		alert.setTitle("Exit");
+		alert.setHeaderText("Are you sure you want to exit the application?");
+		alert.setResizable(false);
+		alert.setContentText("Select yes if you want, or not if you want to get back!");
+		((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Yes");
+		((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("No");
+		Optional<ButtonType> result = alert.showAndWait();
+		if (!result.isPresent())
+			alert.close();
+		else if (result.get() == ButtonType.OK) {
+			ClientUI.LogOutUtility.logOutTraveller();
+			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			stage.close();
+		} else if (result.get() == ButtonType.CANCEL)
+			alert.close();
+	}
 
-  /** Description initialize(URL location, ResourceBundle resources)
-   *Showing the information for the user
-   *the information includes all the data of the order
-   *@return void
-   */
-  @Override
-  public void initialize(URL location, ResourceBundle resources) {
-    setValues();
-  }
+	/**
+	 * Description initialize(URL location, ResourceBundle resources) Showing the
+	 * information for the user the information includes all the data of the order
+	 * 
+	 * @return void
+	 */
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		setValues();
+	}
 
-  /**
-   * Description initialize(URL location, ResourceBundle resources)
-   * when the user will click on done, the system will:
-   * 		will insert the order into DB
-   * 		will delete the current order from the "o" value
-   * @throws IOException
-   * @return void
-   */
+	/**
+	 * Description initialize(URL location, ResourceBundle resources) when the user
+	 * will click on done, the system will: will insert the order into DB will
+	 * delete the current order from the "o" value
+	 * 
+	 * @throws IOException
+	 * @return void
+	 */
 
-  @FXML
-  void WhenClickDoneBtn(ActionEvent event) throws IOException {
-    ClientUI.orderController.confirmOrder();
-    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    Parent root = FXMLLoader.load(
-      getClass().getResource("WelcomeTraveller.fxml")
-    );
-    Scene scene = new Scene(root);
-    stage.setTitle("Prototyp");
-    stage.setScene(scene);
-    stage.show();
-  }
+	@FXML
+	void WhenClickDoneBtn(ActionEvent event) throws IOException {
+		ClientUI.orderController.confirmOrder();
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		Parent root = FXMLLoader.load(getClass().getResource("WelcomeTraveller.fxml"));
+		Scene scene = new Scene(root);
+		stage.setTitle("Prototyp");
+		stage.setScene(scene);
+		stage.show();
+	}
 
-  /**Description of whenClickBackBtn(ActionEvent event) throws IOException 
-   * if the user click back, he will need to fill the form again
-   * with the details from here
-   * @return void
-   */
-  @FXML
-  void whenClickBackBtn(ActionEvent event) throws IOException {
-    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    Parent root = FXMLLoader.load(getClass().getResource("NewOrder.fxml"));
-    Scene scene = new Scene(root);
-    stage.setTitle("Prototyp");
-    stage.setScene(scene);
+	/**
+	 * Description of whenClickBackBtn(ActionEvent event) throws IOException if the
+	 * user click back, he will need to fill the form again with the details from
+	 * here
+	 * 
+	 * @return void
+	 */
+	@FXML
+	void whenClickBackBtn(ActionEvent event) throws IOException {
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		Parent root = FXMLLoader.load(getClass().getResource("NewOrder.fxml"));
+		Scene scene = new Scene(root);
+		stage.setTitle("Prototyp");
+		stage.setScene(scene);
 
-    stage.show();
-  }
+		stage.show();
+	}
 }

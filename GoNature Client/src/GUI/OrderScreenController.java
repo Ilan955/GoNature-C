@@ -24,7 +24,6 @@ import java.util.ResourceBundle;
 
 import Client.ClientUI;
 import Entities.Order;
-import Entities.Person;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -35,9 +34,9 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -47,40 +46,40 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class OrderScreenController implements Initializable {
-	/**WantedParkCB - ComboBox for start*/
+	/** WantedParkCB - ComboBox for start */
 	@FXML
 	private ComboBox WantedParkCB;
-	/**DateLbl - DatePicker for Date of visit*/
+	/** DateLbl - DatePicker for Date of visit */
 	@FXML
 	private DatePicker DateLbl;
-	/**NumOfVisotrsLbl - TextField for Number of visitors*/
+	/** NumOfVisotrsLbl - TextField for Number of visitors */
 	@FXML
 	private TextField NumOfVisotrsLbl;
-	/**TimeOfVisitCB - ComboBox for Time*/
+	/** TimeOfVisitCB - ComboBox for Time */
 	@FXML
 	private ComboBox TimeOfVisitCB;
-	/**EmailLbl - TextField for Email*/
+	/** EmailLbl - TextField for Email */
 	@FXML
 	private TextField EmailLbl;
-	/**PhoneNumberLbl - TextField for Phone*/
+	/** PhoneNumberLbl - TextField for Phone */
 	@FXML
 	private TextField PhoneNumberLbl;
-	/**IdOfViditorLbl - Label for Visitor ID*/
+	/** IdOfViditorLbl - Label for Visitor ID */
 	@FXML
 	private Label IdOfViditorLbl;
-	/**PriceLbl - Label for Price*/
+	/** PriceLbl - Label for Price */
 	@FXML
 	private Label PriceLbl;
 
-	/**listForParks - ObservableList for Park names*/
+	/** listForParks - ObservableList for Park names */
 	ObservableList<String> listForParks;
-	/**listForTimes - ObservableList for Times of the park*/
+	/** listForTimes - ObservableList for Times of the park */
 	ObservableList<String> listForTimes;
 
-	
-
-	/**Description of SetTimeParkCm() 
-	 * enter to the combo box the times from 8 Am to 12 Pm
+	/**
+	 * Description of SetTimeParkCm() enter to the combo box the times from 8 Am to
+	 * 12 Pm
+	 * 
 	 * @return void
 	 */
 	private void SetTimeParkCm() {
@@ -105,14 +104,14 @@ public class OrderScreenController implements Initializable {
 		listForTimes = FXCollections.observableArrayList(Times);
 		TimeOfVisitCB.setItems(listForTimes);
 	}
-  
 
 	// !!!!!!! NEED TO CHANGE ID BY THE USER CONTROLLER!!!!!
 	public void setIdOfMakingOrder() {
 		IdOfViditorLbl.setText("31198");
 	}
 
-	/** Description of initialize(URL arg0, ResourceBundle arg1) in Order screen
+	/**
+	 * Description of initialize(URL arg0, ResourceBundle arg1) in Order screen
 	 * initialize park times and dates, if the user came back from the confirmation
 	 * page, it will show on the screen all of his ditails that he already filled
 	 * 
@@ -120,7 +119,7 @@ public class OrderScreenController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		listForParks=clientLogic.inits.setWantedParkCB();
+		listForParks = clientLogic.inits.setWantedParkCB();
 		WantedParkCB.setItems(listForParks);
 		SetTimeParkCm();
 		setIdOfMakingOrder();
@@ -133,35 +132,35 @@ public class OrderScreenController implements Initializable {
 			ClientUI.orderController.isConfirm = true;
 		}
 	}
-	
+
 	/**
-	 * This method responislbe of showing an alert
-	 * when want to close the application.
+	 * This method responislbe of showing an alert when want to close the
+	 * application.
+	 * 
 	 * @param event
 	 */
-	  @FXML
-	    void WhenClickExitBtn(MouseEvent event) {
-		  Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-		  alert.setTitle("Exit");
-		  alert.setHeaderText("Are you sure you want to exit the application?");
-		  alert.setResizable(false);
-		  alert.setContentText("Select yes if you want, or not if you want to get back!");
-		  ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Yes");
-		  ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("No");
-		  Optional<ButtonType> result =  alert.showAndWait();
-		  if(!result.isPresent())
-		    alert.close();
-		  else if(result.get() == ButtonType.OK) { 
-			  ClientUI.LogOutUtility.logOutTraveller();
-			  Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-				stage.close();
-		  }   
-		  else if(result.get() == ButtonType.CANCEL)
-			  alert.close();
-	    }
-	  
-	  
-	/** Description of initialize(URL arg0, ResourceBundle arg1) in Order screen
+	@FXML
+	void WhenClickExitBtn(MouseEvent event) {
+		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+		alert.setTitle("Exit");
+		alert.setHeaderText("Are you sure you want to exit the application?");
+		alert.setResizable(false);
+		alert.setContentText("Select yes if you want, or not if you want to get back!");
+		((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Yes");
+		((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("No");
+		Optional<ButtonType> result = alert.showAndWait();
+		if (!result.isPresent())
+			alert.close();
+		else if (result.get() == ButtonType.OK) {
+			ClientUI.LogOutUtility.logOutTraveller();
+			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			stage.close();
+		} else if (result.get() == ButtonType.CANCEL)
+			alert.close();
+	}
+
+	/**
+	 * Description of initialize(URL arg0, ResourceBundle arg1) in Order screen
 	 * initialize park times and dates, if the user came back from the confirmation
 	 * page, it will show on the screen all of his ditails that he already filled
 	 * 
@@ -174,12 +173,12 @@ public class OrderScreenController implements Initializable {
 		PriceLbl.setText(new DecimalFormat("##.##").format(ClientUI.discountController.getFinalPriceWithoutDM()));
 		ClientUI.discountController.setFinalPrice(0);
 	}
-	/** Description of WhenClickNextBtn(ActionEvent event) in Order screen
-	 * 1. Check if the date is valid date (not before today)
-	 * 2. check if email and phone entered are valid
-	 * 3. check if can make order from the order controller method
-	 * 4. transfer the user to another stage based of if he can
-	 *  do an order or not
+
+	/**
+	 * Description of WhenClickNextBtn(ActionEvent event) in Order screen 1. Check
+	 * if the date is valid date (not before today) 2. check if email and phone
+	 * entered are valid 3. check if can make order from the order controller method
+	 * 4. transfer the user to another stage based of if he can do an order or not
 	 * 
 	 * @throws IOExcepton
 	 * @return void
@@ -191,12 +190,12 @@ public class OrderScreenController implements Initializable {
 			String[] res = temp.split(":");
 			LocalDate date = DateLbl.getValue();
 			LocalDate dateNow = LocalDate.now();
-			if(date.compareTo(dateNow)<0) {
-				Alert a = new Alert(AlertType.NONE, "The date already passed.\nYou can not pick a date that is already been.\nPlease try again!");
+			if (date.compareTo(dateNow) < 0) {
+				Alert a = new Alert(AlertType.NONE,
+						"The date already passed.\nYou can not pick a date that is already been.\nPlease try again!");
 				a.setAlertType(AlertType.ERROR);
 				a.show();
-			}
-			else {
+			} else {
 				String wanted = (String) WantedParkCB.getValue();
 				int numOfVisitors = Integer.parseInt(NumOfVisotrsLbl.getText());
 				Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -227,9 +226,9 @@ public class OrderScreenController implements Initializable {
 					stage.setTitle("Unapproved Order");
 					stage.setScene(scene);
 					stage.show();
-				}	
+				}
 			}
-			
+
 		} else {
 			Alert a = new Alert(AlertType.NONE, "Email or phone is incorrect!");
 			a.setAlertType(AlertType.ERROR);
@@ -238,10 +237,10 @@ public class OrderScreenController implements Initializable {
 		// System.out.println("Time: "+timeofVisit+" date: "+date+" wantedPark:
 		// "+wanted+" number of visit: "+numOfVisitors);
 	}
-	
-	
-	/** Description of WhenClickPreviusBtn(ActionEvent event) in Order screen
-	 *responislbe to get the traveller back to the welcome Traveller screen
+
+	/**
+	 * Description of WhenClickPreviusBtn(ActionEvent event) in Order screen
+	 * responislbe to get the traveller back to the welcome Traveller screen
 	 * 
 	 * @throws IOException
 	 * @return void

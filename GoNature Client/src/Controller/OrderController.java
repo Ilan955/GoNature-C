@@ -37,48 +37,61 @@ import javafx.stage.Stage;
 
 public class OrderController {
 	public Person t;
-	/**Instance of the current order of the traveller*/
+
+	/** Instance of the current order of the traveller */
+
 	public Order order;
-	/** valid - Parameter that is responsible for telling if can make order or not*/
+	/**
+	 * valid - Parameter that is responsible for telling if can make order or not
+	 */
 	public boolean valid = false;
 	/***/
 	ArrayList<String> mess = new ArrayList<String>();
-	/** currentEmail - Parameter containing the email of the traveller*/
+	/** currentEmail - Parameter containing the email of the traveller */
 	private String currentEmail;
-	/**currentPhone - Parameter containing the phone of the traveller*/
+	/** currentPhone - Parameter containing the phone of the traveller */
 	private String currentPhone;
-	/**n_order - flag indicates if the method can Make order need to creat new instance of Order or not*/
+	/**
+	 * n_order - flag indicates if the method can Make order need to creat new
+	 * instance of Order or not
+	 */
 	public boolean n_order = false;
-	/**isInDb - flag that responsible to cancel order from existing or from new order making*/
+	/**
+	 * isInDb - flag that responsible to cancel order from existing or from new
+	 * order making
+	 */
 	public boolean isInDb = false;
-	/**ReportMonth - Parameter to keep the month of the report needed*/
+	/** ReportMonth - Parameter to keep the month of the report needed */
 	private String ReportMonth;
-	/**ReportYear - Parameter to keep the year of the report needed*/
+	/** ReportYear - Parameter to keep the year of the report needed */
 	private String ReportYear;
-	/**alternativeDates - ArrayList containing alternative dates for the table*/
+	/** alternativeDates - ArrayList containing alternative dates for the table */
 	private ArrayList<String> alternativeDates = new ArrayList<String>();
-	/**ob - List that holds the Existing orders of the traveller*/
+	/** ob - List that holds the Existing orders of the traveller */
 	public ObservableList<Data> ob = FXCollections.observableArrayList();
-	/**aD - List that holds the Alternative dates of the traveller*/
+	/** aD - List that holds the Alternative dates of the traveller */
 	public ObservableList<Data> aD = FXCollections.observableArrayList();
-	/**oR - List that holds the data of the canceled report*/
+	/** oR - List that holds the data of the canceled report */
 	public ArrayList<CancelReportData> oR = new ArrayList<CancelReportData>();
 	/***/
 	public boolean isConfirm = true;
-	/**need_alert - Flag indicates if the traveller got alerted for order or not*/
+	/** need_alert - Flag indicates if the traveller got alerted for order or not */
 	public boolean need_alert = false;
 
-	/** Description canMakeOrder(LocalTime time, LocalDate dateOfVisit, String wantedPark, String type, int numOfVisitors)
-	 * This method will check with the db if there is a place in the park for this
-	 * time and date got if so, will create new order, and save it later in the DB.
-	 * will check first if there is an order for the current time
+	/**
+	 * Description canMakeOrder(LocalTime time, LocalDate dateOfVisit, String
+	 * wantedPark, String type, int numOfVisitors) This method will check with the
+	 * db if there is a place in the park for this time and date got if so, will
+	 * create new order, and save it later in the DB. will check first if there is
+	 * an order for the current time
 	 * 
-	 * @param time - The time of the wanted visit
-	 * @param dateOfVisit -  The date of the wanted visit
-	 * @param wantedPark - The park of the wanted visit
-	 * @param type - The type of the visitors who make the order
+	 * @param time          - The time of the wanted visit
+	 * @param dateOfVisit   - The date of the wanted visit
+	 * @param wantedPark    - The park of the wanted visit
+	 * @param type          - The type of the visitors who make the order
 	 * @param numOfVisitors - The number of visitors who want to create an order
-	 * @return void - this method checkout to the server, therfore not returning anything.
+	 * @return void - this method checkout to the server, therfore not returning
+	 *         anything.
 	 * 
 	 */
 	public void canMakeOrder(LocalTime time, LocalDate dateOfVisit, String wantedPark, String type, int numOfVisitors) {
@@ -149,12 +162,13 @@ public class OrderController {
 		sb.append(dateOfVisit.toString());
 		ClientUI.chat.accept(sb.toString());
 	}
-	
+
 	public void setPerson() {
-		this.t =ClientUI.userController.traveller;
+		this.t = ClientUI.userController.traveller;
 	}
 
-	/** Description of checkValidValues(String phone, String email)
+	/**
+	 * Description of checkValidValues(String phone, String email)
 	 * 
 	 * check if the phone and numbers are valid will check if the phone containing
 	 * 10 digits. will check if all the string of the phone is not a char but a
@@ -190,11 +204,12 @@ public class OrderController {
 		setPhone(phone);
 	}
 
-	/** Description gotMessage(String[] msg)
-	 * This method will be the connector from the data came from the server to this controller
+	/**
+	 * Description gotMessage(String[] msg) This method will be the connector from
+	 * the data came from the server to this controller
 	 * 
 	 * @param msg - String array that containing the msg that comes from the server.
-	 * @return void. 
+	 * @return void.
 	 * @throws IOException
 	 */
 	public void gotMessage(String[] msg) throws IOException {
@@ -219,11 +234,13 @@ public class OrderController {
 
 	}
 
-	/** Description fillReportTableData(String[] msg)
-	 * This method will create a table row for the report.
+	/**
+	 * Description fillReportTableData(String[] msg) This method will create a table
+	 * row for the report.
+	 * 
 	 * @param msg[1] - Number of canceled orders in the current month and year
 	 * @param msg[2] - Number of confirmed but not get to the park orders.
-	 * @return void 
+	 * @return void
 	 */
 	private void fillReportTableData(String[] msg) {
 		System.out.println(msg[1] + "This is the cancel Amount");
@@ -245,11 +262,12 @@ public class OrderController {
 
 	}
 
-	/** Description fillExsistingOrders(String[] ordersArray)
-	 * This method will get all the orderes from the DB and every order will be inserted
-	 * into a Data class, later, all of this datas instances will be entered into a 
-	 * observable list
-	 *  array[0]=methodName, array[1]=data
+	/**
+	 * Description fillExsistingOrders(String[] ordersArray) This method will get
+	 * all the orderes from the DB and every order will be inserted into a Data
+	 * class, later, all of this datas instances will be entered into a observable
+	 * list array[0]=methodName, array[1]=data
+	 * 
 	 * @param ordersArray
 	 */
 	private void fillExsistingOrders(String[] ordersArray) {
@@ -273,15 +291,18 @@ public class OrderController {
 
 	}
 
-	/** Description checkIfCanMakeOrder(String[] msg)
+	/**
+	 * Description checkIfCanMakeOrder(String[] msg)
 	 * 
 	 * This method get from the server all the numbers how many can enter how many
 	 * visitors overall in the gap if adding will make the maxVisit bigger, move to
-	 * unapproved order, if not, will put into the variable true, and make the order confirmed
+	 * unapproved order, if not, will put into the variable true, and make the order
+	 * confirmed
 	 * 
-	 * @param msg[1] - currentVisitors that allows
-	 * @param msg[2] - availableVisitors in the park
-	 * @param order.getNumberOfVisitors() - the visitors that want to get into the park
+	 * @param msg[1]                      - currentVisitors that allows
+	 * @param msg[2]                      - availableVisitors in the park
+	 * @param order.getNumberOfVisitors() - the visitors that want to get into the
+	 *                                    park
 	 * @return void
 	 */
 
@@ -311,11 +332,10 @@ public class OrderController {
 	public String getEmail() {
 		return currentEmail;
 	}
-	
-	
-	/** Description wantToCancel(Stage stage)
-	 * This method will transfer the traveller to a new screen that will ask the user if 
-	 * he want to cancel his order
+
+	/**
+	 * Description wantToCancel(Stage stage) This method will transfer the traveller
+	 * to a new screen that will ask the user if he want to cancel his order
 	 * 
 	 * @param stage - current stage that is in use
 	 * @return void
@@ -332,12 +352,12 @@ public class OrderController {
 
 	}
 
-	/** Description getAlternativeDates(LocalTime timeForVisit) 
+	/**
+	 * Description getAlternativeDates(LocalTime timeForVisit)
 	 * 
-	 * This method will be responislbe for adding the lternative 
-	 * dates for the current order into the observable array list
-	 * another method will take the data from the observable and
-	 * show it into the table
+	 * This method will be responislbe for adding the lternative dates for the
+	 * current order into the observable array list another method will take the
+	 * data from the observable and show it into the table
 	 * 
 	 * @param timeForVisit - the hour of the wanted alternative dates
 	 * @return void
@@ -370,14 +390,16 @@ public class OrderController {
 
 	}
 
-	/** Description of confirmOrder()
+	/**
+	 * Description of confirmOrder()
 	 * 
-	 * This method will be responsible for saving the order into the db
-	 * This method will not return anything worthy to the client
+	 * This method will be responsible for saving the order into the db This method
+	 * will not return anything worthy to the client
+	 * 
 	 * @return void
 	 */
 	public void confirmOrder() {
-
+		t = ClientUI.userController.traveller;
 		StringBuffer sb = new StringBuffer();
 		sb.append("confirmOrder");
 		sb.append(" ");
@@ -390,14 +412,17 @@ public class OrderController {
 		sb.append(" ");
 		sb.append(Float.toString(order.getTotalPrice()));
 		sb.append(" ");
-
 		// !!!!!!! NEED TO BE !!!!!!
-		 sb.append(t.getId());
-		//sb.append("4");
+
+		sb.append(t.getId());
+		// sb.append("4");
+
 		sb.append(" ");
 		// !!!!!!! NEED TO BE !!!!!!
-		 sb.append(t.getType());	
-		sb.append("F");
+
+		sb.append(t.getType());
+		// sb.append("F");
+
 		sb.append(" ");
 		sb.append(Integer.toString(order.getNumberOfVisitors()));
 		sb.append(" ");
@@ -406,13 +431,15 @@ public class OrderController {
 		ClientUI.chat.accept(sb.toString());
 
 	}
+
 	/**
-	 * Description of cancelOrder(String dateOfVisit, String wantedPark, String timeOfVisit)
-	 * This method will be responisble for canceling the order - chaning the order status to canceled in the DB
-	 * this method will that the type of the person from the traveller instance his type and ID.
+	 * Description of cancelOrder(String dateOfVisit, String wantedPark, String
+	 * timeOfVisit) This method will be responisble for canceling the order -
+	 * chaning the order status to canceled in the DB this method will that the type
+	 * of the person from the traveller instance his type and ID.
 	 * 
 	 * @param dateOfVisit - the date of the visit that need to be canceled
-	 * @param wantedPark - the wanted park of the visit that need to be canceled
+	 * @param wantedPark  - the wanted park of the visit that need to be canceled
 	 * @param timeOfVisit - the time of the visit that need to be canceled.
 	 * @return void
 	 */
@@ -438,10 +465,12 @@ public class OrderController {
 
 	}
 
-	/** Description of etExsistingOrders()
+	/**
+	 * Description of etExsistingOrders()
 	 * 
 	 * This method will fill the observable value with all the exsisting orders of
 	 * the current person
+	 * 
 	 * @return void
 	 */
 	public void getExsistingOrders() {
@@ -454,15 +483,18 @@ public class OrderController {
 
 	}
 
-	/** Descritpion of setEnterOrder(String Id, String wantedPark, String dateOfVisit, String TimeInPark)
-	 * Method that will change the status of the order of the traveller from
-	 * confirmed to entered meaning the traveller is now in the park
-	 * @param Id - the id of the Traveller
-	 * @param  wantedPark - the Wanted park name 
-	 * @param dateOfVisit - the date of the visit of the order
-	 * @param TimeInPark - the Time of the visit of the order
+	/**
+	 * Descritpion of setEnterOrder(String Id, String wantedPark, String
+	 * dateOfVisit, String TimeInPark) Method that will change the status of the
+	 * order of the traveller from confirmed to entered meaning the traveller is now
+	 * in the park
 	 * 
-	 *@return void
+	 * @param Id          - the id of the Traveller
+	 * @param wantedPark  - the Wanted park name
+	 * @param dateOfVisit - the date of the visit of the order
+	 * @param TimeInPark  - the Time of the visit of the order
+	 * 
+	 * @return void
 	 */
 	public void setEnterOrder(String Id, String wantedPark, String dateOfVisit, String TimeInPark) {
 
@@ -481,9 +513,12 @@ public class OrderController {
 		ClientUI.chat.accept(sb.toString());
 
 	}
-	/** Description ChangeToWaitOrder(Order getOr)
-	 * This method will change the order that the user just made 
-	 * to wait, because he probably can't enter the park right now.
+
+	/**
+	 * Description ChangeToWaitOrder(Order getOr) This method will change the order
+	 * that the user just made to wait, because he probably can't enter the park
+	 * right now.
+	 * 
 	 * @param getOr
 	 * @reutnr void
 	 */
@@ -498,18 +533,19 @@ public class OrderController {
 		sb.append(getOr.getWantedPark());
 		sb.append(" ");
 		sb.append(t.getType());
-		//sb.append("4");
+		// sb.append("4");
 		sb.append(" ");
 		ClientUI.chat.accept(sb.toString());
 
 	}
 
 	/**
-	 * Description of getDataForReport(LocalDate fromDate, LocalDate toDate)
-	 * This method will be responsible to get the data to the report based on the 
-	 * 2 parameters that he get, that are the limits of the reports
+	 * Description of getDataForReport(LocalDate fromDate, LocalDate toDate) This
+	 * method will be responsible to get the data to the report based on the 2
+	 * parameters that he get, that are the limits of the reports
+	 * 
 	 * @param fromDate - date that the report will start from
-	 * @param toDate - date that the report will end 
+	 * @param toDate   - date that the report will end
 	 * @return void
 	 */
 	public void getDataForReport(LocalDate fromDate, LocalDate toDate) {
@@ -524,14 +560,15 @@ public class OrderController {
 		ClientUI.chat.accept(sb.toString());
 	}
 
-	/** Description of havingAlert(LocalDate tomorrow, String ID)
-	 * method that will check if tomorrow there will be any order this is not
-	 * counting how many orders, its just check if there are some this method will
-	 * be used in the welcome traveller initialize, and if it will be true, it will
-	 * pop up a message saying he need to confirm his orders that are going to be
-	 * tomorrow
+	/**
+	 * Description of havingAlert(LocalDate tomorrow, String ID) method that will
+	 * check if tomorrow there will be any order this is not counting how many
+	 * orders, its just check if there are some this method will be used in the
+	 * welcome traveller initialize, and if it will be true, it will pop up a
+	 * message saying he need to confirm his orders that are going to be tomorrow
+	 * 
 	 * @param tomorrow - the date of tomorrow
-	 * @param Id - the Id of the user
+	 * @param Id       - the Id of the user
 	 * @return boolean - true or false if the user already got the message of not
 	 */
 
@@ -549,9 +586,10 @@ public class OrderController {
 
 	}
 
-	/** confirmAlert(String id)
-	 * This method will just send to the server
-	 * that the alert message already appeard for him 
+	/**
+	 * confirmAlert(String id) This method will just send to the server that the
+	 * alert message already appeard for him
+	 * 
 	 * @param id - the ID of the user that get into the system
 	 * @return void
 	 */

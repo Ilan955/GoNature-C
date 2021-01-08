@@ -27,25 +27,41 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
+/**
+ * This GUI is presenting for employee department the casual traveler requests
+ * of enter park the employee can see all the requests this day and to choose
+ * who can enter park by checking if the park is full if the park is full - he
+ * will get a message and if the park isn't full - he can choose if he wants to
+ * approve the request or to refused it.
+ * 
+ * @author Liad Yadin
+ *
+ */
 public class RequestsEnterTravellerController implements Initializable {
-
+	/** TableView for the requests */
 	@FXML
 	private TableView<Data> requestsTravellerTable;
-
+	/** column for ID */
 	@FXML
 	private TableColumn<Data, String> IDlbl;
-
+	/** column for request time */
 	@FXML
 	private TableColumn<Data, String> timeLbl;
-
+	/** column for number of visitors */
 	@FXML
 	private TableColumn<Data, String> numOfVisitLbl;
-
+	/** Lable for date */
 	@FXML
 	private Label DateLbl;
-
+	/**
+	 * boolean variable for check if park is full false- park isn't full true-park
+	 * is full
+	 */
 	private boolean isFull = false;
 
+	/**
+	 * initialize all the data in the screen and presenting the table of requests
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		ClientUI.requestsController.ob.clear();
@@ -55,38 +71,45 @@ public class RequestsEnterTravellerController implements Initializable {
 		LocalDate myDate = LocalDate.now();
 		DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("HH:mm");
 		this.DateLbl.setText(myDate.toString());
-		ClientUI.requestsController.getRequestsTravellerOfEnterPark("Dan"); // change
+		ClientUI.requestsController.getRequestsTravellerOfEnterPark(ClientUI.employeeController.getParkName());
 		requestsTravellerTable.setItems(ClientUI.requestsController.ob);
 		addButtonToTable();
 
 	}
-	
+
 	/**
-	 * This method responislbe of showing an alert
-	 * when want to close the application.
+	 * This method responislbe of showing an alert when want to close the
+	 * application.
+	 * 
 	 * @param event
 	 */
-	  @FXML
-	    void WhenClickExitBtn(MouseEvent event) {
-		  Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-		  alert.setTitle("Exit");
-		  alert.setHeaderText("Are you sure you want to exit the application?");
-		  alert.setResizable(false);
-		  alert.setContentText("Select yes if you want, or not if you want to get back!");
-		  ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Yes");
-		  ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("No");
-		  Optional<ButtonType> result =  alert.showAndWait();
-		  if(!result.isPresent())
-		    alert.close();
-		  else if(result.get() == ButtonType.OK) { 
-			  ClientUI.LogOutUtility.logOutEmployee();
-			  Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-				stage.close();
-		  }   
-		  else if(result.get() == ButtonType.CANCEL)
-			  alert.close();
-	    }
+	@FXML
+	void WhenClickExitBtn(MouseEvent event) {
+		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+		alert.setTitle("Exit");
+		alert.setHeaderText("Are you sure you want to exit the application?");
+		alert.setResizable(false);
+		alert.setContentText("Select yes if you want, or not if you want to get back!");
+		((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Yes");
+		((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("No");
+		Optional<ButtonType> result = alert.showAndWait();
+		if (!result.isPresent())
+			alert.close();
+		else if (result.get() == ButtonType.OK) {
+			ClientUI.LogOutUtility.logOutEmployee();
+			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			stage.close();
+		} else if (result.get() == ButtonType.CANCEL)
+			alert.close();
+	}
 
+	/**
+	 * this method will add button for all row in the table (Action name) for check
+	 * availability enter park this button will do number of actions: 1. check if
+	 * there is a place in park by "parkisfull" method 2. update full capacity table
+	 * for usage report 3. present the right window when the employee check
+	 * availability
+	 */
 	private void addButtonToTable() {
 		TableColumn<Data, Void> colBtn = new TableColumn("Action");
 		LocalDate myDate = LocalDate.now();
@@ -105,9 +128,19 @@ public class RequestsEnterTravellerController implements Initializable {
 								String ID = data.getID();
 								String park = data.getPark();
 								int numOfvisit = Integer.parseInt(data.getNumOfVisit());
+								int maxUpdateCurrentVisitors;
+								maxUpdateCurrentVisitors = ClientUI.parkController.getCurrentVisitors(park)
+										+ ClientUI.parkController.getCurrentUnexpectedVisitors(park) + numOfvisit;
 								if (!ClientUI.parkController.parkIsFull(park, numOfvisit)) {
-									if (!ClientUI.parkController.IfgetDateExistInDB())
-										ClientUI.parkController.enterDateofFullCapcityPark(park, myDate, 0);
+									if (!ClientUI.parkController.IfgetDateExistInDB(park)) {
+										ClientUI.parkController.enterDateofFullCapcityPark(park, myDate, 0,
+												ClientUI.parkController.getMaxVisitors(park), maxUpdateCurrentVisitors);
+									} else {
+										if (ClientUI.parkController
+												.getMaxcurrentVisitorsPerDay(park) < maxUpdateCurrentVisitors)
+											ClientUI.parkController.changeMaxcurrentAmountOfVisitorsForCapacityPark(
+													park, maxUpdateCurrentVisitors);
+									}
 									Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 									FXMLLoader loader = new FXMLLoader();
 									Pane root;
@@ -120,7 +153,7 @@ public class RequestsEnterTravellerController implements Initializable {
 								} else {
 									ClientUI.requestsController.changeStatusForCasualTraveller(0, ID, park);
 
-									if (ClientUI.parkController.getCurrentVisitors(park)
+									if (ClientUI.parkController.getCurrentVisitors(park) // park is full
 											+ ClientUI.parkController.getCurrentUnexpectedVisitors(
 													park) == ClientUI.parkController.getMaxVisitors(park)) {
 										ClientUI.parkController.updateStatusForCapacityParkToFull(park);
@@ -161,10 +194,15 @@ public class RequestsEnterTravellerController implements Initializable {
 		requestsTravellerTable.getColumns().add(colBtn);
 
 	}
-	
 
-    @FXML
-    void WhenClickedOnPreviousBtn(ActionEvent event) throws IOException {
+	/**
+	 * this method will return the previous screen
+	 * 
+	 * @param event- click previous button
+	 * @throws IOException
+	 */
+	@FXML
+	void WhenClickedOnPreviousBtn(ActionEvent event) throws IOException {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		FXMLLoader loader = new FXMLLoader();
 		Pane root = loader.load(getClass().getResource("WelcomeEmployee.fxml").openStream());
@@ -172,5 +210,5 @@ public class RequestsEnterTravellerController implements Initializable {
 		stage.setTitle("New order");
 		stage.setScene(scene);
 		stage.show();
-    }
+	}
 }

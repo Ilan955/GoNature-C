@@ -130,7 +130,7 @@ public class SignUpScreenController implements Initializable {
 			a.show();
 			regFlag = false;
 		}
-		
+
 		// here we will send the data we got from the form
 		ClientUI.signUpController.checkExist(id);
 		if (ClientUI.signUpController.checker && regFlag == true) {

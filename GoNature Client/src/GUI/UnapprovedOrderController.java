@@ -34,31 +34,33 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class UnapprovedOrderController implements Initializable {
-	/**enterWaitingList - Button*/
+	/** enterWaitingList - Button */
 	@FXML
 	private Button enterWaitingList;
-	/**ShowAlternativeDates - Button*/
+	/** ShowAlternativeDates - Button */
 	@FXML
 	private Button ShowAlternativeDates;
-	/**cancelOrder - Button*/
+	/** cancelOrder - Button */
 	@FXML
 	private Button cancelOrder;
-	/**ParkNameLbl - Lable*/
+	/** ParkNameLbl - Lable */
 	@FXML
 	private Label ParkNameLbl;
-	/**DateVisitLbl - Lable*/
+	/** DateVisitLbl - Lable */
 	@FXML
 	private Label DateVisitLbl;
-	/**NumberVisitorsLbl - Lable*/
+	/** NumberVisitorsLbl - Lable */
 	@FXML
 	private Label NumberVisitorsLbl;
-	/**IdNumberLbl - Lable*/
+	/** IdNumberLbl - Lable */
 	@FXML
 	private Label IdNumberLbl;
-	
-	/** Description of WhenClickCancellBtn(ActionEvent event) throws IOException
+
+	/**
+	 * Description of WhenClickCancellBtn(ActionEvent event) throws IOException
 	 * 
 	 * Method referring to the cancelation screen transfer in the OrderController
+	 * 
 	 * @return void
 	 * @throws IOException
 	 */
@@ -68,7 +70,8 @@ public class UnapprovedOrderController implements Initializable {
 		ClientUI.orderController.wantToCancel(stage);
 	}
 
-	/** Description of WhenClickEnterWaitingListBtn(ActionEvent event)
+	/**
+	 * Description of WhenClickEnterWaitingListBtn(ActionEvent event)
 	 * 
 	 * when click enter waiting list : 1. need to enter the order into the Order
 	 * table in the Db 2. need to change the status of the order to waiting from
@@ -83,9 +86,11 @@ public class UnapprovedOrderController implements Initializable {
 		ClientUI.orderController.confirmOrder();
 		ClientUI.orderController.ChangeToWaitOrder(tmp);
 	}
+
 	/**
-	 * Description of WhenClickShowBtn(ActionEvent event) throws IOException
-	 * This method will transfer the client into new stage of alternative dates
+	 * Description of WhenClickShowBtn(ActionEvent event) throws IOException This
+	 * method will transfer the client into new stage of alternative dates
+	 * 
 	 * @param event
 	 * @throws IOException
 	 */
@@ -100,38 +105,38 @@ public class UnapprovedOrderController implements Initializable {
 		stage.show();
 
 	}
-	
+
 	/**
-	 * This method responislbe of showing an alert
-	 * when want to close the application.
+	 * This method responislbe of showing an alert when want to close the
+	 * application.
+	 * 
 	 * @param event
 	 */
-	  @FXML
-	    void WhenClickExitBtn(MouseEvent event) {
-		  Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-		  alert.setTitle("Exit");
-		  alert.setHeaderText("Are you sure you want to exit the application?");
-		  alert.setResizable(false);
-		  alert.setContentText("Select yes if you want, or not if you want to get back!");
-		  ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Yes");
-		  ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("No");
-		  Optional<ButtonType> result =  alert.showAndWait();
-		  if(!result.isPresent())
-		    alert.close();
-		  else if(result.get() == ButtonType.OK) { 
-			  Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-				stage.close();
-		  }   
-		  else if(result.get() == ButtonType.CANCEL)
-			  alert.close();
-	    }
-	  
+	@FXML
+	void WhenClickExitBtn(MouseEvent event) {
+		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+		alert.setTitle("Exit");
+		alert.setHeaderText("Are you sure you want to exit the application?");
+		alert.setResizable(false);
+		alert.setContentText("Select yes if you want, or not if you want to get back!");
+		((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Yes");
+		((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("No");
+		Optional<ButtonType> result = alert.showAndWait();
+		if (!result.isPresent())
+			alert.close();
+		else if (result.get() == ButtonType.OK) {
+			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			stage.close();
+		} else if (result.get() == ButtonType.CANCEL)
+			alert.close();
+	}
+
 	/**
-	 * Description of setValues()
-	 * This method will insert the values into the labels
+	 * Description of setValues() This method will insert the values into the labels
+	 * 
 	 * @return void
 	 */
-	
+
 	public void setValues() {
 		Order o = ClientUI.orderController.order;
 		IdNumberLbl.setText("31198");
@@ -142,8 +147,10 @@ public class UnapprovedOrderController implements Initializable {
 
 	}
 
-	/** Description of initialize
-	 * This method will initialize the values of the order wanted to be complete
+	/**
+	 * Description of initialize This method will initialize the values of the order
+	 * wanted to be complete
+	 * 
 	 * @return void
 	 */
 	@Override

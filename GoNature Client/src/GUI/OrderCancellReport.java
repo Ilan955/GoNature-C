@@ -31,9 +31,9 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -59,9 +59,10 @@ public class OrderCancellReport implements Initializable {
 	ObservableList<String> listForYears;
 	ObservableList<String> listForMonth;
 
-	/** Description of initialize(URL arg0, ResourceBundle arg1) in OrderCancellReport
-	 * This method responsible to initialize the years and the month
-	 * to give the user the option to choose from
+	/**
+	 * Description of initialize(URL arg0, ResourceBundle arg1) in
+	 * OrderCancellReport This method responsible to initialize the years and the
+	 * month to give the user the option to choose from
 	 * 
 	 * @return void
 	 */
@@ -71,9 +72,10 @@ public class OrderCancellReport implements Initializable {
 		setMonthCb();
 
 	}
-	/** Description of setYearCb() in OrderCancellReport
-	 * This method responsible to initialize the years 
-	 * to give the user the option to choose from
+
+	/**
+	 * Description of setYearCb() in OrderCancellReport This method responsible to
+	 * initialize the years to give the user the option to choose from
 	 * 
 	 * @return void
 	 */
@@ -89,13 +91,13 @@ public class OrderCancellReport implements Initializable {
 		YearCb.setItems(listForYears);
 	}
 
-	/** Description of setMonthCb() in OrderCancellReport
-	 * This method responsible to initialize the month 
-	 * to give the user the option to choose from
+	/**
+	 * Description of setMonthCb() in OrderCancellReport This method responsible to
+	 * initialize the month to give the user the option to choose from
 	 * 
 	 * @return void
 	 */
-	
+
 	private void setMonthCb() {
 		ArrayList<String> month = new ArrayList<String>();
 
@@ -124,9 +126,10 @@ public class OrderCancellReport implements Initializable {
 		stage.show();
 	}
 
-	/** Description of WhenClickClearBtn(ActionEvent event) in OrderCancellReport
-	 * This method is responsible to clear all the data that is in the graphs
-	 * so far.
+	/**
+	 * Description of WhenClickClearBtn(ActionEvent event) in OrderCancellReport
+	 * This method is responsible to clear all the data that is in the graphs so
+	 * far.
 	 * 
 	 * @return void
 	 */
@@ -138,15 +141,16 @@ public class OrderCancellReport implements Initializable {
 		a.setHeaderText("Successfuly cleared all the data");
 		a.show();
 	}
-	
-	
-	/** Description of  WhenClickInformationBtn(ActionEvent event) in OrderCancellReport
-	 * This method responsible of showing some rough data to the user
+
+	/**
+	 * Description of WhenClickInformationBtn(ActionEvent event) in
+	 * OrderCancellReport This method responsible of showing some rough data to the
+	 * user
 	 * 
 	 * @return void
 	 */
 	@FXML
-	 void WhenClickInformationBtn(MouseEvent event) {
+	void WhenClickInformationBtn(MouseEvent event) {
 		Alert a = new Alert(AlertType.INFORMATION,
 				"Please enter the wanted month, and wanted date to make the report.\nYou can't choose month that is not yet been.\nThe report will show the amount of orderes that has canceled, and will show the amount of reports that has been made but the visitors didn't came");
 		a.setTitle("Order reports");
@@ -154,37 +158,37 @@ public class OrderCancellReport implements Initializable {
 
 		a.show();
 	}
-	
+
 	/**
-	 * This method responislbe of showing an alert
-	 * when want to close the application.
+	 * This method responislbe of showing an alert when want to close the
+	 * application.
+	 * 
 	 * @param event
 	 */
-	  @FXML
-	    void WhenClickExitBtn(MouseEvent event) {
-		  Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-		  alert.setTitle("Exit");
-		  alert.setHeaderText("Are you sure you want to exit the application?");
-		  alert.setResizable(false);
-		  alert.setContentText("Select yes if you want, or not if you want to get back!");
-		  ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Yes");
-		  ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("No");
-		  Optional<ButtonType> result =  alert.showAndWait();
-		  if(!result.isPresent())
-		    alert.close();
-		  else if(result.get() == ButtonType.OK) { 
-			  Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-				stage.close();
-		  }   
-		  else if(result.get() == ButtonType.CANCEL)
-			  alert.close();
-	    }
-	
-	
+	@FXML
+	void WhenClickExitBtn(MouseEvent event) {
+		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+		alert.setTitle("Exit");
+		alert.setHeaderText("Are you sure you want to exit the application?");
+		alert.setResizable(false);
+		alert.setContentText("Select yes if you want, or not if you want to get back!");
+		((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Yes");
+		((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("No");
+		Optional<ButtonType> result = alert.showAndWait();
+		if (!result.isPresent())
+			alert.close();
+		else if (result.get() == ButtonType.OK) {
+			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			stage.close();
+		} else if (result.get() == ButtonType.CANCEL)
+			alert.close();
+	}
 
-	/** Description of  whenClickCalculateBtn(ActionEvent event) in OrderCancellReport
+	/**
+	 * Description of whenClickCalculateBtn(ActionEvent event) in OrderCancellReport
 	 * This method will reach to the db, and get the data about the all amont of
 	 * people that: 1.canceled there order 2. confirmed but didn't enter the park.
+	 * 
 	 * @return void
 	 * @throws IOException
 	 */

@@ -25,22 +25,22 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class SureCancellScreen implements Initializable {
-	/**DateLbl - Label for DAte*/
+	/** DateLbl - Label for DAte */
 	@FXML
 	private Label DateLbl;
-	/**ParkLbl - Label for Park*/
+	/** ParkLbl - Label for Park */
 	@FXML
 	private Label ParkLbl;
-	/**TimeLbl - Label for Time*/
+	/** TimeLbl - Label for Time */
 	@FXML
 	private Label TimeLbl;
 
-	
-	/** Description of WhenClickDontWantToCancelBtn(ActionEvent event) in SureCancell Screen
-	 *  if the traveler don't want to cancel the order, he will return to the
-	 *  previous page (the UnapprovedOrder sceen)
-	 *  
-	 *  
+	/**
+	 * Description of WhenClickDontWantToCancelBtn(ActionEvent event) in SureCancell
+	 * Screen if the traveler don't want to cancel the order, he will return to the
+	 * previous page (the UnapprovedOrder sceen)
+	 * 
+	 * 
 	 * @param event
 	 * @throws IOException
 	 */
@@ -56,10 +56,10 @@ public class SureCancellScreen implements Initializable {
 		stage.show();
 	}
 
-	
-	/** Description of WhenClickWantToCancel(ActionEvent event) in SureCancell Screen
-	 * if the traveler want to cancel the 
-	 * order he will return to the main traveller page
+	/**
+	 * Description of WhenClickWantToCancel(ActionEvent event) in SureCancell Screen
+	 * if the traveler want to cancel the order he will return to the main traveller
+	 * page
 	 * 
 	 * @param event
 	 * @throws IOException
@@ -77,10 +77,12 @@ public class SureCancellScreen implements Initializable {
 		stage.show();
 
 	}
-	/** Description of setVals() in SureCancell Screen
-	 * Setting the values of the Date park and time for the 
-	 * traveller to see what type of order he will be
+
+	/**
+	 * Description of setVals() in SureCancell Screen Setting the values of the Date
+	 * park and time for the traveller to see what type of order he will be
 	 * canceling now
+	 * 
 	 * @return void
 	 */
 	public void setVals() {
@@ -89,11 +91,10 @@ public class SureCancellScreen implements Initializable {
 		ParkLbl.setText(o.getWantedPark());
 		TimeLbl.setText(o.getTimeInPark().toString());
 	}
-	
-	
-	/** Description of setVals() in SureCancell Screen
-	 * calling to the setVals that will be initializing
-	 * the datat into the labels
+
+	/**
+	 * Description of setVals() in SureCancell Screen calling to the setVals that
+	 * will be initializing the datat into the labels
 	 * 
 	 * @return void
 	 */

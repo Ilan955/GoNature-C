@@ -43,36 +43,39 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 
 public class ExsitingOrdersScreenController implements Initializable {
-	/**ExistingOrderTable - Table for the Existing order*/
+	/** ExistingOrderTable - Table for the Existing order */
 	@FXML
 	private TableView<Data> ExistingOrderTable;
-	/**IDLbl - TableColumn for the Existing order*/
+	/** IDLbl - TableColumn for the Existing order */
 	@FXML
 	private TableColumn<Data, String> IDLbl;
-	/**DateTbl - TableColumn for the Existing order*/
+	/** DateTbl - TableColumn for the Existing order */
 	@FXML
 	private TableColumn<Data, String> DateTbl;
-	/**ParkLbl - TableColumn for the Existing order*/
+	/** ParkLbl - TableColumn for the Existing order */
 	@FXML
 	private TableColumn<Data, String> ParkLbl;
-	/**TimeLbl - TableColumn for the Existing order*/
+	/** TimeLbl - TableColumn for the Existing order */
 	@FXML
 	private TableColumn<Data, String> TimeLbl;
-	/**NumOfVisitLbl - TableColumn for the Existing order*/
+	/** NumOfVisitLbl - TableColumn for the Existing order */
 	@FXML
 	private TableColumn<Data, String> NumOfVisitLbl;
-	/**StatusLbl - TableColumn for the Existing order*/
+	/** StatusLbl - TableColumn for the Existing order */
 	@FXML
 	private TableColumn<Data, String> StatusLbl;
-	/**CommentsLbl - TableColumn for the Existing order*/
+	/** CommentsLbl - TableColumn for the Existing order */
 	@FXML
 	private TableColumn<Data, String> CommentsLbl;
-	/**PriceLbl - TableColumn for the Existing order*/
+	/** PriceLbl - TableColumn for the Existing order */
 	@FXML
 	private TableColumn<Data, String> PriceLbl;
 
-	/** Description of WhenClickBackBtn(ActionEvent event) in ExsistingOrders Screen
-	 * This method is responsible to get the user back to the Welcome traveller screen
+	/**
+	 * Description of WhenClickBackBtn(ActionEvent event) in ExsistingOrders Screen
+	 * This method is responsible to get the user back to the Welcome traveller
+	 * screen
+	 * 
 	 * @param event
 	 */
 	@FXML
@@ -95,8 +98,9 @@ public class ExsitingOrdersScreenController implements Initializable {
 
 	public int index = 0;
 
-	/** Description of  initialize(URL arg0, ResourceBundle arg1) in ExsistingOrders Screen
-	 * This method responsible to initialize all of the columns in the table
+	/**
+	 * Description of initialize(URL arg0, ResourceBundle arg1) in ExsistingOrders
+	 * Screen This method responsible to initialize all of the columns in the table
 	 * 
 	 */
 	@Override
@@ -109,50 +113,45 @@ public class ExsitingOrdersScreenController implements Initializable {
 		PriceLbl.setCellValueFactory(new PropertyValueFactory<>("Price"));
 		StatusLbl.setCellValueFactory(new PropertyValueFactory<>("Status"));
 		CommentsLbl.setCellValueFactory(new PropertyValueFactory<>("Comments"));
-		
-		
-		
-		
-		
+
 		ClientUI.orderController.getExsistingOrders();
 		System.out.println(ClientUI.orderController.ob.size());
 		ExistingOrderTable.setItems(ClientUI.orderController.ob);
 		addButtonToTable();
 
 	}
-	
+
 	/**
-	 * This method responislbe of showing an alert
-	 * when want to close the application.
+	 * This method responislbe of showing an alert when want to close the
+	 * application.
+	 * 
 	 * @param event
 	 */
-	  @FXML
-	    void WhenClickExitBtn(MouseEvent event) {
-		  Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-		  alert.setTitle("Exit");
-		  alert.setHeaderText("Are you sure you want to exit the application?");
-		  alert.setResizable(false);
-		  alert.setContentText("Select yes if you want, or not if you want to get back!");
-		  ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Yes");
-		  ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("No");
-		  Optional<ButtonType> result =  alert.showAndWait();
-		  if(!result.isPresent())
-		    alert.close();
-		  else if(result.get() == ButtonType.OK) { 
-			  ClientUI.LogOutUtility.logOutTraveller();
-			  Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-				stage.close();
-		  }   
-		  else if(result.get() == ButtonType.CANCEL)
-			  alert.close();
-	    }
-	  
-	  
+	@FXML
+	void WhenClickExitBtn(MouseEvent event) {
+		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+		alert.setTitle("Exit");
+		alert.setHeaderText("Are you sure you want to exit the application?");
+		alert.setResizable(false);
+		alert.setContentText("Select yes if you want, or not if you want to get back!");
+		((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Yes");
+		((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("No");
+		Optional<ButtonType> result = alert.showAndWait();
+		if (!result.isPresent())
+			alert.close();
+		else if (result.get() == ButtonType.OK) {
+			ClientUI.LogOutUtility.logOutTraveller();
+			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			stage.close();
+		} else if (result.get() == ButtonType.CANCEL)
+			alert.close();
+	}
 
-	/** Description of addButtonToTable() in ExsistingOrders Screen
-	 * Creating buttons for every cell there will be adding an option to cancel the
-	 * order if wanted if pressed cancel in the correct cell: Create an order in the
-	 * OrderController Screen Routing the user to sure if cancell order screen
+	/**
+	 * Description of addButtonToTable() in ExsistingOrders Screen Creating buttons
+	 * for every cell there will be adding an option to cancel the order if wanted
+	 * if pressed cancel in the correct cell: Create an order in the OrderController
+	 * Screen Routing the user to sure if cancell order screen
 	 * 
 	 * @return void
 	 */
@@ -238,16 +237,28 @@ public class ExsitingOrdersScreenController implements Initializable {
 								System.out.println("GOOD");
 								int numofvisit = ClientUI.userController.traveller.getNumberOfVisitors();
 								String park = ClientUI.orderController.order.getWantedPark();
-								try {
-									ClientUI.entranceParkController.setCurrentVisitros(park, numofvisit);
-									if (ClientUI.parkController.getCurrentVisitors(park)
-											+ ClientUI.parkController.getCurrentUnexpectedVisitors(
-													park) == ClientUI.parkController.getMaxVisitors(park)) {
-										ClientUI.parkController.updateStatusForCapacityParkToFull(park);
+								String id = ClientUI.userController.traveller.getId();
+								int maxUpdateCurrentVisitors;
+								maxUpdateCurrentVisitors = ClientUI.parkController.getCurrentVisitors(park)
+										+ ClientUI.parkController.getCurrentUnexpectedVisitors(park) + numofvisit;
+
+								ClientUI.entranceParkController.updateEnterTimeForTravellerWithOrder(park, id);
+								ClientUI.entranceParkController.setCurrentVisitros(park, numofvisit);
+
+								if (maxUpdateCurrentVisitors == ClientUI.parkController.getMaxVisitors(park)) {
+									ClientUI.parkController.updateStatusForCapacityParkToFull(park);
+								} else {
+									if (!ClientUI.parkController.IfgetDateExistInDB(park)) {
+										ClientUI.parkController.enterDateofFullCapcityPark(park, LocalDate.now(), 0,
+												ClientUI.parkController.getMaxVisitors(park), maxUpdateCurrentVisitors);
+
+									} else {
+										if (ClientUI.parkController
+												.getMaxcurrentVisitorsPerDay(park) < maxUpdateCurrentVisitors)
+											ClientUI.parkController.changeMaxcurrentAmountOfVisitorsForCapacityPark(
+													park, maxUpdateCurrentVisitors);
 									}
-								} catch (IOException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
+
 								}
 							} else {
 								Alert a = new Alert(AlertType.NONE, "Now it's not the time for your order!");

@@ -12,10 +12,12 @@ public class WaitingListController {
 
 	public boolean enterWaitingList_Flag;
 	public int cnt_OrdersToConfirm;
-	
-	/** enter order to waitingList
+
+	/**
+	 * enter order to waitingList
+	 * 
 	 * @param orderNumber
-	 */  
+	 */
 	void enterWaitingList(int orderNumber) {
 		StringBuffer sb = new StringBuffer();
 		sb.append("enterWaitingList");// method name
@@ -24,25 +26,26 @@ public class WaitingListController {
 		ClientUI.chat.accept(sb.toString());
 	}
 
-	/**This method will be the connector from the data came from the server to this
-	 *controller
+	/**
+	 * This method will be the connector from the data came from the server to this
+	 * controller
+	 * 
 	 * @param msg from server
 	 * @throws IOException
-	 */ 
+	 */
 	public void gotMessage(String[] msg) throws IOException {
 		String cases = msg[0];
 		switch (cases) {
 		case "enterWaitingList":
 			set_enterWaitingList_Flag(msg[1]);
 			break;
-		
-			
+
 		}
 	}
 
-	
-
-	/**set enterWaitingList Flag
+	/**
+	 * set enterWaitingList Flag
+	 * 
 	 * @param str from server
 	 */
 	private void set_enterWaitingList_Flag(String str) {
@@ -51,15 +54,15 @@ public class WaitingListController {
 		else
 			enterWaitingList_Flag = true;
 	}
-	
 
-
-	/** change Order Status in orders table DB
+	/**
+	 * change Order Status in orders table DB
+	 * 
 	 * @param orderNum
 	 * @param status
 	 * @param comment
 	 */
-	public void changeOrderStatus(String orderNum ,String status, String comment) {
+	public void changeOrderStatus(String orderNum, String status, String comment) {
 		StringBuffer sb = new StringBuffer();
 		sb.append("changeOrderStatus");// method name
 		sb.append(" ");
@@ -69,10 +72,12 @@ public class WaitingListController {
 		sb.append(" ");
 		sb.append(comment);
 		ClientUI.chat.accept(sb.toString());
-		
+
 	}
 
-	/**delete order From WaitingList
+	/**
+	 * delete order From WaitingList
+	 * 
 	 * @param orderNum
 	 */
 	public void deleteFromWaitingList(String orderNum) {
@@ -81,6 +86,6 @@ public class WaitingListController {
 		sb.append(" ");
 		sb.append(orderNum);
 		ClientUI.chat.accept(sb.toString());
-		
+
 	}
 }

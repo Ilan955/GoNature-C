@@ -10,10 +10,11 @@ import Client.ClientUI;
 
 /**
  * This Class store functions for Sign Up form. firstName - persons first name,
- * lastName - persons last name, phoneNum - persons phone number,
- * email - persons email address, paymentMethod - persons chosen payment method Cash or credit card,
- * memberType - persons type of membership, numOfVisitors - number of visitor on the subscription,
- * checker - flag for marking if an id in already on the DB or not
+ * lastName - persons last name, phoneNum - persons phone number, email -
+ * persons email address, paymentMethod - persons chosen payment method Cash or
+ * credit card, memberType - persons type of membership, numOfVisitors - number
+ * of visitor on the subscription, checker - flag for marking if an id in
+ * already on the DB or not
  */
 
 public class SignUpController {

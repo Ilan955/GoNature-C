@@ -78,55 +78,46 @@ public class WelcomeParkManagerController implements Initializable {
 		String park = ClientUI.employeeController.getParkName();
 		ParkName.setText(park);
 		int current = 0, currentVisitors = 0, unExpected = 0;
-		try {
-			currentVisitors = ClientUI.parkController.getCurrentVisitors(park);
-			unExpected = ClientUI.parkController.getCurrentUnexpectedVisitors(park);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		currentVisitors = ClientUI.parkController.getCurrentVisitors(park);
+		unExpected = ClientUI.parkController.getCurrentUnexpectedVisitors(park);
 		current = currentVisitors + unExpected;
 		numberOFVisitorsLabel.setText("" + current);
-		try {
-			MaxVisitorsField.setText("" + ClientUI.parkController.getMaxVisitors(park));
-			GapField.setText("" + (ClientUI.parkController.getMaxVisitors(park)
-					- ClientUI.parkController.getMaxAvailableVisitors(park))); // --> need to know what the gap is
-			durationField.setText("" + ClientUI.parkController.getMaxDuration(park));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		MaxVisitorsField.setText("" + ClientUI.parkController.getMaxVisitors(park));
+		GapField.setText("" + (ClientUI.parkController.getMaxVisitors(park)
+				- ClientUI.parkController.getMaxAvailableVisitors(park))); // --> need to know what the gap is
+		durationField.setText("" + ClientUI.parkController.getMaxDuration(park));
 
 		// int current = ParkController.getCurrentVisitors(park) +
 		// ParkController.getCurrentUnexpectedVisitors(park);
 		// CurrentPeopleLbl.setText("" + current);
 		// 64-65 rows are after DB check with parkController. (I didn't use park DB yet)
 	}
-	
+
 	/**
-	 * This method responislbe of showing an alert
-	 * when want to close the application.
+	 * This method responislbe of showing an alert when want to close the
+	 * application.
+	 * 
 	 * @param event
 	 */
-	  @FXML
-	    void WhenClickExitBtn(MouseEvent event) {
-		  Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-		  alert.setTitle("Exit");
-		  alert.setHeaderText("Are you sure you want to exit the application?");
-		  alert.setResizable(false);
-		  alert.setContentText("Select yes if you want, or not if you want to get back!");
-		  ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Yes");
-		  ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("No");
-		  Optional<ButtonType> result =  alert.showAndWait();
-		  if(!result.isPresent())
-		    alert.close();
-		  else if(result.get() == ButtonType.OK) { 
-			  ClientUI.LogOutUtility.logOutEmployee();
-			  Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-				stage.close();
-		  }   
-		  else if(result.get() == ButtonType.CANCEL)
-			  alert.close();
-	    }
+	@FXML
+	void WhenClickExitBtn(MouseEvent event) {
+		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+		alert.setTitle("Exit");
+		alert.setHeaderText("Are you sure you want to exit the application?");
+		alert.setResizable(false);
+		alert.setContentText("Select yes if you want, or not if you want to get back!");
+		((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Yes");
+		((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("No");
+		Optional<ButtonType> result = alert.showAndWait();
+		if (!result.isPresent())
+			alert.close();
+		else if (result.get() == ButtonType.OK) {
+			ClientUI.LogOutUtility.logOutEmployee();
+			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			stage.close();
+		} else if (result.get() == ButtonType.CANCEL)
+			alert.close();
+	}
 
 	@FXML
 	void ClickOnSetSpecialDiscount(ActionEvent event) throws IOException {
@@ -143,9 +134,10 @@ public class WelcomeParkManagerController implements Initializable {
 	void ClickShowNumberVisitorsPark(ActionEvent event) {
 
 	}
+
 	@FXML
 	void ClickCreateOverallVisitorsReport(ActionEvent event) {
-		
+
 	}
 
 	@FXML
@@ -257,6 +249,11 @@ public class WelcomeParkManagerController implements Initializable {
 		a.setHeaderText("Logout instructions");
 		a.show();
 		return;
+	}
+
+	@FXML
+	void ClickCreateOverallVisitorsReport(ActionEvent event) {
+
 	}
 	/*
 	 * @Override public void start(Stage primaryStage) throws Exception {

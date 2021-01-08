@@ -14,11 +14,10 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -51,49 +50,40 @@ public class WelcomeEmployeeController implements Initializable {
 		String park = ClientUI.employeeController.getParkName();
 		ParkNameLbl.setText(park);
 		int current = 0, currentVisitors = 0, unExpected = 0;
-		try {
-			currentVisitors = ClientUI.parkController.getCurrentVisitors(park);
-			unExpected = ClientUI.parkController.getCurrentUnexpectedVisitors(park);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		currentVisitors = ClientUI.parkController.getCurrentVisitors(park);
+		unExpected = ClientUI.parkController.getCurrentUnexpectedVisitors(park);
 		current = currentVisitors + unExpected;
 		CurrentPeopleLbl.setText("" + current);
 		int howMany = 0;
-		try {
-			howMany = ClientUI.parkController.getMaxVisitors(park) - current;
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		howMany = ClientUI.parkController.getMaxVisitors(park) - current;
 		HowManyEnterLbl.setText("" + howMany);
 	}
-	
+
 	/**
-	 * This method responislbe of showing an alert
-	 * when want to close the application.
+	 * This method responislbe of showing an alert when want to close the
+	 * application.
+	 * 
 	 * @param event
 	 */
-	  @FXML
-	    void WhenClickExitBtn(MouseEvent event) {
-		  Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-		  alert.setTitle("Exit");
-		  alert.setHeaderText("Are you sure you want to exit the application?");
-		  alert.setResizable(false);
-		  alert.setContentText("Select yes if you want, or not if you want to get back!");
-		  ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Yes");
-		  ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("No");
-		  Optional<ButtonType> result =  alert.showAndWait();
-		  if(!result.isPresent())
-		    alert.close();
-		  else if(result.get() == ButtonType.OK) { 
-			  ClientUI.LogOutUtility.logOutEmployee();
-			  Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-				stage.close();
-		  }   
-		  else if(result.get() == ButtonType.CANCEL)
-			  alert.close();
-	    }
+	@FXML
+	void WhenClickExitBtn(MouseEvent event) {
+		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+		alert.setTitle("Exit");
+		alert.setHeaderText("Are you sure you want to exit the application?");
+		alert.setResizable(false);
+		alert.setContentText("Select yes if you want, or not if you want to get back!");
+		((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Yes");
+		((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("No");
+		Optional<ButtonType> result = alert.showAndWait();
+		if (!result.isPresent())
+			alert.close();
+		else if (result.get() == ButtonType.OK) {
+			ClientUI.LogOutUtility.logOutEmployee();
+			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			stage.close();
+		} else if (result.get() == ButtonType.CANCEL)
+			alert.close();
+	}
 
 	@FXML
 	void WhenClickLogOutBtn(ActionEvent event) throws IOException {
@@ -137,7 +127,5 @@ public class WelcomeEmployeeController implements Initializable {
 		stage.setScene(scene);
 		stage.show();
 	}
-
-
 
 }

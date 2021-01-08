@@ -13,8 +13,6 @@ public class parkPendingRData {
 	private SimpleStringProperty StartDate;
 	private SimpleStringProperty LastDate;
 	private SimpleStringProperty Precentage;
-	
-	
 
 	public parkPendingRData(String ID, String ParkName, String RequestDate, String RequestTime, String MaxVisitors,
 			String Gap, String MaxDuration) {
@@ -26,8 +24,9 @@ public class parkPendingRData {
 		this.Gap = new SimpleStringProperty(Gap);
 		this.MaxDuration = new SimpleStringProperty(MaxDuration);
 	}
-	
-	public parkPendingRData(String ID,String Parkame, String RequestDate,String RequestTime,String startDate,String endDate,String Precentage,String unimplement) {
+
+	public parkPendingRData(String ID, String Parkame, String RequestDate, String RequestTime, String startDate,
+			String endDate, String Precentage, String unimplement) {
 		this.ParkName = new SimpleStringProperty(Parkame);
 		this.RequestID = new SimpleStringProperty(ID);
 		this.RequestDate = new SimpleStringProperty(RequestDate);

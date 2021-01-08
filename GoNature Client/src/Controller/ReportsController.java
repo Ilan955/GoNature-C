@@ -9,6 +9,7 @@ package Controller;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
+
 import Client.ClientUI;
 import GUI.Data;
 import clientLogic.Reports;
@@ -16,13 +17,22 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class ReportsController {
+
 	/**
 	 * This is a controller for sign up window
 	 * 
 	 * @implNote implements Initializable - initialize all predefined data
 	 */
-	public Data d;
+
+	/** data object for save the data of the table on ObservableList ob */
+	public Data d1;
+	/** data object for save the data of the table on ObservableList ob2 */
+	public Data d2;
+	/** ObservableList for management data in usage table */
+
 	public ObservableList<Data> ob = FXCollections.observableArrayList();
+	/** ObservableList for management data in usage line chart */
+	public ObservableList<Data> ob2 = FXCollections.observableArrayList();
 	public ArrayList<Reports> visitors = new ArrayList<Reports>();
 	public ArrayList<Reports> members = new ArrayList<Reports>();
 	public ArrayList<Reports> groups = new ArrayList<Reports>();
@@ -35,8 +45,6 @@ public class ReportsController {
 	 * members that entered the park, sumGroups=groups that entered to the park
 	 */
 	Float Traveler_cnt, Traveler_income, Member_cnt, Member_income, Family_cnt, Family_income, Group_cnt, Group_income;
-
-	
 
 	/**
 	 * Description of gotMessage(String[] msg) - handle response from server, switch
@@ -60,11 +68,13 @@ public class ReportsController {
 		case "getTableOfUnFullCapacityInDates":
 			filldateofNotfullCapacityTable(msg);
 			break;
+		case "getUnFullCapacityTableInDatesAndNumbers":
+			filldateofNotfullCapacityLineChart(msg);
+			break;
 		case "getDataEntranceTimesAndStay":
 			dealWithgetDataEntranceTimesAndStay(msg);
 			break;
-		
-			
+
 		case "makeMonthlyIncomeReport":
 			createMonthlyIncomeReport(msg[1], msg[2], msg[3], msg[4], msg[5], msg[6], msg[7], msg[8]);
 			break;
@@ -72,6 +82,7 @@ public class ReportsController {
 			break;
 		}
 	}
+
 	public void makeMonthlyIncomeReport(Date Month) {
 		StringBuffer sb = new StringBuffer();
 		sb.append("makeMonthlyIncomeReport");// method name
@@ -79,6 +90,7 @@ public class ReportsController {
 		sb.append(Month.toString());
 		ClientUI.chat.accept(sb.toString());
 	}
+
 	/**
 	 * Description of getMonth(String month)
 	 *
@@ -118,7 +130,7 @@ public class ReportsController {
 			return "Error validation month";
 		}
 	}
-	
+
 	private void createMonthlyIncomeReport(String Traveler_cnt, String Traveler_income, String Member_cnt,
 			String Member_income, String Family_cnt, String Family_income, String Group_cnt, String Group_income) {
 		/* set values */
@@ -134,7 +146,6 @@ public class ReportsController {
 		this.Group_cnt = Float.valueOf(Group_cnt);
 		this.Group_income = Float.valueOf(Group_income);
 	}
-	
 
 	/**
 	 * Description of getData(String month, String year, String park)
@@ -187,8 +198,15 @@ public class ReportsController {
 		return this.sumGroups;
 	}
 
-	
-
+	/**
+	 * this method sends to server month, year and name park and get from DB in
+	 * fullcapacity table only dates that the park wasn't full in this month and
+	 * year for using in table unuse
+	 * 
+	 * @param month-     the month we want to get the report
+	 * @param year       - the year we want to get the report
+	 * @param wantedpark - name park we want to make a report
+	 */
 	public void getTableOfUnFullCapacityInDates(String month, String year, String wantedpark) {
 		StringBuffer sb = new StringBuffer();
 		sb.append("getTableOfUnFullCapacityInDates");
@@ -201,20 +219,46 @@ public class ReportsController {
 		ClientUI.chat.accept(sb.toString());
 	}
 
+	/**
+	 * this method sends to server month, year and name park and get from DB in
+	 * fullcapacity table details that the park wasn't full in this month and year
+	 * for use in line chart
+	 * 
+	 * @param month-     the month we want to get the report
+	 * @param year       - the year we want to get the report
+	 * @param wantedpark - name park we want to make a reoprt
+	 */
+	public void getUnFullCapacityTableInDatesAndNumbers(String month, String year, String wantedpark) {
+		StringBuffer sb = new StringBuffer();
+		sb.append("getUnFullCapacityTableInDatesAndNumbers");
+		sb.append(" ");
+		sb.append(getMonth(month));
+		sb.append(" ");
+		sb.append(year);
+		sb.append(" ");
+		sb.append(wantedpark);
+		ClientUI.chat.accept(sb.toString());
+	}
+
+	/**
+	 * this method fills the table for the table(by ObservableList<Data> )
+	 * 
+	 * @param msg- the details from DB
+	 */
 	private void filldateofNotfullCapacityTable(String[] msg) {
 		int cnt = 1;
 		if (!(msg[1].equals("Done"))) {
 			while (!(msg[cnt].equals("Done"))) {
-				d = new Data(msg[cnt]);
-				ob.add(d);
+				d1 = new Data(msg[cnt]);
+				ob.add(d1);
 				cnt++;
 			}
 		}
 	}
 
 	/**
-	 * Description of getDataEntranceTimesAndStay(String month, String year, String
-	 * park)
+	 * <<<<<<< HEAD Description of getDataEntranceTimesAndStay(String month, String
+	 * year, String park)
 	 *
 	 * @param month - String containing wanted month.
 	 * @param year  - String containing wanted year.
@@ -223,6 +267,23 @@ public class ReportsController {
 	 * @return void - this function requests data from server, the response will be
 	 *         catched in "gotMessage"
 	 */
+
+	/*
+	 * this method fills the table for line chart (by ObservableList<Data> )
+	 * 
+	 * @param msg- the details from DB
+	 */
+	private void filldateofNotfullCapacityLineChart(String[] msg) {
+		int cnt = 1;
+		if (!(msg[1].equals("Done"))) {
+			while (!(msg[cnt].equals("Done"))) {
+				d2 = new Data(msg[cnt], Integer.parseInt(msg[cnt + 1]), Integer.parseInt(msg[cnt + 2]));
+				ob2.add(d2);
+				cnt += 3;
+			}
+		}
+	}
+
 	public void getDataEntranceTimesAndStay(String month, String year, String wantedpark) {
 		StringBuffer sb = new StringBuffer();
 		this.month = month;
@@ -237,13 +298,12 @@ public class ReportsController {
 		sb.append(wantedpark);
 		ClientUI.chat.accept(sb.toString());
 	}
-	
 
 	/**
 	 * Description of dealWithgetDataEntranceTimesAndStay(String[] msg) this
 	 * function handles the received data from server after executing
 	 * "getDataEntranceTimesAndStay".
-	 *  
+	 * 
 	 * @param msg[i]   is numOfVisitors.
 	 * @param msg[i+1] is the type.
 	 * @param msg[i+2] is entrance time.

@@ -60,12 +60,12 @@ public class GoClient extends AbstractClient {
 		int len = res.length;
 		len -= 1;
 		String[] toSend = new String[len];
-		
+
 		for (int i = 0; i < len; i++) {
 			toSend[i] = res[i + 1];
 			System.out.println(toSend.toString());
 		}
-		
+
 		/*
 		 * in place 0 of res will be the name of the method need to deal with in place
 		 * greater then 0 will be all the data for this method in every controller will

@@ -20,6 +20,8 @@ public class Data {
 	private SimpleStringProperty ID;
 	private SimpleStringProperty Status;
 	private SimpleStringProperty Comments;
+	private SimpleStringProperty maxVisitors;
+	private SimpleStringProperty maxCurrent;
 
 	public Data(String ID, String date, String park, String time, String numOfVisit, String price) {
 		this.ID = new SimpleStringProperty(ID);
@@ -29,18 +31,18 @@ public class Data {
 		this.numOfVisit = new SimpleStringProperty(numOfVisit);
 		this.Price = new SimpleStringProperty(price);
 	}
-	
-	public Data(String ID, String date, String park, String time, String numOfVisit, String price,String Status,String Comments) {
+
+	public Data(String ID, String date, String park, String time, String numOfVisit, String price, String Status,
+			String Comments) {
 		this.ID = new SimpleStringProperty(ID);
 		this.Date = new SimpleStringProperty(date);
 		this.Park = new SimpleStringProperty(park);
 		this.Time = new SimpleStringProperty(time);
 		this.numOfVisit = new SimpleStringProperty(numOfVisit);
 		this.Price = new SimpleStringProperty(price);
-		this.Status= new SimpleStringProperty(Status);
-		this.Comments= new SimpleStringProperty(Comments);
+		this.Status = new SimpleStringProperty(Status);
+		this.Comments = new SimpleStringProperty(Comments);
 	}
-	
 
 	public Data(String ID, String time, String numOfVisit) {
 		this.ID = new SimpleStringProperty(ID);
@@ -50,6 +52,12 @@ public class Data {
 
 	public Data(String date) {
 		this.Date = new SimpleStringProperty(date);
+	}
+
+	public Data(String date, int maxVisitors, int maxCurrent) {
+		this.Date = new SimpleStringProperty(date);
+		this.maxVisitors = new SimpleStringProperty(String.valueOf(maxVisitors));
+		this.maxCurrent = new SimpleStringProperty(String.valueOf(maxCurrent));
 	}
 
 	public void setID(String Id) {
@@ -63,8 +71,6 @@ public class Data {
 	public void setDate(String date) {
 		Date = new SimpleStringProperty(date);
 	}
-	
-	
 
 	public String getStatus() {
 		return Status.get();
@@ -73,7 +79,7 @@ public class Data {
 	public void setStatus(String StatusOfOrder) {
 		Status = new SimpleStringProperty(StatusOfOrder);
 	}
-	
+
 	public String getComments() {
 		return Comments.get();
 	}
@@ -81,9 +87,6 @@ public class Data {
 	public void setComments(String CommentsForSt) {
 		Comments = new SimpleStringProperty(CommentsForSt);
 	}
-	
-	
-	
 
 	public void setPark(String park) {
 		Park = new SimpleStringProperty(park);
@@ -121,4 +124,11 @@ public class Data {
 		return Price.get();
 	}
 
+	public String getMaxCurrent() {
+		return maxCurrent.get();
+	}
+
+	public String getMaxVisitors() {
+		return maxVisitors.get();
+	}
 }

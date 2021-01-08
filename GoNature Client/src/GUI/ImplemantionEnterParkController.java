@@ -22,26 +22,41 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+/**
+ * this GUI will present to the traveler the implemantion of the request he send
+ * to the employee department this GUI will show the details of the traveler and
+ * the total price with option of payment for entrance park
+ * 
+ * @author Liad Yadin
+ *
+ */
 public class ImplemantionEnterParkController implements Initializable {
-
+	/** Label for present current date */
 	@FXML
 	private Label DateLbl;
-
+	/** Label for present park name */
 	@FXML
 	private Label ParkLbl;
-
+	/** Label for present current time of enter */
 	@FXML
 	private Label TimeLbl;
-
+	/** Label for present number of visitors */
 	@FXML
 	private Label VisitNumberLbl;
-
+	/** Label for present total price */
 	@FXML
 	private Label PriceLbl;
-
+	/** button for payment */
 	@FXML
 	private Button payNowBtn;
 
+	/**
+	 * if the traveler choose in this option he go on to the payment(we dont care
+	 * this logic- in external system) finally presenting enjoy message screen
+	 * 
+	 * @param event - when click for payment
+	 * @throws IOException
+	 */
 	@FXML
 	void WhenClickPayNowBtn(ActionEvent event) throws IOException {
 		Stage stage = (Stage) payNowBtn.getScene().getWindow();
@@ -54,34 +69,38 @@ public class ImplemantionEnterParkController implements Initializable {
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
-	
+
 	/**
-	 * This method responislbe of showing an alert
-	 * when want to close the application.
+	 * This method responislbe of showing an alert when want to close the
+	 * application.
+	 * 
 	 * @param event
 	 */
-	  @FXML
-	    void WhenClickExitBtn(MouseEvent event) {
-		  Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-		  alert.setTitle("Exit");
-		  alert.setHeaderText("Are you sure you want to exit the application?");
-		  alert.setResizable(false);
-		  alert.setContentText("Select yes if you want, or not if you want to get back!");
-		  ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Yes");
-		  ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("No");
-		  Optional<ButtonType> result =  alert.showAndWait();
-		  if(!result.isPresent())
-		    alert.close();
-		  else if(result.get() == ButtonType.OK) { 
-			  ClientUI.LogOutUtility.logOutTraveller();
-			  Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-				stage.close();
-		  }   
-		  else if(result.get() == ButtonType.CANCEL)
-			  alert.close();
-	    }
+	@FXML
+	void WhenClickExitBtn(MouseEvent event) {
+		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+		alert.setTitle("Exit");
+		alert.setHeaderText("Are you sure you want to exit the application?");
+		alert.setResizable(false);
+		alert.setContentText("Select yes if you want, or not if you want to get back!");
+		((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Yes");
+		((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("No");
+		Optional<ButtonType> result = alert.showAndWait();
+		if (!result.isPresent())
+			alert.close();
+		else if (result.get() == ButtonType.OK) {
+			ClientUI.LogOutUtility.logOutTraveller();
+			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			stage.close();
+		} else if (result.get() == ButtonType.CANCEL)
+			alert.close();
+	}
 
-	public void setValues() {
+	/**
+	 * this method will initialize all the details of this traveler
+	 */
+
+	public void initialize(URL location, ResourceBundle resources) {
 		TravellerInPark t = ClientUI.entranceParkController.travellerinpark;
 
 		ParkLbl.setText(t.getwantedPark());
@@ -90,12 +109,6 @@ public class ImplemantionEnterParkController implements Initializable {
 		VisitNumberLbl.setText(Integer.toString(t.getnumOfVisitors()));
 		PriceLbl.setText(Float.toString(t.gettotalPrice()));
 		ClientUI.entranceParkController.travellerinpark = null;
-
-	}
-
-	public void initialize(URL location, ResourceBundle resources) {
-		setValues();
-
 	}
 
 }
