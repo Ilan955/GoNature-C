@@ -77,9 +77,7 @@ public class ReportsController {
 			break;
 
 		case "makeMonthlyIncomeReport":
-			createMonthlyIncomeReport(msg[1], msg[2], msg[3], msg[4], msg[5], msg[6], msg[7], msg[8]);
-			break;
-		default:
+			createMonthlyIncomeReport(msg[1], msg[2], msg[3], msg[4], msg[5], msg[6], msg[7], msg[8],msg[9],msg[10]);
 			break;
 		}
 	}
@@ -133,10 +131,10 @@ public class ReportsController {
 	}
 
 	private void createMonthlyIncomeReport(String Traveler_cnt, String Traveler_income, String Member_cnt,
-			String Member_income, String Family_cnt, String Family_income, String Group_cnt, String Group_income) {
+			String Member_income, String Family_cnt, String Family_income, String Group_cnt, String Group_income,String TravelerInPark_cnt , String TravelerInPark_income) {
 		/* set values */
-		this.Traveler_cnt = Float.valueOf(Traveler_cnt);
-		this.Traveler_income = Float.valueOf(Traveler_income);
+		this.Traveler_cnt = Float.valueOf(Traveler_cnt) + Float.valueOf(TravelerInPark_cnt);
+		this.Traveler_income = Float.valueOf(Traveler_income) + Float.valueOf(TravelerInPark_income);
 
 		this.Member_cnt = Float.valueOf(Member_cnt);
 		this.Member_income = Float.valueOf(Member_income);
@@ -147,7 +145,6 @@ public class ReportsController {
 		this.Group_cnt = Float.valueOf(Group_cnt);
 		this.Group_income = Float.valueOf(Group_income);
 	}
-
 	/**
 	 * Description of getData(String month, String year, String park)
 	 *

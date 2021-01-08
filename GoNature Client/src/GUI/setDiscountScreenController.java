@@ -3,7 +3,6 @@ package GUI;
 import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
-import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 import Client.ClientUI;
@@ -16,17 +15,16 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 public class setDiscountScreenController {
 	long diff_days;
 	Date from, to;
-
+	float precentage;
+	String parkName;
 	@FXML
 	private Button calculate_duration_btn;
 
@@ -48,6 +46,9 @@ public class setDiscountScreenController {
 	@FXML
 	private Button CancelBTN;
 
+	/** calculate duration of discount and show it to park manager
+	 * @param event
+	 */  
 	@FXML
 	void WhenClickCalculate(ActionEvent event) {
 		// calc days between/
@@ -68,37 +69,16 @@ public class setDiscountScreenController {
 			String daysBetween = String.valueOf(diff_days);
 			DaysOFDiscountLBL.setText(daysBetween + " Days");
 		} else {
-			DaysOFDiscountLBL.setText("'To' date must be after 'From' date!!!");
+			Alert a = new Alert(AlertType.NONE, "'To' date must be after 'From' date!!!");
+			a.setAlertType(AlertType.ERROR);
+			a.show();
 		}
 
 	}
 
-	/**
-	 * This method responislbe of showing an alert when want to close the
-	 * application.
-	 * 
+	/** send manager discount updates to DB
 	 * @param event
-	 */
-	@FXML
-	void WhenClickExitBtn(MouseEvent event) {
-		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-		alert.setTitle("Exit");
-		alert.setHeaderText("Are you sure you want to exit the application?");
-		alert.setResizable(false);
-		alert.setContentText("Select yes if you want, or not if you want to get back!");
-		((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Yes");
-		((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("No");
-		Optional<ButtonType> result = alert.showAndWait();
-		if (!result.isPresent())
-			alert.close();
-		else if (result.get() == ButtonType.OK) {
-			ClientUI.LogOutUtility.logOutEmployee();
-			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-			stage.close();
-		} else if (result.get() == ButtonType.CANCEL)
-			alert.close();
-	}
-
+	 */ 
 	@FXML
 	void whenClickSubmitDiscount(ActionEvent event) {
 		// call WhenClickCalculate to calculate dates and daysBetween/
@@ -112,15 +92,14 @@ public class setDiscountScreenController {
 			a.show();
 			return;
 		} else {
-			float precentage = Float.valueOf(PrecantageLBL);
+			precentage = Float.valueOf(PrecantageLBL);
 			if (precentage <= 0 || precentage >= 1) {
-				Alert a = new Alert(AlertType.NONE, "Discount precentage must be between 0.1 - 0.9");
+				Alert a = new Alert(AlertType.NONE, "Discount precentage must be between 0.01 - 0.99");
 				a.setAlertType(AlertType.ERROR);
 				a.show();
 				return;
 			}
-			String parkName = ClientUI.employeeController.getParkName();
-
+			parkName = ClientUI.employeeController.getParkName();				
 			ClientUI.discountController.setManagerDiscount(from, to, precentage, parkName);
 		}
 
@@ -129,7 +108,9 @@ public class setDiscountScreenController {
 			Alert a = new Alert(AlertType.NONE, "Discount was sent to D.M");
 			a.setAlertType(AlertType.CONFIRMATION);
 			a.show();
-			WhenClickCancel(event); // go back to ParkManger.fxml screen
+			
+			/*go back to ParkManger.fxml screen*/
+			WhenClickCancel(event); 
 
 		} else {
 			Alert a = new Alert(AlertType.NONE, "Sql error!!!");
@@ -138,10 +119,11 @@ public class setDiscountScreenController {
 		}
 	}
 
+	/** go back to manager main menu
+	 * @param event
+	 */
 	@FXML
 	void WhenClickCancel(ActionEvent event) {
-
-		// go back to manager main menu
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		Parent root = null;
 		try {

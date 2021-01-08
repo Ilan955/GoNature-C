@@ -173,6 +173,27 @@ public class ExsitingOrdersScreenController implements Initializable {
 						btn.setOnAction((ActionEvent event) -> {
 							Data data = getTableView().getItems().get(getIndex());
 
+							
+							if(data.getStatus().equals("InWaitingList")) {
+								/*in this case the order will be delete from waitingList && change order status to 'cancelled' in orders table DB*/
+								ClientUI.waitingListController.deleteFromWaitingList(data.getID());
+								ClientUI.waitingListController.changeOrderStatus(data.getID(),"cancelled","Manually");
+								Alert a = new Alert(AlertType.NONE, "Your order has been deleted from waiting list!");
+								a.setAlertType(AlertType.ERROR);
+								a.show();
+								return;
+							}
+							
+							if(data.getStatus().equals("waitForConfirm_WaitingList")) {
+								/*in this case status will be changed to 'CanceledBYUser' (for watingList_Confirmation_thread)*/
+								ClientUI.waitingListController.changeOrderStatus(data.getID(),"CanceledBYUser","");
+								Alert a = new Alert(AlertType.NONE, "Your order has been deleted from waiting list!");
+								a.setAlertType(AlertType.ERROR);
+								a.show();
+								return;
+							}
+
+							
 							int orderNum = Integer.parseInt(data.getID());
 							System.out.println(data.getTime());
 							LocalTime lt = LocalTime.parse(data.getTime());
@@ -296,6 +317,26 @@ public class ExsitingOrdersScreenController implements Initializable {
 
 							Data data = getTableView().getItems().get(getIndex());
 
+							
+							if(data.getStatus().equals("InWaitingList")) {
+								/*in this case the order can not be approved (because not first in line)*/
+								Alert b = new Alert(AlertType.NONE, "Sorry, but your order is still in waiting list\nplease wait for Sms/Email");
+								b.setAlertType(AlertType.ERROR);
+								b.show();
+								return;
+							}
+							
+							if(data.getStatus().equals("waitForConfirm_WaitingList")) {
+								/*in this case user can confirm his order*/
+								ClientUI.waitingListController.changeOrderStatus(data.getID(),"ApprovedBYUser","");
+								Alert a = new Alert(AlertType.NONE, "Your order has been confirmed!");
+								a.setAlertType(AlertType.INFORMATION);
+								a.show();
+							}
+							
+							
+							
+							
 							if (data.getStatus().equals("confirmed")) {
 								Alert b = new Alert(AlertType.NONE, "Sorry, but your order has been already confirmed");
 								b.setAlertType(AlertType.ERROR);

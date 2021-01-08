@@ -11,6 +11,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import Client.ClientUI;
+import Entities.Order;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -154,6 +155,8 @@ public class EnterParkNowController implements Initializable {
 	 * @return total price of the traveler enter park
 	 */
 	public float getPrice() {
+		float priceBeforParkManager;
+		float discount;
 		int numOfVisit = Integer.parseInt((String) NumOfVisitorsCB.getValue());
 		String type = ClientUI.userController.traveller.getType();
 		if (ClientUI.userController.traveller.getMemberID() != null) // member - 20% discount
@@ -162,9 +165,12 @@ public class EnterParkNowController implements Initializable {
 			ClientUI.discountController.getTotalPrice("PreOrderedTraveller", numOfVisit, "Casual", "False");
 		else // group- 10% discounts
 			ClientUI.discountController.getTotalPrice("GroupGuide", numOfVisit, "Casual", "False");
-		return (ClientUI.discountController.getFinalPriceWithoutDM());
-	}
 
+		priceBeforParkManager = (ClientUI.discountController.getFinalPriceWithoutDM());
+		Order orderForPrice=new Order(0, null, myDate, wantedpark,numOfVisit, priceBeforParkManager);
+		discount=ClientUI.discountController.calculateFinalPrice(orderForPrice);
+		return discount;
+	}
 	/**
 	 * get number of visitor
 	 * 
