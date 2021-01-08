@@ -76,7 +76,8 @@ public class confirmationScreenController implements Initializable {
 		EmailLbl.setText(ClientUI.orderController.getEmail());
 		PhoneLbl.setText(ClientUI.orderController.getPhone());
 		NumVisitLlbl.setText(Integer.toString(o.getNumberOfVisitors()));
-		PriceLbl.setText(Float.toString(o.getTotalPrice()));
+		Float finalPric= ClientUI.discountController.calculateFinalPrice(o);
+		PriceLbl.setText(Float.toString(finalPric));
 	}
 
 	/**

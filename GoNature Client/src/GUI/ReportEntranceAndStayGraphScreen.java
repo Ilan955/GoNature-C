@@ -6,6 +6,7 @@
 package GUI;
 
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import Client.ClientUI;
@@ -22,6 +23,10 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 public class ReportEntranceAndStayGraphScreen implements Initializable {
@@ -266,5 +271,7 @@ public class ReportEntranceAndStayGraphScreen implements Initializable {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		stage.close();
 	}
+	
+	
 
 }

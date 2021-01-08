@@ -7,6 +7,7 @@ package GUI;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import Client.ClientUI;
@@ -21,12 +22,15 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 public class ReportEntreisScreenController implements Initializable {
@@ -36,7 +40,7 @@ public class ReportEntreisScreenController implements Initializable {
 	 * @implNote implements Initializable - initialize all predefined data
 	 */
 	@FXML
-	private ComboBox<String> WantedMonthDATE;
+	private ComboBox<String> monthCB;
 
 	@FXML
 	private ComboBox<String> YearCB;
@@ -87,7 +91,7 @@ public class ReportEntreisScreenController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		WantedMonthDATE.setItems(inits.setMonthCB());
+		monthCB.setItems(inits.setMonthCB());
 		YearCB.setItems(inits.setYearCB());
 		IndiLbl.setCellValueFactory(new PropertyValueFactory<>("Individuals"));
 		MemberLbl.setCellValueFactory(new PropertyValueFactory<>("Members"));
@@ -121,7 +125,7 @@ public class ReportEntreisScreenController implements Initializable {
 //Click on Get button => view data
 	@FXML
 	void WhenClickOnGetBtn(ActionEvent event) {
-		String month = WantedMonthDATE.getValue().toString();
+		String month = monthCB.getValue().toString();
 		String year = YearCB.getValue().toString();
 		String park = ClientUI.employeeController.getParkName();
 		MonthLBL.setText(month);
@@ -145,6 +149,27 @@ public class ReportEntreisScreenController implements Initializable {
 		visitorsPie.setData(pieChart);
 		ReportTable.setItems(counters);
 
+	}
+
+
+	@FXML
+	void WhenClickExitBtn(MouseEvent event) {
+		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+		alert.setTitle("Exit");
+		alert.setHeaderText("Are you sure you want to exit the application?");
+		alert.setResizable(false);
+		alert.setContentText("Select yes if you want, or not if you want to get back!");
+		((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Yes");
+		((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("No");
+		Optional<ButtonType> result = alert.showAndWait();
+		if (!result.isPresent())
+			alert.close();
+		else if (result.get() == ButtonType.OK) {
+			ClientUI.LogOutUtility.logOutTraveller();
+			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			stage.close();
+		} else if (result.get() == ButtonType.CANCEL)
+			alert.close();
 	}
 
 }
