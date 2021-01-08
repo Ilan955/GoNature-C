@@ -1,3 +1,11 @@
+/** Descripiton of  SureCancell Screen
+ * SureCancellScreen class responsible of showing, 
+ * a screen with aditional option to not cancel order
+ * 
+ * @author Ilan Alexandrov	
+ * @vestion 1.0 Build December,2020
+ */
+
 package GUI;
 
 import java.io.IOException;
@@ -17,18 +25,25 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class SureCancellScreen implements Initializable {
-
+	/**DateLbl - Label for DAte*/
 	@FXML
 	private Label DateLbl;
-
+	/**ParkLbl - Label for Park*/
 	@FXML
 	private Label ParkLbl;
-
+	/**TimeLbl - Label for Time*/
 	@FXML
 	private Label TimeLbl;
 
-	// if the traveler don't want to cancel the order, he will return to the
-	// previous page (the UnapprovedOrder sceen)
+	
+	/** Description of WhenClickDontWantToCancelBtn(ActionEvent event) in SureCancell Screen
+	 *  if the traveler don't want to cancel the order, he will return to the
+	 *  previous page (the UnapprovedOrder sceen)
+	 *  
+	 *  
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	void WhenClickDontWantToCancelBtn(ActionEvent event) throws IOException {
 
@@ -41,8 +56,14 @@ public class SureCancellScreen implements Initializable {
 		stage.show();
 	}
 
-	// if the traveler want to cancel the order he will return to the main traveller
-	// page
+	
+	/** Description of WhenClickWantToCancel(ActionEvent event) in SureCancell Screen
+	 * if the traveler want to cancel the 
+	 * order he will return to the main traveller page
+	 * 
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	void WhenClickWantToCancel(ActionEvent event) throws IOException {
 		ClientUI.orderController.cancelOrder(DateLbl.getText(), ParkLbl.getText(), TimeLbl.getText());
@@ -56,15 +77,26 @@ public class SureCancellScreen implements Initializable {
 		stage.show();
 
 	}
-
+	/** Description of setVals() in SureCancell Screen
+	 * Setting the values of the Date park and time for the 
+	 * traveller to see what type of order he will be
+	 * canceling now
+	 * @return void
+	 */
 	public void setVals() {
 		Order o = ClientUI.orderController.order;
 		DateLbl.setText(o.getDateOfVisit().toString());
 		ParkLbl.setText(o.getWantedPark());
 		TimeLbl.setText(o.getTimeInPark().toString());
 	}
-
-	// initialize the values for the park, date and time the user entered.
+	
+	
+	/** Description of setVals() in SureCancell Screen
+	 * calling to the setVals that will be initializing
+	 * the datat into the labels
+	 * 
+	 * @return void
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		setVals();

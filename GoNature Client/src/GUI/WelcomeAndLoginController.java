@@ -1,17 +1,27 @@
 package GUI;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.Optional;
+import java.util.ResourceBundle;
 
 import Client.ClientUI;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -26,13 +36,46 @@ public class WelcomeAndLoginController {
 	@FXML
 	private Button EmployeeloginBTN;
 
+	
+    @FXML
+    private ImageView imageOfLogin;
+    
+    
 	@FXML
 	private TextField IdLBL;
+	
+
+    
 
 	@FXML
 	private Button TravellerLoginBtn;
 
 	public static String id;
+	/**
+	 * This method responislbe of showing an alert
+	 * when want to close the application.
+	 * @param event
+	 */
+	  @FXML
+	    void WhenClickExitBtn(MouseEvent event) {
+		  Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+		  alert.setTitle("Exit");
+		  alert.setHeaderText("Are you sure you want to exit the application?");
+		  alert.setResizable(false);
+		  alert.setContentText("Select yes if you want, or not if you want to get back!");
+		  ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Yes");
+		  ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("No");
+		  Optional<ButtonType> result =  alert.showAndWait();
+		  if(!result.isPresent())
+		    alert.close();
+		  else if(result.get() == ButtonType.OK) { 
+			  Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+				stage.close();
+		  }   
+		  else if(result.get() == ButtonType.CANCEL)
+			  alert.close();
+	    }
+	 
 
 	@FXML
 	void WhenPressTravellerLoginBtn(ActionEvent event) throws Exception {
@@ -114,13 +157,13 @@ public class WelcomeAndLoginController {
 		ClientUI.parkController.DetailsPark(ClientUI.employeeController.getParkName());
 		String whichScreen = ClientUI.employeeController.getType();
 		switch (whichScreen) {
-		case "DepartmentEmployee":
+		case "departmentEmployee":
 			changeScreen(event, "welcomeEmployee.fxml");
 			break;
-		case "ParkManager":
+		case "parkManager":
 			changeScreen(event, "WelcomeParkManager.fxml");
 			break;
-		case "DepartmentManager":
+		case "departmentManager":
 			changeScreen(event, "WelcomeDepartmentEmployee.fxml");
 			break;
 		default:
@@ -159,5 +202,7 @@ public class WelcomeAndLoginController {
 		stage.setScene(scene);
 		stage.show();
 	}
+
+
 
 }

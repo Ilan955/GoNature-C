@@ -10,6 +10,11 @@ public class parkPendingRData {
 	private SimpleStringProperty Gap;
 	private SimpleStringProperty MaxDuration;
 	private SimpleStringProperty RequestID;
+	private SimpleStringProperty StartDate;
+	private SimpleStringProperty LastDate;
+	private SimpleStringProperty Precentage;
+	
+	
 
 	public parkPendingRData(String ID, String ParkName, String RequestDate, String RequestTime, String MaxVisitors,
 			String Gap, String MaxDuration) {
@@ -20,6 +25,40 @@ public class parkPendingRData {
 		this.MaxVisitors = new SimpleStringProperty(MaxVisitors);
 		this.Gap = new SimpleStringProperty(Gap);
 		this.MaxDuration = new SimpleStringProperty(MaxDuration);
+	}
+	
+	public parkPendingRData(String ID,String Parkame, String RequestDate,String RequestTime,String startDate,String endDate,String Precentage,String unimplement) {
+		this.ParkName = new SimpleStringProperty(Parkame);
+		this.RequestID = new SimpleStringProperty(ID);
+		this.RequestDate = new SimpleStringProperty(RequestDate);
+		this.RequestTime = new SimpleStringProperty(RequestTime);
+		this.StartDate = new SimpleStringProperty(RequestTime);
+		this.LastDate = new SimpleStringProperty(RequestTime);
+		this.Precentage = new SimpleStringProperty(RequestTime);
+	}
+
+	public String getStartDate() {
+		return StartDate.get();
+	}
+
+	public void setStartDate(String startDate) {
+		StartDate = new SimpleStringProperty(startDate);
+	}
+
+	public String getLastDate() {
+		return LastDate.get();
+	}
+
+	public void setLastDate(String lastDate) {
+		LastDate = new SimpleStringProperty(lastDate);
+	}
+
+	public String getPrecentage() {
+		return Precentage.get();
+	}
+
+	public void setPrecentage(String precentage) {
+		Precentage = new SimpleStringProperty(precentage);
 	}
 
 	public String getParkName() {

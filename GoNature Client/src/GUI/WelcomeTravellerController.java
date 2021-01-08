@@ -3,6 +3,7 @@ package GUI;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import Client.ClientUI;
@@ -15,7 +16,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -56,7 +59,7 @@ public class WelcomeTravellerController implements Initializable {
 		}
 
 		String typ = ClientUI.userController.traveller.getType();
-		if (typ.equals("") || typ.equals("preOrderTraveller") || typ.equals("Traveller"))
+		if (typ.equals("") || typ.equals("preOrderTraveller"))
 			btnExistingorders.setVisible(false);
 		String first = ClientUI.userController.traveller.getFirstName();
 		String last = ClientUI.userController.traveller.getLastName();
@@ -74,13 +77,13 @@ public class WelcomeTravellerController implements Initializable {
 				TypeLBL.setText("");
 			} else {
 				userNamelb.setText(tName);
-				// TypeLBL.setText(ClientUI.userController.traveller.getType());
-				TypeLBL.setText("Check");
+				 TypeLBL.setText(ClientUI.userController.traveller.getType());
+				
 			}
 		} else {
 			userNamelb.setText(tName);
-			// TypeLBL.setText(ClientUI.userController.traveller.getType());
-			TypeLBL.setText("Check");
+			TypeLBL.setText(ClientUI.userController.traveller.getType());
+			//TypeLBL.setText("Check");
 		}
 
 		/*
@@ -101,12 +104,38 @@ public class WelcomeTravellerController implements Initializable {
 		}
 
 	}
+	
+	/**
+	 * This method responislbe of showing an alert
+	 * when want to close the application.
+	 * @param event
+	 */
+	  @FXML
+	    void WhenClickExitBtn(MouseEvent event) {
+		  Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+		  alert.setTitle("Exit");
+		  alert.setHeaderText("Are you sure you want to exit the application?");
+		  alert.setResizable(false);
+		  alert.setContentText("Select yes if you want, or not if you want to get back!");
+		  ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Yes");
+		  ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("No");
+		  Optional<ButtonType> result =  alert.showAndWait();
+		  if(!result.isPresent())
+		    alert.close();
+		  else if(result.get() == ButtonType.OK) { 
+			  ClientUI.LogOutUtility.logOutTraveller();
+			  Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+				stage.close();
+		  }   
+		  else if(result.get() == ButtonType.CANCEL)
+			  alert.close();
+	    }
 
 	@FXML
 	void WhenPressEnterWithoutOrderBtn(ActionEvent event) throws IOException {
 		Stage stage = (Stage) btnWithoutOrder.getScene().getWindow();
 		FXMLLoader loader = new FXMLLoader();
-		Pane root = loader.load(getClass().getResource("/GUI/EnterParkNow.fxml").openStream());
+		Pane root = loader.load(getClass().getResource("EnterParkNow.fxml").openStream());
 		Scene scene = new Scene(root);
 		stage.setTitle("Enter Park Now");
 		stage.setScene(scene);
@@ -127,18 +156,14 @@ public class WelcomeTravellerController implements Initializable {
 	@FXML
 
 	void WhenPressLogOutBtn(ActionEvent event) throws IOException {
-		ClientUI.userController.setAlreadyLoggedIn(false);
-		ClientUI.userController.identify("deleteFromDbWhenlogOutTraveller " + ClientUI.userController.traveller.getId()
-				+ " " + ClientUI.userController.traveller.getMemberID());
-		ClientUI.userController.traveller = null;
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		ClientUI.LogOutUtility.logOutTraveller();
 		FXMLLoader loader = new FXMLLoader();
 		Parent root = loader.load(getClass().getResource("WelcomeAndLoginScreen.fxml").openStream());
 		Scene scene = new Scene(root);
 		stage.setTitle("Welcome to GoNature!");
 		stage.setScene(scene);
 		stage.show();
-
 	}
 
 	@FXML

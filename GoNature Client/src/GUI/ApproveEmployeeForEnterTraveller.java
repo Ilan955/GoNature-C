@@ -12,10 +12,10 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class ApproveEmployeeForEnterTraveller {
-
+	
 	@FXML
 	private Button notApproveBtn;
-
+	
 	@FXML
 	private Button approveBtn;
 

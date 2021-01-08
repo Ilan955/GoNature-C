@@ -1,6 +1,9 @@
 package GUI;
 
+import com.sun.javafx.css.StyleManager;
+
 import Client.ClientUI;
+import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class loginClientController {
 
@@ -24,10 +28,14 @@ public class loginClientController {
 	private TextField portLbl;
 
 	public void start(Stage primaryStage) throws Exception {
+		primaryStage.initStyle(StageStyle.UNDECORATED);
 		Parent root = FXMLLoader.load(getClass().getResource("loginClient.fxml"));
 		Image icon = new Image(getClass().getResourceAsStream("titleIcon.png"));
 		primaryStage.getIcons().add(icon);
 		Scene scene = new Scene(root);
+		primaryStage.sizeToScene();
+		Application.setUserAgentStylesheet(Application.STYLESHEET_MODENA);
+	    StyleManager.getInstance().addUserAgentStylesheet("GUI/css/WelcomeAll.css");
 		primaryStage.setTitle("Prototype");
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -44,12 +52,11 @@ public class loginClientController {
 		int port = Integer.parseInt(portLbl.getText());
 		ClientUI.set(s, port);
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		Parent root = FXMLLoader.load(getClass().getResource("SignUpNewMember.fxml"));
-
+		Parent root = FXMLLoader.load(getClass().getResource("WelcomeAndLoginScreen.fxml"));
 		Scene scene = new Scene(root);
-		stage.setTitle("Prototype");
+		stage.getScene().getWindow().sizeToScene();
+		stage.setTitle("Welcome");
 		stage.setScene(scene);
-
 		stage.show();
 
 	}
@@ -59,5 +66,7 @@ public class loginClientController {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		stage.hide();
 	}
+	
+	
 
 }

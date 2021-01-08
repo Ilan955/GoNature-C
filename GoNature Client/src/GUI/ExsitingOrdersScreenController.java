@@ -1,9 +1,23 @@
+/**
+ * Screen showing the following:
+ * 	1. Creating a table with information
+ *  about the order the traveller has
+ *  2. Creating buttons to enable the traveller
+ *  confirm/cancel orders.
+ *  Check for logical errors when clicking on buttons.
+ *  3. update the park when entering the park. 
+ *  
+ *  @author Ilan Alexandrov
+ *  @author Liad Yadin
+ *  @version 2.0 Build December, 2020
+ */
 package GUI;
 
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import Client.ClientUI;
@@ -18,42 +32,49 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
 public class ExsitingOrdersScreenController implements Initializable {
-
+	/**ExistingOrderTable - Table for the Existing order*/
 	@FXML
 	private TableView<Data> ExistingOrderTable;
-
+	/**IDLbl - TableColumn for the Existing order*/
 	@FXML
 	private TableColumn<Data, String> IDLbl;
-
+	/**DateTbl - TableColumn for the Existing order*/
 	@FXML
 	private TableColumn<Data, String> DateTbl;
-
+	/**ParkLbl - TableColumn for the Existing order*/
 	@FXML
 	private TableColumn<Data, String> ParkLbl;
-
+	/**TimeLbl - TableColumn for the Existing order*/
 	@FXML
 	private TableColumn<Data, String> TimeLbl;
+	/**NumOfVisitLbl - TableColumn for the Existing order*/
 	@FXML
 	private TableColumn<Data, String> NumOfVisitLbl;
-
+	/**StatusLbl - TableColumn for the Existing order*/
 	@FXML
 	private TableColumn<Data, String> StatusLbl;
-
+	/**CommentsLbl - TableColumn for the Existing order*/
 	@FXML
 	private TableColumn<Data, String> CommentsLbl;
-
+	/**PriceLbl - TableColumn for the Existing order*/
 	@FXML
 	private TableColumn<Data, String> PriceLbl;
 
+	/** Description of WhenClickBackBtn(ActionEvent event) in ExsistingOrders Screen
+	 * This method is responsible to get the user back to the Welcome traveller screen
+	 * @param event
+	 */
 	@FXML
 	void WhenClickBackBtn(ActionEvent event) {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -74,6 +95,10 @@ public class ExsitingOrdersScreenController implements Initializable {
 
 	public int index = 0;
 
+	/** Description of  initialize(URL arg0, ResourceBundle arg1) in ExsistingOrders Screen
+	 * This method responsible to initialize all of the columns in the table
+	 * 
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		DateTbl.setCellValueFactory(new PropertyValueFactory<>("Date"));
@@ -84,18 +109,52 @@ public class ExsitingOrdersScreenController implements Initializable {
 		PriceLbl.setCellValueFactory(new PropertyValueFactory<>("Price"));
 		StatusLbl.setCellValueFactory(new PropertyValueFactory<>("Status"));
 		CommentsLbl.setCellValueFactory(new PropertyValueFactory<>("Comments"));
+		
+		
+		
+		
+		
 		ClientUI.orderController.getExsistingOrders();
 		System.out.println(ClientUI.orderController.ob.size());
 		ExistingOrderTable.setItems(ClientUI.orderController.ob);
 		addButtonToTable();
 
 	}
+	
+	/**
+	 * This method responislbe of showing an alert
+	 * when want to close the application.
+	 * @param event
+	 */
+	  @FXML
+	    void WhenClickExitBtn(MouseEvent event) {
+		  Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+		  alert.setTitle("Exit");
+		  alert.setHeaderText("Are you sure you want to exit the application?");
+		  alert.setResizable(false);
+		  alert.setContentText("Select yes if you want, or not if you want to get back!");
+		  ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Yes");
+		  ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("No");
+		  Optional<ButtonType> result =  alert.showAndWait();
+		  if(!result.isPresent())
+		    alert.close();
+		  else if(result.get() == ButtonType.OK) { 
+			  ClientUI.LogOutUtility.logOutTraveller();
+			  Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+				stage.close();
+		  }   
+		  else if(result.get() == ButtonType.CANCEL)
+			  alert.close();
+	    }
+	  
+	  
 
-	/*
+	/** Description of addButtonToTable() in ExsistingOrders Screen
 	 * Creating buttons for every cell there will be adding an option to cancel the
 	 * order if wanted if pressed cancel in the correct cell: Create an order in the
 	 * OrderController Screen Routing the user to sure if cancell order screen
 	 * 
+	 * @return void
 	 */
 
 	private void addButtonToTable() {

@@ -1,3 +1,12 @@
+/** Description of Data
+ * This class is responislble for keeping the data
+ * of the tables (alternative and exisitng orders)
+ * 
+ * 
+ * @author Ilan Alexandrov	
+ * @version 1.0 Build December, 2020
+ */
+
 package GUI;
 
 import javafx.beans.property.SimpleStringProperty;
