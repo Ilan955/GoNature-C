@@ -1,9 +1,14 @@
+/** Description of SignUpScreenController 
+* @author Omri Cohen
+* 
+* @version final Jan 2, 2021.
+*/
+
 package Controller;
 
 import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
-
 import Client.ClientUI;
 import GUI.Data;
 import clientLogic.Reports;
@@ -11,7 +16,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class ReportsController {
-
+	/**
+	 * This is a controller for sign up window
+	 * 
+	 * @implNote implements Initializable - initialize all predefined data
+	 */
 	public Data d;
 	public ObservableList<Data> ob = FXCollections.observableArrayList();
 	public ArrayList<Reports> visitors = new ArrayList<Reports>();
@@ -21,9 +30,10 @@ public class ReportsController {
 
 	public int sumSolo = 0, sumMembers = 0, sumGroups = 0;
 
-	// sumSolo=individuals that entered the park
-	// sumMembers=members and family members that entered the park
-	// sumGroups=groups that entered to the park
+	/**
+	 * sumSolo=individuals that entered the park, sumMembers=members and family
+	 * members that entered the park, sumGroups=groups that entered to the park
+	 */
 	Float Traveler_cnt, Traveler_income, Member_cnt, Member_income, Family_cnt, Family_income, Group_cnt, Group_income;
 
 	public void makeMonthlyIncomeReport(Date Month) {
@@ -34,6 +44,17 @@ public class ReportsController {
 		ClientUI.chat.accept(sb.toString());
 	}
 
+	/**
+	 * Description of gotMessage(String[] msg) - handle response from server, switch
+	 * control to manage all functions
+	 *
+	 * @param msg    - String containing information, return from server side with
+	 *               function result or additional data.
+	 * @param msg[0] - return destination functions name.
+	 * 
+	 * @throws IOException -From inner methods
+	 * @return void - no return, but a message will be printed in the process.
+	 */
 	public void gotMessage(String[] msg) throws IOException {
 		String cases = msg[0];
 		switch (cases) {
@@ -56,6 +77,14 @@ public class ReportsController {
 		}
 	}
 
+	/**
+	 * Description of getMonth(String month)
+	 *
+	 * @param month - String containing month name.
+	 * 
+	 * @throws IOException -From inner methods
+	 * @return String - month numeric representation as a string
+	 */
 	private String getMonth(String month) {
 		switch (month) {
 		case "Jan":
@@ -88,6 +117,16 @@ public class ReportsController {
 		}
 	}
 
+	/**
+	 * Description of getData(String month, String year, String park)
+	 *
+	 * @param month - String containing wanted month.
+	 * @param year  - String containing wanted year.
+	 * @param park  - String containing wanted park.
+	 * 
+	 * @return void - this function requests data from server, the response will be
+	 *         catched in "gotMessage"
+	 */
 	public void getData(String month, String year, String park) {
 		StringBuffer sb = new StringBuffer();
 		sb.append("getData");
@@ -101,14 +140,30 @@ public class ReportsController {
 		ClientUI.chat.accept(sb.toString());
 	}
 
+	/**
+	 * Description of getSolo()
+	 * 
+	 * @return int - this function returns how many solo visitors (travelers) has
+	 *         entered the park.
+	 */
 	public int getSolo() {
 		return this.sumSolo;
 	}
 
+	/**
+	 * Description of getSolo()
+	 * 
+	 * @return int - this function returns how many members has entered the park.
+	 */
 	public int getMembers() {
 		return this.sumMembers;
 	}
 
+	/**
+	 * Description of getSolo()
+	 * 
+	 * @return int - this function returns how many groups has entered the park.
+	 */
 	public int getGroups() {
 		return this.sumGroups;
 	}
@@ -152,6 +207,17 @@ public class ReportsController {
 		}
 	}
 
+	/**
+	 * Description of getDataEntranceTimesAndStay(String month, String year, String
+	 * park)
+	 *
+	 * @param month - String containing wanted month.
+	 * @param year  - String containing wanted year.
+	 * @param park  - String containing wanted park.
+	 * 
+	 * @return void - this function requests data from server, the response will be
+	 *         catched in "gotMessage"
+	 */
 	public void getDataEntranceTimesAndStay(String month, String year, String wantedpark) {
 		StringBuffer sb = new StringBuffer();
 		this.month = month;
@@ -167,12 +233,23 @@ public class ReportsController {
 		ClientUI.chat.accept(sb.toString());
 	}
 
+	/**
+	 * Description of dealWithgetDataEntranceTimesAndStay(String[] msg) this
+	 * function handles the received data from server after executing
+	 * "getDataEntranceTimesAndStay".
+	 *  
+	 * @param msg[i]   is numOfVisitors.
+	 * @param msg[i+1] is the type.
+	 * @param msg[i+2] is entrance time.
+	 * @param msg[i+3] is exit time
+	 * @param msg[i+4] is visit date
+	 * 
+	 * @return void - this function updates 3 arrays: visitors, members and groups
+	 *         in order to create detailed reports.
+	 */
 	private void dealWithgetDataEntranceTimesAndStay(String[] msg) {
-		/*
-		 * msg[0] is numOfVisitors, msg[1] is type, msg[2] is entrance time, msg[3] is
-		 * exit time.
-		 */
 		int i = 1;
+
 		while (!(msg[i].equals("Done"))) {
 
 			String type = msg[i + 1];
@@ -181,10 +258,10 @@ public class ReportsController {
 				visitors.add(new Reports(msg[i], msg[i + 1], msg[i + 2], msg[i + 3], msg[i + 4]));
 				break;
 			case "Member":
-			case "familyMember":
+			case "Family":
 				members.add(new Reports(msg[i], msg[i + 1], msg[i + 2], msg[i + 3], msg[i + 4]));
 				break;
-			case "groupGuide":
+			case "Group":
 				groups.add(new Reports(msg[i], msg[i + 1], msg[i + 2], msg[i + 3], msg[i + 4]));
 				break;
 			default:

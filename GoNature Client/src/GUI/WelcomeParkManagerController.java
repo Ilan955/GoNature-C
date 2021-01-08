@@ -62,6 +62,11 @@ public class WelcomeParkManagerController implements Initializable {
 	@FXML
 	private Button SpecialDiscountBTN111;
 
+	@FXML
+	void ClickCreateOverallVisitorsReport(ActionEvent event) {
+
+	}
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		String first = ClientUI.employeeController.getFirstName();

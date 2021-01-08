@@ -10,10 +10,11 @@ import Client.ClientUI;
 
 /**
  * This Class store functions for Sign Up form. firstName - persons first name,
- * lastName - persons last name, phoneNum - persons phone number,
- * email - persons email address, paymentMethod - persons chosen payment method Cash or credit card,
- * memberType - persons type of membership, numOfVisitors - number of visitor on the subscription,
- * checker - flag for marking if an id in already on the DB or not
+ * lastName - persons last name, phoneNum - persons phone number, email -
+ * persons email address, paymentMethod - persons chosen payment method Cash or
+ * credit card, memberType - persons type of membership, numOfVisitors - number
+ * of visitor on the subscription, checker - flag for marking if an id in
+ * already on the DB or not
  */
 
 public class SignUpController {
@@ -39,7 +40,8 @@ public class SignUpController {
 	/**
 	 * Description of init(String id, String firstName, String lastName, String
 	 * phoneNum, String email, String paymentMethod, String memberType, int
-	 * numOfVisitors)
+	 * numOfVisitors) - this function initializes new member by sending all the data
+	 * to the server in order to add new entry to DB
 	 *
 	 * @param id            - persons id
 	 * @param firstName     - persons first name
@@ -89,7 +91,8 @@ public class SignUpController {
 	}
 
 	/**
-	 * Description of gotMessage(String[] msg)
+	 * Description of gotMessage(String[] msg) - handle response from server, switch
+	 * control to manage all functions
 	 *
 	 * @param msg    - String containing information, return from server side with
 	 *               function result or additional data.

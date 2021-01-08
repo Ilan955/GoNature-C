@@ -26,10 +26,10 @@ import javafx.stage.Stage;
 
 public class OrderCancellReport implements Initializable {
 	@FXML
-	private ComboBox MonthCb;
+	private ComboBox<String> MonthCb;
 
 	@FXML
-	private ComboBox YearCb;
+	private ComboBox<String> YearCb;
 
 	@FXML
 	private BarChart<String, Number> chartBar;
@@ -77,7 +77,19 @@ public class OrderCancellReport implements Initializable {
 
 	@FXML
 	void WhenClickBackBtn(ActionEvent event) {
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		Parent root = null;
+		try {
+			root = FXMLLoader.load(getClass().getResource("WelcomeDeparmentEmployee.fxml"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Scene scene = new Scene(root);
+		stage.setTitle("Success Sign Up");
+		stage.setScene(scene);
 
+		stage.show();
 	}
 
 	@FXML

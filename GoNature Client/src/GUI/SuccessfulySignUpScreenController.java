@@ -1,3 +1,8 @@
+/** Description of SignUpScreenController 
+* @author Omri Cohen
+* @version final Dec 23, 2021.
+*/
+
 package GUI;
 
 import java.io.IOException;
@@ -15,6 +20,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
+/**
+ * This is a controller for sign up confirmation window.
+ * 
+ * @implNote implements Initializable - initialize all predefined data
+ */
 public class SuccessfulySignUpScreenController implements Initializable {
 
 	@FXML

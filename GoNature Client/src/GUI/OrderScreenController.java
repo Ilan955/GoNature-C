@@ -32,7 +32,7 @@ import javafx.stage.Stage;
 public class OrderScreenController implements Initializable {
 
 	@FXML
-	private ComboBox WantedParkCB;
+	private ComboBox<String> WantedParkCB;
 
 	@FXML
 	private DatePicker DateLbl;
@@ -41,7 +41,7 @@ public class OrderScreenController implements Initializable {
 	private TextField NumOfVisotrsLbl;
 
 	@FXML
-	private ComboBox TimeOfVisitCB;
+	private ComboBox<String> TimeOfVisitCB;
 	@FXML
 	private TextField EmailLbl;
 

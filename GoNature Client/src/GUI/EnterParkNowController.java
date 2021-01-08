@@ -39,7 +39,7 @@ public class EnterParkNowController implements Initializable {
 	private Label PriceLbl;
 
 	@FXML
-	private ComboBox WantedParkCB;
+	private ComboBox<String> WantedParkCB;
 
 	@FXML
 	private Label DateLbl;
@@ -48,7 +48,7 @@ public class EnterParkNowController implements Initializable {
 	private Label TimeLbl;
 
     @FXML
-    private ComboBox NumOfVisitorsCB;
+    private ComboBox<String> NumOfVisitorsCB;
 
 	@FXML
 	private Button btnCalculatePrice;

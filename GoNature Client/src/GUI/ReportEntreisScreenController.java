@@ -1,3 +1,8 @@
+/** Description of SignUpScreenController 
+* @author Omri Cohen
+* @version final Jan 5, 2021.
+*/
+
 package GUI;
 
 import java.io.IOException;
@@ -25,9 +30,13 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 public class ReportEntreisScreenController implements Initializable {
-
+	/**
+	 * This is a controller for report of How many entered by typr.
+	 * 
+	 * @implNote implements Initializable - initialize all predefined data
+	 */
 	@FXML
-	private ComboBox<String> WantedMonthDATE;
+	private ComboBox<String> monthCB;
 
 	@FXML
 	private ComboBox<String> YearCB;
@@ -70,10 +79,15 @@ public class ReportEntreisScreenController implements Initializable {
 	@FXML
 	private PieChart visitorsPie;
 
-	// initialize Combo Boxes
+	/**
+	 * Description of initialize - When this window is opened, this is the first
+	 * function to be activated. initializing all the data needed for this window.
+	 * 
+	 * @return void - no returns.
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		WantedMonthDATE.setItems(inits.setMonthCB());
+		monthCB.setItems(inits.setMonthCB());
 		YearCB.setItems(inits.setYearCB());
 		IndiLbl.setCellValueFactory(new PropertyValueFactory<>("Individuals"));
 		MemberLbl.setCellValueFactory(new PropertyValueFactory<>("Members"));
@@ -107,7 +121,7 @@ public class ReportEntreisScreenController implements Initializable {
 //Click on Get button => view data
 	@FXML
 	void WhenClickOnGetBtn(ActionEvent event) {
-		String month = WantedMonthDATE.getValue().toString();
+		String month = monthCB.getValue().toString();
 		String year = YearCB.getValue().toString();
 		String park = ClientUI.employeeController.getParkName();
 		MonthLBL.setText(month);

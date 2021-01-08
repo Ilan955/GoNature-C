@@ -120,7 +120,7 @@ public class WelcomeAndLoginController {
 		case "ParkManager":
 			changeScreen(event, "WelcomeParkManager.fxml");
 			break;
-		case "DepartmentManager":
+		case "departmentManager":
 			changeScreen(event, "WelcomeDepartmentEmployee.fxml");
 			break;
 		default:

@@ -26,10 +26,10 @@ import javafx.stage.Stage;
 public class usageReportController implements Initializable {
 
 	@FXML
-	private ComboBox monthCB;
+	private ComboBox<String> monthCB;
 
 	@FXML
-	private ComboBox yearCB;
+	private ComboBox<String> yearCB;
 
 
     @FXML

@@ -38,7 +38,7 @@ public class AlternativDatesScreenController implements Initializable {
 	private DatePicker EndDateLbl;
 
 	@FXML
-	private ComboBox FromLbl;
+	private ComboBox<?> FromLbl;
 
 	@FXML
 	private Label UserIdLbl;
@@ -65,7 +65,7 @@ public class AlternativDatesScreenController implements Initializable {
 	private TableColumn<Data, String> choseOrder;
 
 	@FXML
-	private ComboBox TimeOfVisitCB;
+	private ComboBox<String> TimeOfVisitCB;
 
 	ObservableList<String> listForTimes;
 
@@ -95,7 +95,7 @@ public class AlternativDatesScreenController implements Initializable {
 	}
 
 	private void addButtonToTable() {
-		TableColumn<Data, Void> colBtn = new TableColumn("Choose Order");
+		TableColumn<Data, Void> colBtn = new TableColumn<Data, Void>("Choose Order");
 
 		Callback<TableColumn<Data, Void>, TableCell<Data, Void>> cellFactory = new Callback<TableColumn<Data, Void>, TableCell<Data, Void>>() {
 			@Override
@@ -176,7 +176,7 @@ public class AlternativDatesScreenController implements Initializable {
 	}
 
 	// if don't want to enter the waiting list, clicking back and redirect to the
-	// Unapproved order
+	// not approved order
 	@FXML
 	void WhenClickBackBtn(ActionEvent event) throws IOException {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
