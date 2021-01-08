@@ -114,13 +114,13 @@ public class WelcomeAndLoginController {
 		ClientUI.parkController.DetailsPark(ClientUI.employeeController.getParkName());
 		String whichScreen = ClientUI.employeeController.getType();
 		switch (whichScreen) {
-		case "DepartmentEmployee":
+		case "departmentEmployee":
 			changeScreen(event, "welcomeEmployee.fxml");
 			break;
-		case "ParkManager":
+		case "parkManager":
 			changeScreen(event, "WelcomeParkManager.fxml");
 			break;
-		case "DepartmentManager":
+		case "departmentManager":
 			changeScreen(event, "WelcomeDepartmentEmployee.fxml");
 			break;
 		default:

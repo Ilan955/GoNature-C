@@ -11,14 +11,33 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+/**
+ * This GUI will open when the employee choose to enter specific traveller in
+ * park and to choose if approve or don't approve the request only provided that
+ * there is a place in the park
+ * 
+ * @author Liad Yadin
+ *
+ */
 public class ApproveEmployeeForEnterTraveller {
-
+	/**
+	 * variable for refusal enter park for casual traveler
+	 */
 	@FXML
 	private Button notApproveBtn;
-
+	/**
+	 * variable for approve enter park for casual traveler
+	 */
 	@FXML
 	private Button approveBtn;
 
+	/**
+	 * this method is enabled when the park employee approve the request of casual
+	 * traveller, update status of request to 1 and back to the previous page
+	 * 
+	 * @param event - when clicked on Approve button
+	 * @throws IOException
+	 */
 	@FXML
 	void whenClickedApproveBtn(ActionEvent event) throws IOException {
 		Stage stage = (Stage) approveBtn.getScene().getWindow();
@@ -35,6 +54,13 @@ public class ApproveEmployeeForEnterTraveller {
 
 	}
 
+	/**
+	 * this method is enabled when the park employee don't approve the request of
+	 * casual traveller,update status of request to 0 and back to the previous page
+	 * 
+	 * @param event- when clicked on Approve button
+	 * @throws IOException
+	 */
 	@FXML
 	void whenClickedDontApprove(ActionEvent event) throws IOException {
 		Stage stage = (Stage) notApproveBtn.getScene().getWindow();

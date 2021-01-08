@@ -11,9 +11,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class ReportsController {
-
-	public Data d;
+	/** data object for save the data of the table on ObservableList ob  */
+	public Data d1;
+	/** data object for save the data of the table on ObservableList ob2  */
+	public Data d2;
+	/**ObservableList for management data in usage table */
 	public ObservableList<Data> ob = FXCollections.observableArrayList();
+	/**ObservableList for management data in usage line chart */
+	public ObservableList<Data> ob2 = FXCollections.observableArrayList();
 	public ArrayList<Reports> visitors = new ArrayList<Reports>();
 	public ArrayList<Reports> members = new ArrayList<Reports>();
 	public ArrayList<Reports> groups = new ArrayList<Reports>();
@@ -44,6 +49,9 @@ public class ReportsController {
 			break;
 		case "getTableOfUnFullCapacityInDates":
 			filldateofNotfullCapacityTable(msg);
+			break;
+		case "getUnFullCapacityTableInDatesAndNumbers":
+			filldateofNotfullCapacityLineChart(msg);
 			break;
 		case "getDataEntranceTimesAndStay":
 			dealWithgetDataEntranceTimesAndStay(msg);
@@ -129,6 +137,15 @@ public class ReportsController {
 		this.Group_income = Float.valueOf(Group_income);
 	}
 
+	/**
+	 * this method sends to server month, year and name park and get from DB in
+	 * fullcapacity table only dates that the park wasn't full in this month and
+	 * year for using in table unuse
+	 * 
+	 * @param month-     the month we want to get the report
+	 * @param year       - the year we want to get the report
+	 * @param wantedpark - name park we want to make a report
+	 */
 	public void getTableOfUnFullCapacityInDates(String month, String year, String wantedpark) {
 		StringBuffer sb = new StringBuffer();
 		sb.append("getTableOfUnFullCapacityInDates");
@@ -141,13 +158,55 @@ public class ReportsController {
 		ClientUI.chat.accept(sb.toString());
 	}
 
+	/**
+	 * this method sends to server month, year and name park and get from DB in
+	 * fullcapacity table details that the park wasn't full in this month and year
+	 * for use in line chart
+	 * 
+	 * @param month-     the month we want to get the report
+	 * @param year       - the year we want to get the report
+	 * @param wantedpark - name park we want to make a reoprt
+	 */
+	public void getUnFullCapacityTableInDatesAndNumbers(String month, String year, String wantedpark) {
+		StringBuffer sb = new StringBuffer();
+		sb.append("getUnFullCapacityTableInDatesAndNumbers");
+		sb.append(" ");
+		sb.append(getMonth(month));
+		sb.append(" ");
+		sb.append(year);
+		sb.append(" ");
+		sb.append(wantedpark);
+		ClientUI.chat.accept(sb.toString());
+	}
+
+	/**
+	 * this method fills the table for the table(by ObservableList<Data> )
+	 * 
+	 * @param msg- the details from DB
+	 */
 	private void filldateofNotfullCapacityTable(String[] msg) {
 		int cnt = 1;
 		if (!(msg[1].equals("Done"))) {
 			while (!(msg[cnt].equals("Done"))) {
-				d = new Data(msg[cnt]);
-				ob.add(d);
+				d1 = new Data(msg[cnt]);
+				ob.add(d1);
 				cnt++;
+			}
+		}
+	}
+
+	/**
+	 * this method fills the table for line chart (by ObservableList<Data> )
+	 * 
+	 * @param msg- the details from DB
+	 */
+	private void filldateofNotfullCapacityLineChart(String[] msg) {
+		int cnt = 1;
+		if (!(msg[1].equals("Done"))) {
+			while (!(msg[cnt].equals("Done"))) {
+				d2 = new Data(msg[cnt], Integer.parseInt(msg[cnt + 1]), Integer.parseInt(msg[cnt + 2]));
+				ob2.add(d2);
+				cnt += 3;
 			}
 		}
 	}

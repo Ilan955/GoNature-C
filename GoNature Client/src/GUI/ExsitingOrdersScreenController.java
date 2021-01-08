@@ -179,16 +179,28 @@ public class ExsitingOrdersScreenController implements Initializable {
 								System.out.println("GOOD");
 								int numofvisit = ClientUI.userController.traveller.getNumberOfVisitors();
 								String park = ClientUI.orderController.order.getWantedPark();
-								try {
-									ClientUI.entranceParkController.setCurrentVisitros(park, numofvisit);
-									if (ClientUI.parkController.getCurrentVisitors(park)
-											+ ClientUI.parkController.getCurrentUnexpectedVisitors(
-													park) == ClientUI.parkController.getMaxVisitors(park)) {
-										ClientUI.parkController.updateStatusForCapacityParkToFull(park);
+								String id = ClientUI.userController.traveller.getId();
+								int maxUpdateCurrentVisitors;
+								maxUpdateCurrentVisitors = ClientUI.parkController.getCurrentVisitors(park)
+										+ ClientUI.parkController.getCurrentUnexpectedVisitors(park) + numofvisit;
+
+								ClientUI.entranceParkController.updateEnterTimeForTravellerWithOrder(park, id);
+								ClientUI.entranceParkController.setCurrentVisitros(park, numofvisit);
+
+								if (maxUpdateCurrentVisitors == ClientUI.parkController.getMaxVisitors(park)) {
+									ClientUI.parkController.updateStatusForCapacityParkToFull(park);
+								} else {
+									if (!ClientUI.parkController.IfgetDateExistInDB(park)) {
+										ClientUI.parkController.enterDateofFullCapcityPark(park, LocalDate.now(), 0,
+												ClientUI.parkController.getMaxVisitors(park), maxUpdateCurrentVisitors);
+
+									} else {
+										if (ClientUI.parkController
+												.getMaxcurrentVisitorsPerDay(park) < maxUpdateCurrentVisitors)
+											ClientUI.parkController.changeMaxcurrentAmountOfVisitorsForCapacityPark(
+													park, maxUpdateCurrentVisitors);
 									}
-								} catch (IOException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
+
 								}
 							} else {
 								Alert a = new Alert(AlertType.NONE, "Now it's not the time for your order!");

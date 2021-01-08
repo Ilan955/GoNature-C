@@ -20,6 +20,11 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+/**
+ * 
+ * @author Liad Yadin
+ *
+ */
 public class WelcomeTravellerController implements Initializable {
 
 	@FXML
@@ -47,13 +52,9 @@ public class WelcomeTravellerController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		try {
-			if (!(ClientUI.entranceParkController.IfgetTravellerInParkExistInDB(ID))
-					&& !((ClientUI.entranceParkController.IfgetOrderInParkExistInDB(ID))))
-				exitParkBtn.setVisible(false);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		if (!(ClientUI.entranceParkController.IfgetTravellerInParkExistInDB(ID))
+				&& !((ClientUI.entranceParkController.IfgetOrderInParkExistInDB(ID))))
+			exitParkBtn.setVisible(false);
 
 		String typ = ClientUI.userController.traveller.getType();
 		if (typ.equals("") || typ.equals("preOrderTraveller") || typ.equals("Traveller"))
@@ -102,6 +103,14 @@ public class WelcomeTravellerController implements Initializable {
 
 	}
 
+	/**
+	 * This method will available to everyone. if the traveler will click this
+	 * button he will move to 'EnterParkNow' screen if he will choose this option -
+	 * he will be Casual taveller type in park
+	 * 
+	 * @param event- when click enter without order
+	 * @throws IOException
+	 */
 	@FXML
 	void WhenPressEnterWithoutOrderBtn(ActionEvent event) throws IOException {
 		Stage stage = (Stage) btnWithoutOrder.getScene().getWindow();
@@ -152,6 +161,16 @@ public class WelcomeTravellerController implements Initializable {
 		stage.show();
 	}
 
+	/**
+	 * This method will be available only who stay in park this moment and need to
+	 * exit from park here he can click on Exit and the details on DB will update:
+	 * ExitTime of this traveler and the data of the amount current visitors in the
+	 * park when the traveler exit from the park - he log out from the system and
+	 * the window of 'Bye Bye' is display him
+	 * 
+	 * @param event - when click exit button
+	 * @throws IOException
+	 */
 	@FXML
 	void WhenPressExitParkBtn(ActionEvent event) throws IOException {
 		int numofvisitors;
@@ -171,6 +190,11 @@ public class WelcomeTravellerController implements Initializable {
 			ClientUI.entranceParkController.setCurrentVisitros(park, numofvisitors);
 			ClientUI.entranceParkController.updateExitTimeForTravellerWithOrder(park, ID);
 		}
+		// Log out
+		ClientUI.userController.setAlreadyLoggedIn(false);
+		ClientUI.userController.identify("deleteFromDbWhenlogOutTraveller " + ClientUI.userController.traveller.getId()
+				+ " " + ClientUI.userController.traveller.getMemberID());
+		ClientUI.userController.traveller = null;
 
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		FXMLLoader loader = new FXMLLoader();

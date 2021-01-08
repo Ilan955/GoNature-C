@@ -75,23 +75,14 @@ public class WelcomeParkManagerController implements Initializable {
 		String park = ClientUI.employeeController.getParkName();
 		ParkName.setText(park);
 		int current = 0, currentVisitors = 0, unExpected = 0;
-		try {
-			currentVisitors = ClientUI.parkController.getCurrentVisitors(park);
-			unExpected = ClientUI.parkController.getCurrentUnexpectedVisitors(park);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		currentVisitors = ClientUI.parkController.getCurrentVisitors(park);
+		unExpected = ClientUI.parkController.getCurrentUnexpectedVisitors(park);
 		current = currentVisitors + unExpected;
 		numberOFVisitorsLabel.setText("" + current);
-		try {
-			MaxVisitorsField.setText("" + ClientUI.parkController.getMaxVisitors(park));
-			GapField.setText("" + (ClientUI.parkController.getMaxVisitors(park)
-					- ClientUI.parkController.getMaxAvailableVisitors(park))); // --> need to know what the gap is
-			durationField.setText("" + ClientUI.parkController.getMaxDuration(park));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		MaxVisitorsField.setText("" + ClientUI.parkController.getMaxVisitors(park));
+		GapField.setText("" + (ClientUI.parkController.getMaxVisitors(park)
+				- ClientUI.parkController.getMaxAvailableVisitors(park))); // --> need to know what the gap is
+		durationField.setText("" + ClientUI.parkController.getMaxDuration(park));
 
 		// int current = ParkController.getCurrentVisitors(park) +
 		// ParkController.getCurrentUnexpectedVisitors(park);
@@ -224,6 +215,11 @@ public class WelcomeParkManagerController implements Initializable {
 		a.setHeaderText("Logout instructions");
 		a.show();
 		return;
+	}
+
+	@FXML
+	void ClickCreateOverallVisitorsReport(ActionEvent event) {
+
 	}
 	/*
 	 * @Override public void start(Stage primaryStage) throws Exception {
