@@ -136,7 +136,10 @@ public class WelcomeParkManagerController implements Initializable {
 	}
 
 	
+	@FXML
+	void WhenOverGapInPArkForHelp(ActionEvent event) {
 
+	}
 	@FXML
 	void WhenClickCreateMonthlyIncomeReportBtn(ActionEvent event) throws IOException {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

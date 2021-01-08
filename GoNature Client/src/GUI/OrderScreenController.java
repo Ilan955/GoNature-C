@@ -169,7 +169,12 @@ public class OrderScreenController implements Initializable {
 	@FXML
 	void WhenClickCalculatePriceBtn(ActionEvent event) {
 		int numOfVisitors = Integer.parseInt(NumOfVisotrsLbl.getText());
-		ClientUI.discountController.getTotalPrice("FamilyMember", numOfVisitors, "FutreOrder", "True");
+		String type=ClientUI.userController.traveller.getType();
+		if (type.equals("Family") || type.equals("Group"))
+			ClientUI.discountController.getTotalPrice(type, numOfVisitors, "FutreOrder", "True");
+		else
+			ClientUI.discountController.getTotalPrice(type, numOfVisitors, "FutreOrder", "False");
+	
 		PriceLbl.setText(new DecimalFormat("##.##").format(ClientUI.discountController.getFinalPriceWithoutDM()));
 		ClientUI.discountController.setFinalPrice(0);
 	}
@@ -206,7 +211,7 @@ public class OrderScreenController implements Initializable {
 				// !!!!!!! TYPE NEED TO BE CHANGED !!!!!!!!
 				ClientUI.orderController.setEmailAndPhone(EmailLbl.getText(), PhoneNumberLbl.getText());
 				ClientUI.orderController.n_order = true;
-				ClientUI.orderController.canMakeOrder(time, date, wanted, "Member", numOfVisitors);
+				ClientUI.orderController.canMakeOrder(time, date, wanted, ClientUI.userController.traveller.getType(), numOfVisitors);
 
 				/*
 				 * after knowing if the order is possible or not, showing the right screen/

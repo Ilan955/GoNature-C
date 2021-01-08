@@ -65,8 +65,13 @@ public class welcomeDepartmentManagerController implements Initializable {
 	}
 
 	@FXML
-	void WhenPressNotYetApprovedDiscountsBTN(ActionEvent event) {
-
+	void WhenPressNotYetApprovedDiscountsBTN(ActionEvent event) throws IOException {
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		FXMLLoader loader = new FXMLLoader();
+		Pane root = loader.load(getClass().getResource("discountForDM.fxml").openStream()); // screen name here
+		Scene scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
 	}
 
 	/**
@@ -117,9 +122,17 @@ public class welcomeDepartmentManagerController implements Initializable {
 	}
 
 	@FXML
-	void WhenPressproduceVisitReportBtn(ActionEvent event) {
-
+	void WhenPressproduceVisitReportBtn(ActionEvent event) throws IOException {
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		FXMLLoader loader = new FXMLLoader();
+		Parent root = loader.load(getClass().getResource("MonthlyReport.fxml").openStream());
+		Scene scene = new Scene(root);
+		
+		stage.setScene(scene);
+		stage.show();
 	}
+	
+	
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {

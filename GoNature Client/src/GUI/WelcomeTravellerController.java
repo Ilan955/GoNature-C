@@ -142,6 +142,10 @@ public class WelcomeTravellerController implements Initializable {
 	 */
 	@FXML
 	void WhenPressEnterWithoutOrderBtn(ActionEvent event) throws IOException {
+		String type= ClientUI.userController.traveller.getType();
+		if(!type.equals("Family")||!type.equals("Group")) {
+			ClientUI.userController.traveller.setType("Traveller");
+		}
 		Stage stage = (Stage) btnWithoutOrder.getScene().getWindow();
 		FXMLLoader loader = new FXMLLoader();
 		Pane root = loader.load(getClass().getResource("EnterParkNow.fxml").openStream());
@@ -177,6 +181,10 @@ public class WelcomeTravellerController implements Initializable {
 
 	@FXML
 	void WhenPressMakeNewOrderBtn(ActionEvent event) throws IOException {
+		String type= ClientUI.userController.traveller.getType();
+		if(!type.equals("Family")||!type.equals("Group")) {
+			ClientUI.userController.traveller.setType("PreOrderedTraveller");
+		}
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		FXMLLoader loader = new FXMLLoader();
 		Pane root = loader.load(getClass().getResource("NewOrder.fxml").openStream());

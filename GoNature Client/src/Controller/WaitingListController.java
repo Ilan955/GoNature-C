@@ -18,7 +18,7 @@ public class WaitingListController {
 	 * 
 	 * @param orderNumber
 	 */
-	void enterWaitingList(int orderNumber) {
+	public void enterWaitingList(int orderNumber) {
 		StringBuffer sb = new StringBuffer();
 		sb.append("enterWaitingList");// method name
 		sb.append(" ");

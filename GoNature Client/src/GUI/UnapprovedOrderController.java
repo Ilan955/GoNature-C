@@ -85,6 +85,7 @@ public class UnapprovedOrderController implements Initializable {
 		Order tmp = ClientUI.orderController.order;
 		ClientUI.orderController.confirmOrder();
 		ClientUI.orderController.ChangeToWaitOrder(tmp);
+		ClientUI.waitingListController.enterWaitingList(tmp.getOrderNum());
 	}
 
 	/**
