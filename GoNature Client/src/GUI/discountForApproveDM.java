@@ -1,6 +1,7 @@
 package GUI;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import Client.ClientUI;
@@ -15,11 +16,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
@@ -65,8 +68,9 @@ public class discountForApproveDM implements Initializable{
 			}
 	    }
 
+	   
 	    @FXML
-	    void whenClickInformationBtn(ActionEvent event) {
+	    void WhenClickInformationBtn(MouseEvent event) {
 	    	Alert a = new Alert(AlertType.INFORMATION, "On this screen, you will see park discount requests waiting for confirmation.\r\n" + 
 	    			"The discount will become valid only if you chose to approve it.\r\n" + 
 	    			"*every time the park manager wants to set a discount the discount will be sent here.");
@@ -74,6 +78,7 @@ public class discountForApproveDM implements Initializable{
 	    	a.setAlertType(AlertType.INFORMATION);
 			a.show();
 	    }
+
 	  
 
 		@Override
@@ -218,6 +223,26 @@ public class discountForApproveDM implements Initializable{
 			RequestTable.getColumns().add(colBtn);
 
 		}
+		@FXML
+		void WhenClickExitBtn(MouseEvent event) {
+			Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+			alert.setTitle("Exit");
+			alert.setHeaderText("Are you sure you want to exit the application?");
+			alert.setResizable(false);
+			alert.setContentText("Select yes if you want, or not if you want to get back!");
+			((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Yes");
+			((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("No");
+			Optional<ButtonType> result = alert.showAndWait();
+			if (!result.isPresent())
+				alert.close();
+			else if (result.get() == ButtonType.OK) {
+				ClientUI.LogOutUtility.logOutEmployee();
+				Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+				stage.close();
+			} else if (result.get() == ButtonType.CANCEL)
+				alert.close();
+		}
+
 
 	
 

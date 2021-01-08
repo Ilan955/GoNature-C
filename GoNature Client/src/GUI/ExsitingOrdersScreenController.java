@@ -13,6 +13,7 @@
  */
 package GUI;
 
+
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -33,6 +34,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -70,7 +72,9 @@ public class ExsitingOrdersScreenController implements Initializable {
 	/** PriceLbl - TableColumn for the Existing order */
 	@FXML
 	private TableColumn<Data, String> PriceLbl;
-
+    @FXML
+    private Label userIDFORLbl;
+    
 	/**
 	 * Description of WhenClickBackBtn(ActionEvent event) in ExsistingOrders Screen
 	 * This method is responsible to get the user back to the Welcome traveller
@@ -113,7 +117,7 @@ public class ExsitingOrdersScreenController implements Initializable {
 		PriceLbl.setCellValueFactory(new PropertyValueFactory<>("Price"));
 		StatusLbl.setCellValueFactory(new PropertyValueFactory<>("Status"));
 		CommentsLbl.setCellValueFactory(new PropertyValueFactory<>("Comments"));
-
+		userIDFORLbl.setText(ClientUI.userController.traveller.getId());
 		ClientUI.orderController.getExsistingOrders();
 		System.out.println(ClientUI.orderController.ob.size());
 		ExistingOrderTable.setItems(ClientUI.orderController.ob);

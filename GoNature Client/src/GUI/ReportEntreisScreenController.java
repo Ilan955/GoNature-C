@@ -165,7 +165,7 @@ public class ReportEntreisScreenController implements Initializable {
 		if (!result.isPresent())
 			alert.close();
 		else if (result.get() == ButtonType.OK) {
-			ClientUI.LogOutUtility.logOutTraveller();
+			ClientUI.LogOutUtility.logOutEmployee();
 			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			stage.close();
 		} else if (result.get() == ButtonType.CANCEL)

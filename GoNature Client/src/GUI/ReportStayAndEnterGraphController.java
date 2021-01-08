@@ -92,7 +92,7 @@ public class ReportStayAndEnterGraphController implements Initializable {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		Parent root = null;
 		try {
-			root = FXMLLoader.load(getClass().getResource("WelcomeDeparmentEmployee.fxml"));
+			root = FXMLLoader.load(getClass().getResource("WelcomeDepartmentEmployee.fxml"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

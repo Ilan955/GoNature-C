@@ -76,7 +76,7 @@ public class confirmationScreenController implements Initializable {
 		EmailLbl.setText(ClientUI.orderController.getEmail());
 		PhoneLbl.setText(ClientUI.orderController.getPhone());
 		NumVisitLlbl.setText(Integer.toString(o.getNumberOfVisitors()));
-		Float finalPric= ClientUI.discountController.calculateFinalPrice(o);
+		Float finalPric=ClientUI.discountController.calculateFinalPrice(o);
 		PriceLbl.setText(Float.toString(finalPric));
 	}
 
@@ -146,6 +146,7 @@ public class confirmationScreenController implements Initializable {
 	 */
 	@FXML
 	void whenClickBackBtn(ActionEvent event) throws IOException {
+		ClientUI.orderController.isConfirm=false;
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		Parent root = FXMLLoader.load(getClass().getResource("NewOrder.fxml"));
 		Scene scene = new Scene(root);

@@ -98,11 +98,6 @@ public class WelcomeEmployeeController implements Initializable {
 
 	}
 
-	@FXML
-	void WhenClickParkCapacityBtn(ActionEvent event) { // don't know if its even needed.. It could appear automatic when
-														// screen is shown.
-
-	}
 
 	@FXML
 	void WhenClickSignUpNewMemberBtn(ActionEvent event) throws IOException {

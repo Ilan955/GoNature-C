@@ -213,21 +213,28 @@ public class DiscountController {
 		sb.append(" ");
 		switch (typeOfMember) {
 
+		case "Traveller":
+			if (orderKind.equals("FutreOrder"))
+				sb.append("OrderdIOF");
+			else
+				sb.append("PreOrderdIOF");
+			break;
 		case "PreOrderedTraveller":
 			if (orderKind.equals("FutreOrder"))
 				sb.append("OrderdIOF");
 			else
 				sb.append("PreOrderdIOF");
 			break;
-
-		case "FamilyMember":
+			
+			
+		case "Family":
 			if (orderKind.equals("FutreOrder"))
 				sb.append("OrderdIOF");
 			else
 				sb.append("PreOrderdIOF");
 			break;
 
-		case "GroupGuide":
+		case "Group":
 			if (orderKind.equals("FutreOrder"))
 				sb.append("OrderdG");
 

@@ -95,8 +95,18 @@ public class OrderController {
 	 * 
 	 */
 	public void canMakeOrder(LocalTime time, LocalDate dateOfVisit, String wantedPark, String type, int numOfVisitors) {
-		if (n_order)
-			order = new Order(5, time, dateOfVisit, wantedPark, numOfVisitors, (float) 50);
+		if (n_order) {
+			if (type.equals("Family") || type.equals("Group"))
+				ClientUI.discountController.getTotalPrice(type, numOfVisitors, "FutreOrder", "True");
+			else
+				ClientUI.discountController.getTotalPrice(type, numOfVisitors, "FutreOrder", "False");
+			
+			float finalPr = ClientUI.discountController.getFinalPriceWithoutDM();
+			
+			System.out.println("The final price before the discount is: "+finalPr);
+			order = new Order(5, time, dateOfVisit, wantedPark, numOfVisitors,finalPr);
+			
+		}
 		LocalTime openingTime = LocalTime.of(8, 0);
 		LocalTime closingTime = LocalTime.of(23, 30);
 		LocalTime turn = LocalTime.of(11, 00);
@@ -180,19 +190,20 @@ public class OrderController {
 	 * 
 	 */
 	public boolean checkValidValues(String phone, String email) {
-		if (phone.length() == 10) {
-			String[] tmp = email.split("@");
-			try {
-				int areDigits = Integer.parseInt(phone);
-			} catch (Exception e) {
-				return false;
-			}
+//		if (phone.length() == 10) {
+//			String[] tmp = email.split("@");
+//			try {
+//				int areDigits = Integer.parseInt(phone);
+//			} catch (Exception e) {
+//				return false;
+//			}
+//
+//			if (tmp.length == 2)
+//				return true;
+//		}
+		return true;
 
-			if (tmp.length == 2)
-				return true;
-		}
-
-		return false;
+		//return false;
 	}
 
 	public boolean getValid() {
@@ -428,6 +439,7 @@ public class OrderController {
 		sb.append(" ");
 		sb.append("Confirmed");
 		order = null;
+		isConfirm =true;
 		ClientUI.chat.accept(sb.toString());
 
 	}
@@ -478,7 +490,8 @@ public class OrderController {
 		StringBuffer sb = new StringBuffer();
 		sb.append("getExsistingOrders");
 		sb.append(" ");
-		sb.append("4");
+		System.out.println(ClientUI.userController.traveller.getId());
+		sb.append(ClientUI.userController.traveller.getId());
 		ClientUI.chat.accept(sb.toString());
 
 	}
