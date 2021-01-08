@@ -44,9 +44,10 @@ public class enjoyMessageController implements Initializable {
 		String st = String.valueOf(ClientUI.parkController.park.getMaxDurationVisit());
 		Lbltime.setText(st);
 	}
-/**
- * for present the time
- */
+
+	/**
+	 * for present the time
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		setTime();

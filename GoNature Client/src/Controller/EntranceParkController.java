@@ -222,9 +222,9 @@ public class EntranceParkController {
 		checkIfOrderExistsInParkAndConfirmed(id);
 		return OrderExistsInDB;
 	}
-	
+
 	/**
-	 * this method sends to server id for get the data of this order from DB 
+	 * this method sends to server id for get the data of this order from DB
 	 * 
 	 * @param id that we want his order details today
 	 */
@@ -236,12 +236,14 @@ public class EntranceParkController {
 		String res = sb.toString();
 		ClientUI.chat.accept(res);
 	}
-/**
- * gotMesage from server - for handle all messages that sent
- * there is cases of got messages - and handle by switch case and updates variables
- * there is case of "done" that we don't need to do something - the action accrued in DB
- * @param msg - the massage that we got from server
- */
+
+	/**
+	 * gotMesage from server - for handle all messages that sent there is cases of
+	 * got messages - and handle by switch case and updates variables there is case
+	 * of "done" that we don't need to do something - the action accrued in DB
+	 * 
+	 * @param msg - the massage that we got from server
+	 */
 	public void gotMesage(String[] msg) {
 		String cases = msg[0];
 		switch (cases) {

@@ -20,14 +20,18 @@ import javafx.stage.Stage;
  *
  */
 public class ApproveEmployeeForEnterTraveller {
+
 	/**
 	 * variable for refusal enter park for casual traveler
 	 */
+
 	@FXML
 	private Button notApproveBtn;
+
 	/**
 	 * variable for approve enter park for casual traveler
 	 */
+
 	@FXML
 	private Button approveBtn;
 

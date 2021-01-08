@@ -10,6 +10,7 @@ import Controller.RequestsController;
 import Controller.SignUpController;
 import Controller.UserController;
 import Controller.WaitingListController;
+import Controller.logOutUtility;
 import GUI.EnterParkNowController;
 import GUI.OrderScreenController;
 import GUI.ReportEntreisScreenController;
@@ -41,7 +42,7 @@ public class ClientUI extends Application {
 	public static DiscountController discountController;
 	public static WaitingListController waitingListController;
 	// public static UserController userController;
-
+	public static logOutUtility LogOutUtility;
 	// public static UserController userController;
 	public static SignUpController signUpController;
 	public static SignUpScreenController signUpScreenController;
@@ -74,7 +75,7 @@ public class ClientUI extends Application {
 		signUpController = new SignUpController();
 		welcomeController = new WelcomeAndLoginController();
 		userController = new UserController();
-
+		LogOutUtility = new logOutUtility();
 		requestsController = new RequestsController();
 
 		reportsController = new ReportsController();

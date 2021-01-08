@@ -1,7 +1,7 @@
 /** Description of SignUpScreenController 
 * @author Omri Cohen
 * @version final Jan 2, 2021.
- */
+*/
 
 package GUI;
 
@@ -75,8 +75,8 @@ public class SignUpScreenController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		PaymentCB.setItems(inits.setTypeMemberCB());
-		TypeMemberCB.setItems(inits.setPaymentCB());
+		TypeMemberCB.setItems(inits.setTypeMemberCB());
+		PaymentCB.setItems(inits.setPaymentCB());
 	}
 
 	/**
@@ -122,15 +122,15 @@ public class SignUpScreenController implements Initializable {
 		numOfVisitors = Integer.valueOf(NumberMembersLbl.getText().toString());
 		paymentMethod = (String) PaymentCB.getValue();
 		memberType = (String) TypeMemberCB.getValue();
-		if (numOfVisitors > 1 && numOfVisitors <= 15 && memberType == "Traveller") {
+		if (numOfVisitors > 1 && memberType == "Traveller") {
 			memberType = "Family Member";
-		} else {
-			if (memberType == "Traveller" && numOfVisitors > 15) {
-				Alert a = new Alert(AlertType.ERROR, "Member type incompatible");
-				a.show();
-				regFlag = false;
-			}
 		}
+		if (memberType == "Group Guide" && numOfVisitors > 15) {
+			Alert a = new Alert(AlertType.ERROR, "Maximum 15 Persons per group!");
+			a.show();
+			regFlag = false;
+		}
+
 		// here we will send the data we got from the form
 		ClientUI.signUpController.checkExist(id);
 		if (ClientUI.signUpController.checker && regFlag == true) {
