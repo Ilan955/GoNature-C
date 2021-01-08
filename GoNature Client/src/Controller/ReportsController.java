@@ -8,6 +8,7 @@ package Controller;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import Client.ClientUI;
@@ -44,7 +45,7 @@ public class ReportsController {
 	 * sumSolo=individuals that entered the park, sumMembers=members and family
 	 * members that entered the park, sumGroups=groups that entered to the park
 	 */
-	Float Traveler_cnt, Traveler_income, Member_cnt, Member_income, Family_cnt, Family_income, Group_cnt, Group_income;
+	public Float Traveler_cnt, Traveler_income, Member_cnt, Member_income, Family_cnt, Family_income, Group_cnt, Group_income;
 
 	/**
 	 * Description of gotMessage(String[] msg) - handle response from server, switch
@@ -83,11 +84,11 @@ public class ReportsController {
 		}
 	}
 
-	public void makeMonthlyIncomeReport(Date Month) {
+	public void makeMonthlyIncomeReport(LocalDate localDate) {
 		StringBuffer sb = new StringBuffer();
 		sb.append("makeMonthlyIncomeReport");// method name
 		sb.append(" ");
-		sb.append(Month.toString());
+		sb.append(localDate.toString());
 		ClientUI.chat.accept(sb.toString());
 	}
 

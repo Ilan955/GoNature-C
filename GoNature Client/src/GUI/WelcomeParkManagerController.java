@@ -135,10 +135,7 @@ public class WelcomeParkManagerController implements Initializable {
 
 	}
 
-	@FXML
-	void ClickCreateOverallVisitorsReport(ActionEvent event) {
-
-	}
+	
 
 	@FXML
 	void WhenClickCreateMonthlyIncomeReportBtn(ActionEvent event) throws IOException {
@@ -236,10 +233,7 @@ public class WelcomeParkManagerController implements Initializable {
 		return;
 	}
 
-	@FXML
-	void WhenOverGapInPArkForHelp(MouseDragEvent event) {
-
-	}
+	
 
 	@FXML
 	void whenClickInformationBtn(ActionEvent event) {
@@ -253,8 +247,23 @@ public class WelcomeParkManagerController implements Initializable {
 
 	@FXML
 	void ClickCreateOverallVisitorsReport(ActionEvent event) {
-
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		FXMLLoader loader = new FXMLLoader();
+		Parent root;
+		try {
+			root = loader.load(getClass().getResource("MonthlyStayAndEnterReport.fxml").openStream());
+			Scene scene = new Scene(root);
+			stage.setTitle("Welcome to GoNature!");
+			stage.setScene(scene);
+			stage.show();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
+	
+	
 	/*
 	 * @Override public void start(Stage primaryStage) throws Exception {
 	 * primaryStage.setOnCloseRequest(e->ClientUI.employeeController.logOutEmployee(
