@@ -21,8 +21,6 @@ import javafx.stage.Stage;
 
 public class OrderController {
 	public Person t;
-//!!!! WHAT NEED TO BE !!!!
-//Traveler t = ClientUI.userController.traveller
 	public Order order;
 	public boolean valid = false;
 	ArrayList<String> mess = new ArrayList<String>();
@@ -216,7 +214,7 @@ public class OrderController {
 	 * visitors overall in the gap if adding will make the maxVisit bigger, move to
 	 * unapproved order
 	 */
-
+	
 	public void checkIfCanMakeOrder(String[] msg) throws IOException {
 
 		int currentVisitorsAtBoundry = Integer.parseInt(msg[1]);
@@ -284,7 +282,7 @@ public class OrderController {
 
 //This method will be responsible for saving the order into the db
 	public void confirmOrder() {
-
+		t = ClientUI.userController.traveller;
 		StringBuffer sb = new StringBuffer();
 		sb.append("confirmOrder");
 		sb.append(" ");
@@ -297,15 +295,13 @@ public class OrderController {
 		sb.append(" ");
 		sb.append(Float.toString(order.getTotalPrice()));
 		sb.append(" ");
-
 		// !!!!!!! NEED TO BE !!!!!!
-		// sb.append(t.getId());
-
-		sb.append("4");
+		sb.append(t.getId());
+		// sb.append("4");
 		sb.append(" ");
 		// !!!!!!! NEED TO BE !!!!!!
-		// sb.append(t.getTYpe());
-		sb.append("F");
+		sb.append(t.getType());
+		// sb.append("F");
 		sb.append(" ");
 		sb.append(Integer.toString(order.getNumberOfVisitors()));
 		sb.append(" ");

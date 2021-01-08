@@ -7,110 +7,138 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import Client.ClientUI;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.chart.Axis;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.scene.input.MouseEvent;
 
+/**
+ * This GUI will give to the park manager an option to do report about usage in
+ * the park. the park manager need to choose month and year. the system will
+ * present in the table the date in this month and this year that the park
+ * wasn't full. in addition, the system will present in the line chart
+ * Precentage of max capacity per day in this month
+ * 
+ * @author Liad Yadin
+ *
+ */
 public class usageReportController implements Initializable {
-
+	/** Combo box for month */
 	@FXML
 	private ComboBox monthCB;
-
+	/** Combo box for year */
 	@FXML
 	private ComboBox yearCB;
-
-
-    @FXML
-    private Button PreviousBtn;
-
+	/** Button for return back screen */
+	@FXML
+	private Button PreviousBtn;
+	/** Button for calculate report */
 	@FXML
 	private Button calculateBtn;
-
-
-    @FXML
-    private Button SendToDmanagerBtn;
-    
-    @FXML
-    private TableView<Data> dateofNotfullCapacityTable;
-
+	/** Line chart for presenting the data */
+	@FXML
+	private LineChart<String, Number> lineChartimePercent;
+	/** The vertical axis of the line chart */
+	@FXML
+	private CategoryAxis days;
+	/** The horizontal axis of the line chart */
+	@FXML
+	private NumberAxis precent;
+	/** Table for presenting the data */
+	@FXML
+	private TableView<Data> dateofNotfullCapacityTable;
+	/** Column in the table for dates */
 	@FXML
 	private TableColumn<Data, String> DateLbl;
-
+	/** List for years */
 	ObservableList<String> listForYears;
+	/** List for months */
 	ObservableList<String> listForMonth;
 
+	/**
+	 * this method for initialize the Combo box of years and months
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		setYearCb();
-		setMonthCb();
-	}
-
-	private void setYearCb() {
-		ArrayList<String> years = new ArrayList<String>();
-		LocalDate lY = LocalDate.now();
-		int base = 2018;
-		for (int i = 2017; i < lY.getYear(); i++) {
-			base++;
-			years.add(Integer.toString(base));
-		}
-		listForYears = FXCollections.observableArrayList(years);
+		listForYears = clientLogic.inits.setYearCB();
+		listForMonth = clientLogic.inits.setMonthCB();
+		monthCB.setItems(listForMonth);
 		yearCB.setItems(listForYears);
 	}
 
-	private void setMonthCb() {
-		ArrayList<String> month = new ArrayList<String>();
-		month.add("Jan");
-		month.add("Fab");
-		month.add("Mar");
-		month.add("Apr");
-		month.add("May");
-		month.add("Jun");
-		month.add("Jul");
-		month.add("Aug");
-		month.add("Sep");
-		month.add("Oct");
-		month.add("Nov");
-		month.add("Dec");
-		listForMonth = FXCollections.observableArrayList(month);
-		monthCB.setItems(listForMonth);
-	}
-
+	/**
+	 * this method will calculate by year and month the data of usage report to the
+	 * table view and line chart
+	 * 
+	 * @param event - when click calculate button
+	 */
 	@FXML
 	void WhenClickCralculateBtn(ActionEvent event) {
 		String year = (String) yearCB.getValue();
 		String month = (String) monthCB.getValue();
 		DateLbl.setCellValueFactory(new PropertyValueFactory<>("Date"));
 		ClientUI.reportsController.ob.clear();
-		ClientUI.reportsController.getTableOfUnFullCapacityInDates(month, year, "Dan"); // ClientUI.employeeController.getParkName()
+		ClientUI.reportsController.getTableOfUnFullCapacityInDates(month, year, "parkA"); // ClientUI.employeeController.getParkName()
 		dateofNotfullCapacityTable.setItems(ClientUI.reportsController.ob);
+
+		String date;
+		int maxVisitors;
+		int maxCurrent;
+		float ratio;
+		ClientUI.reportsController.ob2.clear();
+		ClientUI.reportsController.getUnFullCapacityTableInDatesAndNumbers(month, year, "parkA");
+		XYChart.Series series = new XYChart.Series();
+		series.setName("Precentage of max capacity per day in specific month");
+		for (Data d : ClientUI.reportsController.ob2) {
+			date = d.getDate();
+			maxVisitors = Integer.parseInt(d.getMaxVisitors());
+			maxCurrent = Integer.parseInt(d.getMaxCurrent());
+			ratio = (float) ((float) maxCurrent / (float) maxVisitors);
+			series.getData().add(new XYChart.Data(date, (ratio * 100)));
+		}
+		// lineChartimePercent.setTitle("Precentage of max capacity per day in specific
+		// month");
+
+		lineChartimePercent.getData().addAll(series);
+
 	}
 
-
-    @FXML
-    void WhenClickPreviousBtn(ActionEvent event) throws IOException {
+	/**
+	 * this method will return to the back screen
+	 * 
+	 * @param event - when click previous button
+	 */
+	@FXML
+	void WhenClickPreviousBtn(ActionEvent event) throws IOException {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		FXMLLoader loader = new FXMLLoader();
 		Pane root = loader.load(getClass().getResource("WelcomeParkManager.fxml").openStream());
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
 		stage.show();
-    }
-
-    @FXML
-    void WhenClickedOnSendToDmanagerBtn(ActionEvent event) {
-
 	}
 
 }

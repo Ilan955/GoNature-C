@@ -115,16 +115,18 @@ public class DiscountController {
 
 		// d[0]=depPrice , d[1] = valueDiscount, d[2] = MemberDiscount
 		float totalDiscount = 0;
-
+		float finalPrice;
 		if (!(msg[4].equals("-")))
 			totalDiscount += Float.parseFloat(msg[4]) / 100;
 		if (msg[2].equals("True"))
 			if (!(msg[5].equals("-")))
 				totalDiscount += Float.parseFloat(msg[5]) / 100;
-
-		float finalPrice = Float.parseFloat(msg[3]) * totalDiscount * Integer.parseInt(msg[1]);
+		if (totalDiscount ==0)
+			finalPrice = Float.parseFloat(msg[3]) * Integer.parseInt(msg[1]);
+		else
+			finalPrice = (Float.parseFloat(msg[3])*  Integer.parseInt(msg[1])) *(1- totalDiscount);
+		
 		finalPriceWithoutDM = finalPrice;
-
 	}
 
 	/*

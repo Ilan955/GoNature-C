@@ -11,7 +11,9 @@ public class Data {
 	private SimpleStringProperty ID;
 	private SimpleStringProperty Status;
 	private SimpleStringProperty Comments;
-
+	private SimpleStringProperty maxVisitors;
+	private SimpleStringProperty maxCurrent;
+	
 	public Data(String ID, String date, String park, String time, String numOfVisit, String price) {
 		this.ID = new SimpleStringProperty(ID);
 		this.Date = new SimpleStringProperty(date);
@@ -42,7 +44,11 @@ public class Data {
 	public Data(String date) {
 		this.Date = new SimpleStringProperty(date);
 	}
-
+	public Data(String date,int maxVisitors,int maxCurrent) {
+		this.Date = new SimpleStringProperty(date);
+		this.maxVisitors = new SimpleStringProperty(String.valueOf(maxVisitors));
+		this.maxCurrent = new SimpleStringProperty(String.valueOf(maxCurrent));
+	}
 	public void setID(String Id) {
 		this.ID = new SimpleStringProperty(Id);
 	}
@@ -111,5 +117,12 @@ public class Data {
 	public String getPrice() {
 		return Price.get();
 	}
+	
+	public String getMaxCurrent() {
+		return maxCurrent.get();
+	}
 
+	public String getMaxVisitors() {
+		return maxVisitors.get();
+	}
 }

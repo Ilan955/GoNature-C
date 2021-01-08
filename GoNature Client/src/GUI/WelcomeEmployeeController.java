@@ -48,21 +48,12 @@ public class WelcomeEmployeeController implements Initializable {
 		String park = ClientUI.employeeController.getParkName();
 		ParkNameLbl.setText(park);
 		int current = 0, currentVisitors = 0, unExpected = 0;
-		try {
-			currentVisitors = ClientUI.parkController.getCurrentVisitors(park);
-			unExpected = ClientUI.parkController.getCurrentUnexpectedVisitors(park);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		currentVisitors = ClientUI.parkController.getCurrentVisitors(park);
+		unExpected = ClientUI.parkController.getCurrentUnexpectedVisitors(park);
 		current = currentVisitors + unExpected;
 		CurrentPeopleLbl.setText("" + current);
 		int howMany = 0;
-		try {
-			howMany = ClientUI.parkController.getMaxVisitors(park) - current;
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		howMany = ClientUI.parkController.getMaxVisitors(park) - current;
 		HowManyEnterLbl.setText("" + howMany);
 	}
 
