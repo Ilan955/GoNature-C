@@ -190,20 +190,18 @@ public class OrderController {
 	 * 
 	 */
 	public boolean checkValidValues(String phone, String email) {
-//		if (phone.length() == 10) {
-//			String[] tmp = email.split("@");
-//			try {
-//				int areDigits = Integer.parseInt(phone);
-//			} catch (Exception e) {
-//				return false;
-//			}
-//
-//			if (tmp.length == 2)
-//				return true;
-//		}
-		return true;
+		if (phone.length() == 10) {
+			String[] tmp = email.split("@");
+			try {
+				int areDigits = Integer.parseInt(phone);
+			} catch (Exception e) {
+				return false;
+			}
 
-		//return false;
+			if (tmp.length == 2)
+				return true;
+		}
+		return false;
 	}
 
 	public boolean getValid() {
@@ -234,6 +232,7 @@ public class OrderController {
 			break;
 		case "getDataForReport":
 			fillReportTableData(msg);
+			break;
 		case "havingAlert":
 			if (msg[1].equals(""))
 				need_alert = false;
@@ -424,16 +423,12 @@ public class OrderController {
 		sb.append(Float.toString(order.getTotalPrice()));
 		sb.append(" ");
 		// !!!!!!! NEED TO BE !!!!!!
-
 		sb.append(t.getId());
 		// sb.append("4");
-
 		sb.append(" ");
 		// !!!!!!! NEED TO BE !!!!!!
-
 		sb.append(t.getType());
 		// sb.append("F");
-
 		sb.append(" ");
 		sb.append(Integer.toString(order.getNumberOfVisitors()));
 		sb.append(" ");

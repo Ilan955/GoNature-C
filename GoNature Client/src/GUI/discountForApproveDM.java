@@ -59,6 +59,9 @@ public class discountForApproveDM implements Initializable{
 			Parent root = null;
 			try {
 				root = FXMLLoader.load(getClass().getResource("WelcomeDepartmentEmployee.fxml"));
+				ClientUI.LogOutUtility.makeTheStageDynamicForParent(stage, root);
+				stage = ClientUI.LogOutUtility.getStage();
+				root= ClientUI.LogOutUtility.getP();
 				Scene scene = new Scene(root);
 				stage.setTitle("Department Manger Menu");
 				stage.setScene(scene);

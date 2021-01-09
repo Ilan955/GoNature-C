@@ -56,6 +56,9 @@ public class WaitingForTravellerController {
 				"EnterPark");
 		if (statusApproval == -1) {
 			Parent root = FXMLLoader.load(getClass().getResource("waiting.fxml"));
+			ClientUI.LogOutUtility.makeTheStageDynamicForParent(stage, root);
+			stage = ClientUI.LogOutUtility.getStage();
+			root= ClientUI.LogOutUtility.getP();
 			Scene scene = new Scene(root);
 			stage.setTitle("Waiting for enter");
 			stage.setScene(scene);
@@ -67,12 +70,18 @@ public class WaitingForTravellerController {
 					enterparknow.getNumOfVisitors());
 
 			Parent root = FXMLLoader.load(getClass().getResource("ImplementaionEnterPark.fxml"));
+			ClientUI.LogOutUtility.makeTheStageDynamicForParent(stage, root);
+			stage = ClientUI.LogOutUtility.getStage();
+			root= ClientUI.LogOutUtility.getP();
 			Scene scene = new Scene(root);
 			stage.setTitle("Confirm Enter park");
 			stage.setScene(scene);
 			stage.show();
 		} else {
 			Parent root = FXMLLoader.load(getClass().getResource("parkIsFull.fxml"));
+			ClientUI.LogOutUtility.makeTheStageDynamicForParent(stage, root);
+			stage = ClientUI.LogOutUtility.getStage();
+			root= ClientUI.LogOutUtility.getP();
 			Scene scene = new Scene(root);
 			stage.setTitle("Unapproved");
 			stage.setScene(scene);

@@ -220,6 +220,9 @@ public class OrderScreenController implements Initializable {
 					ClientUI.orderController.isConfirm = false;
 					FXMLLoader loader = new FXMLLoader();
 					Pane root = loader.load(getClass().getResource("/GUI/Confirmation.fxml").openStream());
+					ClientUI.LogOutUtility.makeTheStageDynamic(stage, root);
+					stage = ClientUI.LogOutUtility.getStage();
+					root= ClientUI.LogOutUtility.getParent();
 					Scene scene = new Scene(root);
 					stage.setTitle("Confirm Order");
 					stage.setScene(scene);
@@ -227,6 +230,9 @@ public class OrderScreenController implements Initializable {
 				} else {
 					FXMLLoader loader = new FXMLLoader();
 					Pane root = loader.load(getClass().getResource("/GUI/CancellOrder.fxml").openStream());
+					ClientUI.LogOutUtility.makeTheStageDynamic(stage, root);
+					stage = ClientUI.LogOutUtility.getStage();
+					root= ClientUI.LogOutUtility.getParent();
 					Scene scene = new Scene(root);
 					stage.setTitle("Unapproved Order");
 					stage.setScene(scene);
@@ -254,6 +260,9 @@ public class OrderScreenController implements Initializable {
 	void WhenClickPreviusBtn(ActionEvent event) throws IOException {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		Parent root = FXMLLoader.load(getClass().getResource("WelcomeTraveller.fxml"));
+		ClientUI.LogOutUtility.makeTheStageDynamicForParent(stage, root);
+		stage = ClientUI.LogOutUtility.getStage();
+		root= ClientUI.LogOutUtility.getP();
 		Scene scene = new Scene(root);
 		stage.setTitle("Welcome traveller");
 		stage.setScene(scene);

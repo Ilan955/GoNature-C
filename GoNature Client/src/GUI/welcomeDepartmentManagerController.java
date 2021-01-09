@@ -58,6 +58,9 @@ public class welcomeDepartmentManagerController implements Initializable {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		FXMLLoader loader = new FXMLLoader();
 		Parent root = loader.load(getClass().getResource("WelcomeAndLoginScreen.fxml").openStream());
+		ClientUI.LogOutUtility.makeTheStageDynamicForParent(stage, root);
+		stage = ClientUI.LogOutUtility.getStage();
+		root= ClientUI.LogOutUtility.getP();
 		Scene scene = new Scene(root);
 		stage.setTitle("Welcome" + " " + ClientUI.employeeController.getType() + "!");
 		stage.setScene(scene);
@@ -69,6 +72,9 @@ public class welcomeDepartmentManagerController implements Initializable {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		FXMLLoader loader = new FXMLLoader();
 		Pane root = loader.load(getClass().getResource("discountForDM.fxml").openStream()); // screen name here
+		ClientUI.LogOutUtility.makeTheStageDynamic(stage, root);
+		stage = ClientUI.LogOutUtility.getStage();
+		root= ClientUI.LogOutUtility.getParent();
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
 		stage.show();
@@ -110,6 +116,9 @@ public class welcomeDepartmentManagerController implements Initializable {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		FXMLLoader loader = new FXMLLoader();
 		Pane root = loader.load(getClass().getResource("penidngRequest.fxml").openStream()); // screen name here
+		ClientUI.LogOutUtility.makeTheStageDynamic(stage, root);
+		stage = ClientUI.LogOutUtility.getStage();
+		root= ClientUI.LogOutUtility.getParent();
 		Scene scene = new Scene(root);
 		stage.setTitle("Welcome" + " " + ClientUI.employeeController.getType() + "!");
 		stage.setScene(scene);
@@ -125,14 +134,21 @@ public class welcomeDepartmentManagerController implements Initializable {
 	void WhenPressproduceVisitReportBtn(ActionEvent event) throws IOException {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		FXMLLoader loader = new FXMLLoader();
-		Parent root = loader.load(getClass().getResource("MonthlyReport.fxml").openStream());
-		Scene scene = new Scene(root);
-		
-		stage.setScene(scene);
-		stage.show();
+		Parent root;
+		try {
+			root = loader.load(getClass().getResource("MonthlyStayAndEnterReport.fxml").openStream());
+			ClientUI.LogOutUtility.makeTheStageDynamicForParent(stage, root);
+			stage = ClientUI.LogOutUtility.getStage();
+			root= ClientUI.LogOutUtility.getP();
+			Scene scene = new Scene(root);
+			stage.setTitle("Welcome to GoNature!");
+			stage.setScene(scene);
+			stage.show();
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
 	}
-	
-	
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -145,15 +161,7 @@ public class welcomeDepartmentManagerController implements Initializable {
 		name.append(last);
 		String tName = name.toString();
 		DepartmentManagerNameLBL.setText(tName);
-		// String park = ClientUI.employeeController.getParkName();
-		// parkNameLBL.setText(park);
-		/*
-		 * int currentVisitors=0,unExpected=0,current=0; try { currentVisitors =
-		 * ClientUI.parkController.getCurrentVisitors(park); unExpected =
-		 * ClientUI.parkController.getCurrentUnexpectedVisitors(park); current =
-		 * currentVisitors + unExpected; VisitorsInParkLBL.setText("" + current); }
-		 * catch (IOException e) {e.printStackTrace();}
-		 */
+	
 	}
 
 }

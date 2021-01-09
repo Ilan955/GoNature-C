@@ -131,6 +131,9 @@ public class confirmationScreenController implements Initializable {
 		ClientUI.orderController.confirmOrder();
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		Parent root = FXMLLoader.load(getClass().getResource("WelcomeTraveller.fxml"));
+		ClientUI.LogOutUtility.makeTheStageDynamicForParent(stage, root);
+		stage = ClientUI.LogOutUtility.getStage();
+		root= ClientUI.LogOutUtility.getP();
 		Scene scene = new Scene(root);
 		stage.setTitle("Prototyp");
 		stage.setScene(scene);

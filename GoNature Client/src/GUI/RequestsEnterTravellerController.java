@@ -146,6 +146,9 @@ public class RequestsEnterTravellerController implements Initializable {
 									Pane root;
 									root = loader.load(
 											getClass().getResource("ApprovingRequestTraveller.fxml").openStream());
+									ClientUI.LogOutUtility.makeTheStageDynamic(stage, root);
+									stage = ClientUI.LogOutUtility.getStage();
+									root= ClientUI.LogOutUtility.getParent();
 									Scene scene = new Scene(root);
 									stage.setTitle("Approve request");
 									stage.setScene(scene);
@@ -162,6 +165,9 @@ public class RequestsEnterTravellerController implements Initializable {
 									FXMLLoader loader = new FXMLLoader();
 									Pane root;
 									root = loader.load(getClass().getResource("parkIsFullEmployee.fxml").openStream());
+									ClientUI.LogOutUtility.makeTheStageDynamic(stage, root);
+									stage = ClientUI.LogOutUtility.getStage();
+									root= ClientUI.LogOutUtility.getParent();
 									Scene scene = new Scene(root);
 									stage.setTitle("park is full");
 									stage.setScene(scene);
@@ -206,6 +212,9 @@ public class RequestsEnterTravellerController implements Initializable {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		FXMLLoader loader = new FXMLLoader();
 		Pane root = loader.load(getClass().getResource("WelcomeEmployee.fxml").openStream());
+		ClientUI.LogOutUtility.makeTheStageDynamic(stage, root);
+		stage = ClientUI.LogOutUtility.getStage();
+		root= ClientUI.LogOutUtility.getParent();
 		Scene scene = new Scene(root);
 		stage.setTitle("New order");
 		stage.setScene(scene);

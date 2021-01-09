@@ -38,6 +38,9 @@ public class SuccessfulySignUpScreenController implements Initializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		ClientUI.LogOutUtility.makeTheStageDynamicForParent(stage, root);
+		stage = ClientUI.LogOutUtility.getStage();
+		root= ClientUI.LogOutUtility.getP();
 		Scene scene = new Scene(root);
 		stage.setTitle("Welcome Employee");
 		stage.setScene(scene);

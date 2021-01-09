@@ -21,26 +21,48 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+/**
+ * This is a controller for report of entrance hours and stay duration graphs.
+ * 
+ * @implNote implements Initializable - initialize all predefined data
+ */
 public class ReportStayAndEnter implements Initializable {
 
 	@FXML
+	/** button to show graph */
 	private Button calculateBtn;
-
 	@FXML
+	/** Combo box for choosing wanted month */
 	private ComboBox<String> MonthCB;
 
 	@FXML
+	/** Combo box for choosing wanted year */
 	private ComboBox<String> YearCB;
 
 	@FXML
+	/** display label "park" */
 	private Label parkLbl;
 
 	@FXML
+	/** Combo box for choosing wanted park */
 	private ComboBox<String> parkCB;
 
-	// initialize Combo Box
+	/** button to get back */
+	@FXML
+	private Button backBTN;
+
+	/**
+	 * Description of initialize() this function initializes the combo boxes for the
+	 * window..
+	 * 
+	 * @param MonthCB combo box for wanted month.
+	 * @param parkCB  combo box for wanted park.
+	 * @param YearCB  combo box for wanted year.
+	 * @return void.
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		MonthCB.setItems(inits.setMonthCB());
@@ -48,20 +70,50 @@ public class ReportStayAndEnter implements Initializable {
 		YearCB.setItems(inits.setYearCB());
 	}
 
+	/**
+	 * Description of WhenClickBackBtn Upon clicking back the department manager
+	 * shall be sent back to department managers main screen.
+	 * 
+	 * @return void - no returns.
+	 * @throws IOException
+	 */
 	@FXML
-	void WhenClickBackBtn(ActionEvent event) {
-
+	void WhenClickBackBtn(ActionEvent event) throws IOException {
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		FXMLLoader loader = new FXMLLoader();
+		Pane root = loader.load(getClass().getResource("WelcomeDepartmentEmployee.fxml").openStream());
+		ClientUI.LogOutUtility.makeTheStageDynamic(stage, root);
+		stage = ClientUI.LogOutUtility.getStage();
+		root= ClientUI.LogOutUtility.getParent();
+		Scene scene = new Scene(root);
+		stage.setTitle("Welcome" + " " + ClientUI.employeeController.getType() + "!");
+		stage.setScene(scene);
+		stage.show();
 	}
 
+	/**
+	 * Description of WhenClickClearBtn Upon clicking the button all data shall be
+	 * cleared in all arrays and all graphs.
+	 * 
+	 * @return void - no returns.
+	 */
 	@FXML
 	void WhenClickClearBtn(ActionEvent event) {
-		ClientUI.orderController.oR.clear();
+		ClientUI.reportsController.visitors.clear();
+		ClientUI.reportsController.members.clear();
+		ClientUI.reportsController.groups.clear();
 		Alert a = new Alert(AlertType.INFORMATION, "All the previous data deleted");
 		a.setTitle("Cleared data!");
 		a.setHeaderText("Successfuly cleared all the data");
 		a.show();
 	}
 
+	/**
+	 * Description of WhenClickInformationBtn Upon clicking the button an alert with
+	 * explanation for the screen.
+	 * 
+	 * @return void - no returns.
+	 */
 	@FXML
 	void WhenClickInformationBtn(ActionEvent event) {
 		Alert a = new Alert(AlertType.INFORMATION,
@@ -96,6 +148,14 @@ public class ReportStayAndEnter implements Initializable {
 			alert.close();
 	}
 
+	/**
+	 * Description of whenClickCalculateBtn Upon clicking the button a window will
+	 * pop up with wanted graphs.
+	 * 
+	 * @throws IOException -From inner methods (getDataEntranceTimesAndStay)
+	 * 
+	 * @return void - no returns.
+	 */
 	@FXML
 	void whenClickCalculateBtn(ActionEvent event) throws IOException {
 		String monthOfReport = (String) MonthCB.getValue();
@@ -104,6 +164,9 @@ public class ReportStayAndEnter implements Initializable {
 		ClientUI.reportsController.getDataEntranceTimesAndStay(monthOfReport, yearOfReport, parkOfreport);
 		Stage stage = new Stage();
 		Parent root = FXMLLoader.load(getClass().getResource("MonthlyStayAndEnterReportGraph.fxml"));
+		ClientUI.LogOutUtility.makeTheStageDynamicForParent(stage, root);
+		stage = ClientUI.LogOutUtility.getStage();
+		root= ClientUI.LogOutUtility.getP();
 		Scene scene = new Scene(root);
 		stage.setTitle("View Graph");
 		stage.setScene(scene);

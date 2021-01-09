@@ -1,6 +1,6 @@
 .root{
 	 -fx-background-image: url("baground.jpg");
-	 -fx-font: 18px Vivaldi;
+	 -fx-font: 18px Ariel;
     -fx-background-repeat: no-repeat;   
     -fx-background-size: cover;
     -fx-background-position: center center;
@@ -22,8 +22,8 @@
   
   -fx-background-color: #00CC00;
   -fx-border-color: #1aff1a;
-  -fx-border-radius: 20;
-  -fx-background-radius: 20;
+  -fx-border-radius: 15;
+  -fx-background-radius: 15;
 }
 
 .button:hover {

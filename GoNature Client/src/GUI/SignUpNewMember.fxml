@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="555.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.SignUpScreenController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="555.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.SignUpScreenController">
 	<children>
 		<Label layoutX="14.0" layoutY="14.0" prefHeight="35.0" prefWidth="164.0" text="New Member">
 			<font>
@@ -83,5 +83,6 @@
             </RadialGradient>
          </fill>
       </FontAwesomeIcon>
+      <TextField fx:id="HideMe" layoutX="418.0" layoutY="434.0" />
 	</children>
 </Pane>
