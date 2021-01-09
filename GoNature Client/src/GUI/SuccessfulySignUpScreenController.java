@@ -1,3 +1,8 @@
+/** Description of SignUpScreenController 
+* @author Omri Cohen
+* 
+* @version final Jan 7, 2021.
+*/
 package GUI;
 
 import java.io.IOException;
@@ -15,6 +20,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
+/**
+ * This is a controller for sign up confirmation screen.
+ * 
+ * @implNote implements Initializable - initialize all predefined data
+ */
 public class SuccessfulySignUpScreenController implements Initializable {
 
 	@FXML
@@ -23,11 +33,26 @@ public class SuccessfulySignUpScreenController implements Initializable {
 	@FXML
 	private Label SignedUpType;
 
+	/**
+	 * Description of initialize() this function initializes the combo boxes for the
+	 * window..
+	 * 
+	 * @param SubscriberNumberLbl label for displaying new membership id
+	 * @param SignedUpType        label for displaying the membership type
+	 * 
+	 * @return void.
+	 */
+	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		SubscriberNumberLbl.setText(ClientUI.signUpController.getID());
 		SignedUpType.setText(ClientUI.signUpController.getType());
 	}
-
+	/**
+	 * Description of WhenClickMainMenuBtn() 
+	 * Upon clicking "main menu" button the employee shall be returned to the employees main window.
+	 * 
+	 * @return void.
+	 */
 	@FXML
 	void WhenClickMainMenuBtn(ActionEvent event) {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

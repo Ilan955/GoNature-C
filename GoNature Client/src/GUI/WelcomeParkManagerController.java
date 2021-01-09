@@ -105,7 +105,7 @@ public class WelcomeParkManagerController implements Initializable {
 		alert.setTitle("Exit");
 		alert.setHeaderText("Are you sure you want to exit the application?");
 		alert.setResizable(false);
-		alert.setContentText("Select yes if you want, or not if you want to get back!");
+		alert.setContentText("Select Yes if you want to exit Or No if you want to stay.");
 		((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Yes");
 		((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("No");
 		Optional<ButtonType> result = alert.showAndWait();
@@ -135,16 +135,16 @@ public class WelcomeParkManagerController implements Initializable {
 
 	}
 
-	
 	@FXML
 	void WhenOverGapInPArkForHelp(ActionEvent event) {
 
 	}
+
 	@FXML
 	void WhenClickCreateMonthlyIncomeReportBtn(ActionEvent event) throws IOException {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		FXMLLoader loader = new FXMLLoader();
-		Pane root = loader.load(getClass().getResource("MonthlyReport.fxml").openStream());
+		Pane root = loader.load(getClass().getResource("incomeReportScreen.fxml").openStream());
 		Scene scene = new Scene(root);
 		stage.setTitle("Create monthly report");
 		stage.setScene(scene);
@@ -236,8 +236,6 @@ public class WelcomeParkManagerController implements Initializable {
 		return;
 	}
 
-	
-
 	@FXML
 	void whenClickInformationBtn(ActionEvent event) {
 		Alert a = new Alert(AlertType.INFORMATION,
@@ -249,24 +247,17 @@ public class WelcomeParkManagerController implements Initializable {
 	}
 
 	@FXML
-	void ClickCreateOverallVisitorsReport(ActionEvent event) {
+	void ClickCreateOverallVisitorsReport(ActionEvent event) throws IOException {
+
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		FXMLLoader loader = new FXMLLoader();
-		Parent root;
-		try {
-			root = loader.load(getClass().getResource("MonthlyStayAndEnterReport.fxml").openStream());
-			Scene scene = new Scene(root);
-			stage.setTitle("Welcome to GoNature!");
-			stage.setScene(scene);
-			stage.show();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+		Parent root = loader.load(getClass().getResource("MonthlyReport.fxml").openStream());
+		Scene scene = new Scene(root);
+
+		stage.setScene(scene);
+		stage.show();
 	}
-	
-	
+
 	/*
 	 * @Override public void start(Stage primaryStage) throws Exception {
 	 * primaryStage.setOnCloseRequest(e->ClientUI.employeeController.logOutEmployee(

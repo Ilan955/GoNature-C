@@ -1,6 +1,6 @@
 .root{
 	 -fx-background-image: url("baground.jpg");
-	 -fx-font: 18px Vivaldi;
+	 -fx-font: 18px JetBrains Mono;
     -fx-background-repeat: no-repeat;   
     -fx-background-size: cover;
     -fx-background-position: center center;

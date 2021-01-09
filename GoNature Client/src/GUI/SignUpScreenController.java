@@ -67,6 +67,10 @@ public class SignUpScreenController implements Initializable {
 	private ComboBox<String> TypeMemberCB;
 	/** TypeMemberCB Combo box for choosing membership type */
 
+	@FXML
+	private TextField HideMe;
+	/** hidden text field only for credit card number */
+
 	public String id, firstName, lastName, phoneNum, email, paymentMethod, memberType;
 	int numOfVisitors;
 
@@ -134,6 +138,11 @@ public class SignUpScreenController implements Initializable {
 			a.show();
 			regFlag = false;
 		}
+		System.out.println("paymonet a: "+paymentMethod);
+		if (paymentMethod == "Credit Card") {
+			paymentMethod = HideMe.getText().toString();
+		}
+		System.out.println("paymonet b: "+paymentMethod);
 
 		// here we will send the data we got from the form
 		ClientUI.signUpController.checkExist(id);
@@ -175,13 +184,14 @@ public class SignUpScreenController implements Initializable {
 
 		stage.show();
 	}
+
 	@FXML
 	void WhenClickExitBtn(MouseEvent event) {
 		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 		alert.setTitle("Exit");
 		alert.setHeaderText("Are you sure you want to exit the application?");
 		alert.setResizable(false);
-		alert.setContentText("Select yes if you want, or not if you want to get back!");
+		alert.setContentText("Select Yes if you want to exit Or No if you want to stay.");
 		((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Yes");
 		((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("No");
 		Optional<ButtonType> result = alert.showAndWait();

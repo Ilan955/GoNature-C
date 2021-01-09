@@ -68,11 +68,7 @@ public class SignUpController {
 		sb.append(" ");
 		sb.append(email);
 		sb.append(" ");
-		if (paymentMethod == "Cash") {
-			sb.append(paymentMethod);
-		} else {
-			sb.append("CreditCard");
-		}
+		sb.append(paymentMethod);
 		sb.append(" ");
 		if (memberType == "Traveller") {
 			sb.append(memberType);
