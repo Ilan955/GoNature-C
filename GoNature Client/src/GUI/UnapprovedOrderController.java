@@ -86,6 +86,29 @@ public class UnapprovedOrderController implements Initializable {
 		ClientUI.orderController.confirmOrder();
 		ClientUI.orderController.ChangeToWaitOrder(tmp);
 		ClientUI.waitingListController.enterWaitingList(tmp.getOrderNum());
+		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+		alert.setTitle("Success");
+		alert.setHeaderText("You successfuly entered into the waiting list");
+		alert.setResizable(false);
+		alert.setContentText("Please wait for SMS to confirm it");
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		FXMLLoader loader = new FXMLLoader();
+		Pane root;
+		try {
+			root = loader.load(getClass().getResource("WelcomeTraveller.fxml").openStream());
+			ClientUI.LogOutUtility.makeTheStageDynamic(stage, root);
+			stage = ClientUI.LogOutUtility.getStage();
+			root= ClientUI.LogOutUtility.getParent();
+			Scene scene = new Scene(root);
+			stage.setTitle("Cancel order");
+			stage.setScene(scene);
+			stage.show();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 	}
 
 	/**

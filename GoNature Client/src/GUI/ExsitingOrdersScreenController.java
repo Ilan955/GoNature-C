@@ -193,7 +193,7 @@ public class ExsitingOrdersScreenController implements Initializable {
 							
 							if(data.getStatus().equals("waitForConfirm_WaitingList")) {
 								/*in this case status will be changed to 'CanceledBYUser' (for watingList_Confirmation_thread)*/
-								ClientUI.waitingListController.changeOrderStatus(data.getID(),"CanceledBYUser","");
+								ClientUI.waitingListController.changeOrderStatus(data.getID(),"CanceledBYUser","Manualy");
 								Alert a = new Alert(AlertType.NONE, "Your order has been deleted from waiting list!");
 								a.setAlertType(AlertType.ERROR);
 								a.show();
@@ -267,7 +267,7 @@ public class ExsitingOrdersScreenController implements Initializable {
 							if (ld.compareTo(dateNow) == 0 && timeH < limitTime ) {
 								Order o = new Order(Integer.parseInt(data.getID()),lt,ld,data.getPark(),Integer.parseInt(data.getNumOfVisit()),Float.parseFloat(data.getPrice()));
 								System.out.println("GOOD");
-								int numofvisit = ClientUI.userController.traveller.getNumberOfVisitors();
+								int numofvisit = o.getNumberOfVisitors();
 								String id = ClientUI.userController.traveller.getId();
 								int maxUpdateCurrentVisitors;
 								maxUpdateCurrentVisitors = ClientUI.parkController.getCurrentVisitors(o.getWantedPark())
@@ -338,10 +338,11 @@ public class ExsitingOrdersScreenController implements Initializable {
 							
 							if(data.getStatus().equals("waitForConfirm_WaitingList")) {
 								/*in this case user can confirm his order*/
-								ClientUI.waitingListController.changeOrderStatus(data.getID(),"ApprovedBYUser","");
+								ClientUI.waitingListController.changeOrderStatus(data.getID(),"ApprovedBYUser","Manualy");
 								Alert a = new Alert(AlertType.NONE, "Your order has been confirmed!");
 								a.setAlertType(AlertType.INFORMATION);
 								a.show();
+								return;
 							}
 							
 							

@@ -24,10 +24,23 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 /**
- * 
- * @author Liad Yadin
+-----------------------------   Class explanation  ------------------------------------------------------------------------------------------- 
+ * This class is a screen controller. This class also implements Initializable interface
+ * which means that this class must have initialize method.
+ * this method implements Initializable because we need to initialize screen with data before 
+ * it is displayed to the user
+ * this class will implement the behaviour of WelcomeTraveller screen with every data that is in it
+ * also, this class will be able to navigate from this screen to every of the traveller's options in our system
+ * this class will produce more functionality to the client side
  *
+ * @author Bar Elhanati
+ * @author Liad Yadin 
+ * @version January 2021
+ *
+------------------------------------------------------------------------------------------------------------------------------------
  */
+
+
 public class WelcomeTravellerController implements Initializable {
 
 	@FXML
@@ -53,6 +66,33 @@ public class WelcomeTravellerController implements Initializable {
 
 	String ID = WelcomeAndLoginController.id;
 
+	/**
+	-----------------------------Class variables----------------------------------------------------------------------------------------------------------- 
+		 * @param userNamelb will display traveller's name when he logs in to GoNature system == his full name (if he exists in DB)
+		 * if traveller does not exist in DB userNamelb will be set with default name "Traveller"
+		 * in to GoNature system
+		 * @param TypeLBL will display traveller what type of traveller he is for GoNature
+		 * @param btnExistingorders by clicking this button traveller will be able to see his future orders in GoNature
+		 * @param btnNewOrder by clicking this button, traveller will be able to create a new order
+		 * @param LogOutBtn by clicking this button, traveller will be out of GoNature system 
+		 * @param beforeTypeLBL is a label that we would like to display only if traveller exists in DB
+		 * @param btnWithoutOrder will allow / disallow traveller to enter as traveller (that did not order in advance)
+		 * @param exitParkBtn will get traveller out of park (as soon as his visit in GoNature park ends)
+		 * @param ID is a string that contains the ID of this traveller
+		 * 
+		 * 
+	-----------------------------Class methods----------------------------------------------------------------------------------------------------------------------*/
+		
+		/**
+		 * Description of initialize method:
+		 * initialize method will set WelcomeTraveller screen with appropriate information.
+		 * an example for this is if traveller exsits on DB, the screen will welcome him with his first name, last name 
+		 * and his traveller's type
+		 * also, if traveller has any existing orders, button btnExistingorders will be displayed (if not it will be hidden)
+		 * info will be provided by ClientUI.userController.x where x stands for the info that we need (firstname, lastname,type and so and so)
+		 */
+	
+	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		if (!(ClientUI.entranceParkController.IfgetTravellerInParkExistInDB(ID)) // exists in DB and in park
@@ -110,10 +150,9 @@ public class WelcomeTravellerController implements Initializable {
 	}
 
 	/**
-	 * This method responislbe of showing an alert when want to close the
-	 * application.
-	 * 
-	 * @param event
+	 * Description of WhenClickExitBtn method:
+	 * WhenClickExitBtn method will navigate by pressing X sign to the top right of screen to WelcomeAndLoginScreen screen
+	 * @throws IOException
 	 */
 	@FXML
 	void WhenClickExitBtn(MouseEvent event) {
@@ -160,7 +199,13 @@ public class WelcomeTravellerController implements Initializable {
 		stage.setScene(scene);
 		stage.show();
 	}
-
+	
+	/**
+	 * Description of WhenPressEsitingOrdersBtn method:
+	 * WhenPressEsitingOrdersBtn method will navigate by pressing btnExistingorders to ExistingOrders screen
+	 * @throws IOException
+	 */
+	
 	@FXML
 	void WhenPressEsitingOrdersBtn(ActionEvent event) throws IOException {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -174,7 +219,14 @@ public class WelcomeTravellerController implements Initializable {
 		stage.setScene(scene);
 		stage.show();
 	}
-
+	
+	/**
+	 * Description of WhenPressLogOutBtn method:
+	 * WhenPressLogOutBtn method will navigate by pressing LogOutBtn to WelcomeAndLoginScreen screen
+	 * it will navigate only after updating DB that the traveller is no longer connected to GoNature system
+	 * and also, will set person's values to be null, so other users will be able to connect (from this session)
+	 * @throws IOException
+	 */
 	@FXML
 
 	void WhenPressLogOutBtn(ActionEvent event) throws IOException {
@@ -190,7 +242,13 @@ public class WelcomeTravellerController implements Initializable {
 		stage.setScene(scene);
 		stage.show();
 	}
-
+	
+	/**
+	 * Description of WhenPressMakeNewOrderBtn method:
+	 * WhenPressMakeNewOrderBtn method will navigate by pressing btnNewOrder to NewOrder screen
+	 * @throws IOException
+	 */
+	
 	@FXML
 	void WhenPressMakeNewOrderBtn(ActionEvent event) throws IOException {
 		String type= ClientUI.userController.traveller.getType();

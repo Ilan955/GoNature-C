@@ -63,7 +63,6 @@ public class GoClient extends AbstractClient {
 
 		for (int i = 0; i < len; i++) {
 			toSend[i] = res[i + 1];
-			System.out.println(toSend.toString());
 		}
 
 		/*
@@ -76,6 +75,8 @@ public class GoClient extends AbstractClient {
 
 		case "OrderController":
 			try {
+				
+				
 				ClientUI.orderController.gotMessage(res);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block

@@ -1,6 +1,7 @@
 package GUI;
 
 import java.io.IOException;
+
 import java.util.Optional;
 
 import Client.ClientUI;
@@ -18,6 +19,21 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+
+
+/**
+-----------------------------Class explanation------------------------------------------------------------------------------------------- 
+ * This class is a screen controller. 
+ * this class will implement the behaviour of WelcomeAndLoginScreen screen with every data that is in it
+ * also, this class will be able to navigate from this screen to every of the employees or traveller options in our system
+ * this class will produce more functionality to the client side
+ * this is the very first interaction of the client with our system
+ *
+ * @author Bar Elhanati
+ * @version January 2021
+ *
+------------------------------------------------------------------------------------------------------------------------------------
+ */
 
 public class WelcomeAndLoginController {
 
@@ -42,11 +58,26 @@ public class WelcomeAndLoginController {
 	public static String id;
 
 	/**
-	 * This method responislbe of showing an alert when want to close the
-	 * application.
-	 * 
-	 * @param event
-	 */
+	-----------------------------Class variables----------------------------------------------------------------------------------------------------------- 
+		 * @param UserNameLBL will tell us which user is trying to log into GoNature system (employee login)
+		 * employee user name is the PK to employees DB
+		 * @param PasswordLBL is the password that employee entered (will be checked against the DB for his login)
+		 * @param EmployeeloginBTN is the button that employee press on when he desires to log into GoNature
+		 * only after appropriate data is inserted to appropriate fields (userName and password)
+		 * imageOfLogin is the image of GoNature that you see on screen's center
+		 * @param IdLBL will assist us to have traveller's ID for identifying from DB
+		 * @param TravellerLoginBtn is the button that employee press on when he desires to log into GoNature
+		 * only after appropriate data (9 digits ID or memberID)
+		 * this info will be checked against DB so we would be informed if traveller exists on DB or not
+		 * @param id is a String that would assist us to know id of traveller that wants to log into GoNature system
+	-----------------------------Class methods----------------------------------------------------------------------------------------------------------------------*/
+
+		/**
+		 * Description of WhenClickExitBtn method:
+		 * WhenClickExitBtn method will navigate by pressing X icon on the top right side to disconnect from GoNature system
+		 */
+	
+	
 	@FXML
 	void WhenClickExitBtn(MouseEvent event) {
 		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -66,6 +97,18 @@ public class WelcomeAndLoginController {
 			alert.close();
 	}
 
+	/**
+	 * Description of WhenPressTravellerLoginBtn method:
+	 * WhenPressTravellerLoginBtn method will navigate by pressing TravellerLoginBtn to WelcomeTraveller screen only if:
+	 * ID that traveller entered is 9 (precisely) digits and digits only
+	 * traveller does not already connected to GoNature system
+	 * This method, after checking the input propriety we will go out to DB and check if traveller exists on DB.
+	 * if it is, UserController will have an instance of person will all data that came from DB (info for traveller that we need)
+	 * and WelcomeTraveller screen will be displayed to the user with the appropriate data
+	 * if traveller does not exist in DB, we will create a default traveller and display only "Welcome Traveller" and appropriate buttons
+	 * on WelcomeTraveller screen to the user
+	 */
+	
 	@FXML
 	void WhenPressTravellerLoginBtn(ActionEvent event) throws Exception {
 		id = IdLBL.getText();
@@ -103,6 +146,19 @@ public class WelcomeAndLoginController {
 		stage.setScene(scene);
 		stage.show();
 	}
+	
+	/**
+	 * Description of WhenPressEmployeeLogInBtn method:
+	 * WhenPressEmployeeLogInBtn method will navigate by pressing EmployeeloginBTN to any employee screen (DE,PM,DM):
+	 * userName that employee entered must appear on DB, and if it isn't, user will get an alert that userName isn't valid
+	 * password must be matching to the one that is on our DB and if it is not, user will get an alert that password does not match
+	 * employee must not be connected to GoNature system. if he already is, an alert will be displayed and entrance will not be approved
+	 * if every of the following does appear correctly as DB, employee would be able to move to the appropriate employee screen
+	 * we will navigate to the appropriate screen via employee's type (DE,PM,DM)
+	 * also, this method creates a park instance where employee works in. this action would assist us to display the employee 
+	 * park (where employee belongs to) details  
+	 */
+	
 
 	@FXML
 	void WhenPressEmployeeLogInBtn(ActionEvent event) throws IOException {
@@ -163,16 +219,13 @@ public class WelcomeAndLoginController {
 		}
 	}
 
-	/*
-	 * public void start(Stage primaryStage) throws Exception {
-	 * 
-	 * Parent root =
-	 * FXMLLoader.load(getClass().getResource("WelcomeAndLoginScreen.fxml")); Image
-	 * icon = new Image(getClass().getResourceAsStream("titleIcon.png"));
-	 * primaryStage.getIcons().add(icon); Scene scene = new Scene(root);
-	 * primaryStage.setTitle("Welcome To GoNature!"); primaryStage.setScene(scene);
-	 * primaryStage.show(); }
+	/**
+	 * Description of CheckID method:
+	 * CheckID method will assist us to check the propriety of ID that entered by traveller
+	 * @param id is the ID that traveller entered when he asks to log into GoNature system
 	 */
+	
+	
 	public boolean checkID(String id) {
 		if (id.length() != 9)
 			return false;
@@ -184,7 +237,15 @@ public class WelcomeAndLoginController {
 		}
 		return true;
 	}
-
+	
+	/**
+	 * Description of changeScreen method:
+	 * changeScreen method will navigate by pressing EmployeeloginBTN and after all the input propriety checks 
+	 * will display employee the correct screen regarding to his type in DB (we can know type by ClientUI.employeeController.getType())
+	 * @param screen is the name of the string that we need to display to the employee according to his type (DE,PM,DM)
+	 * @throws IOException
+	 */
+	
 	public void changeScreen(ActionEvent event, String screen) throws IOException {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		FXMLLoader loader = new FXMLLoader();

@@ -189,7 +189,7 @@ public class ParkController {
 	 */
 	public void changeMaxcurrentAmountOfVisitorsForCapacityPark(String park, int maxCurrentVisitors) {
 		StringBuffer sb = new StringBuffer();
-		sb.append("updateStatusForCapacityParkToFull");
+		sb.append("changeMaxcurrentAmountOfVisitorsForCapacityPark");
 		sb.append(" ");
 		sb.append(park);
 		sb.append(" ");
