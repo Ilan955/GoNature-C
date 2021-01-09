@@ -80,6 +80,8 @@ public class usageReportController implements Initializable {
 		listForMonth = clientLogic.inits.setMonthCB();
 		monthCB.setItems(listForMonth);
 		yearCB.setItems(listForYears);
+		dateofNotfullCapacityTable.setVisible(false);
+		lineChartimePercent.setVisible(false);
 	}
 
 	/**
@@ -90,13 +92,14 @@ public class usageReportController implements Initializable {
 	 */
 	@FXML
 	void WhenClickCralculateBtn(ActionEvent event) {
+		dateofNotfullCapacityTable.setVisible(true);
+		lineChartimePercent.setVisible(true);
 		String year = (String) yearCB.getValue();
 		String month = (String) monthCB.getValue();
 		DateLbl.setCellValueFactory(new PropertyValueFactory<>("Date"));
 		ClientUI.reportsController.ob.clear();
 		ClientUI.reportsController.getTableOfUnFullCapacityInDates(month, year, "parkA"); // ClientUI.employeeController.getParkName()
 		dateofNotfullCapacityTable.setItems(ClientUI.reportsController.ob);
-
 		String date;
 		int maxVisitors;
 		int maxCurrent;
@@ -104,7 +107,7 @@ public class usageReportController implements Initializable {
 		ClientUI.reportsController.ob2.clear();
 		ClientUI.reportsController.getUnFullCapacityTableInDatesAndNumbers(month, year, "parkA");
 		XYChart.Series series = new XYChart.Series();
-		series.setName("Precentage of max capacity per day in specific month");
+		series.setName("Precentage of max capacity per day");
 		for (Data d : ClientUI.reportsController.ob2) {
 			date = d.getDate();
 			maxVisitors = Integer.parseInt(d.getMaxVisitors());
@@ -112,8 +115,7 @@ public class usageReportController implements Initializable {
 			ratio = (float) ((float) maxCurrent / (float) maxVisitors);
 			series.getData().add(new XYChart.Data(date, (ratio * 100)));
 		}
-		// lineChartimePercent.setTitle("Precentage of max capacity per day in specific
-		// month");
+		lineChartimePercent.setTitle("Unfull days");
 
 		lineChartimePercent.getData().addAll(series);
 
@@ -132,7 +134,7 @@ public class usageReportController implements Initializable {
 		alert.setTitle("Exit");
 		alert.setHeaderText("Are you sure you want to exit the application?");
 		alert.setResizable(false);
-		alert.setContentText("Select Yes if you want to exit Or No if you want to stay.");
+		alert.setContentText("Select yes if you want, or not if you want to get back!");
 		((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Yes");
 		((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("No");
 		Optional<ButtonType> result = alert.showAndWait();
@@ -156,9 +158,6 @@ public class usageReportController implements Initializable {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		FXMLLoader loader = new FXMLLoader();
 		Pane root = loader.load(getClass().getResource("WelcomeParkManager.fxml").openStream());
-		ClientUI.LogOutUtility.makeTheStageDynamic(stage, root);
-		stage = ClientUI.LogOutUtility.getStage();
-		root= ClientUI.LogOutUtility.getParent();
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
 		stage.show();

@@ -31,8 +31,6 @@ public class WaitingForTravellerController {
 	 * request approve
 	 */
 	private int statusApproval = -1;
-	/** for data in the previous screen */
-	private EnterParkNowController enterparknow = new EnterParkNowController();
 	/**
 	 * Button for check status of the request
 	 */
@@ -51,37 +49,32 @@ public class WaitingForTravellerController {
 	 */
 	@FXML
 	void whenclickedOnCheck(ActionEvent event) throws IOException {
+
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		statusApproval = ClientUI.requestsController.checkIfApproveRequest(ClientUI.userController.traveller.getId(),
 				"EnterPark");
 		if (statusApproval == -1) {
 			Parent root = FXMLLoader.load(getClass().getResource("waiting.fxml"));
-			ClientUI.LogOutUtility.makeTheStageDynamicForParent(stage, root);
-			stage = ClientUI.LogOutUtility.getStage();
-			root= ClientUI.LogOutUtility.getP();
 			Scene scene = new Scene(root);
 			stage.setTitle("Waiting for enter");
 			stage.setScene(scene);
 			stage.show();
 		} else if (statusApproval == 1) {
 			ClientUI.entranceParkController.enterWithoutOrder(LocalTime.now(), LocalDate.now(),
-					enterparknow.getWantedPark(), enterparknow.getNumOfVisitors(), enterparknow.getPrice());
-			ClientUI.entranceParkController.setNumOfVisitorEntringPark(enterparknow.getWantedPark(),
-					enterparknow.getNumOfVisitors());
+					ClientUI.entranceParkController.enterpark.getWantedPark(),
+					ClientUI.entranceParkController.enterpark.getNumOfVisitors(),
+					ClientUI.entranceParkController.enterpark.getTotalprice()); // create travellerinpark
+			ClientUI.entranceParkController.setNumOfVisitorEntringPark(
+					ClientUI.entranceParkController.enterpark.getWantedPark(),
+					ClientUI.entranceParkController.enterpark.getNumOfVisitors());
 
 			Parent root = FXMLLoader.load(getClass().getResource("ImplementaionEnterPark.fxml"));
-			ClientUI.LogOutUtility.makeTheStageDynamicForParent(stage, root);
-			stage = ClientUI.LogOutUtility.getStage();
-			root= ClientUI.LogOutUtility.getP();
 			Scene scene = new Scene(root);
 			stage.setTitle("Confirm Enter park");
 			stage.setScene(scene);
 			stage.show();
 		} else {
 			Parent root = FXMLLoader.load(getClass().getResource("parkIsFull.fxml"));
-			ClientUI.LogOutUtility.makeTheStageDynamicForParent(stage, root);
-			stage = ClientUI.LogOutUtility.getStage();
-			root= ClientUI.LogOutUtility.getP();
 			Scene scene = new Scene(root);
 			stage.setTitle("Unapproved");
 			stage.setScene(scene);
@@ -101,7 +94,7 @@ public class WaitingForTravellerController {
 		alert.setTitle("Exit");
 		alert.setHeaderText("Are you sure you want to exit the application?");
 		alert.setResizable(false);
-		alert.setContentText("Select Yes if you want to exit Or No if you want to stay.");
+		alert.setContentText("Select yes if you want, or not if you want to get back!");
 		((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Yes");
 		((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("No");
 		Optional<ButtonType> result = alert.showAndWait();

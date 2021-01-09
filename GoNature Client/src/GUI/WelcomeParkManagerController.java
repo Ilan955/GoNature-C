@@ -262,14 +262,11 @@ public class WelcomeParkManagerController implements Initializable {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		FXMLLoader loader = new FXMLLoader();
 		Parent root = loader.load(getClass().getResource("MonthlyReport.fxml").openStream());
-<<<<<<< HEAD
+
 		ClientUI.LogOutUtility.makeTheStageDynamicForParent(stage, root);
 		stage = ClientUI.LogOutUtility.getStage();
 		root= ClientUI.LogOutUtility.getP();
-=======
->>>>>>> branch 'master' of https://github.com/Ilan955/GoNature-C.git
 		Scene scene = new Scene(root);
-
 		stage.setScene(scene);
 		stage.show();
 	}
