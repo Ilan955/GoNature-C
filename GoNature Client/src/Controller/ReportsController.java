@@ -9,6 +9,8 @@ package Controller;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 import Client.ClientUI;
 import GUI.Data;
@@ -36,6 +38,7 @@ public class ReportsController {
 	public ArrayList<Reports> visitors = new ArrayList<Reports>();
 	public ArrayList<Reports> members = new ArrayList<Reports>();
 	public ArrayList<Reports> groups = new ArrayList<Reports>();
+	public ArrayList<Reports> totalArray = new ArrayList<Reports>();
 	public String month, park, year;
 
 	public int sumSolo = 0, sumMembers = 0, sumGroups = 0;
@@ -337,5 +340,15 @@ public class ReportsController {
 			}
 			i += 5;
 		}
+		totalArray.addAll(visitors);
+		totalArray.addAll(members);
+		totalArray.addAll(groups);
+		totalArray.sort(clientLogic.Reports.dayOfMonth);
+		
+		ArrayList<Integer> visitTravel=new ArrayList<Integer>();
+		ArrayList<Integer> visitMember=new ArrayList<Integer>();
+		ArrayList<Integer> visitGroups=new ArrayList<Integer>();
+
+
 	}
 }

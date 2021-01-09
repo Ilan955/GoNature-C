@@ -7,6 +7,7 @@ import java.time.LocalTime;
 import Client.ClientUI;
 import Entities.Order;
 import Entities.TravellerInPark;
+import GUI.EnterParkNowController;
 
 /**
  * Controller for logic of enter&exit park. include creating a casual traveler.
@@ -23,6 +24,8 @@ public class EntranceParkController {
 	public boolean travellerExistsInDB = false;
 	/** boolean variable if this traveler exist in order table on DB */
 	public boolean OrderExistsInDB = false;
+	/** for save data between EnterParkNow screen and Implemention */
+	public GUI.EnterParkNowController enterpark = new EnterParkNowController();
 
 	/**
 	 * this method sends to server details of a casual traveler for insert this
@@ -45,7 +48,6 @@ public class EntranceParkController {
 		sb.append("enterWithoutOrder");
 		sb.append(" ");
 		sb.append(ClientUI.userController.traveller.getId());
-		sb.append("6");
 		sb.append(" ");
 		sb.append(Integer.toString(travellerinpark.getnumOfVisitors()));
 		sb.append(" ");

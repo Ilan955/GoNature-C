@@ -55,10 +55,13 @@ public class WelcomeTravellerController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		if (!(ClientUI.entranceParkController.IfgetTravellerInParkExistInDB(ID))
+		if (!(ClientUI.entranceParkController.IfgetTravellerInParkExistInDB(ID)) // exists in DB and in park
 				&& !((ClientUI.entranceParkController.IfgetOrderInParkExistInDB(ID))))
 			exitParkBtn.setVisible(false);
-
+		else {
+			btnWithoutOrder.setVisible(false);
+			btnNewOrder.setVisible(false);
+		}
 		String typ = ClientUI.userController.traveller.getType();
 		if (typ.equals("") || typ.equals("preOrderTraveller"))
 			btnExistingorders.setVisible(false);
@@ -240,18 +243,22 @@ public class WelcomeTravellerController implements Initializable {
 		ClientUI.userController.identify("deleteFromDbWhenlogOutTraveller " + ClientUI.userController.traveller.getId()
 				+ " " + ClientUI.userController.traveller.getMemberID());
 		ClientUI.userController.traveller = null;
-
-		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		FXMLLoader loader = new FXMLLoader();
-		Pane root = loader.load(getClass().getResource("ByeBye.fxml").openStream());
-		ClientUI.LogOutUtility.makeTheStageDynamic(stage, root);
-		stage = ClientUI.LogOutUtility.getStage();
-		root = ClientUI.LogOutUtility.getParent();
-		Scene scene = new Scene(root);
-		stage.setTitle("Exit");
-		stage.setScene(scene);
-		stage.show();
-
+		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+		alert.setTitle("Exit from park");
+		alert.setHeaderText("Are you sure you want to exit from the park?");
+		alert.setResizable(false);
+		alert.setContentText("Select yes if you want, or not if you want to get back!");
+		((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Yes");
+		((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("No");
+		Optional<ButtonType> result = alert.showAndWait();
+		if (!result.isPresent())
+			alert.close();
+		else if (result.get() == ButtonType.OK) {
+			ClientUI.LogOutUtility.logOutTraveller();
+			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			stage.close();
+		} else if (result.get() == ButtonType.CANCEL)
+			alert.close();
 	}
 
 }

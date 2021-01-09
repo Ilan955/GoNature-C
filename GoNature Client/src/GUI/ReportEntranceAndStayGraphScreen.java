@@ -5,7 +5,10 @@
 */
 package GUI;
 
+import java.lang.reflect.Array;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.ResourceBundle;
 
 import Client.ClientUI;
@@ -53,16 +56,17 @@ public class ReportEntranceAndStayGraphScreen implements Initializable {
 	 * cnt[1 - 8]: counters for various stay time with 30min gaps cnt1 =0 up to 30
 	 * minutes stay cnt8 =210 up to 240 minutes stay
 	 */
-	int cnt1, cnt2, cnt3, cnt4, cnt5, cnt6, cnt7, cnt8;
+	int cnt1, cnt2, cnt3, cnt4, cnt5, cnt6, cnt7, cnt8, i;
+	boolean barFlag;
 
 	/**
 	 * Description of initialize() this function initializes the bar and scatter
 	 * charts. at the end initialization for pie chart is activated.
 	 * 
-	 * @param visitTravel is number of visitors as travelers.
+	 * @param visitTravel is number of visitors as Travellers.
 	 * @param visitMember is number of visitors as members.
 	 * @param visitGroup  is number of visitors as groups
-	 * @param enterTravel represents when did travelers enter the park
+	 * @param enterTravel represents when did Travellers enter the park
 	 * @param enterMember represents when did members enter the park
 	 * @param enterGroup  represents when did groups enter the park
 	 * 
@@ -70,7 +74,6 @@ public class ReportEntranceAndStayGraphScreen implements Initializable {
 	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		yAxis = new NumberAxis(7.0, 20., 0.1);
 		XYChart.Series<String, Number> visitTravel;
 		XYChart.Series<String, Number> visitMember;
 		XYChart.Series<String, Number> visitGroup;
@@ -78,39 +81,76 @@ public class ReportEntranceAndStayGraphScreen implements Initializable {
 		XYChart.Series<String, Float> enterTravel;
 		XYChart.Series<String, Float> enterMember;
 		XYChart.Series<String, Float> enterGroup;
+		XYChart.Series<String, Float> spaceholder;
 		// how many entered the park
 		visitTravel = new XYChart.Series<String, Number>();
 		visitMember = new XYChart.Series<String, Number>();
 		visitGroup = new XYChart.Series<String, Number>();
+
 		// when did they enter the park
 		enterTravel = new XYChart.Series<String, Float>();
 		enterMember = new XYChart.Series<String, Float>();
 		enterGroup = new XYChart.Series<String, Float>();
-
-		visitTravel.setName("Travelers");
-		enterTravel.setName("Travelers");
-		// Initialize Traveler graphs
-		for (Reports r : ClientUI.reportsController.visitors) {
-			visitTravel.getData().add(new XYChart.Data<>(r.getDate().toString(), r.getNumOfVisit()));
-			enterTravel.getData().add(new XYChart.Data<>(r.getDate().toString(), r.getEntranceTime()));
-		}
+		spaceholder = new XYChart.Series<String, Float>();
+//initialize legends
+		visitTravel.setName("Travellers");
+		enterTravel.setName("Travellers");
 		visitMember.setName("Members");
 		enterMember.setName("Members");
-		// Initialize Member graphs
-		for (Reports r : ClientUI.reportsController.members) {
-			visitMember.getData().add(new XYChart.Data<>(r.getDate().toString(), r.getNumOfVisit()));
-			enterMember.getData().add(new XYChart.Data<>(r.getDate().toString(), r.getEntranceTime()));
-		}
 		visitGroup.setName("Groups");
 		enterGroup.setName("Groups");
-		// Initialize Group graphs
-		for (Reports r : ClientUI.reportsController.groups) {
-			visitGroup.getData().add(new XYChart.Data<>(r.getDate().toString(), r.getNumOfVisit()));
-			enterGroup.getData().add(new XYChart.Data<>(r.getDate().toString(), r.getEntranceTime()));
+		spaceholder.setName("Travellers");
+		// Initialize graphs
+		int[] dayzVisitor = new int[32];
+		int[] dayzMember = new int[32];
+		int[] dayzGroup = new int[32];
+
+		for (i = 1; i <= 31; i++) {
+			dayzVisitor[i] = 0;
+			dayzMember[i] = 0;
+			dayzGroup[i] = 0;
+
 		}
+
+		for (Reports r : ClientUI.reportsController.totalArray) {
+			if (r.getType().equals("traveller")) {
+				dayzVisitor[r.getDate()] += r.getNumOfVisit();
+				for (i = 0; i < r.getNumOfVisit(); i++) {
+					enterTravel.getData().add(new XYChart.Data<>(String.valueOf(r.getDate()), r.getEntranceTime()));
+				}
+			}
+			if (r.getType().equals("Member") || r.getType().equals("Family")) {
+				dayzMember[r.getDate()] += r.getNumOfVisit();
+				for (i = 0; i < r.getNumOfVisit(); i++) {
+
+					enterMember.getData().add(new XYChart.Data<>(String.valueOf(r.getDate()), r.getEntranceTime()));
+				}
+
+			}
+			if (r.getType().equals("Group")) {
+				dayzGroup[r.getDate()] += r.getNumOfVisit();
+
+				for (i = 0; i < r.getNumOfVisit(); i++) {
+					enterGroup.getData().add(new XYChart.Data<>(String.valueOf(r.getDate()), r.getEntranceTime()));
+				}
+			}
+		}
+
 		// Add collected data to the graph
+		for (i = 1; i <= 31; i++) {
+			if (dayzVisitor[i] > 0 || dayzMember[i] > 0 || dayzGroup[i] > 0) {
+				visitTravel.getData().add(new XYChart.Data<>(String.valueOf(i), dayzVisitor[i]));
+				visitMember.getData().add(new XYChart.Data<>(String.valueOf(i), dayzMember[i]));
+				visitTravel.getData().add(new XYChart.Data<>(String.valueOf(i), dayzGroup[i]));
+				spaceholder.getData().add(new XYChart.Data<>(String.valueOf(i), (float) 8));
+
+			}
+
+		}
+		spaceholder.getData().addAll(enterTravel.getData());
 		chartBarNumbers.getData().addAll(visitTravel, visitMember, visitGroup);
-		chartBarEntrance.getData().addAll(enterTravel, enterMember, enterGroup);
+		chartBarEntrance.getData().addAll(spaceholder, enterMember, enterGroup);
+
 
 		// Initialize pie chart
 		countinit();
@@ -119,7 +159,7 @@ public class ReportEntranceAndStayGraphScreen implements Initializable {
 	/**
 	 * Description of countinit() this function initializes the pie charts.
 	 * 
-	 * @param pieChartTraveler is pie chart for travelers.
+	 * @param pieChartTraveler is pie chart for Travellers.
 	 * @param pieChartMember   is pie chart for members.
 	 * @param pieChartGroups   is pie chart for groups.
 	 * @param cnt[1            - 8]: counters for various stay time with 30min gaps
