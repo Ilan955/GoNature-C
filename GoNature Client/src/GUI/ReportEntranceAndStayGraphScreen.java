@@ -122,14 +122,11 @@ public class ReportEntranceAndStayGraphScreen implements Initializable {
 			if (r.getType().equals("Member") || r.getType().equals("Family")) {
 				dayzMember[r.getDate()] += r.getNumOfVisit();
 				for (i = 0; i < r.getNumOfVisit(); i++) {
-
 					enterMember.getData().add(new XYChart.Data<>(String.valueOf(r.getDate()), r.getEntranceTime()));
 				}
-
 			}
 			if (r.getType().equals("Group")) {
 				dayzGroup[r.getDate()] += r.getNumOfVisit();
-
 				for (i = 0; i < r.getNumOfVisit(); i++) {
 					enterGroup.getData().add(new XYChart.Data<>(String.valueOf(r.getDate()), r.getEntranceTime()));
 				}
@@ -143,14 +140,11 @@ public class ReportEntranceAndStayGraphScreen implements Initializable {
 				visitMember.getData().add(new XYChart.Data<>(String.valueOf(i), dayzMember[i]));
 				visitTravel.getData().add(new XYChart.Data<>(String.valueOf(i), dayzGroup[i]));
 				spaceholder.getData().add(new XYChart.Data<>(String.valueOf(i), (float) 8));
-
 			}
-
 		}
 		spaceholder.getData().addAll(enterTravel.getData());
 		chartBarNumbers.getData().addAll(visitTravel, visitMember, visitGroup);
 		chartBarEntrance.getData().addAll(spaceholder, enterMember, enterGroup);
-
 
 		// Initialize pie chart
 		countinit();

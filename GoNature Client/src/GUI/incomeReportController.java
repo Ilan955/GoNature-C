@@ -3,9 +3,11 @@ package GUI;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 import Client.ClientUI;
+import clientLogic.inits;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +16,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
@@ -41,9 +44,22 @@ public class incomeReportController implements Initializable {
 	@FXML
 	private Label Groups_income_LBL;
 
+	@FXML
+	private ComboBox<String> MonthCB;
+
+	@FXML
+	private ComboBox<String> YearCB;
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		ClientUI.reportsController.makeMonthlyIncomeReport(LocalDate.now());
+		MonthCB.setItems(inits.setMonthCB());
+		YearCB.setItems(inits.setYearCB());
+
+	}
+
+	@FXML
+	void whenClickCalculateBtn(ActionEvent event) {
+		ClientUI.reportsController.makeMonthlyIncomeReport((String) MonthCB.getValue(), (String) YearCB.getValue(),ClientUI.employeeController.getParkName());
 		Amount_of_travelers_LBL.setText(String.valueOf(ClientUI.reportsController.Traveler_cnt));
 		Travelers_income_Lbl.setText(String.valueOf(ClientUI.reportsController.Traveler_income));
 

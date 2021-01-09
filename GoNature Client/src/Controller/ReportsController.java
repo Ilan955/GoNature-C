@@ -8,6 +8,7 @@ package Controller;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -85,11 +86,17 @@ public class ReportsController {
 		}
 	}
 
-	public void makeMonthlyIncomeReport(LocalDate localDate) {
+	public void makeMonthlyIncomeReport(String month, String Year, String park) {
+		String date = Year + "-" + getMonth(month) + "-01";
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		LocalDate localDate = LocalDate.parse(date, formatter);
+		System.out.println(localDate);
 		StringBuffer sb = new StringBuffer();
 		sb.append("makeMonthlyIncomeReport");// method name
 		sb.append(" ");
 		sb.append(localDate.toString());
+		sb.append(" ");
+		sb.append(park);
 		ClientUI.chat.accept(sb.toString());
 	}
 
@@ -344,11 +351,10 @@ public class ReportsController {
 		totalArray.addAll(members);
 		totalArray.addAll(groups);
 		totalArray.sort(clientLogic.Reports.dayOfMonth);
-		
-		ArrayList<Integer> visitTravel=new ArrayList<Integer>();
-		ArrayList<Integer> visitMember=new ArrayList<Integer>();
-		ArrayList<Integer> visitGroups=new ArrayList<Integer>();
 
+		ArrayList<Integer> visitTravel = new ArrayList<Integer>();
+		ArrayList<Integer> visitMember = new ArrayList<Integer>();
+		ArrayList<Integer> visitGroups = new ArrayList<Integer>();
 
 	}
 }
