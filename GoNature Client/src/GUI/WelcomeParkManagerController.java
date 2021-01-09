@@ -24,7 +24,21 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-
+/**
+-----------------------------Class explanation------------------------------------------------------------------------------------------- 
+ * This class is a screen controller. This class also implements Initializable interface
+ * which means that this class must have initialize method.
+ * this method implements Initializable because we need to initialize screen with data before 
+ * it is displayed to the user
+ * this class will implement the behaviour of WelcomeParkManager screen with every data that is in it
+ * also, this class will be able to navigate from this screen to every of the department manager's options in our system
+ * this class will produce more functionality to the client side
+ *
+ * @author Bar Elhanati
+ * @version January 2021
+ *
+------------------------------------------------------------------------------------------------------------------------------------
+ */
 public class WelcomeParkManagerController implements Initializable {
 	@FXML
 	private Button informationBtn;
@@ -64,6 +78,30 @@ public class WelcomeParkManagerController implements Initializable {
 	@FXML
 	private Button SpecialDiscountBTN111;
 
+	
+	/**
+	-----------------------------Class variables----------------------------------------------------------------------------------------------------------- 
+		 * @param ParkMAnagerName will display park manager's name when he logs in to GoNature system == his full name 
+		 * @param ParkName will display park manager's park name
+		 * @param MaxVisitorsField is a field that park manager can set and send for approval of d. manager (sent as park settings request)
+		 * @param GapField is a field that park manager can set and send for approval of d. manager (sent as park settings request)
+		 * @param durationField is a field that park manager can set and send for approval of d. manager (sent as park settings request)
+		 * @param numberOFVisitorsLabel is a label that would be able to display park manager how many visitors (orders and unexpected) are in park now
+		 * @param SpecialDiscountBTN is a button that will navigate park manager to a screen which there he would be able to request for new discount request for d. manager approval
+		 * @param overallVisitorsReportBTN with this button, park manager would be allowed to produce overall visitors report
+		 * @param CreateUsageReportBTN with this button, park manager would be able to produce a usage report
+		 * @param SpecialDiscountBTN111 will allow park manager to log out of GoNature system 
+		 * 
+	-----------------------------Class methods----------------------------------------------------------------------------------------------------------------------*/
+
+		/**
+		 * Description of initialize method:
+		 * initialize method will set WelcomeParkManager screen with appropriate information.
+		 * info will be provided by ClientUI.employeeController.x where x stands for the info that we need (firstname, lastname, and so and so)
+		 * also, WelcomeParkManager will display amount of visitors in his park now and park current settings (maxVisitors,gap and maxDuration)
+		 */
+	
+	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		String first = ClientUI.employeeController.getFirstName();
@@ -89,11 +127,13 @@ public class WelcomeParkManagerController implements Initializable {
 	}
 
 	/**
-	 * This method responislbe of showing an alert when want to close the
-	 * application.
-	 * 
-	 * @param event
+	 * Description of WhenClickExitBtn method:
+	 * WhenClickExitBtn method will navigate by pressing X icon on the top right side to WelcomeAndLoginScreen screen
+	 * it will navigate only after updating DB that the employee is no longer connected to GoNature system
+	 * and also, will set employee values to be null, so other users will be able to connect (from this session)
+	 * @throws IOException
 	 */
+	
 	@FXML
 	void WhenClickExitBtn(MouseEvent event) {
 		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -114,6 +154,13 @@ public class WelcomeParkManagerController implements Initializable {
 			alert.close();
 	}
 
+	/**
+	 * Description of ClickOnSetSpecialDiscount method:
+	 * ClickOnSetSpecialDiscount will let park manager to navigate to SetDiscount screen.
+	 * there, park manager will be able to ask for d. manager approval for new discount in his park
+	 */
+	
+	
 	@FXML
 	void ClickOnSetSpecialDiscount(ActionEvent event) throws IOException {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -128,15 +175,18 @@ public class WelcomeParkManagerController implements Initializable {
 		stage.show();
 	}
 
-	@FXML
-	void ClickShowNumberVisitorsPark(ActionEvent event) {
-
-	}
+	
 
 	@FXML
 	void WhenOverGapInPArkForHelp(ActionEvent event) {
 
 	}
+	
+	/**
+	 * Description of WhenClickCreateMonthlyIncomeReportBtn method:
+	 * WhenClickCreateMonthlyIncomeReportBtn will let park manager to navigate to MonthlyReport screen.
+	 * there, park manager will be able to produce monthly income report
+	 */
 
 	@FXML
 	void WhenClickCreateMonthlyIncomeReportBtn(ActionEvent event) throws IOException {
@@ -153,6 +203,12 @@ public class WelcomeParkManagerController implements Initializable {
 		stage.setScene(scene);
 		stage.show();
 	}
+	
+	/**
+	 * Description of WhenClickCreateUsageReportBtn method:
+	 * WhenClickCreateUsageReportBtn will let park manager to navigate to usageReport screen.
+	 * there, park manager will be able to produce usage report 
+	 */
 
 	@FXML
 	void WhenClickCreateUsageReportBtn(ActionEvent event) throws IOException {
@@ -167,6 +223,15 @@ public class WelcomeParkManagerController implements Initializable {
 		stage.setScene(scene);
 		stage.show();
 	}
+	
+	/**
+	 * Description of WhenPressLogOutBTN method:
+	 * WhenPressLogOutBTN method will navigate by pressing logOutBTN to WelcomeAndLoginScreen screen
+	 * it will navigate only after updating DB that the employee is no longer connected to GoNature system
+	 * and also, will set employee values to be null, so other users will be able to connect (from this session)
+	 * @throws IOException
+	 */
+	
 
 	@FXML
 	void WhenClickLogOutBtn(ActionEvent event) throws IOException {
@@ -185,6 +250,17 @@ public class WelcomeParkManagerController implements Initializable {
 		stage.setScene(scene);
 		stage.show();
 	}
+	
+	/**
+	 * Description of WhenClickSendChangesBtn method:
+	 * WhenClickSendChangesBtn method will update DB with new park settings change request
+	 * request will be sent to DB only if it is appropriate (new maximum visitors can not be higher then the current amount)
+	 * gap could not be greater then the max amount of visitors
+	 * all fields must not be empty while sending to d. manager approval
+	 * a request will have following properties: ID,date(now),time(now),park settings changes,status(department manager touched request or not)
+	 * @throws IOException
+	 */
+	
 
 	@FXML
 	void WhenClickSendChangesBtn(ActionEvent event) {
@@ -254,6 +330,13 @@ public class WelcomeParkManagerController implements Initializable {
 		a.show();
 		return;
 	}
+	
+	/**
+	 * Description of ClickCreateOverallVisitorsReport method:
+	 * ClickCreateOverallVisitorsReport will let park manager to navigate to MonthlyStayAndEnterReport screen.
+	 * there, park manager will be able to produce monthly park being report 
+	 */
+	
 
 	@FXML
 	void ClickCreateOverallVisitorsReport(ActionEvent event) throws IOException {
@@ -269,10 +352,5 @@ public class WelcomeParkManagerController implements Initializable {
 		stage.show();
 	}
 
-	/*
-	 * @Override public void start(Stage primaryStage) throws Exception {
-	 * primaryStage.setOnCloseRequest(e->ClientUI.employeeController.logOutEmployee(
-	 * ClientUI.employeeController.getUserName())); }
-	 */
 
 }

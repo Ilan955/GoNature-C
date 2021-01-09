@@ -92,6 +92,7 @@ public class usageReportController implements Initializable {
 	 */
 	@FXML
 	void WhenClickCralculateBtn(ActionEvent event) {
+		lineChartimePercent.getData().clear();
 		dateofNotfullCapacityTable.setVisible(true);
 		lineChartimePercent.setVisible(true);
 		String year = (String) yearCB.getValue();

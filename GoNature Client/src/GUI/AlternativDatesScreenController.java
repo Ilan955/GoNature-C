@@ -109,7 +109,7 @@ public class AlternativDatesScreenController implements Initializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("HOW MANY");
+		
 		SetTimeParkCm();
 		AlternativeTable.setItems(ClientUI.orderController.aD);
 		addButtonToTable();

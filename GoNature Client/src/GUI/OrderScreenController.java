@@ -190,7 +190,16 @@ public class OrderScreenController implements Initializable {
 	 */
 	@FXML
 	void WhenClickNextBtn(ActionEvent event) throws IOException {
-		if (ClientUI.orderController.checkValidValues(PhoneNumberLbl.getText(), EmailLbl.getText())) {
+		String wanted = (String) WantedParkCB.getValue();
+		int numOfVisitors = Integer.parseInt(NumOfVisotrsLbl.getText());
+		int numOfAvailable = ClientUI.parkController.getMaxAvailableVisitors(wanted);
+		if(numOfVisitors>numOfAvailable) {
+			Alert a = new Alert(AlertType.NONE,
+					"Sorry but this amount of visitors is not allowed in our park.\nPlease contact the employees or try again with  smaller  amount of visitors.\nIn our park we allowing only "+numOfAvailable);
+			a.setAlertType(AlertType.ERROR);
+			a.show();
+		}
+		else if (ClientUI.orderController.checkValidValues(PhoneNumberLbl.getText(), EmailLbl.getText())) {
 			String temp = (String) TimeOfVisitCB.getValue();
 			String[] res = temp.split(":");
 			LocalDate date = DateLbl.getValue();
@@ -201,8 +210,7 @@ public class OrderScreenController implements Initializable {
 				a.setAlertType(AlertType.ERROR);
 				a.show();
 			} else {
-				String wanted = (String) WantedParkCB.getValue();
-				int numOfVisitors = Integer.parseInt(NumOfVisotrsLbl.getText());
+				
 				Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 				LocalDate d = DateLbl.getValue();
 				LocalTime time = LocalTime.of(Integer.parseInt(res[0]), Integer.parseInt(res[1]));
