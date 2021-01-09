@@ -91,6 +91,9 @@ public class WelcomeEmployeeController implements Initializable {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		FXMLLoader loader = new FXMLLoader();
 		Parent root = loader.load(getClass().getResource("WelcomeAndLoginScreen.fxml").openStream());
+		ClientUI.LogOutUtility.makeTheStageDynamicForParent(stage, root);
+		stage = ClientUI.LogOutUtility.getStage();
+		root= ClientUI.LogOutUtility.getP();
 		Scene scene = new Scene(root);
 		stage.setTitle("Welcome to GoNature!");
 		stage.setScene(scene);
@@ -105,6 +108,9 @@ public class WelcomeEmployeeController implements Initializable {
 
 		FXMLLoader loader = new FXMLLoader();
 		Pane root = loader.load(getClass().getResource("SignUpNewMember.fxml").openStream());
+		ClientUI.LogOutUtility.makeTheStageDynamic(stage, root);
+		stage = ClientUI.LogOutUtility.getStage();
+		root= ClientUI.LogOutUtility.getParent();
 		Scene scene = new Scene(root);
 		stage.setTitle("Signup new member");
 		stage.setScene(scene);
@@ -117,6 +123,9 @@ public class WelcomeEmployeeController implements Initializable {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		FXMLLoader loader = new FXMLLoader();
 		Pane root = loader.load(getClass().getResource("requestsEnterTraveller.fxml").openStream());
+		ClientUI.LogOutUtility.makeTheStageDynamic(stage, root);
+		stage = ClientUI.LogOutUtility.getStage();
+		root= ClientUI.LogOutUtility.getParent();
 		Scene scene = new Scene(root);
 		stage.setTitle("Requests enter traveller");
 		stage.setScene(scene);

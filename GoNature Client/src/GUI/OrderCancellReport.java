@@ -119,6 +119,9 @@ public class OrderCancellReport implements Initializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		ClientUI.LogOutUtility.makeTheStageDynamicForParent(stage, root);
+		stage = ClientUI.LogOutUtility.getStage();
+		root= ClientUI.LogOutUtility.getP();
 		Scene scene = new Scene(root);
 		stage.setTitle("Success Sign Up");
 		stage.setScene(scene);
@@ -213,6 +216,9 @@ public class OrderCancellReport implements Initializable {
 		// ClientUI.orderController.oR.remove(0);
 		Stage stage = new Stage();
 		Parent root = FXMLLoader.load(getClass().getResource("cancelGraph.fxml"));
+		ClientUI.LogOutUtility.makeTheStageDynamicForParent(stage, root);
+		stage = ClientUI.LogOutUtility.getStage();
+		root= ClientUI.LogOutUtility.getP();
 		Scene scene = new Scene(root);
 		stage.setTitle("Prototype");
 		stage.setScene(scene);

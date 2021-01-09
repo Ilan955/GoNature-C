@@ -2,6 +2,7 @@ package GUI;
 
 import java.io.IOException;
 
+import Client.ClientUI;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -50,6 +51,9 @@ public class parkIsFullController {
 		FXMLLoader loader = new FXMLLoader();
 		Stage primaryStage = new Stage();
 		Pane root = loader.load(getClass().getResource("/GUI/NewOrder.fxml").openStream());
+		ClientUI.LogOutUtility.makeTheStageDynamic(stage, root);
+		stage = ClientUI.LogOutUtility.getStage();
+		root= ClientUI.LogOutUtility.getParent();
 		Scene scene = new Scene(root);
 		primaryStage.setTitle("New Order");
 		primaryStage.setScene(scene);

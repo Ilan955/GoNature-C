@@ -50,6 +50,9 @@ public class SureCancellScreen implements Initializable {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		FXMLLoader loader = new FXMLLoader();
 		Pane root = loader.load(getClass().getResource("/GUI/WelcomeTraveller.fxml").openStream());
+		ClientUI.LogOutUtility.makeTheStageDynamic(stage, root);
+		stage = ClientUI.LogOutUtility.getStage();
+		root= ClientUI.LogOutUtility.getParent();
 		Scene scene = new Scene(root);
 		stage.setTitle("Cancel order");
 		stage.setScene(scene);
@@ -71,6 +74,9 @@ public class SureCancellScreen implements Initializable {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		FXMLLoader loader = new FXMLLoader();
 		Pane root = loader.load(getClass().getResource("/GUI/WelcomeTraveller.fxml").openStream());
+		ClientUI.LogOutUtility.makeTheStageDynamic(stage, root);
+		stage = ClientUI.LogOutUtility.getStage();
+		root= ClientUI.LogOutUtility.getParent();
 		Scene scene = new Scene(root);
 		stage.setTitle("Cancel order");
 		stage.setScene(scene);

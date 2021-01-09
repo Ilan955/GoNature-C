@@ -51,12 +51,17 @@ public class cancelGraphScreen implements Initializable {
 		XYChart.Series<String, Number> series2;
 		series1 = new XYChart.Series<String, Number>();
 		series2 = new XYChart.Series<String, Number>();
+		System.out.println("Here im trying!");
+		for (CancelReportData k : ClientUI.orderController.oR) {
+			System.out.println(k.getMonth());
+		}
 		series1.setName("Canceled");
 		series2.setName("Not entered");
 		for (CancelReportData k : ClientUI.orderController.oR) {
 			series1.getData().add(new XYChart.Data<>(k.getMonth() + "/" + k.getYear(), k.getCancelledOrders()));
 			series2.getData().add(new XYChart.Data<>(k.getMonth() + "/" + k.getYear(), k.getUncompleteOrders()));
 		}
+		chartBar.getData().addAll(series1,series2);
 	}
 
 	/**

@@ -87,6 +87,11 @@ public class ReportStayAndEnter implements Initializable {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		FXMLLoader loader = new FXMLLoader();
 		Pane root = loader.load(getClass().getResource("WelcomeDepartmentEmployee.fxml").openStream());
+
+		ClientUI.LogOutUtility.makeTheStageDynamic(stage, root);
+		stage = ClientUI.LogOutUtility.getStage();
+		root= ClientUI.LogOutUtility.getParent();
+
 		Scene scene = new Scene(root);
 		stage.setTitle("Welcome" + " " + ClientUI.employeeController.getType() + "!");
 		stage.setScene(scene);
@@ -166,6 +171,9 @@ public class ReportStayAndEnter implements Initializable {
 		ClientUI.reportsController.getDataEntranceTimesAndStay(monthOfReport, yearOfReport, parkOfreport);
 		Stage stage = new Stage();
 		Parent root = FXMLLoader.load(getClass().getResource("MonthlyStayAndEnterReportGraph.fxml"));
+		ClientUI.LogOutUtility.makeTheStageDynamicForParent(stage, root);
+		stage = ClientUI.LogOutUtility.getStage();
+		root= ClientUI.LogOutUtility.getP();
 		Scene scene = new Scene(root);
 		stage.setTitle("View Graph");
 		stage.setScene(scene);

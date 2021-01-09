@@ -88,6 +88,9 @@ public class ExsitingOrdersScreenController implements Initializable {
 		Parent root;
 		try {
 			root = FXMLLoader.load(getClass().getResource("WelcomeTraveller.fxml"));
+			ClientUI.LogOutUtility.makeTheStageDynamicForParent(stage, root);
+			stage = ClientUI.LogOutUtility.getStage();
+			root= ClientUI.LogOutUtility.getP();
 			Scene scene = new Scene(root);
 			stage.setTitle("Prototyp");
 			stage.setScene(scene);
@@ -210,6 +213,9 @@ public class ExsitingOrdersScreenController implements Initializable {
 							Pane root;
 							try {
 								root = loader.load(getClass().getResource("/GUI/SureIfCancel.fxml").openStream());
+								ClientUI.LogOutUtility.makeTheStageDynamic(stage, root);
+								stage = ClientUI.LogOutUtility.getStage();
+								root= ClientUI.LogOutUtility.getParent();
 								Scene scene = new Scene(root);
 								stage.setTitle("Unapproved Order");
 								stage.setScene(scene);
@@ -246,7 +252,7 @@ public class ExsitingOrdersScreenController implements Initializable {
 					{
 						btn.setOnAction((ActionEvent event) -> {
 							Data data = getTableView().getItems().get(getIndex());
-
+							
 							int orderNum = Integer.parseInt(data.getID());
 							System.out.println(data.getTime());
 							LocalTime lt = LocalTime.parse(data.getTime());
@@ -258,30 +264,30 @@ public class ExsitingOrdersScreenController implements Initializable {
 							int timelH = lt.getHour();
 							int limitTime = timelH + 4;
 							int timelM = lt.getMinute();
-							if (ld.compareTo(dateNow) == 0 && timeH < limitTime && timelM == timeM) {
+							if (ld.compareTo(dateNow) == 0 && timeH < limitTime ) {
+								Order o = new Order(Integer.parseInt(data.getID()),lt,ld,data.getPark(),Integer.parseInt(data.getNumOfVisit()),Float.parseFloat(data.getPrice()));
 								System.out.println("GOOD");
 								int numofvisit = ClientUI.userController.traveller.getNumberOfVisitors();
-								String park = ClientUI.orderController.order.getWantedPark();
 								String id = ClientUI.userController.traveller.getId();
 								int maxUpdateCurrentVisitors;
-								maxUpdateCurrentVisitors = ClientUI.parkController.getCurrentVisitors(park)
-										+ ClientUI.parkController.getCurrentUnexpectedVisitors(park) + numofvisit;
+								maxUpdateCurrentVisitors = ClientUI.parkController.getCurrentVisitors(o.getWantedPark())
+										+ ClientUI.parkController.getCurrentUnexpectedVisitors(o.getWantedPark()) + numofvisit;
 
-								ClientUI.entranceParkController.updateEnterTimeForTravellerWithOrder(park, id);
-								ClientUI.entranceParkController.setCurrentVisitros(park, numofvisit);
+								ClientUI.entranceParkController.updateEnterTimeForTravellerWithOrder(o.getWantedPark(), id);
+								ClientUI.entranceParkController.setCurrentVisitros(o.getWantedPark(), numofvisit);
 
-								if (maxUpdateCurrentVisitors == ClientUI.parkController.getMaxVisitors(park)) {
-									ClientUI.parkController.updateStatusForCapacityParkToFull(park);
+								if (maxUpdateCurrentVisitors == ClientUI.parkController.getMaxVisitors(o.getWantedPark())) {
+									ClientUI.parkController.updateStatusForCapacityParkToFull(o.getWantedPark());
 								} else {
-									if (!ClientUI.parkController.IfgetDateExistInDB(park)) {
-										ClientUI.parkController.enterDateofFullCapcityPark(park, LocalDate.now(), 0,
-												ClientUI.parkController.getMaxVisitors(park), maxUpdateCurrentVisitors);
+									if (!ClientUI.parkController.IfgetDateExistInDB(o.getWantedPark())) {
+										ClientUI.parkController.enterDateofFullCapcityPark(o.getWantedPark(), LocalDate.now(), 0,
+												ClientUI.parkController.getMaxVisitors(o.getWantedPark()), maxUpdateCurrentVisitors);
 
 									} else {
 										if (ClientUI.parkController
-												.getMaxcurrentVisitorsPerDay(park) < maxUpdateCurrentVisitors)
+												.getMaxcurrentVisitorsPerDay(o.getWantedPark()) < maxUpdateCurrentVisitors)
 											ClientUI.parkController.changeMaxcurrentAmountOfVisitorsForCapacityPark(
-													park, maxUpdateCurrentVisitors);
+													o.getWantedPark(), maxUpdateCurrentVisitors);
 									}
 
 								}
@@ -367,6 +373,9 @@ public class ExsitingOrdersScreenController implements Initializable {
 										try {
 											root = loader.load(
 													getClass().getResource("/GUI/ExistingOrders.fxml").openStream());
+											ClientUI.LogOutUtility.makeTheStageDynamic(stage, root);
+											stage = ClientUI.LogOutUtility.getStage();
+											root= ClientUI.LogOutUtility.getParent();
 											Scene scene = new Scene(root);
 											stage.setTitle("Unapproved Order");
 											stage.setScene(scene);

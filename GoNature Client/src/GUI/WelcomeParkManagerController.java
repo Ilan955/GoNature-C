@@ -87,10 +87,6 @@ public class WelcomeParkManagerController implements Initializable {
 				- ClientUI.parkController.getMaxAvailableVisitors(park))); // --> need to know what the gap is
 		durationField.setText("" + ClientUI.parkController.getMaxDuration(park));
 
-		// int current = ParkController.getCurrentVisitors(park) +
-		// ParkController.getCurrentUnexpectedVisitors(park);
-		// CurrentPeopleLbl.setText("" + current);
-		// 64-65 rows are after DB check with parkController. (I didn't use park DB yet)
 	}
 
 	/**
@@ -124,6 +120,9 @@ public class WelcomeParkManagerController implements Initializable {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		FXMLLoader loader = new FXMLLoader();
 		Pane root = loader.load(getClass().getResource("SetDiscount.fxml").openStream());
+		ClientUI.LogOutUtility.makeTheStageDynamic(stage, root);
+		stage = ClientUI.LogOutUtility.getStage();
+		root = ClientUI.LogOutUtility.getParent();
 		Scene scene = new Scene(root);
 		stage.setTitle("Set new discount");
 		stage.setScene(scene);
@@ -145,6 +144,11 @@ public class WelcomeParkManagerController implements Initializable {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		FXMLLoader loader = new FXMLLoader();
 		Pane root = loader.load(getClass().getResource("incomeReportScreen.fxml").openStream());
+
+		ClientUI.LogOutUtility.makeTheStageDynamic(stage, root);
+		stage = ClientUI.LogOutUtility.getStage();
+		root = ClientUI.LogOutUtility.getParent();
+
 		Scene scene = new Scene(root);
 		stage.setTitle("Create monthly report");
 		stage.setScene(scene);
@@ -156,6 +160,9 @@ public class WelcomeParkManagerController implements Initializable {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		FXMLLoader loader = new FXMLLoader();
 		Pane root = loader.load(getClass().getResource("usageReport.fxml").openStream());
+		ClientUI.LogOutUtility.makeTheStageDynamic(stage, root);
+		stage = ClientUI.LogOutUtility.getStage();
+		root = ClientUI.LogOutUtility.getParent();
 		Scene scene = new Scene(root);
 		stage.setTitle("Create usage report");
 		stage.setScene(scene);
@@ -171,6 +178,9 @@ public class WelcomeParkManagerController implements Initializable {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		FXMLLoader loader = new FXMLLoader();
 		Parent root = loader.load(getClass().getResource("WelcomeAndLoginScreen.fxml").openStream());
+		ClientUI.LogOutUtility.makeTheStageDynamicForParent(stage, root);
+		stage = ClientUI.LogOutUtility.getStage();
+		root = ClientUI.LogOutUtility.getP();
 		Scene scene = new Scene(root);
 		stage.setTitle("Welcome to GoNature!");
 		stage.setScene(scene);
@@ -252,6 +262,12 @@ public class WelcomeParkManagerController implements Initializable {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		FXMLLoader loader = new FXMLLoader();
 		Parent root = loader.load(getClass().getResource("MonthlyReport.fxml").openStream());
+<<<<<<< HEAD
+		ClientUI.LogOutUtility.makeTheStageDynamicForParent(stage, root);
+		stage = ClientUI.LogOutUtility.getStage();
+		root= ClientUI.LogOutUtility.getP();
+=======
+>>>>>>> branch 'master' of https://github.com/Ilan955/GoNature-C.git
 		Scene scene = new Scene(root);
 
 		stage.setScene(scene);

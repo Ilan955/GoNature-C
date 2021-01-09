@@ -55,6 +55,9 @@ public class pendingParkSettingsRequestDepartmentManagerScreen implements Initia
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		FXMLLoader loader = new FXMLLoader();
 		Pane root = loader.load(getClass().getResource("WelcomeDepartmentEmployee.fxml").openStream());
+		ClientUI.LogOutUtility.makeTheStageDynamic(stage, root);
+		stage = ClientUI.LogOutUtility.getStage();
+		root= ClientUI.LogOutUtility.getParent();
 		Scene scene = new Scene(root);
 		stage.setTitle("Welcome" + " " + ClientUI.employeeController.getType() + "!");
 		stage.setScene(scene);
