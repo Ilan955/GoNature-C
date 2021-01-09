@@ -37,7 +37,7 @@ import javafx.stage.Stage;
 
 public class OrderController {
 	public Person t;
-
+	private int orderNum;
 	/** Instance of the current order of the traveller */
 
 	public Order order;
@@ -101,10 +101,13 @@ public class OrderController {
 			else
 				ClientUI.discountController.getTotalPrice(type, numOfVisitors, "FutreOrder", "False");
 			
-			float finalPr = ClientUI.discountController.getFinalPriceWithoutDM();
+			float finalPr = ClientUI.discountController.getFinalPriceWithoutDM();	
+			StringBuffer sb =new StringBuffer();
+			sb.append("getOrderNnumber");
+			ClientUI.chat.accept(sb.toString());
+			order = new Order(orderNum, time, dateOfVisit, wantedPark, numOfVisitors,finalPr);
 			
-			System.out.println("The final price before the discount is: "+finalPr);
-			order = new Order(5, time, dateOfVisit, wantedPark, numOfVisitors,finalPr);
+			System.out.println("The number of the order is : "+orderNum);
 			
 		}
 		LocalTime openingTime = LocalTime.of(8, 0);
@@ -222,6 +225,7 @@ public class OrderController {
 	 * @throws IOException
 	 */
 	public void gotMessage(String[] msg) throws IOException {
+		
 		String cases = msg[0];
 		switch (cases) {
 		case "canMakeOrder":
@@ -229,6 +233,10 @@ public class OrderController {
 			break;
 		case "getExsistingOrders":
 			fillExsistingOrders(msg);
+			break;
+		case "getOrderNumber":
+			orderNum = Integer.parseInt(msg[1]);
+			
 			break;
 		case "getDataForReport":
 			fillReportTableData(msg);
@@ -239,9 +247,7 @@ public class OrderController {
 			else
 				need_alert = true;
 			break;
-
 		}
-
 	}
 
 	/**
@@ -451,9 +457,9 @@ public class OrderController {
 	 * @return void
 	 */
 	public void cancelOrder(String dateOfVisit, String wantedPark, String timeOfVisit) {
-		// String id = traveller.getId();
+		
 		if (isInDb) {
-			String id = "4";
+			 String id = t.getId();
 			StringBuffer sb = new StringBuffer();
 			sb.append("cancelOrder");
 			sb.append(" ");
@@ -540,7 +546,7 @@ public class OrderController {
 		sb.append(" ");
 		sb.append(getOr.getWantedPark());
 		sb.append(" ");
-		sb.append(t.getType());
+		sb.append(t.getId());
 		// sb.append("4");
 		sb.append(" ");
 		ClientUI.chat.accept(sb.toString());

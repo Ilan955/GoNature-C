@@ -21,6 +21,22 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+/**
+-----------------------------Class explanation------------------------------------------------------------------------------------------- 
+ * This class is a screen controller. This class also implements Initializable interface
+ * which means that this class must have initialize method.
+ * this method implements Initializable because we need to initialize screen with data before 
+ * it is displayed to the user
+ * this class will implement the behaviour of WelcomeDepartmentManager screen with every data that is in it
+ * also, this class will be able to navigate from this screen to every of the department manager's options in our system
+ * this class will produce more functionality to the client side
+ *
+ * @author Bar Elhanati
+ * @version January 2021
+ *
+------------------------------------------------------------------------------------------------------------------------------------
+ */
+
 public class welcomeDepartmentManagerController implements Initializable {
 	@FXML
 	private Button informationBtn;
@@ -48,6 +64,25 @@ public class welcomeDepartmentManagerController implements Initializable {
 	@FXML
 	private Button produceVisitReportBtn;
 
+	/**---------------------------------Class variables----------------------------------------------------------------------------------------------------------- 
+	 * @param DepartmentManagerNameLBL will display department manager's name when he logs in to GoNature system == his full name 
+	 * @param WaitingDiscountsBTN this button will allow department manager to watch every park manager request for setting a new discount
+	 * @param WaitingParkChangesBTN this button will allow department manager to watch every park manager request for setting park changes
+	 * @param btnNewOrder by clicking this button, traveller will be able to create a new order
+	 * @param logOutBTN by clicking this button, department manger will be out of GoNature system 
+	 * @param produceCancelledOrdersBtn will allow department manager to produce cancelled orders report
+	 * @param produceVisitReportBtn will allow department manager to produce any park visits reports
+	 * 
+-----------------------------Class methods----------------------------------------------------------------------------------------------------------------------*/
+
+	/**
+	 * Description of WhenPressLogOutBTN method:
+	 * WhenPressLogOutBTN method will navigate by pressing logOutBTN to WelcomeAndLoginScreen screen
+	 * it will navigate only after updating DB that the employee is no longer connected to GoNature system
+	 * and also, will set employee values to be null, so other users will be able to connect (from this session)
+	 * @throws IOException
+	 */
+	
 	@FXML
 	void WhenPressLogOutBTN(ActionEvent event) throws IOException {
 		ClientUI.employeeController.logOutEmployee(ClientUI.employeeController.getUserName());
@@ -67,6 +102,14 @@ public class welcomeDepartmentManagerController implements Initializable {
 		stage.show();
 	}
 
+	/**
+	 * Description of WhenPressNotYetApprovedDiscountsBTN method:
+	 * WhenPressNotYetApprovedDiscountsBTN method will navigate by pressing WaitingDiscountsBTN to discountForDM.fxml screen
+	 * it will navigate only after updating the table in discountForDM screen with the park discount requests from park managers
+	 * @throws IOException
+	 */
+	
+	
 	@FXML
 	void WhenPressNotYetApprovedDiscountsBTN(ActionEvent event) throws IOException {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -81,10 +124,11 @@ public class welcomeDepartmentManagerController implements Initializable {
 	}
 
 	/**
-	 * This method responislbe of showing an alert when want to close the
-	 * application.
-	 * 
-	 * @param event
+	 * Description of WhenClickExitBtn method:
+	 * WhenClickExitBtn method will navigate by pressing X icon on the top right side to WelcomeAndLoginScreen screen
+	 * it will navigate only after updating DB that the employee is no longer connected to GoNature system
+	 * and also, will set employee values to be null, so other users will be able to connect (from this session)
+	 * @throws IOException
 	 */
 	@FXML
 	void WhenClickExitBtn(MouseEvent event) {
@@ -105,6 +149,14 @@ public class welcomeDepartmentManagerController implements Initializable {
 		} else if (result.get() == ButtonType.CANCEL)
 			alert.close();
 	}
+	
+	/**
+	 * Description of WhenPressNotYetApprovedParkChanges method:
+	 * WhenPressNotYetApprovedParkChanges method will navigate by pressing WaitingParkChangesBTN to penidngRequest.fxml screen
+	 * it will navigate only after updating the table in penidngRequest screen with the park settings request for change by park managers
+	 * @throws IOException
+	 */
+	
 
 	@FXML
 	void WhenPressNotYetApprovedParkChanges(ActionEvent event) throws IOException {
@@ -130,6 +182,13 @@ public class welcomeDepartmentManagerController implements Initializable {
 
 	}
 
+	/**
+	 * Description of WhenPressproduceVisitReportBtn method:
+	 * WhenPressproduceVisitReportBtn method will navigate by pressing produceVisitReportBtn to ..... 
+	 * @throws IOException
+	 */
+	
+	
 	@FXML
 	void WhenPressproduceVisitReportBtn(ActionEvent event) throws IOException {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -151,6 +210,12 @@ public class welcomeDepartmentManagerController implements Initializable {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * Description of initialize method:
+	 * initialize method will set WelcomeDepartmentManager screen with appropriate information.
+	 * info will be provided by ClientUI.employeeController.x where x stands for the info that we need (firstname, lastname, and so and so)
+	 */
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {

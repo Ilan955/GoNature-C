@@ -152,7 +152,7 @@ public class EnterParkNowController implements Initializable {
 			ClientUI.discountController.getTotalPrice("Group", numOfVisit, "Casual", "False");
 
 		priceBeforParkManager = (ClientUI.discountController.getFinalPriceWithoutDM());
-		Order orderForPrice = new Order(0, null, myDate, wantedpark, numOfVisit, priceBeforParkManager);
+		Order orderForPrice = new Order(0, null, myDate, (String)WantedParkCB.getValue(), numOfVisit, priceBeforParkManager);
 		priceAftarDiscountManager = ClientUI.discountController.calculateFinalPrice(orderForPrice);
 		ClientUI.entranceParkController.enterpark.Totalprice = priceAftarDiscountManager;
 		return priceAftarDiscountManager;
