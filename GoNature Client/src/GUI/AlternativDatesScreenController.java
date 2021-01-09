@@ -115,7 +115,6 @@ public class AlternativDatesScreenController implements Initializable {
 		addButtonToTable();
 	}
 
-	
 	/**
 	 * This method responislbe of showing an alert when want to close the
 	 * application.
@@ -177,7 +176,7 @@ public class AlternativDatesScreenController implements Initializable {
 								root = loader.load(getClass().getResource("/GUI/Confirmation.fxml").openStream());
 								ClientUI.LogOutUtility.makeTheStageDynamic(stage, root);
 								stage = ClientUI.LogOutUtility.getStage();
-								root= ClientUI.LogOutUtility.getParent();
+								root = ClientUI.LogOutUtility.getParent();
 								Scene scene = new Scene(root);
 								stage.setTitle("Unapproved Order");
 								stage.setScene(scene);
@@ -255,7 +254,7 @@ public class AlternativDatesScreenController implements Initializable {
 		Pane root = loader.load(getClass().getResource("/GUI/CencellOrder.fxml").openStream());
 		ClientUI.LogOutUtility.makeTheStageDynamic(stage, root);
 		stage = ClientUI.LogOutUtility.getStage();
-		root= ClientUI.LogOutUtility.getParent();
+		root = ClientUI.LogOutUtility.getParent();
 		Scene scene = new Scene(root);
 		stage.setTitle("Cancel order");
 		stage.setScene(scene);

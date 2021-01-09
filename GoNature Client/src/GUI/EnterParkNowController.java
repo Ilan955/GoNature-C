@@ -167,10 +167,11 @@ public class EnterParkNowController implements Initializable {
 			ClientUI.discountController.getTotalPrice("GroupGuide", numOfVisit, "Casual", "False");
 
 		priceBeforParkManager = (ClientUI.discountController.getFinalPriceWithoutDM());
-		Order orderForPrice=new Order(0, null, myDate, wantedpark,numOfVisit, priceBeforParkManager);
-		discount=ClientUI.discountController.calculateFinalPrice(orderForPrice);
+		Order orderForPrice = new Order(0, null, myDate, wantedpark, numOfVisit, priceBeforParkManager);
+		discount = ClientUI.discountController.calculateFinalPrice(orderForPrice);
 		return discount;
 	}
+
 	/**
 	 * get number of visitor
 	 * 
@@ -210,14 +211,12 @@ public class EnterParkNowController implements Initializable {
 		Pane root = loader.load(getClass().getResource("waiting.fxml").openStream());
 		ClientUI.LogOutUtility.makeTheStageDynamic(stage, root);
 		stage = ClientUI.LogOutUtility.getStage();
-		root= ClientUI.LogOutUtility.getParent();
+		root = ClientUI.LogOutUtility.getParent();
 		Scene scene = new Scene(root);
 		stage.setTitle("Waiting for enter");
 		stage.setScene(scene);
 		stage.show();
 	}
-	
-
 
 	/**
 	 * this action will return to the back screen
@@ -234,7 +233,7 @@ public class EnterParkNowController implements Initializable {
 		Pane root = loader.load(getClass().getResource("/GUI/WelcomeTraveller.fxml").openStream());
 		ClientUI.LogOutUtility.makeTheStageDynamic(stage, root);
 		stage = ClientUI.LogOutUtility.getStage();
-		root= ClientUI.LogOutUtility.getParent();
+		root = ClientUI.LogOutUtility.getParent();
 		Scene scene = new Scene(root);
 		primaryStage.setTitle("Welcome Traveller");
 		primaryStage.setScene(scene);

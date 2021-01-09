@@ -225,8 +225,7 @@ public class DiscountController {
 			else
 				sb.append("PreOrderdIOF");
 			break;
-			
-			
+
 		case "Family":
 			if (orderKind.equals("FutreOrder"))
 				sb.append("OrderdIOF");

@@ -142,8 +142,8 @@ public class WelcomeTravellerController implements Initializable {
 	 */
 	@FXML
 	void WhenPressEnterWithoutOrderBtn(ActionEvent event) throws IOException {
-		String type= ClientUI.userController.traveller.getType();
-		if(!type.equals("Family")||!type.equals("Group")) {
+		String type = ClientUI.userController.traveller.getType();
+		if (!type.equals("Family") || !type.equals("Group")) {
 			ClientUI.userController.traveller.setType("Traveller");
 		}
 		Stage stage = (Stage) btnWithoutOrder.getScene().getWindow();
@@ -151,7 +151,7 @@ public class WelcomeTravellerController implements Initializable {
 		Pane root = loader.load(getClass().getResource("EnterParkNow.fxml").openStream());
 		ClientUI.LogOutUtility.makeTheStageDynamic(stage, root);
 		stage = ClientUI.LogOutUtility.getStage();
-		root= ClientUI.LogOutUtility.getParent();
+		root = ClientUI.LogOutUtility.getParent();
 		Scene scene = new Scene(root);
 		stage.setTitle("Enter Park Now");
 		stage.setScene(scene);
@@ -165,7 +165,7 @@ public class WelcomeTravellerController implements Initializable {
 		Pane root = loader.load(getClass().getResource("ExistingOrders.fxml").openStream());
 		ClientUI.LogOutUtility.makeTheStageDynamic(stage, root);
 		stage = ClientUI.LogOutUtility.getStage();
-		root= ClientUI.LogOutUtility.getParent();
+		root = ClientUI.LogOutUtility.getParent();
 		Scene scene = new Scene(root);
 		stage.setTitle("Existing orders");
 		stage.setScene(scene);
@@ -181,7 +181,7 @@ public class WelcomeTravellerController implements Initializable {
 		Parent root = loader.load(getClass().getResource("WelcomeAndLoginScreen.fxml").openStream());
 		ClientUI.LogOutUtility.makeTheStageDynamicForParent(stage, root);
 		stage = ClientUI.LogOutUtility.getStage();
-		root= ClientUI.LogOutUtility.getP();
+		root = ClientUI.LogOutUtility.getP();
 		Scene scene = new Scene(root);
 		stage.setTitle("Welcome to GoNature!");
 		stage.setScene(scene);
@@ -190,8 +190,8 @@ public class WelcomeTravellerController implements Initializable {
 
 	@FXML
 	void WhenPressMakeNewOrderBtn(ActionEvent event) throws IOException {
-		String type= ClientUI.userController.traveller.getType();
-		if(!type.equals("Family")||!type.equals("Group")) {
+		String type = ClientUI.userController.traveller.getType();
+		if (!type.equals("Family") || !type.equals("Group")) {
 			ClientUI.userController.traveller.setType("PreOrderedTraveller");
 		}
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -199,7 +199,7 @@ public class WelcomeTravellerController implements Initializable {
 		Pane root = loader.load(getClass().getResource("NewOrder.fxml").openStream());
 		ClientUI.LogOutUtility.makeTheStageDynamic(stage, root);
 		stage = ClientUI.LogOutUtility.getStage();
-		root= ClientUI.LogOutUtility.getParent();
+		root = ClientUI.LogOutUtility.getParent();
 		Scene scene = new Scene(root);
 		stage.setTitle("New order");
 		stage.setScene(scene);
@@ -246,7 +246,7 @@ public class WelcomeTravellerController implements Initializable {
 		Pane root = loader.load(getClass().getResource("ByeBye.fxml").openStream());
 		ClientUI.LogOutUtility.makeTheStageDynamic(stage, root);
 		stage = ClientUI.LogOutUtility.getStage();
-		root= ClientUI.LogOutUtility.getParent();
+		root = ClientUI.LogOutUtility.getParent();
 		Scene scene = new Scene(root);
 		stage.setTitle("Exit");
 		stage.setScene(scene);

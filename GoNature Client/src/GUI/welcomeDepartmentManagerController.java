@@ -60,7 +60,7 @@ public class welcomeDepartmentManagerController implements Initializable {
 		Parent root = loader.load(getClass().getResource("WelcomeAndLoginScreen.fxml").openStream());
 		ClientUI.LogOutUtility.makeTheStageDynamicForParent(stage, root);
 		stage = ClientUI.LogOutUtility.getStage();
-		root= ClientUI.LogOutUtility.getP();
+		root = ClientUI.LogOutUtility.getP();
 		Scene scene = new Scene(root);
 		stage.setTitle("Welcome" + " " + ClientUI.employeeController.getType() + "!");
 		stage.setScene(scene);
@@ -74,7 +74,7 @@ public class welcomeDepartmentManagerController implements Initializable {
 		Pane root = loader.load(getClass().getResource("discountForDM.fxml").openStream()); // screen name here
 		ClientUI.LogOutUtility.makeTheStageDynamic(stage, root);
 		stage = ClientUI.LogOutUtility.getStage();
-		root= ClientUI.LogOutUtility.getParent();
+		root = ClientUI.LogOutUtility.getParent();
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
 		stage.show();
@@ -118,7 +118,7 @@ public class welcomeDepartmentManagerController implements Initializable {
 		Pane root = loader.load(getClass().getResource("penidngRequest.fxml").openStream()); // screen name here
 		ClientUI.LogOutUtility.makeTheStageDynamic(stage, root);
 		stage = ClientUI.LogOutUtility.getStage();
-		root= ClientUI.LogOutUtility.getParent();
+		root = ClientUI.LogOutUtility.getParent();
 		Scene scene = new Scene(root);
 		stage.setTitle("Welcome" + " " + ClientUI.employeeController.getType() + "!");
 		stage.setScene(scene);
@@ -140,13 +140,12 @@ public class welcomeDepartmentManagerController implements Initializable {
 
 			ClientUI.LogOutUtility.makeTheStageDynamicForParent(stage, root);
 			stage = ClientUI.LogOutUtility.getStage();
-			root= ClientUI.LogOutUtility.getP();
+			root = ClientUI.LogOutUtility.getP();
 			Scene scene = new Scene(root);
 			stage.setTitle("Welcome to GoNature!");
 			stage.setScene(scene);
 			stage.show();
 		} catch (IOException e) {
-			
 
 			e.printStackTrace();
 		}
@@ -163,7 +162,7 @@ public class welcomeDepartmentManagerController implements Initializable {
 		name.append(last);
 		String tName = name.toString();
 		DepartmentManagerNameLBL.setText(tName);
-	
+
 	}
 
 }

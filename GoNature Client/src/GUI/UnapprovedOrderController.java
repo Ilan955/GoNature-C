@@ -102,7 +102,7 @@ public class UnapprovedOrderController implements Initializable {
 		Pane root = loader.load(getClass().getResource("AlternativeDates.fxml").openStream());
 		ClientUI.LogOutUtility.makeTheStageDynamic(stage, root);
 		stage = ClientUI.LogOutUtility.getStage();
-		root= ClientUI.LogOutUtility.getParent();
+		root = ClientUI.LogOutUtility.getParent();
 		Scene scene = new Scene(root);
 		stage.setTitle("Cancel order");
 		stage.setScene(scene);

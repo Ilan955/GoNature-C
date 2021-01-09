@@ -53,7 +53,7 @@ public class parkIsFullController {
 		Pane root = loader.load(getClass().getResource("/GUI/NewOrder.fxml").openStream());
 		ClientUI.LogOutUtility.makeTheStageDynamic(stage, root);
 		stage = ClientUI.LogOutUtility.getStage();
-		root= ClientUI.LogOutUtility.getParent();
+		root = ClientUI.LogOutUtility.getParent();
 		Scene scene = new Scene(root);
 		primaryStage.setTitle("New Order");
 		primaryStage.setScene(scene);

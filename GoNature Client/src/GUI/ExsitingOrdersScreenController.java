@@ -13,7 +13,6 @@
  */
 package GUI;
 
-
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -72,9 +71,9 @@ public class ExsitingOrdersScreenController implements Initializable {
 	/** PriceLbl - TableColumn for the Existing order */
 	@FXML
 	private TableColumn<Data, String> PriceLbl;
-    @FXML
-    private Label userIDFORLbl;
-    
+	@FXML
+	private Label userIDFORLbl;
+
 	/**
 	 * Description of WhenClickBackBtn(ActionEvent event) in ExsistingOrders Screen
 	 * This method is responsible to get the user back to the Welcome traveller
@@ -90,7 +89,7 @@ public class ExsitingOrdersScreenController implements Initializable {
 			root = FXMLLoader.load(getClass().getResource("WelcomeTraveller.fxml"));
 			ClientUI.LogOutUtility.makeTheStageDynamicForParent(stage, root);
 			stage = ClientUI.LogOutUtility.getStage();
-			root= ClientUI.LogOutUtility.getP();
+			root = ClientUI.LogOutUtility.getP();
 			Scene scene = new Scene(root);
 			stage.setTitle("Prototyp");
 			stage.setScene(scene);
@@ -180,27 +179,31 @@ public class ExsitingOrdersScreenController implements Initializable {
 						btn.setOnAction((ActionEvent event) -> {
 							Data data = getTableView().getItems().get(getIndex());
 
-							
-							if(data.getStatus().equals("InWaitingList")) {
-								/*in this case the order will be delete from waitingList && change order status to 'cancelled' in orders table DB*/
+							if (data.getStatus().equals("InWaitingList")) {
+								/*
+								 * in this case the order will be delete from waitingList && change order status
+								 * to 'cancelled' in orders table DB
+								 */
 								ClientUI.waitingListController.deleteFromWaitingList(data.getID());
-								ClientUI.waitingListController.changeOrderStatus(data.getID(),"cancelled","Manually");
-								Alert a = new Alert(AlertType.NONE, "Your order has been deleted from waiting list!");
-								a.setAlertType(AlertType.ERROR);
-								a.show();
-								return;
-							}
-							
-							if(data.getStatus().equals("waitForConfirm_WaitingList")) {
-								/*in this case status will be changed to 'CanceledBYUser' (for watingList_Confirmation_thread)*/
-								ClientUI.waitingListController.changeOrderStatus(data.getID(),"CanceledBYUser","");
+								ClientUI.waitingListController.changeOrderStatus(data.getID(), "cancelled", "Manually");
 								Alert a = new Alert(AlertType.NONE, "Your order has been deleted from waiting list!");
 								a.setAlertType(AlertType.ERROR);
 								a.show();
 								return;
 							}
 
-							
+							if (data.getStatus().equals("waitForConfirm_WaitingList")) {
+								/*
+								 * in this case status will be changed to 'CanceledBYUser' (for
+								 * watingList_Confirmation_thread)
+								 */
+								ClientUI.waitingListController.changeOrderStatus(data.getID(), "CanceledBYUser", "");
+								Alert a = new Alert(AlertType.NONE, "Your order has been deleted from waiting list!");
+								a.setAlertType(AlertType.ERROR);
+								a.show();
+								return;
+							}
+
 							int orderNum = Integer.parseInt(data.getID());
 							System.out.println(data.getTime());
 							LocalTime lt = LocalTime.parse(data.getTime());
@@ -215,7 +218,7 @@ public class ExsitingOrdersScreenController implements Initializable {
 								root = loader.load(getClass().getResource("/GUI/SureIfCancel.fxml").openStream());
 								ClientUI.LogOutUtility.makeTheStageDynamic(stage, root);
 								stage = ClientUI.LogOutUtility.getStage();
-								root= ClientUI.LogOutUtility.getParent();
+								root = ClientUI.LogOutUtility.getParent();
 								Scene scene = new Scene(root);
 								stage.setTitle("Unapproved Order");
 								stage.setScene(scene);
@@ -252,7 +255,7 @@ public class ExsitingOrdersScreenController implements Initializable {
 					{
 						btn.setOnAction((ActionEvent event) -> {
 							Data data = getTableView().getItems().get(getIndex());
-							
+
 							int orderNum = Integer.parseInt(data.getID());
 							System.out.println(data.getTime());
 							LocalTime lt = LocalTime.parse(data.getTime());
@@ -264,28 +267,34 @@ public class ExsitingOrdersScreenController implements Initializable {
 							int timelH = lt.getHour();
 							int limitTime = timelH + 4;
 							int timelM = lt.getMinute();
-							if (ld.compareTo(dateNow) == 0 && timeH < limitTime ) {
-								Order o = new Order(Integer.parseInt(data.getID()),lt,ld,data.getPark(),Integer.parseInt(data.getNumOfVisit()),Float.parseFloat(data.getPrice()));
+							if (ld.compareTo(dateNow) == 0 && timeH < limitTime) {
+								Order o = new Order(Integer.parseInt(data.getID()), lt, ld, data.getPark(),
+										Integer.parseInt(data.getNumOfVisit()), Float.parseFloat(data.getPrice()));
 								System.out.println("GOOD");
 								int numofvisit = ClientUI.userController.traveller.getNumberOfVisitors();
 								String id = ClientUI.userController.traveller.getId();
 								int maxUpdateCurrentVisitors;
 								maxUpdateCurrentVisitors = ClientUI.parkController.getCurrentVisitors(o.getWantedPark())
-										+ ClientUI.parkController.getCurrentUnexpectedVisitors(o.getWantedPark()) + numofvisit;
+										+ ClientUI.parkController.getCurrentUnexpectedVisitors(o.getWantedPark())
+										+ numofvisit;
 
-								ClientUI.entranceParkController.updateEnterTimeForTravellerWithOrder(o.getWantedPark(), id);
+								ClientUI.entranceParkController.updateEnterTimeForTravellerWithOrder(o.getWantedPark(),
+										id);
 								ClientUI.entranceParkController.setCurrentVisitros(o.getWantedPark(), numofvisit);
 
-								if (maxUpdateCurrentVisitors == ClientUI.parkController.getMaxVisitors(o.getWantedPark())) {
+								if (maxUpdateCurrentVisitors == ClientUI.parkController
+										.getMaxVisitors(o.getWantedPark())) {
 									ClientUI.parkController.updateStatusForCapacityParkToFull(o.getWantedPark());
 								} else {
 									if (!ClientUI.parkController.IfgetDateExistInDB(o.getWantedPark())) {
-										ClientUI.parkController.enterDateofFullCapcityPark(o.getWantedPark(), LocalDate.now(), 0,
-												ClientUI.parkController.getMaxVisitors(o.getWantedPark()), maxUpdateCurrentVisitors);
+										ClientUI.parkController.enterDateofFullCapcityPark(o.getWantedPark(),
+												LocalDate.now(), 0,
+												ClientUI.parkController.getMaxVisitors(o.getWantedPark()),
+												maxUpdateCurrentVisitors);
 
 									} else {
-										if (ClientUI.parkController
-												.getMaxcurrentVisitorsPerDay(o.getWantedPark()) < maxUpdateCurrentVisitors)
+										if (ClientUI.parkController.getMaxcurrentVisitorsPerDay(
+												o.getWantedPark()) < maxUpdateCurrentVisitors)
 											ClientUI.parkController.changeMaxcurrentAmountOfVisitorsForCapacityPark(
 													o.getWantedPark(), maxUpdateCurrentVisitors);
 									}
@@ -327,26 +336,23 @@ public class ExsitingOrdersScreenController implements Initializable {
 
 							Data data = getTableView().getItems().get(getIndex());
 
-							
-							if(data.getStatus().equals("InWaitingList")) {
-								/*in this case the order can not be approved (because not first in line)*/
-								Alert b = new Alert(AlertType.NONE, "Sorry, but your order is still in waiting list\nplease wait for Sms/Email");
+							if (data.getStatus().equals("InWaitingList")) {
+								/* in this case the order can not be approved (because not first in line) */
+								Alert b = new Alert(AlertType.NONE,
+										"Sorry, but your order is still in waiting list\nplease wait for Sms/Email");
 								b.setAlertType(AlertType.ERROR);
 								b.show();
 								return;
 							}
-							
-							if(data.getStatus().equals("waitForConfirm_WaitingList")) {
-								/*in this case user can confirm his order*/
-								ClientUI.waitingListController.changeOrderStatus(data.getID(),"ApprovedBYUser","");
+
+							if (data.getStatus().equals("waitForConfirm_WaitingList")) {
+								/* in this case user can confirm his order */
+								ClientUI.waitingListController.changeOrderStatus(data.getID(), "ApprovedBYUser", "");
 								Alert a = new Alert(AlertType.NONE, "Your order has been confirmed!");
 								a.setAlertType(AlertType.INFORMATION);
 								a.show();
 							}
-							
-							
-							
-							
+
 							if (data.getStatus().equals("confirmed")) {
 								Alert b = new Alert(AlertType.NONE, "Sorry, but your order has been already confirmed");
 								b.setAlertType(AlertType.ERROR);
@@ -375,7 +381,7 @@ public class ExsitingOrdersScreenController implements Initializable {
 													getClass().getResource("/GUI/ExistingOrders.fxml").openStream());
 											ClientUI.LogOutUtility.makeTheStageDynamic(stage, root);
 											stage = ClientUI.LogOutUtility.getStage();
-											root= ClientUI.LogOutUtility.getParent();
+											root = ClientUI.LogOutUtility.getParent();
 											Scene scene = new Scene(root);
 											stage.setTitle("Unapproved Order");
 											stage.setScene(scene);

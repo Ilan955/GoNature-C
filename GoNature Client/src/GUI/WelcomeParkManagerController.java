@@ -21,7 +21,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -262,14 +261,10 @@ public class WelcomeParkManagerController implements Initializable {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		FXMLLoader loader = new FXMLLoader();
 		Parent root = loader.load(getClass().getResource("MonthlyReport.fxml").openStream());
-<<<<<<< HEAD
 		ClientUI.LogOutUtility.makeTheStageDynamicForParent(stage, root);
 		stage = ClientUI.LogOutUtility.getStage();
-		root= ClientUI.LogOutUtility.getP();
-=======
->>>>>>> branch 'master' of https://github.com/Ilan955/GoNature-C.git
+		root = ClientUI.LogOutUtility.getP();
 		Scene scene = new Scene(root);
-
 		stage.setScene(scene);
 		stage.show();
 	}

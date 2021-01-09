@@ -100,12 +100,12 @@ public class OrderController {
 				ClientUI.discountController.getTotalPrice(type, numOfVisitors, "FutreOrder", "True");
 			else
 				ClientUI.discountController.getTotalPrice(type, numOfVisitors, "FutreOrder", "False");
-			
+
 			float finalPr = ClientUI.discountController.getFinalPriceWithoutDM();
-			
-			System.out.println("The final price before the discount is: "+finalPr);
-			order = new Order(5, time, dateOfVisit, wantedPark, numOfVisitors,finalPr);
-			
+
+			System.out.println("The final price before the discount is: " + finalPr);
+			order = new Order(5, time, dateOfVisit, wantedPark, numOfVisitors, finalPr);
+
 		}
 		LocalTime openingTime = LocalTime.of(8, 0);
 		LocalTime closingTime = LocalTime.of(23, 30);
@@ -434,7 +434,7 @@ public class OrderController {
 		sb.append(" ");
 		sb.append("Confirmed");
 		order = null;
-		isConfirm =true;
+		isConfirm = true;
 		ClientUI.chat.accept(sb.toString());
 
 	}

@@ -20,12 +20,12 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 /**
@@ -105,7 +105,7 @@ public class SignUpScreenController implements Initializable {
 		}
 		ClientUI.LogOutUtility.makeTheStageDynamicForParent(stage, root);
 		stage = ClientUI.LogOutUtility.getStage();
-		root= ClientUI.LogOutUtility.getP();
+		root = ClientUI.LogOutUtility.getP();
 		Scene scene = new Scene(root);
 		stage.setTitle("Welcome Employee");
 		stage.setScene(scene);
@@ -141,11 +141,11 @@ public class SignUpScreenController implements Initializable {
 			a.show();
 			regFlag = false;
 		}
-		System.out.println("paymonet a: "+paymentMethod);
+		System.out.println("paymonet a: " + paymentMethod);
 		if (paymentMethod == "Credit Card") {
 			paymentMethod = HideMe.getText().toString();
 		}
-		System.out.println("paymonet b: "+paymentMethod);
+		System.out.println("paymonet b: " + paymentMethod);
 
 		// here we will send the data we got from the form
 		ClientUI.signUpController.checkExist(id);
@@ -183,7 +183,7 @@ public class SignUpScreenController implements Initializable {
 		}
 		ClientUI.LogOutUtility.makeTheStageDynamicForParent(stage, root);
 		stage = ClientUI.LogOutUtility.getStage();
-		root= ClientUI.LogOutUtility.getP();
+		root = ClientUI.LogOutUtility.getP();
 		Scene scene = new Scene(root);
 		stage.setTitle("Success Sign Up");
 		stage.setScene(scene);

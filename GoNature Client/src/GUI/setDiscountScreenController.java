@@ -15,12 +15,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 public class setDiscountScreenController {
@@ -49,9 +49,11 @@ public class setDiscountScreenController {
 	@FXML
 	private Button CancelBTN;
 
-	/** calculate duration of discount and show it to park manager
+	/**
+	 * calculate duration of discount and show it to park manager
+	 * 
 	 * @param event
-	 */  
+	 */
 	@FXML
 	void WhenClickCalculate(ActionEvent event) {
 		// calc days between/
@@ -79,9 +81,11 @@ public class setDiscountScreenController {
 
 	}
 
-	/** send manager discount updates to DB
+	/**
+	 * send manager discount updates to DB
+	 * 
 	 * @param event
-	 */ 
+	 */
 	@FXML
 	void whenClickSubmitDiscount(ActionEvent event) {
 		// call WhenClickCalculate to calculate dates and daysBetween/
@@ -102,7 +106,7 @@ public class setDiscountScreenController {
 				a.show();
 				return;
 			}
-			parkName = ClientUI.employeeController.getParkName();				
+			parkName = ClientUI.employeeController.getParkName();
 			ClientUI.discountController.setManagerDiscount(from, to, precentage, parkName);
 		}
 
@@ -111,9 +115,9 @@ public class setDiscountScreenController {
 			Alert a = new Alert(AlertType.NONE, "Discount was sent to D.M");
 			a.setAlertType(AlertType.CONFIRMATION);
 			a.show();
-			
-			/*go back to ParkManger.fxml screen*/
-			WhenClickCancel(event); 
+
+			/* go back to ParkManger.fxml screen */
+			WhenClickCancel(event);
 
 		} else {
 			Alert a = new Alert(AlertType.NONE, "Sql error!!!");
@@ -122,7 +126,9 @@ public class setDiscountScreenController {
 		}
 	}
 
-	/** go back to manager main menu
+	/**
+	 * go back to manager main menu
+	 * 
 	 * @param event
 	 */
 	@FXML
@@ -133,7 +139,7 @@ public class setDiscountScreenController {
 			root = FXMLLoader.load(getClass().getResource("WelcomeParkManager.fxml"));
 			ClientUI.LogOutUtility.makeTheStageDynamicForParent(stage, root);
 			stage = ClientUI.LogOutUtility.getStage();
-			root= ClientUI.LogOutUtility.getP();
+			root = ClientUI.LogOutUtility.getP();
 			Scene scene = new Scene(root);
 			stage.setTitle("Park Manger Menu");
 			stage.setScene(scene);
@@ -144,6 +150,7 @@ public class setDiscountScreenController {
 		}
 
 	}
+
 	@FXML
 	void WhenClickExitBtn(MouseEvent event) {
 		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -163,6 +170,5 @@ public class setDiscountScreenController {
 		} else if (result.get() == ButtonType.CANCEL)
 			alert.close();
 	}
-
 
 }

@@ -117,7 +117,7 @@ public class ReportEntreisScreenController implements Initializable {
 		}
 		ClientUI.LogOutUtility.makeTheStageDynamicForParent(stage, root);
 		stage = ClientUI.LogOutUtility.getStage();
-		root= ClientUI.LogOutUtility.getP();
+		root = ClientUI.LogOutUtility.getP();
 		Scene scene = new Scene(root);
 		stage.setTitle("Welcome " + ClientUI.employeeController.getFirstName());
 		stage.setScene(scene);
@@ -159,6 +159,7 @@ public class ReportEntreisScreenController implements Initializable {
 		ReportTable.setItems(counters);
 
 	}
+
 	/**
 	 * Description of WhenClickExitBtn() this function will exit.
 	 * 

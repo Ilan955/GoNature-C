@@ -28,15 +28,14 @@ public class loginClientController {
 
 	@FXML
 	private TextField portLbl;
-	
-	
-	private double  xoffset;
-	private double  yoffset; 
-	
+
+	private double xoffset;
+	private double yoffset;
+
 	public void start(Stage primaryStage) throws Exception {
 		primaryStage.initStyle(StageStyle.UNDECORATED);
 		Parent root = FXMLLoader.load(getClass().getResource("loginClient.fxml"));
-		
+
 //		root.setOnMousePressed(new EventHandler<MouseEvent>() {
 //            @Override
 //            public void handle(MouseEvent event) {
@@ -52,24 +51,23 @@ public class loginClientController {
 //                primaryStage.setY(event.getScreenY() + yoffset);
 //            }
 //        });
-		
-		
+
 		Image icon = new Image(getClass().getResourceAsStream("titleIcon.png"));
 		primaryStage.getIcons().add(icon);
 		root.setOnMousePressed(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-            	xoffset = primaryStage.getX() - event.getScreenX();
-            	yoffset = primaryStage.getY() - event.getScreenY();
-            }
-        });
+			@Override
+			public void handle(MouseEvent event) {
+				xoffset = primaryStage.getX() - event.getScreenX();
+				yoffset = primaryStage.getY() - event.getScreenY();
+			}
+		});
 		root.setOnMouseDragged(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-            	primaryStage.setX(event.getScreenX() + xoffset);
-            	primaryStage.setY(event.getScreenY() + yoffset);
-            }
-        });
+			@Override
+			public void handle(MouseEvent event) {
+				primaryStage.setX(event.getScreenX() + xoffset);
+				primaryStage.setY(event.getScreenY() + yoffset);
+			}
+		});
 		Scene scene = new Scene(root);
 		primaryStage.sizeToScene();
 		Application.setUserAgentStylesheet(Application.STYLESHEET_MODENA);
@@ -92,20 +90,20 @@ public class loginClientController {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		Parent root = FXMLLoader.load(getClass().getResource("WelcomeAndLoginScreen.fxml"));
 		root.setOnMousePressed(new EventHandler<MouseEvent>() {
-	            @Override
-	            public void handle(MouseEvent event) {
-	            	xoffset = stage.getX() - event.getScreenX();
-	            	yoffset = stage.getY() - event.getScreenY();
-	            }
-	        });
+			@Override
+			public void handle(MouseEvent event) {
+				xoffset = stage.getX() - event.getScreenX();
+				yoffset = stage.getY() - event.getScreenY();
+			}
+		});
 		root.setOnMouseDragged(new EventHandler<MouseEvent>() {
-	            @Override
-	            public void handle(MouseEvent event) {
-	            	stage.setX(event.getScreenX() + xoffset);
-	            	stage.setY(event.getScreenY() + yoffset);
-	            }
-	        });
-		
+			@Override
+			public void handle(MouseEvent event) {
+				stage.setX(event.getScreenX() + xoffset);
+				stage.setY(event.getScreenY() + yoffset);
+			}
+		});
+
 		Scene scene = new Scene(root);
 		stage.getScene().getWindow().sizeToScene();
 		stage.setScene(scene);

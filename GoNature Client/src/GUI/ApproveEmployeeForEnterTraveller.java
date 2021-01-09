@@ -53,7 +53,7 @@ public class ApproveEmployeeForEnterTraveller {
 		Pane root = loader.load(getClass().getResource("requestsEnterTraveller.fxml").openStream());
 		ClientUI.LogOutUtility.makeTheStageDynamic(stage, root);
 		stage = ClientUI.LogOutUtility.getStage();
-		root= ClientUI.LogOutUtility.getParent();
+		root = ClientUI.LogOutUtility.getParent();
 		Scene scene = new Scene(root);
 		primaryStage.setTitle("Requests enter traveller");
 		primaryStage.setScene(scene);
@@ -79,7 +79,7 @@ public class ApproveEmployeeForEnterTraveller {
 		Pane root = loader.load(getClass().getResource("requestsEnterTraveller.fxml").openStream());
 		ClientUI.LogOutUtility.makeTheStageDynamic(stage, root);
 		stage = ClientUI.LogOutUtility.getStage();
-		root= ClientUI.LogOutUtility.getParent();
+		root = ClientUI.LogOutUtility.getParent();
 		Scene scene = new Scene(root);
 		primaryStage.setTitle("Requests enter traveller");
 		primaryStage.setScene(scene);

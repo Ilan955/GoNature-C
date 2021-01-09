@@ -158,7 +158,7 @@ public class usageReportController implements Initializable {
 		Pane root = loader.load(getClass().getResource("WelcomeParkManager.fxml").openStream());
 		ClientUI.LogOutUtility.makeTheStageDynamic(stage, root);
 		stage = ClientUI.LogOutUtility.getStage();
-		root= ClientUI.LogOutUtility.getParent();
+		root = ClientUI.LogOutUtility.getParent();
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
 		stage.show();

@@ -66,7 +66,7 @@ public class ImplemantionEnterParkController implements Initializable {
 		Pane root = loader.load(getClass().getResource("/GUI/enjoyMessage.fxml").openStream());
 		ClientUI.LogOutUtility.makeTheStageDynamic(stage, root);
 		stage = ClientUI.LogOutUtility.getStage();
-		root= ClientUI.LogOutUtility.getParent();
+		root = ClientUI.LogOutUtility.getParent();
 		Scene scene = new Scene(root);
 		primaryStage.setTitle("bye bye");
 		primaryStage.setScene(scene);

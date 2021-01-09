@@ -7,7 +7,6 @@
 package Controller;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -45,7 +44,8 @@ public class ReportsController {
 	 * sumSolo=individuals that entered the park, sumMembers=members and family
 	 * members that entered the park, sumGroups=groups that entered to the park
 	 */
-	public Float Traveler_cnt, Traveler_income, Member_cnt, Member_income, Family_cnt, Family_income, Group_cnt, Group_income;
+	public Float Traveler_cnt, Traveler_income, Member_cnt, Member_income, Family_cnt, Family_income, Group_cnt,
+			Group_income;
 
 	/**
 	 * Description of gotMessage(String[] msg) - handle response from server, switch
@@ -77,7 +77,7 @@ public class ReportsController {
 			break;
 
 		case "makeMonthlyIncomeReport":
-			createMonthlyIncomeReport(msg[1], msg[2], msg[3], msg[4], msg[5], msg[6], msg[7], msg[8],msg[9],msg[10]);
+			createMonthlyIncomeReport(msg[1], msg[2], msg[3], msg[4], msg[5], msg[6], msg[7], msg[8], msg[9], msg[10]);
 			break;
 		}
 	}
@@ -131,7 +131,8 @@ public class ReportsController {
 	}
 
 	private void createMonthlyIncomeReport(String Traveler_cnt, String Traveler_income, String Member_cnt,
-			String Member_income, String Family_cnt, String Family_income, String Group_cnt, String Group_income,String TravelerInPark_cnt , String TravelerInPark_income) {
+			String Member_income, String Family_cnt, String Family_income, String Group_cnt, String Group_income,
+			String TravelerInPark_cnt, String TravelerInPark_income) {
 		/* set values */
 		this.Traveler_cnt = Float.valueOf(Traveler_cnt) + Float.valueOf(TravelerInPark_cnt);
 		this.Traveler_income = Float.valueOf(Traveler_income) + Float.valueOf(TravelerInPark_income);
@@ -145,6 +146,7 @@ public class ReportsController {
 		this.Group_cnt = Float.valueOf(Group_cnt);
 		this.Group_income = Float.valueOf(Group_income);
 	}
+
 	/**
 	 * Description of getData(String month, String year, String park)
 	 *

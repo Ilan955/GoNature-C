@@ -47,9 +47,10 @@ public class SuccessfulySignUpScreenController implements Initializable {
 		SubscriberNumberLbl.setText(ClientUI.signUpController.getID());
 		SignedUpType.setText(ClientUI.signUpController.getType());
 	}
+
 	/**
-	 * Description of WhenClickMainMenuBtn() 
-	 * Upon clicking "main menu" button the employee shall be returned to the employees main window.
+	 * Description of WhenClickMainMenuBtn() Upon clicking "main menu" button the
+	 * employee shall be returned to the employees main window.
 	 * 
 	 * @return void.
 	 */
@@ -65,7 +66,7 @@ public class SuccessfulySignUpScreenController implements Initializable {
 		}
 		ClientUI.LogOutUtility.makeTheStageDynamicForParent(stage, root);
 		stage = ClientUI.LogOutUtility.getStage();
-		root= ClientUI.LogOutUtility.getP();
+		root = ClientUI.LogOutUtility.getP();
 		Scene scene = new Scene(root);
 		stage.setTitle("Welcome Employee");
 		stage.setScene(scene);

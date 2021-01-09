@@ -169,12 +169,12 @@ public class OrderScreenController implements Initializable {
 	@FXML
 	void WhenClickCalculatePriceBtn(ActionEvent event) {
 		int numOfVisitors = Integer.parseInt(NumOfVisotrsLbl.getText());
-		String type=ClientUI.userController.traveller.getType();
+		String type = ClientUI.userController.traveller.getType();
 		if (type.equals("Family") || type.equals("Group"))
 			ClientUI.discountController.getTotalPrice(type, numOfVisitors, "FutreOrder", "True");
 		else
 			ClientUI.discountController.getTotalPrice(type, numOfVisitors, "FutreOrder", "False");
-	
+
 		PriceLbl.setText(new DecimalFormat("##.##").format(ClientUI.discountController.getFinalPriceWithoutDM()));
 		ClientUI.discountController.setFinalPrice(0);
 	}
@@ -211,7 +211,8 @@ public class OrderScreenController implements Initializable {
 				// !!!!!!! TYPE NEED TO BE CHANGED !!!!!!!!
 				ClientUI.orderController.setEmailAndPhone(EmailLbl.getText(), PhoneNumberLbl.getText());
 				ClientUI.orderController.n_order = true;
-				ClientUI.orderController.canMakeOrder(time, date, wanted, ClientUI.userController.traveller.getType(), numOfVisitors);
+				ClientUI.orderController.canMakeOrder(time, date, wanted, ClientUI.userController.traveller.getType(),
+						numOfVisitors);
 
 				/*
 				 * after knowing if the order is possible or not, showing the right screen/
@@ -222,7 +223,7 @@ public class OrderScreenController implements Initializable {
 					Pane root = loader.load(getClass().getResource("/GUI/Confirmation.fxml").openStream());
 					ClientUI.LogOutUtility.makeTheStageDynamic(stage, root);
 					stage = ClientUI.LogOutUtility.getStage();
-					root= ClientUI.LogOutUtility.getParent();
+					root = ClientUI.LogOutUtility.getParent();
 					Scene scene = new Scene(root);
 					stage.setTitle("Confirm Order");
 					stage.setScene(scene);
@@ -232,7 +233,7 @@ public class OrderScreenController implements Initializable {
 					Pane root = loader.load(getClass().getResource("/GUI/CancellOrder.fxml").openStream());
 					ClientUI.LogOutUtility.makeTheStageDynamic(stage, root);
 					stage = ClientUI.LogOutUtility.getStage();
-					root= ClientUI.LogOutUtility.getParent();
+					root = ClientUI.LogOutUtility.getParent();
 					Scene scene = new Scene(root);
 					stage.setTitle("Unapproved Order");
 					stage.setScene(scene);
@@ -262,7 +263,7 @@ public class OrderScreenController implements Initializable {
 		Parent root = FXMLLoader.load(getClass().getResource("WelcomeTraveller.fxml"));
 		ClientUI.LogOutUtility.makeTheStageDynamicForParent(stage, root);
 		stage = ClientUI.LogOutUtility.getStage();
-		root= ClientUI.LogOutUtility.getP();
+		root = ClientUI.LogOutUtility.getP();
 		Scene scene = new Scene(root);
 		stage.setTitle("Welcome traveller");
 		stage.setScene(scene);

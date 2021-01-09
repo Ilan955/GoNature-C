@@ -97,7 +97,7 @@ public class WelcomeAndLoginController {
 		Pane root = loader.load(getClass().getResource("/GUI/WelcomeTraveller.fxml").openStream());
 		ClientUI.LogOutUtility.makeTheStageDynamic(stage, root);
 		stage = ClientUI.LogOutUtility.getStage();
-		root= ClientUI.LogOutUtility.getParent();
+		root = ClientUI.LogOutUtility.getParent();
 		Scene scene = new Scene(root);
 		stage.setTitle("Welcome Traveller!");
 		stage.setScene(scene);
@@ -191,7 +191,7 @@ public class WelcomeAndLoginController {
 		Pane root = loader.load(getClass().getResource(screen).openStream());
 		ClientUI.LogOutUtility.makeTheStageDynamic(stage, root);
 		stage = ClientUI.LogOutUtility.getStage();
-		root= ClientUI.LogOutUtility.getParent();
+		root = ClientUI.LogOutUtility.getParent();
 		Scene scene = new Scene(root);
 		stage.setTitle("Welcome" + " " + ClientUI.employeeController.getType() + "!");
 		stage.setScene(scene);
