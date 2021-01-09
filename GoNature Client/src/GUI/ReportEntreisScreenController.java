@@ -1,6 +1,6 @@
 /** Description of SignUpScreenController 
 * @author Omri Cohen
-* @version final Jan 5, 2021.
+* @version final Jan 8, 2021.
 */
 
 package GUI;
@@ -35,7 +35,7 @@ import javafx.stage.Stage;
 
 public class ReportEntreisScreenController implements Initializable {
 	/**
-	 * This is a controller for report of How many entered by typr.
+	 * This is a controller for report of How many entered by type.
 	 * 
 	 * @implNote implements Initializable - initialize all predefined data
 	 */
@@ -99,14 +99,13 @@ public class ReportEntreisScreenController implements Initializable {
 		TotalLbl.setCellValueFactory(new PropertyValueFactory<>("Total"));
 	}
 
+	/**
+	 * Description of WhenClickOnCancel() this function returns the user to welcome
+	 * employee screen
+	 * 
+	 * @return void.
+	 */
 	@FXML
-	void ClickOnSendToDepartmentManager(ActionEvent event) {
-		// Send message to Park Manager with the report
-
-	}
-
-	@FXML
-//	Click on cancel => return to welcome employee screen
 	void WhenClickOnCancel(ActionEvent event) {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		Parent root = null;
@@ -125,7 +124,16 @@ public class ReportEntreisScreenController implements Initializable {
 		stage.show();
 	}
 
-//Click on Get button => view data
+	/**
+	 * Description of WhenClickOnGetBtn() this function will show the report results
+	 * both in a table and in graph form.
+	 * 
+	 * @param month - wanted month, chosen by employee.
+	 * @param year  - wanted year, chosen by employee.
+	 * @param park  - data taken from employees park
+	 * 
+	 * @return void - lie display of graph and table with requested data..
+	 */
 	@FXML
 	void WhenClickOnGetBtn(ActionEvent event) {
 		String month = monthCB.getValue().toString();
@@ -140,8 +148,6 @@ public class ReportEntreisScreenController implements Initializable {
 		int sumMembers = ClientUI.reportsController.getMembers();
 		int sumGroups = ClientUI.reportsController.getGroups();
 		int sumTotal = sumSolo + sumMembers + sumGroups;
-		System.out.println("After click get: " + sumSolo + " " + sumMembers + " " + sumGroups + " " + sumTotal);
-
 		ObservableList<ReportData> counters = FXCollections.observableArrayList();
 		ObservableList<PieChart.Data> pieChart = FXCollections.observableArrayList(
 				new PieChart.Data("Travellers", sumSolo), new PieChart.Data("Members", sumMembers),
@@ -153,15 +159,20 @@ public class ReportEntreisScreenController implements Initializable {
 		ReportTable.setItems(counters);
 
 	}
-
-
+	/**
+	 * Description of WhenClickExitBtn() this function will exit.
+	 * 
+	 * @param alert - pop up message asking the user if he is sure he wants to exit.
+	 * 
+	 * @return void - lie display of graph and table with requested data..
+	 */
 	@FXML
 	void WhenClickExitBtn(MouseEvent event) {
 		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 		alert.setTitle("Exit");
 		alert.setHeaderText("Are you sure you want to exit the application?");
 		alert.setResizable(false);
-		alert.setContentText("Select yes if you want, or not if you want to get back!");
+		alert.setContentText("Select Yes if you want to exit Or No if you want to stay.");
 		((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Yes");
 		((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("No");
 		Optional<ButtonType> result = alert.showAndWait();

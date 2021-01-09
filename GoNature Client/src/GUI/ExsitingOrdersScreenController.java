@@ -140,7 +140,7 @@ public class ExsitingOrdersScreenController implements Initializable {
 		alert.setTitle("Exit");
 		alert.setHeaderText("Are you sure you want to exit the application?");
 		alert.setResizable(false);
-		alert.setContentText("Select yes if you want, or not if you want to get back!");
+		alert.setContentText("Select Yes if you want to exit Or No if you want to stay.");
 		((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Yes");
 		((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("No");
 		Optional<ButtonType> result = alert.showAndWait();

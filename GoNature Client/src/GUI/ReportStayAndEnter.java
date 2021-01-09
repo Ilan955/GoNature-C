@@ -1,3 +1,8 @@
+/** Description of SignUpScreenController 
+* @author Omri Cohen
+* 
+* @version final Jan 2, 2021.
+*/
 package GUI;
 
 import java.io.IOException;
@@ -82,9 +87,11 @@ public class ReportStayAndEnter implements Initializable {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		FXMLLoader loader = new FXMLLoader();
 		Pane root = loader.load(getClass().getResource("WelcomeDepartmentEmployee.fxml").openStream());
+
 		ClientUI.LogOutUtility.makeTheStageDynamic(stage, root);
 		stage = ClientUI.LogOutUtility.getStage();
 		root= ClientUI.LogOutUtility.getParent();
+
 		Scene scene = new Scene(root);
 		stage.setTitle("Welcome" + " " + ClientUI.employeeController.getType() + "!");
 		stage.setScene(scene);
@@ -135,7 +142,7 @@ public class ReportStayAndEnter implements Initializable {
 		alert.setTitle("Exit");
 		alert.setHeaderText("Are you sure you want to exit the application?");
 		alert.setResizable(false);
-		alert.setContentText("Select yes if you want, or not if you want to get back!");
+		alert.setContentText("Select Yes if you want to exit Or No if you want to stay.");
 		((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Yes");
 		((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("No");
 		Optional<ButtonType> result = alert.showAndWait();

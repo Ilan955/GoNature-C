@@ -92,7 +92,7 @@ public class welcomeDepartmentManagerController implements Initializable {
 		alert.setTitle("Exit");
 		alert.setHeaderText("Are you sure you want to exit the application?");
 		alert.setResizable(false);
-		alert.setContentText("Select yes if you want, or not if you want to get back!");
+		alert.setContentText("Select Yes if you want to exit Or No if you want to stay.");
 		((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Yes");
 		((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("No");
 		Optional<ButtonType> result = alert.showAndWait();
@@ -137,6 +137,7 @@ public class welcomeDepartmentManagerController implements Initializable {
 		Parent root;
 		try {
 			root = loader.load(getClass().getResource("MonthlyStayAndEnterReport.fxml").openStream());
+
 			ClientUI.LogOutUtility.makeTheStageDynamicForParent(stage, root);
 			stage = ClientUI.LogOutUtility.getStage();
 			root= ClientUI.LogOutUtility.getP();
@@ -146,6 +147,7 @@ public class welcomeDepartmentManagerController implements Initializable {
 			stage.show();
 		} catch (IOException e) {
 			
+
 			e.printStackTrace();
 		}
 	}

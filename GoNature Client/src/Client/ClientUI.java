@@ -1,16 +1,6 @@
 package Client;
 
-import Controller.DiscountController;
-import Controller.EmployeeController;
-import Controller.EntranceParkController;
-import Controller.OrderController;
-import Controller.ParkController;
-import Controller.ReportsController;
-import Controller.RequestsController;
-import Controller.SignUpController;
-import Controller.UserController;
-import Controller.WaitingListController;
-import Controller.logOutUtility;
+import Controller.*;
 import GUI.EnterParkNowController;
 import GUI.OrderScreenController;
 import GUI.ReportEntreisScreenController;
