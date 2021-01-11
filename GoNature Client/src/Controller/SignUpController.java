@@ -1,4 +1,5 @@
-/** Description of SignUpController 
+/** 
+*Description of SignUpController 
 * @author Omri Cohen
 * @version final Jan 2, 2021.
  */
@@ -26,7 +27,7 @@ public class SignUpController {
 	 * Description of checkExist(String id)
 	 *
 	 * @param id - person id
-	 * @return void - no return, but a flag is changed in the process.
+	 
 	 */
 	public void checkExist(String id) {
 		StringBuffer sb = new StringBuffer();
@@ -51,7 +52,7 @@ public class SignUpController {
 	 * @param memberType    - persons type of membership
 	 * @param numOfVisitors - number of visitor on the subscription
 	 * 
-	 * @return void - no return, but a message will be printed in the process.
+	 
 	 */
 	public void init(String id, String firstName, String lastName, String phoneNum, String email, String paymentMethod,
 			String memberType, int numOfVisitors) {
@@ -93,7 +94,7 @@ public class SignUpController {
 	 * @param msg[0] - return destination functions name.
 	 * 
 	 * @throws IOException -From inner methods
-	 * @return void - no return, but a message will be printed in the process.
+	
 	 */
 	public void gotMessage(String[] msg) throws IOException {
 		String cases = msg[0];

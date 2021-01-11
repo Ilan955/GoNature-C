@@ -18,6 +18,10 @@
     -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0); 
 }
 
+#ReportTable .table-column {
+  -fx-alignment: CENTER;
+}
+
 .button {
   
   -fx-background-color: #00CC00;

@@ -25,6 +25,12 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
+/**
+ * Description of pendingParkSettingsRequestDepartmentManagerScreen
+ * @author Ilan
+ * @author Bar
+ *
+ */
 public class pendingParkSettingsRequestDepartmentManagerScreen implements Initializable {
 	@FXML
 	private TableView<parkPendingRData> RequestTable;
@@ -93,6 +99,7 @@ public class pendingParkSettingsRequestDepartmentManagerScreen implements Initia
 		if (!result.isPresent())
 			alert.close();
 		else if (result.get() == ButtonType.OK) {
+			ClientUI.LogOutUtility.logOutEmployee();
 			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			stage.close();
 		} else if (result.get() == ButtonType.CANCEL)

@@ -8,7 +8,7 @@
  * the Discount controller
  * 
  * @author Ilan Alexandrov
- * @version 3.0 Build December, 2020
+
  */
 
 package GUI;
@@ -107,7 +107,7 @@ public class OrderScreenController implements Initializable {
 
 	// !!!!!!! NEED TO CHANGE ID BY THE USER CONTROLLER!!!!!
 	public void setIdOfMakingOrder() {
-		IdOfViditorLbl.setText("31198");
+		IdOfViditorLbl.setText(ClientUI.userController.traveller.getId());
 	}
 
 	/**
@@ -119,6 +119,7 @@ public class OrderScreenController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		
 		listForParks = clientLogic.inits.setWantedParkCB();
 		WantedParkCB.setItems(listForParks);
 		SetTimeParkCm();
@@ -176,7 +177,7 @@ public class OrderScreenController implements Initializable {
 			ClientUI.discountController.getTotalPrice(type, numOfVisitors, "FutreOrder", "False");
 
 		PriceLbl.setText(new DecimalFormat("##.##").format(ClientUI.discountController.getFinalPriceWithoutDM()));
-		ClientUI.discountController.setFinalPrice(0);
+		ClientUI.discountController.setFinalPrice(ClientUI.discountController.getFinalPriceWithoutDM());
 	}
 
 	/**
@@ -190,8 +191,29 @@ public class OrderScreenController implements Initializable {
 	 */
 	@FXML
 	void WhenClickNextBtn(ActionEvent event) throws IOException {
-		String wanted = (String) WantedParkCB.getValue();
+		String typeOfUser = ClientUI.userController.traveller.getType();
 		int numOfVisitors = Integer.parseInt(NumOfVisotrsLbl.getText());
+		System.out.println(typeOfUser);
+		if(typeOfUser.equals("Traveller")) {
+			if(numOfVisitors>1) {
+				Alert a = new Alert(AlertType.NONE,
+						"Sorry but this  amount of visitors is more than allowed 4 you,\nYou can enter with maximum of 1");
+				a.setAlertType(AlertType.ERROR);
+				a.show();
+				return;
+			}
+		}
+		if(typeOfUser.equals("Group")||typeOfUser.equals("Family")) {
+			if(numOfVisitors>ClientUI.userController.traveller.getNumberOfVisitors()) {
+				Alert a = new Alert(AlertType.NONE,
+						"Sorry but this  amount of visitors is more than allowed 4 you,\nYou can enter with maximum of "+ClientUI.userController.traveller.getNumberOfVisitors());
+				a.setAlertType(AlertType.ERROR);
+				a.show();
+				return;
+			}
+		}
+		String wanted = (String) WantedParkCB.getValue();
+		
 		int numOfAvailable = ClientUI.parkController.getMaxAvailableVisitors(wanted);
 		if(numOfVisitors>numOfAvailable) {
 			Alert a = new Alert(AlertType.NONE,

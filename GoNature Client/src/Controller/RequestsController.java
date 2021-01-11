@@ -1,3 +1,9 @@
+/**
+ * Controller for logic of requests in GoNature
+ * 
+ * @author Liad Yadin
+ * @version 1.0 Build December, 2020
+ */
 package Controller;
 
 import java.time.LocalDate;
@@ -8,12 +14,7 @@ import GUI.Data;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-/**
- * Controller for logic of requests in GoNature
- * 
- * @author Liad Yadin
- * @version 1.0 Build December, 2020
- */
+
 public class RequestsController {
 	/** status of request in real time */
 	private int statusOfRequest = -1;

@@ -1,7 +1,8 @@
-/** Description of SignUpScreenController 
+/**
+ *  Description of SignUpScreenController 
 * @author Omri Cohen
 * 
-* @version final Jan 2, 2021.
+
 */
 package GUI;
 
@@ -63,14 +64,8 @@ public class ReportEntranceAndStayGraphScreen implements Initializable {
 	 * Description of initialize() this function initializes the bar and scatter
 	 * charts. at the end initialization for pie chart is activated.
 	 * 
-	 * @param visitTravel is number of visitors as Travellers.
-	 * @param visitMember is number of visitors as members.
-	 * @param visitGroup  is number of visitors as groups
-	 * @param enterTravel represents when did Travellers enter the park
-	 * @param enterMember represents when did members enter the park
-	 * @param enterGroup  represents when did groups enter the park
-	 * 
-	 * @return void - this function initialize the graphs..
+	* @param arg0 -argi
+	 * @param arg1 - argi2
 	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -113,6 +108,7 @@ public class ReportEntranceAndStayGraphScreen implements Initializable {
 		}
 
 		for (Reports r : ClientUI.reportsController.totalArray) {
+			r.syso();
 			if (r.getType().equals("traveller")) {
 				dayzVisitor[r.getDate()] += r.getNumOfVisit();
 				for (i = 0; i < r.getNumOfVisit(); i++) {
@@ -297,6 +293,10 @@ public class ReportEntranceAndStayGraphScreen implements Initializable {
 	 * @return void - no returns.
 	 */
 	void whenClickExit(ActionEvent event) {
+		ClientUI.reportsController.visitors.clear();
+		ClientUI.reportsController.members.clear();
+		ClientUI.reportsController.groups.clear();
+		ClientUI.reportsController.totalArray.clear();
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		stage.close();
 	}

@@ -1,13 +1,15 @@
+/**
+ * Description  WaitingListController
+ * @author 123ta
+ *
+ */
 package Controller;
 
 import java.io.IOException;
 
 import Client.ClientUI;
 
-/**
- * @author 123ta
- *
- */
+
 public class WaitingListController {
 
 	public boolean enterWaitingList_Flag;

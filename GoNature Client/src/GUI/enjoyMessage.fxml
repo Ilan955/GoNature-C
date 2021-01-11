@@ -17,17 +17,17 @@
 				<Font name="System Bold" size="45.0" />
 			</font>
 		</Label>
-		<Label layoutX="103.0" layoutY="110.0" text="Maximum time in park:" textAlignment="CENTER">
+		<Label layoutX="58.0" layoutY="110.0" text="Maximum time in park:" textAlignment="CENTER">
 			<font>
 				<Font size="15.0" />
 			</font>
 		</Label>
-		<Label fx:id="Lbltime" layoutX="259.0" layoutY="110.0" text="t">
+		<Label fx:id="Lbltime" layoutX="221.0" layoutY="110.0" prefHeight="21.0" prefWidth="38.0" text="t">
 			<font>
 				<Font size="15.0" />
 			</font>
 		</Label>
-		<Label layoutX="288.0" layoutY="110.0" text="hours">
+		<Label layoutX="259.0" layoutY="110.0" text="hours">
 			<font>
 				<Font size="15.0" />
 			</font>

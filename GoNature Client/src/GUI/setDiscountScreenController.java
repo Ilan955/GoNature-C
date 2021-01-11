@@ -1,3 +1,8 @@
+/**
+ * Description of  setDiscountScreenController
+ * @author Ilan
+ *
+ */
 package GUI;
 
 import java.io.IOException;
@@ -22,6 +27,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+
 
 public class setDiscountScreenController {
 	long diff_days;

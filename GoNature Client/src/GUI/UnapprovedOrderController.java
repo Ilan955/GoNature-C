@@ -8,7 +8,6 @@
  * order, and alerting about unable to complete the mission
  * 
  * @author Ilan Alexandrov
- * @version 4.0 Build December,2020
  */
 package GUI;
 
@@ -61,8 +60,7 @@ public class UnapprovedOrderController implements Initializable {
 	 * 
 	 * Method referring to the cancelation screen transfer in the OrderController
 	 * 
-	 * @return void
-	 * @throws IOException
+	 * @throws IOException -io
 	 */
 	@FXML
 	void WhenClickCancellBtn(ActionEvent event) throws IOException {
@@ -78,7 +76,6 @@ public class UnapprovedOrderController implements Initializable {
 	 * confirmed 3. need to put the waiting request into the table of the waiting
 	 * list with the current timeStamp.
 	 * 
-	 * @return void
 	 */
 	@FXML
 	void WhenClickEnterWaitingListBtn(ActionEvent event) {
@@ -115,8 +112,8 @@ public class UnapprovedOrderController implements Initializable {
 	 * Description of WhenClickShowBtn(ActionEvent event) throws IOException This
 	 * method will transfer the client into new stage of alternative dates
 	 * 
-	 * @param event
-	 * @throws IOException
+	 * @param event - event 
+	 * @throws IOException - io
 	 */
 	@FXML
 	void WhenClickShowBtn(ActionEvent event) throws IOException {
@@ -137,7 +134,7 @@ public class UnapprovedOrderController implements Initializable {
 	 * This method responislbe of showing an alert when want to close the
 	 * application.
 	 * 
-	 * @param event
+	 * @param event - event
 	 */
 	@FXML
 	void WhenClickExitBtn(MouseEvent event) {
@@ -161,7 +158,6 @@ public class UnapprovedOrderController implements Initializable {
 	/**
 	 * Description of setValues() This method will insert the values into the labels
 	 * 
-	 * @return void
 	 */
 
 	public void setValues() {
@@ -178,7 +174,7 @@ public class UnapprovedOrderController implements Initializable {
 	 * Description of initialize This method will initialize the values of the order
 	 * wanted to be complete
 	 * 
-	 * @return void
+
 	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {

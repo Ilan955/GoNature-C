@@ -223,6 +223,7 @@ public class WelcomeAndLoginController {
 	 * Description of CheckID method:
 	 * CheckID method will assist us to check the propriety of ID that entered by traveller
 	 * @param id is the ID that traveller entered when he asks to log into GoNature system
+	 * @return boolean - true false
 	 */
 	
 	
@@ -243,7 +244,8 @@ public class WelcomeAndLoginController {
 	 * changeScreen method will navigate by pressing EmployeeloginBTN and after all the input propriety checks 
 	 * will display employee the correct screen regarding to his type in DB (we can know type by ClientUI.employeeController.getType())
 	 * @param screen is the name of the string that we need to display to the employee according to his type (DE,PM,DM)
-	 * @throws IOException
+	 * @param event - enent
+	 * @throws IOException -io
 	 */
 	
 	public void changeScreen(ActionEvent event, String screen) throws IOException {

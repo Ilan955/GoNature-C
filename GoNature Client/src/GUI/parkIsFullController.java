@@ -1,3 +1,10 @@
+/**
+ * This GUI will present to the traveler if park is full and will give him 2
+ * options: 1. make new future order 2. close end exit
+ * 
+ * @author Liad Yadin
+ *
+ */
 package GUI;
 
 import java.io.IOException;
@@ -11,13 +18,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-/**
- * This GUI will present to the traveler if park is full and will give him 2
- * options: 1. make new future order 2. close end exit
- * 
- * @author Liad Yadin
- *
- */
+
 public class parkIsFullController {
 	/** button for close window */
 	@FXML

@@ -1,6 +1,8 @@
-/** Description of SignUpScreenController 
+/**
+ *  Description of SignUpScreenController 
+ *  This is sign up controller
 * @author Omri Cohen
-* @version final Jan 8, 2021.
+
 */
 
 package GUI;
@@ -150,7 +152,7 @@ public class ReportEntreisScreenController implements Initializable {
 		int sumTotal = sumSolo + sumMembers + sumGroups;
 		ObservableList<ReportData> counters = FXCollections.observableArrayList();
 		ObservableList<PieChart.Data> pieChart = FXCollections.observableArrayList(
-				new PieChart.Data("Travellers", sumSolo), new PieChart.Data("Members", sumMembers),
+				new PieChart.Data("Individuals", sumSolo), new PieChart.Data("Members", sumMembers),
 				new PieChart.Data("Groups", sumGroups));
 		ReportData rd = new ReportData(String.valueOf(sumSolo), String.valueOf(sumMembers), String.valueOf(sumGroups),
 				String.valueOf(sumTotal));

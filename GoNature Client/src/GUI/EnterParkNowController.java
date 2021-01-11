@@ -1,4 +1,12 @@
-
+/**
+ * this GUI will show the details of casual entrance park. the traveler will
+ * choose the park he wants to enter inside and the number of visitors he came
+ * with. there is an option to calculate price for this enter. by click on
+ * 'next' we will send the request enter for the employee
+ * 
+ * @author Liad Yadin
+ *
+ */
 package GUI;
 
 import java.io.IOException;
@@ -37,15 +45,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-/**
- * this GUI will show the details of casual entrance park. the traveler will
- * choose the park he wants to enter inside and the number of visitors he came
- * with. there is an option to calculate price for this enter. by click on
- * 'next' we will send the request enter for the employee
- * 
- * @author Liad Yadin
- *
- */
+
 public class EnterParkNowController implements Initializable {
 	/** for send request enter to employee of the park */
 	@FXML

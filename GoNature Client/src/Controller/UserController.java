@@ -1,11 +1,3 @@
-
-package Controller;
-import java.io.IOException;
-
-import Client.ClientUI;
-import Entities.Person;
-
-
 /**
 -----------------------------Class explanation------------------------------------------------------------------------------------------- 
  * This class is a controller
@@ -17,6 +9,14 @@ import Entities.Person;
  *
 ------------------------------------------------------------------------------------------------------------------------------------
  */
+package Controller;
+import java.io.IOException;
+
+import Client.ClientUI;
+import Entities.Person;
+
+
+
 
 
 public class UserController {
@@ -39,12 +39,12 @@ public class UserController {
 		
 		/**
 		 * Description of identify method:
-	 	 * @param s is a string that contains all of our data that the DB needs to identify a traveller in it 
+	 	 * @param str is a string that contains all of our data that the DB needs to identify a traveller in it 
 	 	 * s will contain the id of the traveller that desires to log into GoNature system and by sending it to the 
 	 	 * server, we will be able to collect traveller's data (if exists in DB)
 	 	 * if it is not, we will creat a defaul person instance (explained in gotMessage method)
 	 	 * accept is the method that sends the information to the server
-	 	 * @throws IOException 
+	 	 * @throws IOException - io
 		 */
 	
 	
@@ -78,25 +78,26 @@ public class UserController {
 	 * also, this method will assist us to know if this traveller exists in DB or not
 	 * @param action will help us to navigate to the case that we desire (by the information that returned from server)
 	 * @param info is an array of strings that will consist all of the information that the server returned us 
-	 * @param info[0] -> ID (DB PK)
-	 * @param info[1] -> firstName
-	 * @param info[2] -> lastName
-	 * @param info[3] -> phoneNumber
-	 * @param info[4] -> Email
-	 * @param info[5] -> AmountOfVisitors
-	 * @param info[6] -> creditCardNumber
-	 * @param info[7] -> Type
-	 * @param info[8] -> memberID 
+	 * @param info[0] - ID (DB PK)
+	 * @param info[1] - firstName
+	 * @param info[2] - lastName
+	 * @param info[3] - phoneNumber
+	 * @param info[4] - Email
+	 * @param info[5] - AmountOfVisitors
+	 * @param info[6] - creditCardNumber
+	 * @param info[7] - Type
+	 * @param info[8] - memberID 
 	 * entry cases will be as the following:
 	 * A. if traveller already logged in to GoNature system then alreadyLoggedIn will set as false (won't be able to enter)
-	 * B. traveller exists in DB --> will create an instance of person with traveller info from DB
-	 * C. traveller does not exists in DB --> will create a default traveller instance with no data (only id)
+	 * B. traveller exists in DB -- will create an instance of person with traveller info from DB
+	 * C. traveller does not exists in DB -- will create a default traveller instance with no data (only id)
 	 */
 
 	public void gotMessage(String action, String[] info) {
 		switch (action) {
 		case "IdentifyTraveller": // Traveller exist in our DB
 			this.alreadyLoggedIn = false;
+			System.out.println(info[7]);
 			ClientUI.userController.traveller = new Person(info[1], info[2], info[4], info[7], info[3]);
 			ClientUI.userController.traveller.setId(info[0]);
 			ClientUI.userController.traveller.setCreditCardNumber(info[6]);
@@ -110,6 +111,7 @@ public class UserController {
 			this.alreadyLoggedIn = false;
 			ClientUI.userController.traveller = new Person("Traveller", "", null, "Traveller", null);
 			ClientUI.userController.traveller.setId(info[0]);
+			ClientUI.userController.traveller.setNumberOfVisitors(1);
 			ClientUI.orderController.setPerson();
 			break;
 		case "AlreadyLoggedIn":

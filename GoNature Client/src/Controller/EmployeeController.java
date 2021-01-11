@@ -1,3 +1,14 @@
+/**
+-----------------------------Class explanation------------------------------------------------------------------------------------------- 
+ * This class is a controller
+ * this class will not contain any instance of departmentEmployee since GoNature does not consist of it's employees
+ * this class will produce more functionality to the client side
+ *
+ * @author Bar Elhanati 
+ * @version January 2021
+ *
+------------------------------------------------------------------------------------------------------------------------------------
+ */
 package Controller;
 
 import Client.ClientUI;
@@ -97,17 +108,17 @@ public class EmployeeController {
 	 * gotMessage is the method that controls the data that returns from server	 
 	 * @param action will help us to navigate to the case that we desire (by the information that returned from server)
 	 * @param info is an array of strings that will consist all of the information that the server returned us 
-	 * @param info[0] -> firstName
-	 * @param info[1] -> lastName
-	 * @param info[2] -> email
-	 * @param info[3] -> type
-	 * @param info[4] -> phoneNumber
-	 * @param info[5] -> id
-	 * @param info[6] -> department
-	 * @param info[7] -> parkName 
-	 * @param info[8] -> userName (DB PK)
+	 * @param info[0] - firstName
+	 * @param info[1] - lastName
+	 * @param info[2] - email
+	 * @param info[3] - type
+	 * @param info[4] - phoneNumber
+	 * @param info[5] - id
+	 * @param info[6] - department
+	 * @param info[7] - parkName 
+	 * @param info[8] - userName (DB PK)
 	 * Cases are as the following:
-	 * - employee can enter GoNature only if => isValidUsaerName,alreadyLogged and isPasswordsMatch are all true
+	 * - employee can enter GoNature only if - isValidUsaerName,alreadyLogged and isPasswordsMatch are all true
 	 * - employee will not be able to park otherwise and alerts will be thrown as expected with the appropriate 
 	 * 	 text for client's convenience and knowledge 
 	 * gotMessage will also recognize if department manager desires to pull his requests from park manager
@@ -222,7 +233,7 @@ public class EmployeeController {
 	 * Description of goAndChangeParkSettingsInDB method:
 	 *  As well as other methods that goes from client to server, this method will update park settings	
 	 *  this method will happen only when departmenr manager clicked on approve button for a request
-	 *  @param s will contain the data for changing park settings --> which park, new settings
+	 *  @param s will contain the data for changing park settings - which park, new settings
 	 */
 	
 

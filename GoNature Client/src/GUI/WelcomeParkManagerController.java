@@ -1,3 +1,18 @@
+/**
+-----------------------------Class explanation------------------------------------------------------------------------------------------- 
+ * This class is a screen controller. This class also implements Initializable interface
+ * which means that this class must have initialize method.
+ * this method implements Initializable because we need to initialize screen with data before 
+ * it is displayed to the user
+ * this class will implement the behaviour of WelcomeParkManager screen with every data that is in it
+ * also, this class will be able to navigate from this screen to every of the department manager's options in our system
+ * this class will produce more functionality to the client side
+ *
+ * @author Bar Elhanati
+
+ *
+------------------------------------------------------------------------------------------------------------------------------------
+ */
 package GUI;
 
 import java.io.IOException;
@@ -24,21 +39,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-/**
------------------------------Class explanation------------------------------------------------------------------------------------------- 
- * This class is a screen controller. This class also implements Initializable interface
- * which means that this class must have initialize method.
- * this method implements Initializable because we need to initialize screen with data before 
- * it is displayed to the user
- * this class will implement the behaviour of WelcomeParkManager screen with every data that is in it
- * also, this class will be able to navigate from this screen to every of the department manager's options in our system
- * this class will produce more functionality to the client side
- *
- * @author Bar Elhanati
- * @version January 2021
- *
-------------------------------------------------------------------------------------------------------------------------------------
- */
+
 public class WelcomeParkManagerController implements Initializable {
 	@FXML
 	private Button informationBtn;
@@ -131,7 +132,7 @@ public class WelcomeParkManagerController implements Initializable {
 	 * WhenClickExitBtn method will navigate by pressing X icon on the top right side to WelcomeAndLoginScreen screen
 	 * it will navigate only after updating DB that the employee is no longer connected to GoNature system
 	 * and also, will set employee values to be null, so other users will be able to connect (from this session)
-	 * @throws IOException
+	 * @throws IOException -io
 	 */
 	
 	@FXML
@@ -229,12 +230,13 @@ public class WelcomeParkManagerController implements Initializable {
 	 * WhenPressLogOutBTN method will navigate by pressing logOutBTN to WelcomeAndLoginScreen screen
 	 * it will navigate only after updating DB that the employee is no longer connected to GoNature system
 	 * and also, will set employee values to be null, so other users will be able to connect (from this session)
-	 * @throws IOException
+	 * @throws IOException -io
 	 */
 	
 
 	@FXML
 	void WhenClickLogOutBtn(ActionEvent event) throws IOException {
+		ClientUI.employeeController.logOutEmployee(ClientUI.employeeController.getUserName());
 		ClientUI.employeeController.setFirstName(null);
 		ClientUI.employeeController.setLastName(null);
 		ClientUI.employeeController.setType(null);
@@ -246,7 +248,7 @@ public class WelcomeParkManagerController implements Initializable {
 		stage = ClientUI.LogOutUtility.getStage();
 		root = ClientUI.LogOutUtility.getP();
 		Scene scene = new Scene(root);
-		stage.setTitle("Welcome to GoNature!");
+		stage.setTitle("Welcome" + " " + ClientUI.employeeController.getType() + "!");
 		stage.setScene(scene);
 		stage.show();
 	}
@@ -258,7 +260,7 @@ public class WelcomeParkManagerController implements Initializable {
 	 * gap could not be greater then the max amount of visitors
 	 * all fields must not be empty while sending to d. manager approval
 	 * a request will have following properties: ID,date(now),time(now),park settings changes,status(department manager touched request or not)
-	 * @throws IOException
+	 * @throws IOException -io
 	 */
 	
 

@@ -90,7 +90,6 @@ public class OrderController {
 	 * @param wantedPark    - The park of the wanted visit
 	 * @param type          - The type of the visitors who make the order
 	 * @param numOfVisitors - The number of visitors who want to create an order
-	 * @return void - this method checkout to the server, therfore not returning
 	 *         anything.
 	 * 
 	 */
@@ -220,8 +219,8 @@ public class OrderController {
 	 * the data came from the server to this controller
 	 * 
 	 * @param msg - String array that containing the msg that comes from the server.
-	 * @return void.
-	 * @throws IOException
+	
+	 * @throws IOException - io
 	 */
 	public void gotMessage(String[] msg) throws IOException {
 
@@ -316,9 +315,7 @@ public class OrderController {
 	 * 
 	 * @param msg[1]                      - currentVisitors that allows
 	 * @param msg[2]                      - availableVisitors in the park
-	 * @param order.getNumberOfVisitors() - the visitors that want to get into the
-	 *                                    park
-	 * @return void
+	 * @throws IOException - exe
 	 */
 
 	public void checkIfCanMakeOrder(String[] msg) throws IOException {
@@ -353,8 +350,8 @@ public class OrderController {
 	 * to a new screen that will ask the user if he want to cancel his order
 	 * 
 	 * @param stage - current stage that is in use
-	 * @return void
-	 * @throws IOException
+	
+	 * @throws IOException - io
 	 */
 	public void wantToCancel(Stage stage) throws IOException {
 
@@ -375,8 +372,8 @@ public class OrderController {
 	 * data from the observable and show it into the table
 	 * 
 	 * @param timeForVisit - the hour of the wanted alternative dates
-	 * @return void
-	 * @throws IOException
+	
+	 * @throws IOException - io
 	 */
 	public void getAlternativeDates(LocalTime timeForVisit) throws IOException {
 		alternativeDates.clear();
@@ -392,7 +389,7 @@ public class OrderController {
 			this.canMakeOrder(time, toDate, park, "f", numOfVisit);
 			if (valid)
 				alternativeDates.add(toDate.toString());
-
+		}
 			for (String var : alternativeDates) {
 				d = new Data("4", var, order.getWantedPark(), time.toString(),
 						Integer.toString(order.getNumberOfVisitors()), Float.toString(order.getTotalPrice()));
@@ -401,7 +398,6 @@ public class OrderController {
 
 			}
 
-		}
 
 	}
 
@@ -411,7 +407,7 @@ public class OrderController {
 	 * This method will be responsible for saving the order into the db This method
 	 * will not return anything worthy to the client
 	 * 
-	 * @return void
+	 
 	 */
 	public void confirmOrder() {
 		t = ClientUI.userController.traveller;
@@ -453,7 +449,7 @@ public class OrderController {
 	 * @param dateOfVisit - the date of the visit that need to be canceled
 	 * @param wantedPark  - the wanted park of the visit that need to be canceled
 	 * @param timeOfVisit - the time of the visit that need to be canceled.
-	 * @return void
+	
 	 */
 	public void cancelOrder(String dateOfVisit, String wantedPark, String timeOfVisit) {
 
@@ -483,7 +479,7 @@ public class OrderController {
 	 * This method will fill the observable value with all the exsisting orders of
 	 * the current person
 	 * 
-	 * @return void
+	
 	 */
 	public void getExsistingOrders() {
 		ob.clear();
@@ -507,7 +503,7 @@ public class OrderController {
 	 * @param dateOfVisit - the date of the visit of the order
 	 * @param TimeInPark  - the Time of the visit of the order
 	 * 
-	 * @return void
+	
 	 */
 	public void setEnterOrder(String Id, String wantedPark, String dateOfVisit, String TimeInPark) {
 
@@ -532,8 +528,8 @@ public class OrderController {
 	 * that the user just made to wait, because he probably can't enter the park
 	 * right now.
 	 * 
-	 * @param getOr
-	 * @reutnr void
+	 * @param getOr - get
+	
 	 */
 	public void ChangeToWaitOrder(Order getOr) {
 		StringBuffer sb = new StringBuffer();
@@ -559,7 +555,7 @@ public class OrderController {
 	 * 
 	 * @param fromDate - date that the report will start from
 	 * @param toDate   - date that the report will end
-	 * @return void
+	
 	 */
 	public void getDataForReport(LocalDate fromDate, LocalDate toDate) {
 		ReportMonth = Integer.toString(fromDate.getMonthValue());
@@ -581,7 +577,7 @@ public class OrderController {
 	 * message saying he need to confirm his orders that are going to be tomorrow
 	 * 
 	 * @param tomorrow - the date of tomorrow
-	 * @param Id       - the Id of the user
+	 * @param ID       - the Id of the user
 	 * @return boolean - true or false if the user already got the message of not
 	 */
 
@@ -604,7 +600,7 @@ public class OrderController {
 	 * alert message already appeard for him
 	 * 
 	 * @param id - the ID of the user that get into the system
-	 * @return void
+	
 	 */
 	public void confirmAlert(String id) {
 		StringBuffer sb = new StringBuffer();

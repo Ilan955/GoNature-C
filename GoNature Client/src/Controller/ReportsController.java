@@ -1,4 +1,5 @@
-/** Description of SignUpScreenController 
+/**
+* Description of SignUpScreenController 
 * @author Omri Cohen
 * 
 * @version final Jan 2, 2021.
@@ -60,7 +61,7 @@ public class ReportsController {
 	 * @param msg[0] - return destination functions name.
 	 * 
 	 * @throws IOException -From inner methods
-	 * @return void - no return, but a message will be printed in the process.
+	
 	 */
 	public void gotMessage(String[] msg) throws IOException {
 		String cases = msg[0];
@@ -164,8 +165,7 @@ public class ReportsController {
 	 * @param year  - String containing wanted year.
 	 * @param park  - String containing wanted park.
 	 * 
-	 * @return void - this function requests data from server, the response will be
-	 *         catched in "gotMessage"
+
 	 */
 	public void getData(String month, String year, String park) {
 		StringBuffer sb = new StringBuffer();
@@ -325,21 +325,23 @@ public class ReportsController {
 	 */
 	private void dealWithgetDataEntranceTimesAndStay(String[] msg) {
 		int i = 1;
-
+System.out.println(msg);
 		while (!(msg[i].equals("Done"))) {
-
+			System.out.println("I: " + i + " msg[1]: " + msg[i] + "  msg[2]: " + msg[i + 1] + "  msg[3]: "
+					+ msg[i + 2] + "  msg[4]: " + msg[i + 3] + " msg[5]: " + msg[i + 4]);
 			String type = msg[i + 1];
 			switch (type) {
 			case "traveller":
 				visitors.add(new Reports(msg[i], msg[i + 1], msg[i + 2], msg[i + 3], msg[i + 4]));
-				break;
+								break;
 			case "Member":
 			case "Family":
 				members.add(new Reports(msg[i], msg[i + 1], msg[i + 2], msg[i + 3], msg[i + 4]));
+				
 				break;
 			case "Group":
 				groups.add(new Reports(msg[i], msg[i + 1], msg[i + 2], msg[i + 3], msg[i + 4]));
-				break;
+					break;
 			default:
 				System.out.println("Somthing is wrong with type");
 				System.out.println("I: " + i + " msg[1]: " + msg[i] + "  msg[2]: " + msg[i + 1] + "  msg[3]: "
@@ -351,10 +353,6 @@ public class ReportsController {
 		totalArray.addAll(members);
 		totalArray.addAll(groups);
 		totalArray.sort(clientLogic.Reports.dayOfMonth);
-
-		ArrayList<Integer> visitTravel = new ArrayList<Integer>();
-		ArrayList<Integer> visitMember = new ArrayList<Integer>();
-		ArrayList<Integer> visitGroups = new ArrayList<Integer>();
 
 	}
 }
