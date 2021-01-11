@@ -1,7 +1,6 @@
 /** Description of SignUpScreenController 
 * @author Omri Cohen
 * 
-* @version final Jan 7, 2021.
 */
 package GUI;
 
@@ -23,7 +22,7 @@ import javafx.stage.Stage;
 /**
  * This is a controller for sign up confirmation screen.
  * 
- * @implNote implements Initializable - initialize all predefined data
+
  */
 public class SuccessfulySignUpScreenController implements Initializable {
 
@@ -36,11 +35,8 @@ public class SuccessfulySignUpScreenController implements Initializable {
 	/**
 	 * Description of initialize() this function initializes the combo boxes for the
 	 * window..
-	 * 
-	 * @param SubscriberNumberLbl label for displaying new membership id
-	 * @param SignedUpType        label for displaying the membership type
-	 * 
-	 * @return void.
+	 * @param arg0- arg0
+	 * @param arg1- arg1
 	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {

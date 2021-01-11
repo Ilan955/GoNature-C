@@ -1,4 +1,6 @@
-/** Description of SignUpScreenController 
+/** 
+ *Description of SignUpScreenController 
+ *Desc of reports
 * @author Omri Cohen
 * 
 * @version final Jan 2, 2021.
@@ -109,6 +111,7 @@ public class ReportStayAndEnter implements Initializable {
 		ClientUI.reportsController.visitors.clear();
 		ClientUI.reportsController.members.clear();
 		ClientUI.reportsController.groups.clear();
+		ClientUI.reportsController.totalArray.clear();
 		Alert a = new Alert(AlertType.INFORMATION, "All the previous data deleted");
 		a.setTitle("Cleared data!");
 		a.setHeaderText("Successfuly cleared all the data");

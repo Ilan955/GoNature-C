@@ -4,7 +4,7 @@
  * showing the Canceled orders by month.
  * added option of Exit to close stage.
  * @author Ilan Alexandrov
- * @version 1.0 Build December 2020
+ 
  */
 package GUI;
 
@@ -42,7 +42,7 @@ public class cancelGraphScreen implements Initializable {
 	 * Description of initialize(URL arg0, ResourceBundle arg1) The initialize
 	 * method responislb eto show the daya of the graph to the stage
 	 * 
-	 * @return void
+	
 	 * 
 	 */
 	@Override

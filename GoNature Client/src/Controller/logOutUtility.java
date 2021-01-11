@@ -39,11 +39,17 @@ public class logOutUtility {
 
 	public void logOutTraveller() {
 		ClientUI.userController.setAlreadyLoggedIn(false);
-
+		System.out.println(ClientUI.userController.traveller.getId());
+		System.out.println(ClientUI.userController.traveller.getMemberID());
 		try {
+			if (ClientUI.userController.traveller.getMemberID() != null)
 			ClientUI.userController
 					.identify("deleteFromDbWhenlogOutTraveller " + ClientUI.userController.traveller.getId() + " "
 							+ ClientUI.userController.traveller.getMemberID());
+			else
+				ClientUI.userController
+				.identify("deleteFromDbWhenlogOutTraveller " + ClientUI.userController.traveller.getId() + " "
+						+ ClientUI.userController.traveller.getMemberID());
 
 		} catch (IOException e) {
 			e.printStackTrace();

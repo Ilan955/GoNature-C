@@ -1,10 +1,10 @@
-/** Description of OrderCancellReport
+/** 
+ * Description of OrderCancellReport
  * OrderCancellReport class responsible of the
  * connection to the client, ask him to fill 
  * the year and month, to get the report to.
  * 
  * @author Ilan Alexandrov
- * @version 1.0 Build December,2020.
  */
 
 package GUI;
@@ -181,12 +181,12 @@ public class OrderCancellReport implements Initializable {
 		if (!result.isPresent())
 			alert.close();
 		else if (result.get() == ButtonType.OK) {
+			ClientUI.LogOutUtility.logOutEmployee();
 			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			stage.close();
 		} else if (result.get() == ButtonType.CANCEL)
 			alert.close();
 	}
-
 	/**
 	 * Description of whenClickCalculateBtn(ActionEvent event) in OrderCancellReport
 	 * This method will reach to the db, and get the data about the all amont of

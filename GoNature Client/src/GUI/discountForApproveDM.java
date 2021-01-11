@@ -1,3 +1,12 @@
+/**
+ *  Description of discountForApproveDM
+ * This class responisble for the table showing
+ * the alternative dates for picking a visit
+ * Creating button to choose a date
+ * Creating the option to choose from another time
+ * 
+ * @author TalLanger	
+ */
 package GUI;
 
 import java.io.IOException;

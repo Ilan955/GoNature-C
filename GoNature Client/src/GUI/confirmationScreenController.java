@@ -7,7 +7,6 @@
  * (already filled with the previus details)
  * 
  * @author Ilan Alexandrov
- * @version 3.0 Build December,2020
  */
 
 package GUI;
@@ -65,11 +64,11 @@ public class confirmationScreenController implements Initializable {
 	 * Description of setValues() Setting the values of the confirmation based on
 	 * what was set in the order and what set for the traveler who made the order
 	 * 
-	 * @return void
+	 
 	 */
 	public void setValues() {
 		Order o = ClientUI.orderController.order;
-
+		IdOvTravelerLb.setText(ClientUI.userController.traveller.getId());
 		WantedParkLbl.setText(o.getWantedPark());
 		DateLbl.setText(o.getDateOfVisit().toString());
 		TimeLbl.setText(o.getTimeInPark().toString());
@@ -110,7 +109,7 @@ public class confirmationScreenController implements Initializable {
 	 * Description initialize(URL location, ResourceBundle resources) Showing the
 	 * information for the user the information includes all the data of the order
 	 * 
-	 * @return void
+	
 	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {

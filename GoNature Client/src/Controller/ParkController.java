@@ -1,10 +1,3 @@
-package Controller;
-
-import java.time.LocalDate;
-
-import Client.ClientUI;
-import Entities.Park;
-
 /**
  * Controller for logic of data in park table. get&set methods checking if the
  * park is full by the data and checking when the park in full capacity
@@ -12,6 +5,14 @@ import Entities.Park;
  * @author Liad Yadin
  * @version 2.0 Build December, 2020
  */
+package Controller;
+
+import java.time.LocalDate;
+
+import Client.ClientUI;
+import Entities.Park;
+
+
 public class ParkController {
 	/** park object for save the data of this park */
 	public Park park;
@@ -119,6 +120,8 @@ public class ParkController {
 	 * @param park- the name of the park
 	 * @param date- current date
 	 * @param full- 0 if the park is not full and 1 if the park is full
+	 * @param maxVisitors - maxVisitors
+	 * @param maxCurrentPerDay - maxCurrentPerDay
 	 */
 	public void enterDateofFullCapcityPark(String park, LocalDate date, int full, int maxVisitors,
 			int maxCurrentPerDay) {
@@ -156,8 +159,8 @@ public class ParkController {
 
 	/**
 	 * this method call to checkIfThisDateInFullCapacityTable
-	 * 
-	 * @return dateExistInDB-return true if this date exists, and false-else
+	 * @param park -park
+	 * @return boolean-return true if this date exists, and false-else
 	 */
 	public boolean IfgetDateExistInDB(String park) {
 		checkIfThisDateInFullCapacityTable(park);

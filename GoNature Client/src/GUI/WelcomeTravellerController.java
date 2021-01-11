@@ -1,3 +1,20 @@
+/**
+-----------------------------   Class explanation  ------------------------------------------------------------------------------------------- 
+ * This class is a screen controller. This class also implements Initializable interface
+ * which means that this class must have initialize method.
+ * this method implements Initializable because we need to initialize screen with data before 
+ * it is displayed to the user
+ * this class will implement the behaviour of WelcomeTraveller screen with every data that is in it
+ * also, this class will be able to navigate from this screen to every of the traveller's options in our system
+ * this class will produce more functionality to the client side
+ *
+ * @author Bar Elhanati
+ * @author Liad Yadin 
+ * @version January 2021
+ *
+------------------------------------------------------------------------------------------------------------------------------------
+ */
+
 package GUI;
 
 import java.io.IOException;
@@ -23,22 +40,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-/**
------------------------------   Class explanation  ------------------------------------------------------------------------------------------- 
- * This class is a screen controller. This class also implements Initializable interface
- * which means that this class must have initialize method.
- * this method implements Initializable because we need to initialize screen with data before 
- * it is displayed to the user
- * this class will implement the behaviour of WelcomeTraveller screen with every data that is in it
- * also, this class will be able to navigate from this screen to every of the traveller's options in our system
- * this class will produce more functionality to the client side
- *
- * @author Bar Elhanati
- * @author Liad Yadin 
- * @version January 2021
- *
-------------------------------------------------------------------------------------------------------------------------------------
- */
 
 
 public class WelcomeTravellerController implements Initializable {
@@ -122,7 +123,6 @@ public class WelcomeTravellerController implements Initializable {
 			} else {
 				userNamelb.setText(tName);
 				TypeLBL.setText(ClientUI.userController.traveller.getType());
-
 			}
 		} else {
 			userNamelb.setText(tName);
@@ -137,7 +137,8 @@ public class WelcomeTravellerController implements Initializable {
 		 */
 		LocalDate tomorrow = LocalDate.now();
 		tomorrow = tomorrow.plusDays(1);
-		if (ClientUI.orderController.havingAlert(tomorrow, Integer.toString(4))) {
+		System.out.println(tomorrow.toString());
+		if (ClientUI.orderController.havingAlert(tomorrow,ClientUI.userController.traveller.getId())) {
 			ClientUI.orderController.need_alert = false;
 			Alert a = new Alert(AlertType.INFORMATION,
 					"Good news! \nTomorrow you having a trip with us!\nplease make sure to approve your order in the 'Show exisitng orders' section!\nThank you and have fun with us!");
@@ -152,7 +153,7 @@ public class WelcomeTravellerController implements Initializable {
 	/**
 	 * Description of WhenClickExitBtn method:
 	 * WhenClickExitBtn method will navigate by pressing X sign to the top right of screen to WelcomeAndLoginScreen screen
-	 * @throws IOException
+	 * @throws IOException -io
 	 */
 	@FXML
 	void WhenClickExitBtn(MouseEvent event) {
@@ -185,9 +186,6 @@ public class WelcomeTravellerController implements Initializable {
 	@FXML
 	void WhenPressEnterWithoutOrderBtn(ActionEvent event) throws IOException {
 		String type = ClientUI.userController.traveller.getType();
-		if (!type.equals("Family") || !type.equals("Group")) {
-			ClientUI.userController.traveller.setType("Traveller");
-		}
 		Stage stage = (Stage) btnWithoutOrder.getScene().getWindow();
 		FXMLLoader loader = new FXMLLoader();
 		Pane root = loader.load(getClass().getResource("EnterParkNow.fxml").openStream());
@@ -231,9 +229,9 @@ public class WelcomeTravellerController implements Initializable {
 
 	void WhenPressLogOutBtn(ActionEvent event) throws IOException {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		ClientUI.LogOutUtility.logOutTraveller();
 		FXMLLoader loader = new FXMLLoader();
 		Parent root = loader.load(getClass().getResource("WelcomeAndLoginScreen.fxml").openStream());
+		ClientUI.LogOutUtility.logOutTraveller();
 		ClientUI.LogOutUtility.makeTheStageDynamicForParent(stage, root);
 		stage = ClientUI.LogOutUtility.getStage();
 		root = ClientUI.LogOutUtility.getP();
@@ -252,9 +250,6 @@ public class WelcomeTravellerController implements Initializable {
 	@FXML
 	void WhenPressMakeNewOrderBtn(ActionEvent event) throws IOException {
 		String type = ClientUI.userController.traveller.getType();
-		if (!type.equals("Family") || !type.equals("Group")) {
-			ClientUI.userController.traveller.setType("PreOrderedTraveller");
-		}
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		FXMLLoader loader = new FXMLLoader();
 		Pane root = loader.load(getClass().getResource("NewOrder.fxml").openStream());
@@ -312,7 +307,7 @@ public class WelcomeTravellerController implements Initializable {
 		if (!result.isPresent())
 			alert.close();
 		else if (result.get() == ButtonType.OK) {
-			ClientUI.LogOutUtility.logOutTraveller();
+		//	ClientUI.LogOutUtility.logOutTraveller();
 			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			stage.close();
 		} else if (result.get() == ButtonType.CANCEL)

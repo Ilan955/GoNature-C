@@ -1,3 +1,20 @@
+/**
+-----------------------------Class explanation------------------------------------------------------------------------------------------- 
+ * This class is a screen controller. This method also implements Initializable interface
+ * which means that this class must have initialize method.
+ * this method implements Initializable because we need to initialize screen with data before 
+ * it is displayed to the user
+ * this class will implement the behaviour of WelcomeEmployee screen with every data that is in it
+ * also, this class will be able to navigate from this screen to every of the department employee's options in our system
+ * this class will produce more functionality to the client side
+ *
+ * @author Bar Elhanati
+ * @author Omri Cohen
+ * @version January 2021
+ *
+------------------------------------------------------------------------------------------------------------------------------------
+ */
+
 package GUI;
 
 import java.io.IOException;
@@ -22,22 +39,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 
-/**
------------------------------Class explanation------------------------------------------------------------------------------------------- 
- * This class is a screen controller. This method also implements Initializable interface
- * which means that this class must have initialize method.
- * this method implements Initializable because we need to initialize screen with data before 
- * it is displayed to the user
- * this class will implement the behaviour of WelcomeEmployee screen with every data that is in it
- * also, this class will be able to navigate from this screen to every of the department employee's options in our system
- * this class will produce more functionality to the client side
- *
- * @author Bar Elhanati
- * @author Omri Cohen
- * @version January 2021
- *
-------------------------------------------------------------------------------------------------------------------------------------
- */
+
 
 public class WelcomeEmployeeController implements Initializable {
 	@FXML
@@ -105,7 +107,7 @@ public class WelcomeEmployeeController implements Initializable {
 	 * WhenClickExitBtn method will navigate by pressing X icon to the top right side to WelcomeAndLoginScreen screen
 	 * it will navigate only after updating DB that the employee is no longer connected to GoNature system
 	 * and also, will set employee values to be null, so other users will be able to connect (from this session)
-	 * @throws IOException
+	 * @throws IOException -io
 	 */
 	
 	
@@ -134,7 +136,7 @@ public class WelcomeEmployeeController implements Initializable {
 	 * WhenClickLogOutBtn method will navigate by pressing logOutButton to WelcomeAndLoginScreen screen
 	 * it will navigate only after updating DB that the employee is no longer connected to GoNature system
 	 * and also, will set employee values to be null, so other users will be able to connect (from this session)
-	 * @throws IOException
+	 * @throws IOException - io
 	 */
 	
 	
@@ -158,7 +160,7 @@ public class WelcomeEmployeeController implements Initializable {
 	/**
 	 * Description of WhenClickSignUpNewMemberBtn method:
 	 * WhenClickSignUpNewMemberBtn method will navigate by pressing signUpMemberButton to SignUpNewMember screen
-	 * @throws IOException
+	 * @throws IOException - io
 	 */
 	
 	

@@ -10,7 +10,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="485.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.ExsitingOrdersScreenController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="485.0" prefWidth="1388.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.ExsitingOrdersScreenController">
 	<children>
 		<Label layoutX="15.0" layoutY="14.0" text="Exisiting orders">
 			<font>
@@ -27,14 +27,14 @@
 				<Font size="16.0" />
 			</font>
 		</Label>
-		<TableView fx:id="ExistingOrderTable" layoutX="11.0" layoutY="120.0" prefHeight="292.0" prefWidth="1311.0">
+		<TableView fx:id="ExistingOrderTable" layoutX="11.0" layoutY="120.0" prefHeight="292.0" prefWidth="1366.0">
 			<columns>
 				<TableColumn fx:id="IDLbl" prefWidth="123.0" text="Order ID" />
 				<TableColumn fx:id="DateTbl" prefWidth="137.0" text="Date" />
 				<TableColumn fx:id="ParkLbl" prefWidth="107.0" text="Park" />
 				<TableColumn fx:id="TimeLbl" prefWidth="149.0" text="Time" />
-				<TableColumn fx:id="NumOfVisitLbl" prefWidth="123.0" text="Number of visitors" />
-				<TableColumn fx:id="PriceLbl" prefWidth="123.0" text="Price" />
+				<TableColumn fx:id="NumOfVisitLbl" prefWidth="133.0" text="Visitors" />
+				<TableColumn fx:id="PriceLbl" prefWidth="113.0" text="Price" />
 				<TableColumn fx:id="StatusLbl" prefWidth="123.0" text="Status" />
 				<TableColumn fx:id="CommentsLbl" prefWidth="123.0" text="Comments" />
 

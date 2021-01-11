@@ -1,3 +1,11 @@
+/**
+ * This GUI will open when the employee choose to enter specific traveller in
+ * park and to choose if approve or don't approve the request only provided that
+ * there is a place in the park
+ * 
+ * @author Liad Yadin
+ *
+ */
 package GUI;
 
 import java.io.IOException;
@@ -16,14 +24,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-/**
- * This GUI will open when the employee choose to enter specific traveller in
- * park and to choose if approve or don't approve the request only provided that
- * there is a place in the park
- * 
- * @author Liad Yadin
- *
- */
+
 public class ApproveEmployeeForEnterTraveller {
 
 	/**

@@ -1,3 +1,9 @@
+/**
+ *  Description of incomeReportController
+ * This will show the graph of the report
+ * 
+ * @author Tal Langer	
+ */
 package GUI;
 
 import java.io.IOException;

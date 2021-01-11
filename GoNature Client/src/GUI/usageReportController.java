@@ -1,3 +1,14 @@
+
+/**
+ * This GUI will give to the park manager an option to do report about usage in
+ * the park. the park manager need to choose month and year. the system will
+ * present in the table the date in this month and this year that the park
+ * wasn't full. in addition, the system will present in the line chart
+ * Precentage of max capacity per day in this month
+ * 
+ * @author Liad Yadin
+ *
+ */
 package GUI;
 
 import java.io.IOException;
@@ -28,16 +39,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-/**
- * This GUI will give to the park manager an option to do report about usage in
- * the park. the park manager need to choose month and year. the system will
- * present in the table the date in this month and this year that the park
- * wasn't full. in addition, the system will present in the line chart
- * Precentage of max capacity per day in this month
- * 
- * @author Liad Yadin
- *
- */
+
 public class usageReportController implements Initializable {
 	/** Combo box for month */
 	@FXML
@@ -127,7 +129,7 @@ public class usageReportController implements Initializable {
 	 * This method responislbe of showing an alert when want to close the
 	 * application.
 	 * 
-	 * @param event
+	 * @param event -event
 	 */
 	@FXML
 	void WhenClickExitBtn(MouseEvent event) {

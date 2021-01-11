@@ -1,11 +1,12 @@
-/** Description of AlternativDatesScreenController
+/**
+ *  Description of AlternativDatesScreenController
  * This class responisble for the table showing
  * the alternative dates for picking a visit
  * Creating button to choose a date
  * Creating the option to choose from another time
  * 
  * @author Ilan Alexandrov	
- * @version 2.0 Build December, 2020
+
  */
 
 package GUI;
@@ -102,7 +103,9 @@ public class AlternativDatesScreenController implements Initializable {
 		Time.setCellValueFactory(new PropertyValueFactory<>("Time"));
 		numOfVisit.setCellValueFactory(new PropertyValueFactory<>("NumOfVisit"));
 		Price.setCellValueFactory(new PropertyValueFactory<>("Price"));
+		UserIdLbl.setText(ClientUI.userController.traveller.getId());
 
+		
 		try {
 			ClientUI.orderController.getAlternativeDates(ClientUI.orderController.order.getTimeInPark());
 		} catch (IOException e) {
@@ -251,7 +254,7 @@ public class AlternativDatesScreenController implements Initializable {
 	void WhenClickBackBtn(ActionEvent event) throws IOException {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		FXMLLoader loader = new FXMLLoader();
-		Pane root = loader.load(getClass().getResource("/GUI/CencellOrder.fxml").openStream());
+		Pane root = loader.load(getClass().getResource("CancellOrder.fxml").openStream());
 		ClientUI.LogOutUtility.makeTheStageDynamic(stage, root);
 		stage = ClientUI.LogOutUtility.getStage();
 		root = ClientUI.LogOutUtility.getParent();

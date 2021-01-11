@@ -1,3 +1,13 @@
+/**
+ * This GUI is presenting for employee department the casual traveler requests
+ * of enter park the employee can see all the requests this day and to choose
+ * who can enter park by checking if the park is full if the park is full - he
+ * will get a message and if the park isn't full - he can choose if he wants to
+ * approve the request or to refused it.
+ * 
+ * @author Liad Yadin
+ *
+ */
 package GUI;
 
 import java.io.IOException;
@@ -27,16 +37,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
-/**
- * This GUI is presenting for employee department the casual traveler requests
- * of enter park the employee can see all the requests this day and to choose
- * who can enter park by checking if the park is full if the park is full - he
- * will get a message and if the park isn't full - he can choose if he wants to
- * approve the request or to refused it.
- * 
- * @author Liad Yadin
- *
- */
+
 public class RequestsEnterTravellerController implements Initializable {
 	/** TableView for the requests */
 	@FXML

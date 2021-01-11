@@ -1,9 +1,10 @@
-/** Descripiton of  SureCancell Screen
+/**
+ *  Descripiton of  SureCancell Screen
  * SureCancellScreen class responsible of showing, 
  * a screen with aditional option to not cancel order
  * 
  * @author Ilan Alexandrov	
- * @vestion 1.0 Build December,2020
+
  */
 
 package GUI;
@@ -89,7 +90,7 @@ public class SureCancellScreen implements Initializable {
 	 * park and time for the traveller to see what type of order he will be
 	 * canceling now
 	 * 
-	 * @return void
+
 	 */
 	public void setVals() {
 		Order o = ClientUI.orderController.order;
@@ -102,7 +103,7 @@ public class SureCancellScreen implements Initializable {
 	 * Description of setVals() in SureCancell Screen calling to the setVals that
 	 * will be initializing the datat into the labels
 	 * 
-	 * @return void
+	
 	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {

@@ -1,3 +1,10 @@
+/**
+ * This GUI will present 'waiting screen' for casual traveller who requests to
+ * enter the park
+ * 
+ * @author Liad Yadin
+ *
+ */
 package GUI;
 
 import java.io.IOException;
@@ -18,13 +25,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-/**
- * This GUI will present 'waiting screen' for casual traveller who requests to
- * enter the park
- * 
- * @author Liad Yadin
- *
- */
+
 public class WaitingForTravellerController {
 	/**
 	 * variable for status approval = -1 request waiting, 0 request repuesed, 1
@@ -45,7 +46,7 @@ public class WaitingForTravellerController {
 	 * visitors will update in DB
 	 * 
 	 * @param event- when click on check
-	 * @throws IOException
+	 * @throws IOException - io
 	 */
 	@FXML
 	void whenclickedOnCheck(ActionEvent event) throws IOException {
@@ -89,31 +90,6 @@ public class WaitingForTravellerController {
 			stage.setScene(scene);
 			stage.show();
 		}
-	}
-
-	/**
-	 * This method responislbe of showing an alert when want to close the
-	 * application.
-	 * 
-	 * @param event
-	 */
-	@FXML
-	void WhenClickExitBtn(MouseEvent event) {
-		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-		alert.setTitle("Exit");
-		alert.setHeaderText("Are you sure you want to exit the application?");
-		alert.setResizable(false);
-		alert.setContentText("Select yes if you want, or not if you want to get back!");
-		((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Yes");
-		((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("No");
-		Optional<ButtonType> result = alert.showAndWait();
-		if (!result.isPresent())
-			alert.close();
-		else if (result.get() == ButtonType.OK) {
-			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-			stage.close();
-		} else if (result.get() == ButtonType.CANCEL)
-			alert.close();
 	}
 
 }

@@ -44,7 +44,6 @@
 		</Label>
 		<Line endX="599.0" layoutX="101.0" layoutY="141.0" startX="-100.0" />
 		<Button layoutX="403.0" layoutY="343.0" mnemonicParsing="false" onAction="#WhenClickSRequestsOfCasualTravellerBtn" prefHeight="31.0" prefWidth="285.0" text="Show enter requests of casual traveller" />
-		<Button layoutX="667.0" layoutY="-31.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="34.0" text="x" />
       <FontAwesomeIcon iconName="CLOSE" layoutX="666.0" layoutY="33.0" onMouseClicked="#WhenClickExitBtn" size="35">
          <fill>
             <RadialGradient centerX="0.5" centerY="0.5" radius="0.8658536585365855">

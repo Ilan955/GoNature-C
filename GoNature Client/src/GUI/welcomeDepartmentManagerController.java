@@ -1,3 +1,18 @@
+/**
+-----------------------------Class explanation------------------------------------------------------------------------------------------- 
+ * This class is a screen controller. This class also implements Initializable interface
+ * which means that this class must have initialize method.
+ * this method implements Initializable because we need to initialize screen with data before 
+ * it is displayed to the user
+ * this class will implement the behaviour of WelcomeDepartmentManager screen with every data that is in it
+ * also, this class will be able to navigate from this screen to every of the department manager's options in our system
+ * this class will produce more functionality to the client side
+ *
+ * @author Bar Elhanati
+ *
+------------------------------------------------------------------------------------------------------------------------------------
+ */
+
 package GUI;
 
 import java.io.IOException;
@@ -21,21 +36,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-/**
------------------------------Class explanation------------------------------------------------------------------------------------------- 
- * This class is a screen controller. This class also implements Initializable interface
- * which means that this class must have initialize method.
- * this method implements Initializable because we need to initialize screen with data before 
- * it is displayed to the user
- * this class will implement the behaviour of WelcomeDepartmentManager screen with every data that is in it
- * also, this class will be able to navigate from this screen to every of the department manager's options in our system
- * this class will produce more functionality to the client side
- *
- * @author Bar Elhanati
- * @version January 2021
- *
-------------------------------------------------------------------------------------------------------------------------------------
- */
+
 
 public class welcomeDepartmentManagerController implements Initializable {
 	@FXML
@@ -80,7 +81,7 @@ public class welcomeDepartmentManagerController implements Initializable {
 	 * WhenPressLogOutBTN method will navigate by pressing logOutBTN to WelcomeAndLoginScreen screen
 	 * it will navigate only after updating DB that the employee is no longer connected to GoNature system
 	 * and also, will set employee values to be null, so other users will be able to connect (from this session)
-	 * @throws IOException
+	 * @throws IOException - io
 	 */
 	
 	@FXML
@@ -106,7 +107,7 @@ public class welcomeDepartmentManagerController implements Initializable {
 	 * Description of WhenPressNotYetApprovedDiscountsBTN method:
 	 * WhenPressNotYetApprovedDiscountsBTN method will navigate by pressing WaitingDiscountsBTN to discountForDM.fxml screen
 	 * it will navigate only after updating the table in discountForDM screen with the park discount requests from park managers
-	 * @throws IOException
+	 * @throws IOException - io
 	 */
 	
 	
@@ -128,7 +129,7 @@ public class welcomeDepartmentManagerController implements Initializable {
 	 * WhenClickExitBtn method will navigate by pressing X icon on the top right side to WelcomeAndLoginScreen screen
 	 * it will navigate only after updating DB that the employee is no longer connected to GoNature system
 	 * and also, will set employee values to be null, so other users will be able to connect (from this session)
-	 * @throws IOException
+	 * @throws IOException - io
 	 */
 	@FXML
 	void WhenClickExitBtn(MouseEvent event) {
@@ -154,7 +155,7 @@ public class welcomeDepartmentManagerController implements Initializable {
 	 * Description of WhenPressNotYetApprovedParkChanges method:
 	 * WhenPressNotYetApprovedParkChanges method will navigate by pressing WaitingParkChangesBTN to penidngRequest.fxml screen
 	 * it will navigate only after updating the table in penidngRequest screen with the park settings request for change by park managers
-	 * @throws IOException
+	 * @throws IOException - io
 	 */
 	
 
@@ -178,14 +179,21 @@ public class welcomeDepartmentManagerController implements Initializable {
 	}
 
 	@FXML
-	void WhenPressproduceCancelledOrdersBtn(ActionEvent event) {
-
+	void WhenPressproduceCancelledOrdersBtn(ActionEvent event) throws IOException {
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		FXMLLoader loader = new FXMLLoader();
+		Pane root = loader.load(getClass().getResource("cancellationReport.fxml").openStream()); // screen name here
+		ClientUI.LogOutUtility.makeTheStageDynamic(stage, root);
+		stage = ClientUI.LogOutUtility.getStage();
+		root = ClientUI.LogOutUtility.getParent();
+		Scene scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
 	}
 
 	/**
 	 * Description of WhenPressproduceVisitReportBtn method:
 	 * WhenPressproduceVisitReportBtn method will navigate by pressing produceVisitReportBtn to ..... 
-	 * @throws IOException
 	 */
 	
 	

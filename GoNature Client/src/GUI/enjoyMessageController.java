@@ -1,3 +1,10 @@
+/**
+ * This GUI will show 'enjoy message' for casual traveler in the entrance park
+ * and presnting him how many time he has in the park
+ * 
+ * @author Liad Yadin
+ *
+ */
 package GUI;
 
 import java.net.URL;
@@ -16,13 +23,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-/**
- * This GUI will show 'enjoy message' for casual traveler in the entrance park
- * and presnting him how many time he has in the park
- * 
- * @author Liad Yadin
- *
- */
+
 public class enjoyMessageController implements Initializable {
 	/** for presenting the time the traveler has in park */
 	@FXML

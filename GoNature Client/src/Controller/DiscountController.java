@@ -1,3 +1,7 @@
+/** Description DiscountController
+ * @author Tal
+ *
+ */
 package Controller;
 
 import java.io.IOException;
@@ -7,6 +11,7 @@ import java.time.LocalDate;
 import Client.ClientUI;
 import Entities.Order;
 import GUI.parkPendingRData;
+
 
 public class DiscountController {
 	public boolean setManagerDiscount_flag;
@@ -185,17 +190,22 @@ public class DiscountController {
 	private void updateTotalPrice(String[] msg) {
 
 		// d[0]=depPrice , d[1] = valueDiscount, d[2] = MemberDiscount
-		float totalDiscount = 0;
+		float totalDiscount1 = 0;
+		float toatlDiscount2 = 0;
 		float finalPrice;
 		if (!(msg[4].equals("-")))
-			totalDiscount += Float.parseFloat(msg[4]) / 100;
+			totalDiscount1 = Float.parseFloat(msg[4]) / 100;
 		if (msg[2].equals("True"))
 			if (!(msg[5].equals("-")))
-				totalDiscount += Float.parseFloat(msg[5]) / 100;
-		if (totalDiscount == 0)
-			finalPrice = Float.parseFloat(msg[3]) * Integer.parseInt(msg[1]);
-		else
-			finalPrice = (Float.parseFloat(msg[3]) * Integer.parseInt(msg[1])) * (1 - totalDiscount);
+				toatlDiscount2= Float.parseFloat(msg[5]) / 100;
+		if (totalDiscount1 == 0 && toatlDiscount2 == 0)
+			finalPrice = Float.parseFloat(msg[3]) * Integer.parseInt(msg[1])  ;
+		else if (totalDiscount1 != 0 && toatlDiscount2 == 0)
+			finalPrice = (Float.parseFloat(msg[3]) * Integer.parseInt(msg[1])) * (1 - totalDiscount1);
+		else if (totalDiscount1 == 0 && toatlDiscount2 != 0)
+			finalPrice = (Float.parseFloat(msg[3]) * Integer.parseInt(msg[1]))  * (1 - toatlDiscount2);
+		else 
+			finalPrice = (Float.parseFloat(msg[3]) * Integer.parseInt(msg[1])) * (1 - toatlDiscount2) * (1-totalDiscount1);
 
 		finalPriceWithoutDM = finalPrice;
 	}

@@ -1,6 +1,7 @@
-/** Description of SignUpScreenController 
+/** 
+ * Description of SignUpScreenController 
 * @author Omri Cohen
-* @version final Jan 2, 2021.
+
 */
 
 package GUI;
@@ -31,7 +32,6 @@ import javafx.stage.Stage;
 /**
  * This is a controller for sign up window
  * 
- * @implNote implements Initializable - initialize all predefined data
  */
 public class SignUpScreenController implements Initializable {
 
@@ -79,7 +79,7 @@ public class SignUpScreenController implements Initializable {
 	 * function to be activated. initializing all the data needed for this window.
 	 * Payment combo box and Membership types combo box
 	 * 
-	 * @return void - no returns.
+	
 	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {

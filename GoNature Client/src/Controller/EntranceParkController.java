@@ -1,4 +1,11 @@
-
+/**
+ * Controller for logic of enter - exit park. include creating a casual traveler.
+ * updates by enter time and exit time of traveler(including with order 
+ * without order). updates the numbers of travelers in the park.
+ * 
+ * @author Liad Yadin
+ * @version 2.0 Build December, 2020
+ */
 package Controller;
 
 import java.time.LocalDate;
@@ -10,8 +17,8 @@ import Entities.TravellerInPark;
 import GUI.EnterParkNowController;
 
 /**
- * Controller for logic of enter&exit park. include creating a casual traveler.
- * updates by enter time and exit time of traveler(including with order &
+ * Controller for logic of enter - exit park. include creating a casual traveler.
+ * updates by enter time and exit time of traveler(including with order 
  * without order). updates the numbers of travelers in the park.
  * 
  * @author Liad Yadin

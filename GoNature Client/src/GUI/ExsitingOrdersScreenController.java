@@ -9,7 +9,7 @@
  *  
  *  @author Ilan Alexandrov
  *  @author Liad Yadin
- *  @version 2.0 Build December, 2020
+ 
  */
 package GUI;
 
@@ -87,9 +87,8 @@ public class ExsitingOrdersScreenController implements Initializable {
 		Parent root;
 		try {
 			root = FXMLLoader.load(getClass().getResource("WelcomeTraveller.fxml"));
-			ClientUI.LogOutUtility.makeTheStageDynamicForParent(stage, root);
-			stage = ClientUI.LogOutUtility.getStage();
-			root = ClientUI.LogOutUtility.getP();
+			
+			
 			Scene scene = new Scene(root);
 			stage.setTitle("Prototyp");
 			stage.setScene(scene);
